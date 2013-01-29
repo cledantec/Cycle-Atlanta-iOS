@@ -42,7 +42,6 @@
 #import "SaveRequest.h"
 #import "ZipUtil.h"
 
-
 @implementation SaveRequest
 
 @synthesize request, deviceUniqueIdHash, postVars;
@@ -62,9 +61,6 @@
         [request setURL:[NSURL URLWithString:kSaveURL]];
         [request setHTTPMethod:@"POST"];
         [request setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
-//        [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-//        [request setValue:@"chunked" forHTTPHeaderField:@"Transfer-Encoding"];
-//        [request setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
 		
         self.postVars = [NSMutableDictionary dictionaryWithDictionary:inPostVars];
         NSLog(@"postVars = %@", postVars);
@@ -75,19 +71,24 @@
         //convert dict to string
 		NSMutableString *postBody = [NSMutableString string];
     
-		for(NSString * key in postVars)
-			[postBody appendString:[NSString stringWithFormat:@"%@=%@&", key, [postVars objectForKey:key]]];
+        NSString *sep = @"";
+		for(NSString * key in postVars) {
+			[postBody appendString:[NSString stringWithFormat:@"%@%@=%@",
+                                    sep,
+                                    key,
+                                    [postVars objectForKey:key]]];
+            sep = @"&";
+        }
         
-        //gzip the POST payload
-        //NSData *postBodyData = [postBody dataUsingEncoding:NSUTF8StringEncoding];
-        //NSData *postBodyDataZipped = [ZipUtil gzipDeflate:postBodyData];
+        // gzip the POST payload
+        NSData *originalData = [postBody dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *postBodyDataZipped = [ZipUtil gzipDeflate:originalData];
         
-		NSLog(@"Initializing HTTP POST request to %@ of size %d with body %@", 
-			  kSaveURL, [[postBody dataUsingEncoding:NSUTF8StringEncoding] length], postBody);
+		NSLog(@"Initializing HTTP POST request to %@ of size %d, orig size %d",
+			  kSaveURL, [postBodyDataZipped length], [originalData length]);
 
         //set the POST body
-		[request setHTTPBody:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
-        //[request setHTTPBody:postBodyDataZipped];
+        [request setHTTPBody:postBodyDataZipped];
 
 	}
 	
