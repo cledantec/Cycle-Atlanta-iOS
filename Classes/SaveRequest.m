@@ -60,8 +60,14 @@
         self.request = [[NSMutableURLRequest alloc] init];
         [request setURL:[NSURL URLWithString:kSaveURL]];
         [request setHTTPMethod:@"POST"];
+        [request setValue:@"3" forHTTPHeaderField:@"Cycleatl-Protocol-Version"];
         [request setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
-		
+        
+        // this is a bit grotty, but it indicates a) cycleatl namespace
+        // b) trip upload, c) version 3, d) form encoding
+        [request setValue:@"application/vnd.cycleatl.trip-v3+form"
+                 forHTTPHeaderField:@"Content-Type"];
+        
         self.postVars = [NSMutableDictionary dictionaryWithDictionary:inPostVars];
         NSLog(@"postVars = %@", postVars);
 	
