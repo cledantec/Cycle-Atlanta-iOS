@@ -341,7 +341,7 @@
             [userDict setValue:user.income          forKey:@"income"];
             [userDict setValue:user.rider_type      forKey:@"rider_type"];
             [userDict setValue:user.rider_history	forKey:@"rider_history"];
-            [userDict setValue:appVersion           forKey:@"app_version"];
+            //[userDict setValue:appVersion           forKey:@"app_version"];
 		}
 		else
 			NSLog(@"TripManager fetch user FAIL");
