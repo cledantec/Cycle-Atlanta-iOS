@@ -54,6 +54,12 @@
 #import <CoreData/NSMappingModel.h>
 #import "ProgressView.h"
 
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
 @implementation CycleAtlantaAppDelegate
 
 @synthesize window;
@@ -147,8 +153,20 @@
 
 - (void)initUniqueIDHash
 {
+<<<<<<< HEAD
 	//self.uniqueIDHash = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier]; // save for later.
     self.uniqueIDHash = @"0f607264fc6318a92b9e13c65db7cd3c";
+=======
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        self.uniqueIDHash = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier]; // save for later.
+    }
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        self.uniqueIDHash = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        NSLog(@"iOS 7");
+    }
+    
+>>>>>>> FETCH_HEAD
 	NSLog(@"Hashed uniqueID: %@", uniqueIDHash);	
 }
 

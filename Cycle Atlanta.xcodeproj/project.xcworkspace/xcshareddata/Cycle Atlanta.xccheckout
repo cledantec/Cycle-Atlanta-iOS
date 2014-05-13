@@ -5,19 +5,31 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
+<<<<<<< HEAD
 	<string>E96E4E70-4643-4E7B-8DF7-D57241F35556</string>
+=======
+	<string>B0C950CA-A398-4435-B5A3-2F8C35DE9C37</string>
+>>>>>>> FETCH_HEAD
 	<key>IDESourceControlProjectName</key>
 	<string>Cycle Atlanta</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+<<<<<<< HEAD
 		<key>E7C9049C-202C-4FDF-8457-D52612A911A3</key>
+=======
+		<key>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</key>
+>>>>>>> FETCH_HEAD
 		<string>https://github.com/cledantec/Cycle-Atlanta-iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Cycle Atlanta.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+<<<<<<< HEAD
 		<key>E7C9049C-202C-4FDF-8457-D52612A911A3</key>
+=======
+		<key>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</key>
+>>>>>>> FETCH_HEAD
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +37,22 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
+<<<<<<< HEAD
 	<string>E7C9049C-202C-4FDF-8457-D52612A911A3</string>
+=======
+	<string>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</string>
+>>>>>>> FETCH_HEAD
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+<<<<<<< HEAD
 			<string>E7C9049C-202C-4FDF-8457-D52612A911A3</string>
+=======
+			<string>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</string>
+>>>>>>> FETCH_HEAD
 			<key>IDESourceControlWCCName</key>
 			<string>Cycle-Atlanta-iOS</string>
 		</dict>
