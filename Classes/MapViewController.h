@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -39,12 +39,14 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-
+#import <QuartzCore/QuartzCore.h>
 #import "TripManager.h"
+#import "TripPurposeDelegate.h"
 
 
 @interface MapViewController : UIViewController <MKMapViewDelegate>
 {
+    id <TripPurposeDelegate> delegate;
 	IBOutlet MKMapView *mapView;
 	Trip *trip;
 	
@@ -53,7 +55,7 @@
 	UIView *infoView;
 }
 
-
+@property (nonatomic, retain) id <TripPurposeDelegate> delegate;
 @property (nonatomic, retain) Trip *trip;
 @property (nonatomic, retain) UIBarButtonItem *doneButton;
 @property (nonatomic, retain) UIBarButtonItem *flipButton;

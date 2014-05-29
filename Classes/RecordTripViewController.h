@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -45,13 +45,13 @@
 #import "RecordingInProgressDelegate.h"
 #import "TripPurposeDelegate.h"
 #import "CycleAtlantaAppDelegate.h"
+#import "Note.h"
 
 
 @class ReminderManager;
 @class TripManager;
-//@class CycleTracksAppDelegate;
+@class NoteManager;
 
-//@interface RecordTripViewController : UITableViewController 
 @interface RecordTripViewController : UIViewController 
 	<CLLocationManagerDelegate,
 	MKMapViewDelegate,
@@ -66,27 +66,19 @@
 {
     NSManagedObjectContext *managedObjectContext;
 	CycleAtlantaAppDelegate *appDelegate;
-//    CLLocationManager *locationManager;
-	/*
-	UITableViewCell *tripPurposeCell;
-	UITableViewCell *personalInfoCell;
-	*/
 	BOOL				didUpdateUserLocation;
 	IBOutlet MKMapView	*mapView;
-	
-	IBOutlet UIButton *infoButton;
-	IBOutlet UIButton *saveButton;
+
 	IBOutlet UIButton *startButton;
+    IBOutlet UIButton *noteButton;
 	
 	IBOutlet UILabel *timeCounter;
 	IBOutlet UILabel *distCounter;
 	IBOutlet UILabel *speedCounter;
     UIActionSheet *saveActionSheet;
 
-
 	NSTimer *timer;
 	
-	// pointer to opacity mask, TabBar view
 	UIView *opacityMask;
 	UIView *parentView;
 	
@@ -94,67 +86,41 @@
 	BOOL shouldUpdateCounter;
 	BOOL userInfoSaved;
     NSInteger pickerCategory;
-	
-	TripManager		*tripManager;
-//	ReminderManager *reminderManager;
+    
+    CLLocation *myLocation;
+    
+	TripManager	*tripManager;
+    NoteManager *noteManager;
 }
 
-//@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
-//@property (nonatomic, retain) CLLocationManager *locationManager;
-/*
-@property (nonatomic, retain) UITableViewCell	*tripPurposeCell;
-@property (nonatomic, retain) UITableViewCell	*personalInfoCell;
-*/
 @property (nonatomic, retain) UIButton *infoButton;
 @property (nonatomic, retain) UIButton *saveButton;
 @property (nonatomic, retain) UIButton *startButton;
-
+@property (nonatomic, retain) UIButton *noteButton;
 @property (nonatomic, retain) UILabel *timeCounter;
 @property (nonatomic, retain) UILabel *distCounter;
 @property (nonatomic, retain) UIActionSheet *saveActionSheet;
-
-
 @property (assign) NSTimer *timer;
-
 @property (nonatomic, retain) UIView   *parentView;
-
-
 @property (assign) BOOL recording;
 @property (assign) BOOL shouldUpdateCounter;
 @property (assign) BOOL userInfoSaved;
-
-//@property (nonatomic, retain) ReminderManager *reminderManager;
-@property (nonatomic, retain) TripManager *tripManager;
-
 @property (nonatomic, retain) CycleAtlantaAppDelegate *appDelegate;
+@property (nonatomic, retain) TripManager *tripManager;
+@property (nonatomic, retain) NoteManager *noteManager;
 
-- (void)initTripManager:(TripManager*)manager;
-
-// DEPRECATED
-//- (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
-//- (id)initWithTripManager:(TripManager*)manager;
-
-// IBAction handlers
-- (IBAction)save:(UIButton *)sender;
--(void)save;
--(IBAction)issue:(id)sender;
--(IBAction)asset:(id)sender;
--(IBAction)detail:(id)sender;
+- (void)save;
 - (IBAction)start:(UIButton *)sender;
+-(IBAction)notethis:(id)sender;
 
-
-// timer methods
-- (void)start:(UIButton *)sender;
-- (void)createCounter;
 - (void)resetCounter;
 - (void)setCounterTimeSince:(NSDate *)startDate distance:(CLLocationDistance)distance;
 - (void)updateCounter:(NSTimer *)theTimer;
 
-- (UIButton *)createSaveButton;
 - (UIButton *)createStartButton;
 
-
-
+- (void)initTripManager:(TripManager*)manager;
+- (void)initNoteManager:(NoteManager*)manager;
 
 @end

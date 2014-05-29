@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -53,8 +53,8 @@
 }
 
 @property (nonatomic) CLLocationCoordinate2D coordinate;
-@property (retain) NSString *title;
-@property (retain) NSString *subtitle;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *subtitle;
 
 @property (assign) BOOL first;
 @property (assign) BOOL last;

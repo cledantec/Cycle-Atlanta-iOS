@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -40,6 +40,8 @@
 #import <UIKit/UIKit.h>
 #import "CustomPickerDataSource.h"
 #import "TripPurposeDelegate.h"
+#import "Note.h"
+#import "RecordTripViewController.h"
 
 
 @interface PickerViewController : UIViewController <UIPickerViewDelegate>
@@ -50,13 +52,15 @@
 	
 	UITextView				*description;
     NSInteger pickerCategory;
+    NSInteger pickedNotedType;
     IBOutlet UINavigationBar *navBarItself;
     UILabel *descriptionText;
+    
 }
 
 
 @property (nonatomic, retain) id <TripPurposeDelegate> delegate;
-@property (nonatomic, retain) IBOutlet UIPickerView *customPickerView;
+@property (nonatomic, retain) UIPickerView *customPickerView;
 @property (nonatomic, retain) CustomPickerDataSource *customPickerDataSource;
 
 @property (nonatomic, retain) UITextView *description;

@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -42,21 +42,13 @@
 #import <Foundation/Foundation.h>
 #import "ActivityIndicatorDelegate.h"
 #import "TripPurposeDelegate.h"
-
+#import "LoadingView.h"
 
 @class Trip;
 
 
-@interface TripManager : NSObject
-<ActivityIndicatorDelegate, 
-TripPurposeDelegate, 
-UIAlertViewDelegate, 
-UITextViewDelegate>
+@interface TripManager : NSObject <TripPurposeDelegate> //<ActivityIndicatorDelegate, , UIAlertViewDelegate, UITextViewDelegate>
 {
-	id <ActivityIndicatorDelegate> activityDelegate;
-	id <UIAlertViewDelegate> alertDelegate;
-
-	UIActivityIndicatorView *activityIndicator;
 	UIAlertView *saving;
 	UIAlertView *tripNotes;
 	UITextView	*tripNotesText;
@@ -77,10 +69,8 @@ UITextViewDelegate>
 }
 
 
-@property (nonatomic, retain) id <ActivityIndicatorDelegate> activityDelegate;
-@property (nonatomic, retain) id <UIAlertViewDelegate> alertDelegate;
-
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, retain) LoadingView *uploadingView;
+@property (nonatomic, retain) UIViewController *parent;
 @property (nonatomic, retain) UIAlertView *saving;
 @property (nonatomic, retain) UIAlertView *tripNotes;
 @property (nonatomic, retain) UITextView *tripNotesText;
@@ -108,8 +98,6 @@ UITextViewDelegate>
 - (CLLocationDistance)getDistanceEstimate;
 
 - (NSInteger)getPurposeIndex;
-
-- (void)promptForTripNotes;
 
 - (int)countUnSavedTrips;
 - (int)countUnSyncedTrips;

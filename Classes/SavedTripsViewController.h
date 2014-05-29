@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -59,8 +59,10 @@
 	id <RecordingInProgressDelegate> delegate;
 	TripManager *tripManager;
 	Trip *selectedTrip;
-	
+
 	LoadingView *loading;
+    
+    NSInteger pickerCategory;
 }
 
 @property (nonatomic, retain) NSMutableArray *trips;
@@ -70,8 +72,12 @@
 @property (nonatomic, retain) TripManager *tripManager;
 @property (nonatomic, retain) Trip *selectedTrip;
 
+@property (nonatomic, retain) UILabel *tripInProgressTime;
+@property (nonatomic, retain) NSTimer * timer;
+
 - (void)initTripManager:(TripManager*)manager;
 
+- (void)displayUploadedTripMap;
 // DEPRECATED
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;
 - (id)initWithTripManager:(TripManager*)manager;

@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -56,16 +56,19 @@
 #define kTripPurposeErrandIcon		@"errands.png"
 #define kTripPurposeOtherIcon		@"other.png"
 
+#define kNoteThisAsset              @"noteAssetPicker.png"
+#define kNoteThisIssue              @"noteIssuePicker.png"
+#define kNoteBlank                  @"noteBlankPicker.png"
+
 #define kTripPurposeCommuteString	@"Commute"
 #define kTripPurposeSchoolString	@"School"
-#define kTripPurposeWorkString		@"Work-related"
+#define kTripPurposeWorkString		@"Work-Related"
 #define kTripPurposeExerciseString	@"Exercise"
 #define kTripPurposeSocialString	@"Social"
 #define kTripPurposeShoppingString	@"Shopping"
 #define kTripPurposeErrandString	@"Errand"
 #define kTripPurposeOtherString		@"Other"
 
-//TODO: define strings and icons for issue and asset
 
 
 @protocol TripPurposeDelegate <NSObject>
@@ -76,6 +79,16 @@
 
 @optional
 - (void)didCancelPurpose;
+- (void)didCancelNote;
+- (void)didCancelNoteDelete;
 - (void)didPickPurpose:(unsigned int)index;
+- (void)didPickNoteType:(NSNumber *)index;
+- (void)didEnterNoteDetails:(NSString *)details;
+- (void)didEnterTripDetails:(NSString *)details;
+- (void)didSaveImage:(NSData *)imgData;
+- (void)getNoteThumbnail:(NSData *)imgData;
+- (void)getTripThumbnail:(NSData *)imgData;
+- (void)saveNote;
+- (void)saveTrip;
 
 @end

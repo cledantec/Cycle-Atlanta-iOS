@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -56,16 +56,23 @@
 #define kStdButtonWidth			106.0
 #define kStdButtonHeight		40.0
 
+#define kJpegQuality        0.9
 
 // error messages
-#define kConnectionError	@"Unable to reach server"
-#define kServerError		@"Failed to upload your trip. Please try again later."
+#define kConnectionError	@"Server unreachable, \n try again later."
+#define kServerError		@"Upload failed, \n try again later."
 
 // alert titles
 #define kBatteryTitle		@"Battery Low"
 #define kRetryTitle			@"Retry Upload?"
-#define	kSavingTitle		@"Uploading Your Trip"
-#define kSuccessTitle		@"Transfer complete"
+#define	kSavingTitle		@"Uploading your trip"
+#define kFetchTitle         @"Downloading your saved trips. \n\nThis may take a minute..."
+#define kFetchError         @"There was a problem downloading some of your trips. Please try again later."
+#define kSavingNoteTitle    @"Uploading your note"
+#define kInitMessage        @"Upgrading internal database. \n\nThis may take a minute..."
+#define kDownloadingUser    @"Downloading demographic information"
+#define kSuccessTitle		@"Upload complete"
+#define kSuccessFetchTitle	@"Download complete"
 #define kTripNotesTitle		@"Enter Comments Below"
 #define kConsentFor18Title  @"In order to send route data to Georgia Tech and the City of Atlanta, you must be at least 18."
 
@@ -84,13 +91,15 @@
 #define kPreparingData		@"Preparing your trip data for transfer."
 #define kRetryMessage		@"This trip has not yet been uploaded successfully. Try again?"
 #define kSaveSuccess		@"Your trip has been uploaded successfully. Thank you."
+#define kFetchSuccess		@"User and Trips information are downloaded successfully. Thank you."
 #define kSaveAccepted		@"Your trip has already been uploaded. Thank you."
 #define kSaveError			@"Your trip has been saved. Please try uploading again later."
 
 #define kInfoURL			@"http://cycleatlanta.org/CycleAtlantaInfo"
-#define kInstructionsURL	@"http://cycleatlanta.org/instructions/"
+#define kInstructionsURL	@"http://cycleatlanta.org/instructions-v2/"
 
 #define kSaveURL			@"http://cycleatlanta.org/post_dev/"
+#define kFetchURL			@"http://cycleatlanta.org/fetch/"
 
 #define kTripNotesPlaceholder	@"Comments"
 

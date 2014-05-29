@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -59,6 +59,19 @@
 - (void) print
 {
 	NSLog(@"%f lat, %f lon", coordinate.latitude, coordinate.longitude);
+}
+
+- (void)dealloc
+{
+    self.title = nil;
+    self.subtitle = nil;
+    self.first = nil;
+    self.last = nil;
+ 
+    [title release];
+    [subtitle release];
+    
+    [super dealloc];
 }
 
 

@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -101,6 +101,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 
 @implementation LoadingView
 
+@synthesize loadingLabel, activityIndicatorView;
 //
 // loadingViewInView:
 //
@@ -113,11 +114,14 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 // returns the constructed view, already added as a subview of the aSuperview
 //	(and hence retained by the superview)
 //
-+ (id)loadingViewInView:(UIView *)aSuperview
++ (id)loadingViewInView:(UIView *)aSuperview messageString:(NSString *)message
 {
+    if (message==NULL)
+        NSLocalizedString(@"Loading...", nil);
+    
 	// LoadingView *loadingView = [[[LoadingView alloc] initWithFrame:[aSuperview bounds]] autorelease];
 	CGRect frame    = CGRectMake(floor(0.5 * (320 - DEFAULT_LABEL_WIDTH)),
-								 floor(0.5 * (480 - DEFAULT_LABEL_HEIGHT)), 
+								 floor(0.5 * ([[UIScreen mainScreen] bounds].size.height - DEFAULT_LABEL_HEIGHT)), 
 								 DEFAULT_LABEL_WIDTH, DEFAULT_LABEL_HEIGHT);
 	LoadingView *loadingView = [[[LoadingView alloc] initWithFrame:frame] autorelease];
 	
@@ -134,45 +138,48 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	/*
 	const CGFloat DEFAULT_LABEL_WIDTH = 280.0;
 	const CGFloat DEFAULT_LABEL_HEIGHT = 50.0;
-	 */
+	 */ //[lblText setFrame:CGRectMake(10, 21, 100, 250)];
 	CGRect labelFrame = CGRectMake(0, 0, DEFAULT_LABEL_WIDTH, 35.);
-	UILabel *loadingLabel =
+	loadingView.loadingLabel =
 		[[[UILabel alloc]
 			initWithFrame:labelFrame]
 		autorelease];
-	loadingLabel.text = NSLocalizedString(@"Loading...", nil);
-	loadingLabel.textColor = [UIColor whiteColor];
-	loadingLabel.backgroundColor = [UIColor clearColor];
-	loadingLabel.textAlignment = UITextAlignmentCenter;
-	loadingLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-	loadingLabel.autoresizingMask =
+	loadingView.loadingLabel.text = message;
+	loadingView.loadingLabel.textColor = [UIColor whiteColor];
+    loadingView.loadingLabel.numberOfLines = 3;
+    loadingView.loadingLabel.lineBreakMode = NSLineBreakByWordWrapping;
+	loadingView.loadingLabel.backgroundColor = [UIColor clearColor];
+	loadingView.loadingLabel.textAlignment = NSTextAlignmentCenter;
+	loadingView.loadingLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
+	loadingView.loadingLabel.autoresizingMask =
 		UIViewAutoresizingFlexibleLeftMargin |
 		UIViewAutoresizingFlexibleRightMargin |
 		UIViewAutoresizingFlexibleTopMargin |
 		UIViewAutoresizingFlexibleBottomMargin;
 	
-	[loadingView addSubview:loadingLabel];
-	UIActivityIndicatorView *activityIndicatorView = [[[UIActivityIndicatorView alloc]
+	[loadingView addSubview:loadingView.loadingLabel];
+	loadingView.activityIndicatorView = [[[UIActivityIndicatorView alloc]
 													   initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite]
 													  autorelease];
-	CGRect activityIndicatorRect = activityIndicatorView.frame;
+	CGRect activityIndicatorRect = loadingView.activityIndicatorView.frame;
+    loadingView.activityIndicatorView.hidesWhenStopped = YES;
 	activityIndicatorRect.origin.x = 0.5 * (loadingView.frame.size.width - activityIndicatorRect.size.width);
-	activityIndicatorRect.origin.y = loadingLabel.frame.origin.y + loadingLabel.frame.size.height + 10.;
-	activityIndicatorView.frame = activityIndicatorRect;	
+	activityIndicatorRect.origin.y = loadingView.loadingLabel.frame.origin.y + loadingView.loadingLabel.frame.size.height + 10.;
+	loadingView.activityIndicatorView.frame = activityIndicatorRect;	
 	
-	activityIndicatorView.autoresizingMask =
+	loadingView.activityIndicatorView.autoresizingMask =
 		UIViewAutoresizingFlexibleLeftMargin |
 		UIViewAutoresizingFlexibleRightMargin |
 		UIViewAutoresizingFlexibleTopMargin |
 		UIViewAutoresizingFlexibleBottomMargin;
 	
-	[activityIndicatorView startAnimating];
-	[loadingView addSubview:activityIndicatorView];
+	[loadingView.activityIndicatorView startAnimating];
+	[loadingView addSubview:loadingView.activityIndicatorView];
 	
-	CGFloat totalHeight = loadingLabel.frame.size.height + activityIndicatorView.frame.size.height;
+	CGFloat totalHeight = loadingView.loadingLabel.frame.size.height + loadingView.activityIndicatorView.frame.size.height;
 	labelFrame.origin.x = floor(0.5 * (loadingView.frame.size.width - DEFAULT_LABEL_WIDTH));
 	labelFrame.origin.y = floor(0.5 * (loadingView.frame.size.height - totalHeight));
-	loadingLabel.frame = labelFrame;
+	loadingView.loadingLabel.frame = labelFrame;
 	
 	// Set up the fade-in animation
 	CATransition *animation = [CATransition animation];
@@ -182,6 +189,36 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	return loadingView;
 }
 
+//
+// changes the message to 'completeMessage' and removes the view after a delay.
+//
+//
+- (void)loadingComplete:(NSString *)completeMessage delayInterval:(NSTimeInterval)delay
+{
+    self.loadingLabel.text=completeMessage;
+    
+//    CGFloat totalHeight = self.loadingLabel.frame.size.height;
+//    CGRect labelFrame = CGRectMake(0, 0, DEFAULT_LABEL_WIDTH, 35.);
+//	labelFrame.origin.x = floor(0.5 * (self.frame.size.width - DEFAULT_LABEL_WIDTH));
+//	labelFrame.origin.y = floor(0.5 * (self.frame.size.height - totalHeight));
+    
+    CGSize maxLabelSize = CGSizeMake(DEFAULT_LABEL_WIDTH, 400);
+    CGSize labelSize = [self.loadingLabel.text sizeWithFont:self.loadingLabel.font constrainedToSize:maxLabelSize lineBreakMode:self.loadingLabel.lineBreakMode];
+    
+    CGRect newFrame = self.loadingLabel.frame;
+    newFrame.size.height = labelSize.height;
+    
+    CGFloat totalHeight = newFrame.size.height;
+    newFrame.origin.x = floor(0.5 * (self.frame.size.width - DEFAULT_LABEL_WIDTH));
+    newFrame.origin.y = floor(0.5 * (self.frame.size.height - totalHeight));
+    
+    self.loadingLabel.frame = newFrame;
+	
+//    self.loadingLabel.frame = labelFrame;
+    [self.activityIndicatorView stopAnimating];
+
+    [self performSelector:@selector(removeView) withObject:nil afterDelay:delay];
+}
 //
 // removeView
 //
@@ -244,6 +281,12 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 //
 - (void)dealloc
 {
+    self.loadingLabel = nil;
+    self.activityIndicatorView = nil;
+    
+    [loadingLabel release];
+    [activityIndicatorView release];
+    
     [super dealloc];
 }
 

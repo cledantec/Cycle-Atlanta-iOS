@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -39,12 +39,12 @@
 
 #import <UIKit/UIKit.h>
 #import "PersonalInfoDelegate.h"
-
+#import "FetchUser.h"
 
 @class User;
 
 
-@interface PersonalInfoViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
+@interface PersonalInfoViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, UIWebViewDelegate>
 {
 	id <PersonalInfoDelegate> delegate;
 	NSManagedObjectContext *managedObjectContext;
@@ -84,7 +84,7 @@
     NSInteger selectedItem;
 }
 
-
+@property (nonatomic,strong) FetchUser *fetchUser;
 @property (nonatomic, retain) id <PersonalInfoDelegate> delegate;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) User *user;
@@ -111,7 +111,7 @@
 @property (nonatomic) NSInteger riderHistorySelectedRow;
 @property (nonatomic) NSInteger selectedItem;
 
-//- (void)initTripManager:(TripManager*)manager;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 // DEPRECATED
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;

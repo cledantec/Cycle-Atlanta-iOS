@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -37,6 +37,10 @@
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
+// Different picker versions based on OS version
+#define IOS_6_OR_EARLIER ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+
+
 // Trip Purpose descriptions
 #define kDescCommute	@"The primary reason for this bike trip is to get between home and your primary work location."
 #define kDescSchool		@"The primary reason for this bike trip is to go to or from school or college."
@@ -55,6 +59,8 @@
 #define kIssueDescBikeLaneIssue  @"Where the bike lane ends (abruptly) or is too narrow (pesky parked cars)."
 #define kIssueDescNoteThisSpot   @"Anything else ripe for improvement: want a sharrow, a sign, a bike lane? Share the details."
 
+#define kDescNoteThis   @"Anything about this spot?"
+
 // Asset descriptions
 #define kAssetDescBikeParking   @"Park them here and remember to secure your bike well! Please only include racks or other objects intended for bikes."
 #define kAssetDescBikeShops @"Have a flat, a broken chain, or spongy brakes? Or do you need a bike to jump into this world of cycling in the first place? Here's a shop ready to help."
@@ -62,6 +68,7 @@
 #define kAssetDescSecretPassage @"Here's an access point under the tracks, through the park, onto a trail, or over a ravine."
 #define kAssetDescWaterFountains    @"Here’s a spot to fill your bottle on those hot summer days… stay hydrated, people. We need you."
 #define kAssetDescNoteThisSpot  @"Anything else we should map to help your fellow cyclists? Share the details."
+
 
 
 @interface CustomPickerDataSource : NSObject <UIPickerViewDataSource, UIPickerViewDelegate>
@@ -72,6 +79,8 @@
 }
 
 @property (nonatomic, retain) NSArray *customPickerArray;
+@property (nonatomic, retain) NSArray *pickerTitles;
+@property (nonatomic, retain) NSArray *pickerImages;
 @property (nonatomic, retain) id<UIPickerViewDelegate> parent;
 
 @end

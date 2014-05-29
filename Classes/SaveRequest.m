@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -34,13 +34,13 @@
 //
 //  Copyright 2009-2010 SFCTA. All rights reserved.
 //  Written by Matt Paul <mattpaul@mopimp.com> on 8/25/09.
-//	For more information on the project, 
+//	For more information on the project,
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
 #import "constants.h"
 #import "CycleAtlantaAppDelegate.h"
 #import "SaveRequest.h"
-
+#import "ZipUtil.h"
 
 @implementation SaveRequest
 
@@ -48,47 +48,103 @@
 
 #pragma mark init
 
-- initWithPostVars:(NSDictionary *)inPostVars
+- initWithPostVars:(NSDictionary *)inPostVars with:(NSInteger) type image:(NSData*) imageData;
 {
 	if (self = [super init])
 	{
-		// Nab the unique device id hash from our delegate.
+		// create request.
+        self.request = [[[NSMutableURLRequest alloc] init] autorelease];
+        [request setURL:[NSURL URLWithString:kSaveURL]];
+        [request setHTTPMethod:@"POST"];
+        
+        // Nab the unique device id hash from our delegate.
 		CycleAtlantaAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 		self.deviceUniqueIdHash = delegate.uniqueIDHash;
-		
-		// create request.
-		self.request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:kSaveURL]]; // prop set retains
-		// [request addValue:kServiceUserAgent forHTTPHeaderField:@"User-Agent"];
-
-		// setup POST vars
-		[request setHTTPMethod:@"POST"];
-		self.postVars = [NSMutableDictionary dictionaryWithDictionary:inPostVars];
-	
-		// add hash of device id
-		[postVars setObject:deviceUniqueIdHash forKey:@"device"];
-
-		// convert dict to string
-		NSMutableString *postBody = [NSMutableString string];
-
-		for(NSString * key in postVars)
-			[postBody appendString:[NSString stringWithFormat:@"%@=%@&", key, [postVars objectForKey:key]]];
-
-		NSLog(@"initializing HTTP POST request to %@ with %d bytes", 
-			  kSaveURL,
-			  [[postBody dataUsingEncoding:NSUTF8StringEncoding] length]);
-		[request setHTTPBody:[postBody dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        self.postVars = [NSMutableDictionary dictionaryWithDictionary:inPostVars];
+        postVars[@"device"] = deviceUniqueIdHash;
+        
+        if (type == 3) {
+            [request setValue:@"3" forHTTPHeaderField:@"Cycleatl-Protocol-Version"];
+        }
+        else if (type == 4){
+            [request setValue:@"4" forHTTPHeaderField:@"Cycleatl-Protocol-Version"];
+        }
+        
+        if (type == 4){
+            // create the POST request for saving a Note
+            NSString *boundary = @"cycle*******notedata*******atlanta";
+            NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+            [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+            
+            
+            // post body
+            NSMutableData *body = [NSMutableData data];
+            
+            // add note details
+            for (NSString *key in postVars) {
+                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"%@\r\n", postVars[key]] dataUsingEncoding:NSUTF8StringEncoding]];
+            }                        
+            
+            // add image data
+            if (imageData) {
+                NSLog(@"there's an image");
+                [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@.jpg\"\r\n", deviceUniqueIdHash] dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                [body appendData:imageData];
+                [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            }
+            
+            [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            
+            // setting the body of the post to the reqeust
+            [request setHTTPBody:body];
+            
+            // set the content-length
+            NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
+            [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+            
+        } else {
+            // create the POST request for saving a Trip
+            [request setValue:@"gzip" forHTTPHeaderField:@"Content-Encoding"];
+            // this is a bit grotty, but it indicates a) cycleatl namespace
+            // b) trip upload, c) version 3, d) form encoding
+            [request setValue:@"application/vnd.cycleatl.trip-v3+form" forHTTPHeaderField:@"Content-Type"];
+            
+            //convert dict to string
+            NSMutableString *postBody = [NSMutableString string];
+            
+            NSString *sep = @"";
+            for(NSString * key in postVars) {
+                [postBody appendString:[NSString stringWithFormat:@"%@%@=%@",
+                                        sep,
+                                        key,
+                                        postVars[key]]];
+                sep = @"&";
+            }
+            //append actual image data
+            // for (each image to upload){
+            //      [postBody appendString 
+            
+            //NSLog(@"Post body unzipped: %@", postBody);
+            // gzip the POST payload
+            NSData *originalData = [postBody dataUsingEncoding:NSUTF8StringEncoding];
+            NSData *postBodyDataZipped = [ZipUtil gzipDeflate:originalData];
+            
+            NSLog(@"Initializing HTTP POST request to %@ of size %lu, orig size %lu",
+                  kSaveURL, (unsigned long)[postBodyDataZipped length], (unsigned long)[originalData length]);
+            
+            [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[postBodyDataZipped length]] forHTTPHeaderField:@"Content-Length"];
+            //set the POST body
+            [request setHTTPBody:postBodyDataZipped];
+        }
+        
 	}
-	
+    
 	return self;
-}
-
-- (void)dealloc
-{
-	[super dealloc];
-	
-	[postVars release];
-	[request release];
-	[deviceUniqueIdHash release];
 }
 
 #pragma mark instance methods
@@ -96,9 +152,22 @@
 // add POST vars to request
 - (NSURLConnection *)getConnectionWithDelegate:(id)delegate
 {
-	
+    
 	NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:delegate];
 	return [conn autorelease];
+}
+
+- (void)dealloc
+{
+	self.request = nil;
+    self.postVars = nil;
+    self.deviceUniqueIdHash = nil;
+    
+	[postVars release];
+	[request release];
+	[deviceUniqueIdHash release];
+    
+    [super dealloc];
 }
 
 @end

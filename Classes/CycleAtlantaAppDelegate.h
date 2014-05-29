@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -36,7 +36,12 @@
 //  Written by Matt Paul <mattpaul@mopimp.com> on 9/21/09.
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
+#import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "ProgressView.h"
+
+@class TripManager;
+@class NoteManager;
 
 @interface CycleAtlantaAppDelegate : NSObject <UIApplicationDelegate>
 {
@@ -47,11 +52,10 @@
     UIWindow *window;
     UITabBarController *tabBarController;
 	NSString *uniqueIDHash;
-    //UIAlertView *consentFor18;
-    // added to handle location manager background service switching
     BOOL isRecording;
     CLLocationManager *locationManager;
-    
+    UIView *backgroundView;
+    UIImageView *backgroundImage;
 }
 
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
@@ -61,10 +65,10 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) NSString *uniqueIDHash;
-//@property (nonatomic, retain) UIAlertView *consentFor18;
-// added to handle location manager background service switching
 @property (nonatomic, assign) BOOL isRecording;
 @property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic, retain) ProgressView *storeLoadingView;
+
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)initUniqueIDHash;

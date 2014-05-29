@@ -1,8 +1,8 @@
-/** Cycle Altanta, Copyright 2012 Georgia Institute of Technology
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
  *                                    Atlanta, GA. USA
  *
  *   @author Christopher Le Dantec <ledantec@gatech.edu>
- *   @author Anhong Guo <guoanhong15@gmail.com>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
  *
  *   Updated/Modified for Atlanta's app deployment. Based on the
  *   CycleTracks codebase for SFCTA.
@@ -64,13 +64,6 @@
 {
     [super viewDidLoad];
     
-	self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-	NSLog(@"About viewDidLoad");
-    //loads the instructions page everytime the app is started. good for testing.
-    NSURL *url = [NSURL URLWithString:kInstructionsURL];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    [webView loadRequest:request];
     //loads the instructions page once and saves it unless the app is deleted
 	//[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:kInstructionsURL]]];
     
@@ -92,14 +85,18 @@
     }*/
 }
 
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	NSLog(@"About viewDidLoad");
+    //loads the instructions page everytime the app is started. good for testing.
+    NSURL *url = [NSURL URLWithString:kInstructionsURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [webView loadRequest:request];
+    [super viewWillAppear:animated];
 }
-*/
+
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -108,13 +105,9 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
 
 - (void)dealloc {
+    [webView release];
     [super dealloc];
 }
 

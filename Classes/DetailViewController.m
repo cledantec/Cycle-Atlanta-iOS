@@ -1,16 +1,31 @@
-//
-//  DetailViewController.m
-//  Cycle Atlanta
-//
-//  Created by Guo Anhong on 12-11-8.
-//
-//
+/** Cycle Atlanta, Copyright 2012, 2013 Georgia Institute of Technology
+ *                                    Atlanta, GA. USA
+ *
+ *   @author Christopher Le Dantec <ledantec@gatech.edu>
+ *   @author Anhong Guo <guoanhong@gatech.edu>
+ *
+ *   Cycle Atlanta is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   Cycle Atlanta is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with Cycle Atlanta.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #import "DetailViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
+#import "NoteManager.h"
+#import "ImageResize.h"
 
 @interface DetailViewController ()
 static UIImage *shrinkImage(UIImage *original, CGSize size);
+
 - (void)updateDisplay;
 - (void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType;
 @end
@@ -20,36 +35,39 @@ static UIImage *shrinkImage(UIImage *original, CGSize size);
 @synthesize detailTextView;
 @synthesize addPicButton;
 @synthesize imageView;
-@synthesize moviePlayerController;
 @synthesize image;
-@synthesize movieURL;
-@synthesize lastChosenMediaType;
 @synthesize imageFrame;
+@synthesize imageFrameView;
+@synthesize lastChosenMediaType;
+@synthesize imageData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
 - (void)viewDidLoad
 {
-    [self.detailTextView setText:@"Enter More Details Here"];
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    if (![UIImagePickerController isSourceTypeAvailable:
-          UIImagePickerControllerSourceTypeCamera]) {
-        addPicButton.hidden = YES;
-    }
-    imageFrame = imageView.frame;
+    //[self.detailTextView setText:@"Enter More Details Here"];
     
+    [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.detailTextView becomeFirstResponder];
+    // Do any additional setup after loading the view.
+    if (![UIImagePickerController isSourceTypeAvailable:
+          UIImagePickerControllerSourceTypeCamera]) {
+        addPicButton.hidden = YES;
+    }
+    //needed to center button title text on ios5 (attributed title does not work prior to ios6)
+    addPicButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+
+    detailTextView.layer.borderWidth = 1.0;
+    detailTextView.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.imageFrame = [UIImage imageWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"photoFrame" ofType:@"png"]];
+    imageFrameView.image = imageFrame;
     [super viewWillAppear:animated];
 }
 
@@ -72,15 +90,36 @@ static UIImage *shrinkImage(UIImage *original, CGSize size);
 
 -(IBAction)skip:(id)sender{
     NSLog(@"Skip");
-    [delegate didCancelPurpose];
-    //do something: photo=null, text=null
+    [detailTextView resignFirstResponder];
+    [delegate didCancelNote];
+    
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    details = @"";
+    image = nil;
+    
+    [delegate didEnterNoteDetails:details];
+    [delegate didSaveImage:nil];
+    [delegate saveNote];
 }
+
 
 -(IBAction)saveDetail:(id)sender{
     NSLog(@"Save Detail");
     [detailTextView resignFirstResponder];
-    //do many things here: get photo and text for later use.
-    [delegate didCancelPurpose];
+    [delegate didCancelNote];
+    
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    details = detailTextView.text;
+    
+    [delegate didEnterNoteDetails:details];
+    [delegate didSaveImage:imageData];
+    [delegate saveNote];
 }
 
 - (IBAction)shootPictureOrVideo:(id)sender {
@@ -97,25 +136,29 @@ static UIImage *shrinkImage(UIImage *original, CGSize size);
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 #pragma mark UIImagePickerController delegate methods
+
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    self.lastChosenMediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    if ([lastChosenMediaType isEqual:(NSString *)kUTTypeImage]) {
-        UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
-        UIImage *shrunkenImage = shrinkImage(chosenImage, imageFrame.size);
-        self.image = shrunkenImage;
-    } else if ([lastChosenMediaType isEqual:(NSString *)kUTTypeMovie]) {
-        self.movieURL = [info objectForKey:UIImagePickerControllerMediaURL];
-    }
-    [picker dismissModalViewControllerAnimated:YES];
+    //original
+    UIImage *castedImage = info[UIImagePickerControllerOriginalImage];
+    //save to library
+    UIImageWriteToSavedPhotosAlbum(castedImage,self, nil, nil);
+    imageData = [[NSData alloc] initWithData:UIImageJPEGRepresentation([ImageResize imageWithImage:castedImage scaledToSize:CGSizeMake(960, 720)], 1)];
+    NSLog(@"Size of Image(bytes):%lu",(unsigned long)[imageData length]);
+    self.image = [ImageResize imageWithImage:castedImage scaledToSize:CGSizeMake(290, 192)];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker release];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissModalViewControllerAnimated:YES];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker release];
 }
 
 #pragma mark  -
+
 static UIImage *shrinkImage(UIImage *original, CGSize size) {
     CGFloat scale = [UIScreen mainScreen].scale;
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
@@ -130,40 +173,27 @@ static UIImage *shrinkImage(UIImage *original, CGSize size) {
     
     CGContextRelease(context);
     CGImageRelease(shrunken);
-    
+    CGColorSpaceRelease(colorSpace);
     return final;
 }
 
 - (void)updateDisplay {
-    if ([lastChosenMediaType isEqual:(NSString *)kUTTypeImage]) {
-        imageView.image = image;
-        imageView.hidden = NO;
-        moviePlayerController.view.hidden = YES;
-    } else if ([lastChosenMediaType isEqual:(NSString *)kUTTypeMovie]) {
-        [self.moviePlayerController.view removeFromSuperview];
-        self.moviePlayerController = [[MPMoviePlayerController alloc]
-                                      initWithContentURL:movieURL];
-        moviePlayerController.view.frame = imageFrame;
-        moviePlayerController.view.clipsToBounds = YES;
-        [self.view addSubview:moviePlayerController.view];
-        imageView.hidden = YES;
-    }
+    imageView.image = image;
+    imageView.hidden = NO;
 }
 
 - (void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType {
-    NSArray *mediaTypes = [UIImagePickerController
-                           availableMediaTypesForSourceType:sourceType];
+    //NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
     if ([UIImagePickerController isSourceTypeAvailable:
-         sourceType] && [mediaTypes count] > 0) {
-        NSArray *mediaTypes = [UIImagePickerController
-                               availableMediaTypesForSourceType:sourceType];
-        UIImagePickerController *picker =
-        [[UIImagePickerController alloc] init];
-        picker.mediaTypes = mediaTypes;
+         sourceType]) {
+        //NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        //picker.mediaTypes = mediaTypes;
+        //picker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
         picker.delegate = self;
-        picker.allowsEditing = YES;
         picker.sourceType = sourceType;
-        [self presentModalViewController:picker animated:YES];
+        [self presentViewController:picker animated:YES completion:nil];
+//        [picker release];
     } else {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:@"Error accessing media"
@@ -177,65 +207,27 @@ static UIImage *shrinkImage(UIImage *original, CGSize size) {
 
 
 - (void)dealloc {
-    [super dealloc];
-}
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    self.imageView = nil;
+    self.delegate = nil;
+    self.detailTextView = nil;
     self.addPicButton = nil;
-    self.moviePlayerController = nil;
-}
-
--(IBAction)screenShoot:(id)sender{
-    NSLog(@"Screen Shoot");
-    UIImage *image1 = [self screenshot];
-    imageView.image = image1;
-}
-
-- (UIImage*)screenshot
-{
-    // Create a graphics context with the target size
-    // On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
-    // On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
-    CGSize imageSize = [[UIScreen mainScreen] bounds].size;
-    if (NULL != UIGraphicsBeginImageContextWithOptions)
-        UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-    else
-        UIGraphicsBeginImageContext(imageSize);
+    self.imageView = nil;
+    self.imageFrameView = nil;
+    self.image = nil;
+    self.imageFrame = nil;
+    self.imageData = nil;
+    self.lastChosenMediaType = nil;
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
+    [delegate release];
+    [detailTextView release];
+    [addPicButton release];
+    [imageView release];
+    [imageFrameView release];
+    [image release];
+    [imageFrame release];
+    [imageData release];
+    [lastChosenMediaType release];
     
-    // Iterate over every window from back to front
-    for (UIWindow *window in [[UIApplication sharedApplication] windows])
-    {
-        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen])
-        {
-            // -renderInContext: renders in the coordinate space of the layer,
-            // so we must first apply the layer's geometry to the graphics context
-            CGContextSaveGState(context);
-            // Center the context around the window's anchor point
-            CGContextTranslateCTM(context, [window center].x, [window center].y);
-            // Apply the window's transform about the anchor point
-            CGContextConcatCTM(context, [window transform]);
-            // Offset by the portion of the bounds left of and above the anchor point
-            CGContextTranslateCTM(context,
-                                  -[window bounds].size.width * [[window layer] anchorPoint].x,
-                                  -[window bounds].size.height * [[window layer] anchorPoint].y);
-            
-            // Render the layer hierarchy to the current context
-            [[window layer] renderInContext:context];
-            
-            // Restore the context
-            CGContextRestoreGState(context);
-        }
-    }
-    
-    // Retrieve the screenshot image
-    UIImage *screenImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return screenImage;
+    [super dealloc];
 }
 
 
