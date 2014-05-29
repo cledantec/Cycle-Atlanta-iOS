@@ -69,19 +69,19 @@
 }
 
 
-@property (nonatomic, retain) LoadingView *uploadingView;
-@property (nonatomic, retain) UIViewController *parent;
-@property (nonatomic, retain) UIAlertView *saving;
-@property (nonatomic, retain) UIAlertView *tripNotes;
-@property (nonatomic, retain) UITextView *tripNotesText;
+@property (nonatomic, strong) LoadingView *uploadingView;
+@property (nonatomic, strong) UIViewController *parent;
+@property (nonatomic, strong) UIAlertView *saving;
+@property (nonatomic, strong) UIAlertView *tripNotes;
+@property (nonatomic, strong) UITextView *tripNotesText;
 
 @property (assign) BOOL dirty;
-@property (nonatomic, retain) Trip *trip;
+@property (nonatomic, strong) Trip *trip;
 
-@property (nonatomic, retain) NSMutableArray *coords;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSMutableArray *coords;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
-@property (nonatomic, retain) NSMutableData *receivedData;
+@property (nonatomic, strong) NSMutableData *receivedData;
 
 
 - (id)initWithManagedObjectContext:(NSManagedObjectContext*)context;

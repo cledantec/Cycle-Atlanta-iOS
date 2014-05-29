@@ -127,6 +127,7 @@
         // Get reference to the destination view controller
          NoteViewController *nvc = [segue destinationViewController];
         [nvc initWithNote:noteToDisplay];
+        [loading removeFromSuperview];
 
     }
 }
@@ -144,8 +145,6 @@
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptors release];
-	[sortDescriptor release];
 	
 	NSError *error;
 	NSInteger count = [noteManager.managedObjectContext countForFetchRequest:request error:&error];
@@ -163,8 +162,6 @@
 	[self setNotes:mutableFetchResults];
 	[self.tableView reloadData];
     
-	[mutableFetchResults release];
-	[request release];
 }
 
 
@@ -235,13 +232,13 @@
 	NoteCell *cell = (NoteCell*)[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
 	if (cell == nil)
 	{
-		cell = [[[NoteCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier] autorelease];
+		cell = [[NoteCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
 		cell.detailTextLabel.numberOfLines = 2;
         if ( [reuseIdentifier isEqual: kCellReuseIdentifierExclamation] )
 		{
 			// add exclamation point
 			UIImage		*image		= [UIImage imageNamed:@"failedUpload.png"];
-			UIImageView *imageView	= [[[UIImageView alloc] initWithImage:image] autorelease];
+			UIImageView *imageView	= [[UIImageView alloc] initWithImage:image];
 			imageView.frame = CGRectMake( kAccessoryViewX, kAccessoryViewY, image.size.width, image.size.height );
 			imageView.tag	= kTagImage;
 			cell.accessoryView = imageView;
@@ -300,7 +297,7 @@
             image = [UIImage imageNamed:@"GreenCheckMark2.png"];
         }
         
-        UIImageView *imageView	= [[[UIImageView alloc] initWithImage:image] autorelease];
+        UIImageView *imageView	= [[UIImageView alloc] initWithImage:image];
         imageView.frame			= CGRectMake( kAccessoryViewX, kAccessoryViewY, image.size.width, image.size.height );
         
         //[cell.contentView addSubview:imageView];
@@ -319,7 +316,7 @@
     cell.detailTextLabel.tag = kTagDetail;
     cell.textLabel.tag = kTagTitle;
     
-    NSString *title = [[[NSString alloc] init] autorelease] ;
+    NSString *title = [[NSString alloc] init] ;
     switch ([note.note_type intValue]) {
         case 0:
             title = @"Pavement issue";
@@ -403,7 +400,6 @@
 													otherButtonTitles:@"Upload", nil];
 	
 	[actionSheet showInView:self.tabBarController.view];
-	[actionSheet release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -429,14 +425,11 @@
 
 - (void)displaySelectedNoteMap
 {
-	loading		= [[LoadingView loadingViewInView:self.parentViewController.view messageString:@"Loading..."] retain];
+	loading		= [LoadingView loadingViewInView:self.parentViewController.view messageString:@"Loading..."];
 	loading.tag = 999;
 	if ( selectedNote )
 	{
         self.noteToDisplay = selectedNote;
-     /* NoteViewController *mvc = [[NoteViewController alloc] initWithNote:selectedNote];
-		[[self navigationController] pushViewController:mvc animated:YES];
-		[mvc release]; */
         [self performSegueWithIdentifier:@"SavedNotesToNote" sender:self];
 		selectedNote = nil;
 	}
@@ -445,11 +438,6 @@
 - (void)displayUploadedNote
 {
     self.noteToDisplay = noteManager.note;
-    // load map view of note
-    /*NoteViewController *mvc = [[NoteViewController alloc] initWithNote:note];
-    [[self navigationController] pushViewController:mvc animated:YES];
-    NSLog(@"displayUploadedNote");
-    [mvc release];*/
     [self performSegueWithIdentifier:@"SavedNotesToNote" sender:self];
 
 }
@@ -498,13 +486,11 @@
     
     selectedNote = (Note *)notes[indexPath.row];
     
-    loading		= [[LoadingView loadingViewInView:self.parentViewController.view messageString:@"Loading..."] retain];
+    loading		= [LoadingView loadingViewInView:self.parentViewController.view messageString:@"Loading..."];
 	loading.tag = 999;
     [loading performSelector:@selector(removeView) withObject:nil afterDelay:0.5];
     
     if (!selectedNote.uploaded) {
-        if ( noteManager )
-            [noteManager release];
         
         noteManager = [[NoteManager alloc] initWithNote:selectedNote];
         noteManager.alertDelegate = self;
@@ -514,9 +500,7 @@
     }
     else if ( selectedNote )
 	{
-		NoteViewController *mvc = [[NoteViewController alloc] initWithNote:selectedNote];
-		[[self navigationController] pushViewController:mvc animated:YES];
-		[mvc release];
+		[self displaySelectedNoteMap];
 		selectedNote = nil;
 	}
 }
@@ -542,18 +526,5 @@
 	}
 }
 
-- (void)dealloc {
-    self.notes = nil;
-    self.managedObjectContext = nil;
-    self.noteManager = nil;
-    self.selectedNote = nil;
-    
-    [notes release];
-    [selectedNote release];
-    [noteManager release];
-    [loading release];
-    
-    [super dealloc];
-}
 
 @end

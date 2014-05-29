@@ -247,7 +247,7 @@
 
 //        size_t num_locations            = 2;
         CGFloat locations[]             = {0.0, 1.0};
-        CFArrayRef colors = (CFArrayRef) @[(id)_progressTintColorDark.CGColor,
+        CFArrayRef colors = (__bridge CFArrayRef) @[(id)_progressTintColorDark.CGColor,
                                           (id)self.progressTintColor.CGColor];
         
         CGGradientRef gradient          = CGGradientCreateWithColors (colorSpace, colors, locations);

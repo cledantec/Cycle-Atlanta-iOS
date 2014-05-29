@@ -35,13 +35,13 @@
     NSDictionary *tripDict;
 }
 
-@property (nonatomic, retain) NSDictionary *tripDict;
-@property (nonatomic, retain) NSMutableURLRequest *urlRequest;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSMutableData *receivedData;
-@property (nonatomic, retain) ProgressView *downloadingProgressView;
+@property (nonatomic, strong) NSDictionary *tripDict;
+@property (nonatomic, strong) NSMutableURLRequest *urlRequest;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSMutableData *receivedData;
+@property (nonatomic, strong) ProgressView *downloadingProgressView;
 @property (nonatomic) int *tripDownloadCount;
-@property (nonatomic, retain) NSMutableArray *tripsToLoad;
+@property (nonatomic, strong) NSMutableArray *tripsToLoad;
 
 - (void)fetchTripData:(NSDictionary*) tripToLoad;
 - (id)initWithTripCountAndProgessView:(int) tripCount progressView:(ProgressView*) progressView;

@@ -46,7 +46,7 @@
 }
 /** Run the animation of the progress bar. YES by default. */
 @property (nonatomic, getter = isAnimated) BOOL animated;
-@property (nonatomic, retain) UIColor *progressTintColor;
+@property (nonatomic, strong) UIColor *progressTintColor;
 
 #pragma mark Constructors - Initializers
 

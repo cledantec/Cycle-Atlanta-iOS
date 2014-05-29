@@ -129,7 +129,17 @@
     return self;
 }
 
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"SavedTripsToMap"])
+    {
+        // Get reference to the destination view controller
+        MapViewController *nvc = [segue destinationViewController];
+        [nvc initWithTrip:tripToDisplay];
+        [loading removeFromSuperview];
+    }
+}
 
 - (void)refreshTableView
 {
@@ -142,8 +152,6 @@
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptors release];
-	[sortDescriptor release];
 	
 	NSError *error;
 	NSInteger count = [tripManager.managedObjectContext countForFetchRequest:request error:&error];
@@ -160,8 +168,6 @@
 	[self setTrips:mutableFetchResults];
 	[self.tableView reloadData];
 
-	[mutableFetchResults release];
-	[request release];
 }
 
 
@@ -213,50 +219,48 @@
 - (void)_recalculateDistanceForSelectedTripMap
 {
 	// important if we call from a background thread
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
+    @autoreleasepool { // Top-level pool
 	
 	// instantiate a temporary TripManager to recalcuate distance
-	TripManager *mapTripManager = [[TripManager alloc] initWithTrip:selectedTrip];
-	CLLocationDistance newDist	= [mapTripManager calculateTripDistance:selectedTrip];
-	
-	// save updated distance to CoreData
-	[mapTripManager.trip setDistance:@(newDist)];
+		TripManager *mapTripManager = [[TripManager alloc] initWithTrip:selectedTrip];
+		CLLocationDistance newDist	= [mapTripManager calculateTripDistance:selectedTrip];
+		
+		// save updated distance to CoreData
+		[mapTripManager.trip setDistance:@(newDist)];
 
-	NSError *error;
-	if (![mapTripManager.managedObjectContext save:&error]) {
-		// Handle the error.
-		NSLog(@"_recalculateDistanceForSelectedTripMap error %@, %@", error, [error localizedDescription]);
-	}
-	
-	[mapTripManager release];
-	tripManager.dirty = YES;
-	
-	[self performSelectorOnMainThread:@selector(_displaySelectedTripMap) withObject:nil waitUntilDone:NO];
-    [pool release];  // Release the objects in the pool.
+		NSError *error;
+		if (![mapTripManager.managedObjectContext save:&error]) {
+			// Handle the error.
+			NSLog(@"_recalculateDistanceForSelectedTripMap error %@, %@", error, [error localizedDescription]);
+		}
+		
+		tripManager.dirty = YES;
+		
+		[self performSelectorOnMainThread:@selector(_displaySelectedTripMap) withObject:nil waitUntilDone:NO];
+    }  // Release the objects in the pool.
 }
 
 
 - (void)_displaySelectedTripMap
 {
 	// important if we call from a background thread
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // Top-level pool
+    @autoreleasepool { // Top-level pool
 
-	if ( selectedTrip )
-	{
-		MapViewController *mvc = [[MapViewController alloc] initWithTrip:selectedTrip];
-		[[self navigationController] pushViewController:mvc animated:YES];
-		[mvc release];		
-		selectedTrip = nil;
-	}
+		if ( selectedTrip )
+		{
+        tripToDisplay = selectedTrip;
+		    [self performSegueWithIdentifier:@"SavedTripsToMap" sender:self];
+			selectedTrip = nil;
+		}
 
-    [pool release];  // Release the objects in the pool.
+    }  // Release the objects in the pool.
 }
 
 
 // display map view
 - (void)displaySelectedTripMap
 {
-	loading		= [[LoadingView loadingViewInView:self.parentViewController.view messageString:@"Loading..."] retain];
+	loading		= [LoadingView loadingViewInView:self.parentViewController.view messageString:@"Loading..."];
 	loading.tag = 909;
 	[self performSelectorInBackground:@selector(_recalculateDistanceForSelectedTripMap) withObject:nil];
 }
@@ -287,7 +291,7 @@
     
 	if (cell == nil)
 	{
-		cell = [[[TripCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier] autorelease];
+		cell = [[TripCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
 		cell.detailTextLabel.numberOfLines = 2;
 		if ( [reuseIdentifier isEqual: kCellReuseIdentifierCheck] )
 		{
@@ -305,7 +309,7 @@
 		{
 			// add exclamation point
 			UIImage		*image		= [UIImage imageNamed:@"failedUpload.png"];
-			UIImageView *imageView	= [[[UIImageView alloc] initWithImage:image] autorelease];
+			UIImageView *imageView	= [[UIImageView alloc] initWithImage:image];
 			imageView.frame = CGRectMake( kAccessoryViewX, kAccessoryViewY, image.size.width, image.size.height );
 			imageView.tag	= kTagImage;
 			//[cell.contentView addSubview:imageView];
@@ -322,7 +326,7 @@
 			{
 				// create activity indicator if needed
 				CGRect frame = CGRectMake( kAccessoryViewX + 4.0, kAccessoryViewY + 4.0, kActivityIndicatorSize, kActivityIndicatorSize );
-				inProgressIndicator = [[[UIActivityIndicatorView alloc] initWithFrame:frame] autorelease];
+				inProgressIndicator = [[UIActivityIndicatorView alloc] initWithFrame:frame];
 				inProgressIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;		
 				[inProgressIndicator sizeToFit];
 				[inProgressIndicator startAnimating];
@@ -366,27 +370,27 @@
 	//only update contents if cell does not exist. improves intermittent overlap bug
     if(cell == nil)
     {
-        UILabel *timeText = [[[UILabel alloc] init] autorelease];
+        UILabel *timeText = [[UILabel alloc] init];
         timeText.frame = CGRectMake( 10, 5, 220, 25);
         [timeText setFont:[UIFont systemFontOfSize:15]];
         [timeText setTextColor:[UIColor grayColor]];
         
-        UILabel *purposeText = [[[UILabel alloc] init] autorelease];
+        UILabel *purposeText = [[UILabel alloc] init];
         purposeText.frame = CGRectMake( 10, 24, 120, 30);
         [purposeText setFont:[UIFont boldSystemFontOfSize:18]];
         [purposeText setTextColor:[UIColor blackColor]];
         
-        UILabel *durationText = [[[UILabel alloc] init] autorelease];
+        UILabel *durationText = [[UILabel alloc] init];
         durationText.frame = CGRectMake( 140, 24, 190, 30);
         [durationText setFont:[UIFont systemFontOfSize:18]];
         [durationText setTextColor:[UIColor blackColor]];
         
-        UILabel *CO2Text = [[[UILabel alloc] init] autorelease];
+        UILabel *CO2Text = [[UILabel alloc] init];
         CO2Text.frame = CGRectMake( 10, 50, 120, 20);
         [CO2Text setFont:[UIFont systemFontOfSize:12]];
         [CO2Text setTextColor:[UIColor grayColor]];
         
-        UILabel *CaloryText = [[[UILabel alloc] init] autorelease];
+        UILabel *CaloryText = [[UILabel alloc] init];
         CaloryText.frame = CGRectMake( 140, 50, 190, 20);
         [CaloryText setFont:[UIFont systemFontOfSize:12]];
         [CaloryText setTextColor:[UIColor grayColor]];
@@ -435,7 +439,7 @@
                 default:
                     image = [UIImage imageNamed:@"GreenCheckMark2.png"];
             }
-            UIImageView *imageView	= [[[UIImageView alloc] initWithImage:image] autorelease];
+            UIImageView *imageView	= [[UIImageView alloc] initWithImage:image];
             imageView.frame			= CGRectMake( kAccessoryViewX, kAccessoryViewY, image.size.width, image.size.height );
             
             //[cell.contentView addSubview:imageView];
@@ -476,8 +480,8 @@
         NSDate *fauxDate = [inputFormatter dateFromString:@"00:00:00"];
         [inputFormatter setDateFormat:@"HH:mm:ss"];
         NSLog(@"trip duration: %f", [trip.duration doubleValue]);
-        NSDate *outputDate = [[[NSDate alloc] initWithTimeInterval:(NSTimeInterval)[trip.duration doubleValue]
-                                                        sinceDate:fauxDate] autorelease];
+        NSDate *outputDate = [[NSDate alloc] initWithTimeInterval:(NSTimeInterval)[trip.duration doubleValue]
+                                                        sinceDate:fauxDate];
         
         cell.detailTextLabel.numberOfLines = 2;
         
@@ -536,8 +540,8 @@
     NSDate *fauxDate = [inputFormatter dateFromString:@"00:00:00"];
     [inputFormatter setDateFormat:@"HH:mm:ss"];
     NSLog(@"trip duration: %f", [trip.duration doubleValue]);
-    NSDate *outputDate = [[[NSDate alloc] initWithTimeInterval:(NSTimeInterval)[trip.duration doubleValue]
-                                                     sinceDate:fauxDate] autorelease];
+    NSDate *outputDate = [[NSDate alloc] initWithTimeInterval:(NSTimeInterval)[trip.duration doubleValue]
+                                                     sinceDate:fauxDate];
     
     tripInProgressTime.text = [NSString stringWithFormat:@"%@",[inputFormatter stringFromDate:outputDate]];
 }
@@ -570,7 +574,6 @@
 													otherButtonTitles:@"Upload", nil];
 	
 	[actionSheet showInView:self.tabBarController.view];
-	[actionSheet release];	
 }
 
 
@@ -594,8 +597,6 @@
 		{
 			// init new TripManager instance with selected trip
 			// release previously set tripManager
-			if ( tripManager )
-				[tripManager release];
 			
 			tripManager = [[TripManager alloc] initWithTrip:selectedTrip];
 			tripManager.parent = self;
@@ -620,12 +621,10 @@
 
 - (void)displayUploadedTripMap
 {
-    Trip *trip = tripManager.trip;
-    
+    tripToDisplay = tripManager.trip;
     // load map view of saved trip
-    MapViewController *mvc = [[MapViewController alloc] initWithTrip:trip];
-    [[self navigationController] pushViewController:mvc animated:YES];
-    [mvc release];
+    [self performSegueWithIdentifier:@"SavedTripsToMap" sender:self];
+
 }
 
 
@@ -783,21 +782,6 @@
 	[tripManager setPurpose:index];
 }
 
-- (void)dealloc {
-    self.trips = nil;
-    self.managedObjectContext = nil;
-    self.delegate = nil;
-    self.tripManager = nil;
-    self.selectedTrip = nil;
-    
-    [delegate release];
-    [trips release];
-    [tripManager release];
-    [selectedTrip release];
-    [loading release];
-    
-    [super dealloc];
-}
 
 
 @end

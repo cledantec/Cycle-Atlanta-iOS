@@ -106,10 +106,6 @@
 }
 
 
-- (void)dealloc {
-    [webView release];
-    [super dealloc];
-}
 
 /*
 #pragma mark UIAlertViewDelegate methods

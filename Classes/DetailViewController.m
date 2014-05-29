@@ -149,12 +149,10 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSLog(@"Size of Image(bytes):%lu",(unsigned long)[imageData length]);
     self.image = [ImageResize imageWithImage:castedImage scaledToSize:CGSizeMake(290, 192)];
     [picker dismissViewControllerAnimated:YES completion:nil];
-    [picker release];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    [picker release];
 }
 
 #pragma mark  -
@@ -206,29 +204,6 @@ static UIImage *shrinkImage(UIImage *original, CGSize size) {
 }
 
 
-- (void)dealloc {
-    self.delegate = nil;
-    self.detailTextView = nil;
-    self.addPicButton = nil;
-    self.imageView = nil;
-    self.imageFrameView = nil;
-    self.image = nil;
-    self.imageFrame = nil;
-    self.imageData = nil;
-    self.lastChosenMediaType = nil;
-    
-    [delegate release];
-    [detailTextView release];
-    [addPicButton release];
-    [imageView release];
-    [imageFrameView release];
-    [image release];
-    [imageFrame release];
-    [imageData release];
-    [lastChosenMediaType release];
-    
-    [super dealloc];
-}
 
 
 @end

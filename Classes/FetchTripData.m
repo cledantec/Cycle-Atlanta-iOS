@@ -111,7 +111,6 @@
 		// Handle the error.
 		NSLog(@"TripManager addCoord error %@, %@", error, [error localizedDescription]);
 	}
-    [dateFormat release];
     
     if (taskId != UIBackgroundTaskInvalid) {
         [[UIApplication sharedApplication] endBackgroundTask:taskId];
@@ -132,7 +131,7 @@
 	if ( [filteredCoords count] )
 	{
 		// sort filtered coords by recorded date
-		NSSortDescriptor *sortByDate	= [[[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES] autorelease];
+		NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
 		NSArray		*sortDescriptors	= @[sortByDate];
 		NSArray		*sortedCoords		= [filteredCoords sortedArrayUsingDescriptors:sortDescriptors];
 		
@@ -149,10 +148,10 @@
 
 - (CLLocationDistance)distanceFrom:(Coord*)prev to:(Coord*)next realTime:(BOOL)realTime
 {
-	CLLocation *prevLoc = [[[CLLocation alloc] initWithLatitude:[prev.latitude doubleValue]
-                                                      longitude:[prev.longitude doubleValue]] autorelease];
-	CLLocation *nextLoc = [[[CLLocation alloc] initWithLatitude:[next.latitude doubleValue]
-                                                      longitude:[next.longitude doubleValue]] autorelease];
+	CLLocation *prevLoc = [[CLLocation alloc] initWithLatitude:[prev.latitude doubleValue]
+                                                      longitude:[prev.longitude doubleValue]];
+	CLLocation *nextLoc = [[CLLocation alloc] initWithLatitude:[next.latitude doubleValue]
+                                                      longitude:[next.longitude doubleValue]];
 	
 	CLLocationDistance	deltaDist	= [nextLoc distanceFromLocation:prevLoc];
 	NSTimeInterval		deltaTime	= [next.recorded timeIntervalSinceDate:prev.recorded];
@@ -181,14 +180,13 @@
 {
     [self.downloadingProgressView updateProgress:1.0f/[[NSNumber numberWithInt:tripDownloadCount] floatValue] ];
     self.tripsToLoad = trips;
-    NSDictionary* trip = [[self.tripsToLoad lastObject] retain];
+    NSDictionary* trip = [self.tripsToLoad lastObject];
     [self.tripsToLoad removeLastObject];
     
     if(trip)
     {
         [self fetchTripData:trip];
     }    
-    [trip release];
 }
 
 
@@ -197,7 +195,7 @@
     self.tripDict = tripToLoad;
     
     NSMutableString *postBody = [NSMutableString string];
-    self.urlRequest = [[[NSMutableURLRequest alloc] init] autorelease] ;
+    self.urlRequest = [[NSMutableURLRequest alloc] init] ;
     [urlRequest setURL:[NSURL URLWithString:kFetchURL] ];
     [urlRequest setHTTPMethod:@"POST"];
     [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -219,7 +217,7 @@
     
     if ( theConnection )
     {
-        receivedData=[[NSMutableData data] retain];
+        receivedData=[NSMutableData data];
     }
     else
     {
@@ -293,10 +291,8 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     // release the connection, and the data object
-    [connection release];
 	
     // receivedData is declared as a method instance elsewhere
-    [receivedData release];
     
     [self.downloadingProgressView setErrorMessage:kFetchError];
     [self.downloadingProgressView updateProgress:1.0f/[[NSNumber numberWithInt:self.tripDownloadCount] floatValue] ];
@@ -325,9 +321,6 @@
 //    NSLog(@"%@", [[[NSString alloc] initWithData:JsonDataCoords encoding:NSUTF8StringEncoding] autorelease] );
 
     // release the connection, and the data object
-    [connection release];
-    [receivedData release];
-    [jsonString release];
     //get the next trip from the array.
     [self fetchWithTrips:self.tripsToLoad];
 }

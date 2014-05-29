@@ -86,8 +86,6 @@
     }
     [self.managedObjectContext save:&error];
     [self.parent viewWillAppear:false];
-	[mutableFetchResults release];
-	[request release];
 }
 
 -(void)loadTrip:(NSDictionary *)tripsDict{
@@ -128,14 +126,10 @@
     else{
         [self.downloadingProgressView setVisible:TRUE messageString:kFetchTitle];
         NSLog(@"Number of trips to download: %lu", (unsigned long)[tripsToLoad count]);
-        FetchTripData *fetchTrip = [[[FetchTripData alloc] initWithTripCountAndProgessView:[tripsToLoad count] progressView:self.downloadingProgressView] autorelease];
+        FetchTripData *fetchTrip = [[FetchTripData alloc] initWithTripCountAndProgessView:[tripsToLoad count] progressView:self.downloadingProgressView];
         [fetchTrip fetchWithTrips:tripsToLoad];
     }
     
-    [request release];
-    [storedTrips release];
-    [dateFormat release];
-    [tripsToLoad release];
 }
 
 
@@ -168,7 +162,7 @@
     NSData *postData = [postBody dataUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"POST Data: %@", postBody);
     
-    self.urlRequest = [[[NSMutableURLRequest alloc] init] autorelease];
+    self.urlRequest = [[NSMutableURLRequest alloc] init];
     [urlRequest setURL:[NSURL URLWithString:kFetchURL]];
     [urlRequest setHTTPMethod:@"POST"];
     [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -180,7 +174,7 @@
 	
     if ( theConnection )
     {
-        receivedData=[[NSMutableData data] retain];
+        receivedData=[NSMutableData data];
     }
     else
     {
@@ -257,8 +251,6 @@
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
-    [connection release];
-    [receivedData release];
     
     [self.downloadingProgressView setErrorMessage:kFetchError];
     [self.downloadingProgressView loadingComplete:kFetchTitle delayInterval:1.7];
@@ -292,9 +284,6 @@
     [self loadTrip:tripsDict];
     
     // release the connection, and the data object
-    [connection release];
-    [receivedData release];
-    [jsonString release];
 }
 
 @end

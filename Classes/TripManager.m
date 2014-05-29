@@ -72,7 +72,7 @@
 {
     if ( self = [super init] )
 	{
-		self.coords					= [[[NSMutableArray alloc] initWithCapacity:1000] autorelease];
+		self.coords					= [[NSMutableArray alloc] initWithCapacity:1000];
 		distance					= 0.0;
 		self.managedObjectContext	= context;
 		self.trip					= nil;
@@ -94,10 +94,10 @@
 		NSLog(@"loading %fm trip started at %@...", distance, _trip.start);
 
 		// sort coords by recorded date DESCENDING so that the coord at index=0 is the most recent
-		NSSortDescriptor *dateDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"recorded"
-																		ascending:NO] autorelease];
+		NSSortDescriptor *dateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"recorded"
+																		ascending:NO];
 		NSArray *sortDescriptors	= @[dateDescriptor];
-		self.coords					= [[[[_trip.coords allObjects] sortedArrayUsingDescriptors:sortDescriptors] mutableCopy] autorelease];
+		self.coords					= [[[_trip.coords allObjects] sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
 		
 		//NSLog(@"loading %d coords completed.", [self.coords count]);
 
@@ -193,10 +193,10 @@
 
 - (CLLocationDistance)distanceFrom:(Coord*)prev to:(Coord*)next realTime:(BOOL)realTime
 {
-	CLLocation *prevLoc = [[[CLLocation alloc] initWithLatitude:[prev.latitude doubleValue]
-													 longitude:[prev.longitude doubleValue]] autorelease];
-	CLLocation *nextLoc = [[[CLLocation alloc] initWithLatitude:[next.latitude doubleValue]
-													 longitude:[next.longitude doubleValue]] autorelease];
+	CLLocation *prevLoc = [[CLLocation alloc] initWithLatitude:[prev.latitude doubleValue]
+													 longitude:[prev.longitude doubleValue]];
+	CLLocation *nextLoc = [[CLLocation alloc] initWithLatitude:[next.latitude doubleValue]
+													 longitude:[next.longitude doubleValue]];
 	
 	CLLocationDistance	deltaDist	= [nextLoc distanceFromLocation:prevLoc];
 	NSTimeInterval		deltaTime	= [next.recorded timeIntervalSinceDate:prev.recorded];
@@ -346,12 +346,10 @@
 		else
 			NSLog(@"TripManager fetch user FAIL");
 		
-		[mutableFetchResults release];
 	}
 	else
 		NSLog(@"TripManager WARNING no saved user data to encode");
 	
-	[request release];
     return userDict;
 }
 
@@ -410,7 +408,7 @@
 	Coord *coord;
 	
 	// format date as a string
-	NSDateFormatter *outputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	NSDateFormatter *outputFormatter = [[NSDateFormatter alloc] init];
 	[outputFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 
 #if kSaveProtocolVersion == kSaveProtocolVersion_3
@@ -491,12 +489,12 @@
     NSError *writeError = nil;
     // JSON encode user data
     NSData *userJsonData = [NSJSONSerialization dataWithJSONObject:userDict options:0 error:&writeError];
-    NSString *userJson = [[[NSString alloc] initWithData:userJsonData encoding:NSUTF8StringEncoding] autorelease];
+    NSString *userJson = [[NSString alloc] initWithData:userJsonData encoding:NSUTF8StringEncoding];
     NSLog(@"user data %@", userJson);
     
     // JSON encode the trip data
     NSData *tripJsonData = [NSJSONSerialization dataWithJSONObject:tripDict options:0 error:&writeError];
-    NSString *tripJson = [[[NSString alloc] initWithData:tripJsonData encoding:NSUTF8StringEncoding] autorelease];
+    NSString *tripJson = [[NSString alloc] initWithData:tripJsonData encoding:NSUTF8StringEncoding];
     //NSLog(@"trip data %@", tripJson);
 
         
@@ -509,17 +507,17 @@
                               
 							  @"version": [NSString stringWithFormat:@"%d", kSaveProtocolVersion]};
 	// create save request
-	SaveRequest *saveRequest = [[[SaveRequest alloc] initWithPostVars:postVars with:3 image:NULL] autorelease];
+	SaveRequest *saveRequest = [[SaveRequest alloc] initWithPostVars:postVars with:3 image:NULL];
 	
 	// create the connection with the request and start loading the data
 	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:[saveRequest request] delegate:self];
 	// create loading view to indicate trip is being uploaded
-    uploadingView = [[LoadingView loadingViewInView:parent.parentViewController.view messageString:kSavingTitle] retain];
+    uploadingView = [LoadingView loadingViewInView:parent.parentViewController.view messageString:kSavingTitle];
 
 
     if ( theConnection )
      {
-         receivedData=[[NSMutableData data] retain];
+         receivedData=[NSMutableData data];
      }
      else
      {
@@ -606,8 +604,6 @@
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
-    [connection release];
-    [receivedData release];
     
     [uploadingView loadingComplete:kConnectionError delayInterval:1.5];
     
@@ -621,11 +617,9 @@
 {
 	// do something with the data
     NSLog(@"+++++++DEBUG: Received %lu bytes of data", (unsigned long)[receivedData length]);
-	NSLog(@"%@", [[[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding] autorelease] );
+	NSLog(@"%@", [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding] );
 
     // release the connection, and the data object
-    [connection release];
-    [receivedData release];	
 }
 
 
@@ -674,8 +668,8 @@
 	NSLog(@"createTrip");
 	
 	// Create and configure a new instance of the Trip entity
-	trip = (Trip *)[[NSEntityDescription insertNewObjectForEntityForName:@"Trip" 
-												  inManagedObjectContext:managedObjectContext] retain];
+	trip = (Trip *)[NSEntityDescription insertNewObjectForEntityForName:@"Trip" 
+												  inManagedObjectContext:managedObjectContext];
 	[trip setStart:[NSDate date]];
 	
 	NSError *error;
@@ -693,8 +687,8 @@
 	NSLog(@"createTrip: %@", purpose);
 	
 	// Create and configure a new instance of the Trip entity
-	trip = (Trip *)[[NSEntityDescription insertNewObjectForEntityForName:@"Trip" 
-												  inManagedObjectContext:managedObjectContext] retain];
+	trip = (Trip *)[NSEntityDescription insertNewObjectForEntityForName:@"Trip" 
+												  inManagedObjectContext:managedObjectContext];
 	
 	[trip setPurpose:purpose];
 	[trip setStart:[NSDate date]];
@@ -755,8 +749,6 @@
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptors release];
-	[sortDescriptor release];
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"saved = nil"];
 	[request setPredicate:predicate];
@@ -765,7 +757,6 @@
 	NSInteger count = [managedObjectContext countForFetchRequest:request error:&error];
 	NSLog(@"countUnSavedTrips = %ld", (long)count);
 	
-	[request release];
 	return count;
 }
 
@@ -780,8 +771,6 @@
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptors release];
-	[sortDescriptor release];
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"saved != nil AND uploaded = nil"];
 	[request setPredicate:predicate];
@@ -790,7 +779,6 @@
 	NSInteger count = [managedObjectContext countForFetchRequest:request error:&error];
 	NSLog(@"countUnSyncedTrips = %ld", (long)count);
 	
-	[request release];
 	return count;
 }
 
@@ -805,8 +793,6 @@
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptors release];
-	[sortDescriptor release];
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"saved != nil AND distance < 0.1"];
 	[request setPredicate:predicate];
@@ -815,7 +801,6 @@
 	NSInteger count = [managedObjectContext countForFetchRequest:request error:&error];
 	NSLog(@"countZeroDistanceTrips = %ld", (long)count);
 	
-	[request release];
 	return count;
 }
 
@@ -830,8 +815,6 @@
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptors release];
-	[sortDescriptor release];
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"saved = nil"];
 	[request setPredicate:predicate];
@@ -852,8 +835,6 @@
 		success = [self loadTrip:mutableFetchResults[0]];
 	}
 	
-	[mutableFetchResults release];
-	[request release];
 	return success;
 }
 
@@ -876,7 +857,7 @@
 	if ( [filteredCoords count] )
 	{
 		// sort filtered coords by recorded date
-		NSSortDescriptor *sortByDate	= [[[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES] autorelease];
+		NSSortDescriptor *sortByDate	= [[NSSortDescriptor alloc] initWithKey:@"recorded" ascending:YES];
 		NSArray		*sortDescriptors	= @[sortByDate];
 		NSArray		*sortedCoords		= [filteredCoords sortedArrayUsingDescriptors:sortDescriptors];
 		
@@ -907,8 +888,6 @@
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:NO];
 	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
 	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptors release];
-	[sortDescriptor release];
 	
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"saved != nil AND distance < 0.1"];
 	[request setPredicate:predicate];
@@ -938,40 +917,16 @@
 		break;
 	}
 	
-	[mutableFetchResults release];
-	[request release];
 	
 	return count;
 }
 
 -(void)dealloc
 {
-    self.uploadingView = nil;
-    self.parent = nil;
-    self.saving = nil;
-    self.tripNotes = nil;
-    self.tripNotesText = nil;
     self.dirty = nil;
-    self.trip = nil;
-    self.coords = nil;
-    self.managedObjectContext = nil;
-    self.receivedData = nil;
     
-    [saving release];
-    [tripNotes release];
-    [tripNotesText release];
-    [trip release];
-    [coords release];
-    [managedObjectContext release];
-    [receivedData release];
-    [uploadingView release];
-    [parent release];
     
-    [unSavedTrips release];
-    [unSyncedTrips release];
-    [zeroDistanceTrips release];
     
-    [super dealloc];
 }
 
 

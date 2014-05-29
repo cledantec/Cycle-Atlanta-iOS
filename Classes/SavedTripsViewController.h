@@ -59,21 +59,23 @@
 	id <RecordingInProgressDelegate> delegate;
 	TripManager *tripManager;
 	Trip *selectedTrip;
+    Trip *tripToDisplay;
 
 	LoadingView *loading;
     
     NSInteger pickerCategory;
 }
 
-@property (nonatomic, retain) NSMutableArray *trips;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSMutableArray *trips;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
-@property (nonatomic, retain) id <RecordingInProgressDelegate> delegate;
-@property (nonatomic, retain) TripManager *tripManager;
-@property (nonatomic, retain) Trip *selectedTrip;
+@property (nonatomic, strong) id <RecordingInProgressDelegate> delegate;
+@property (nonatomic, strong) TripManager *tripManager;
+@property (nonatomic, strong) Trip *selectedTrip;
+@property (nonatomic, strong) Trip *tripToDisplay;
 
-@property (nonatomic, retain) UILabel *tripInProgressTime;
-@property (nonatomic, retain) NSTimer * timer;
+@property (nonatomic, strong) UILabel *tripInProgressTime;
+@property (nonatomic, strong) NSTimer * timer;
 
 - (void)initTripManager:(TripManager*)manager;
 

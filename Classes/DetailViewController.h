@@ -32,17 +32,17 @@
     NSData *imageData;
 }
 
-@property (nonatomic, retain) id <TripPurposeDelegate> delegate;
+@property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 
-@property (nonatomic, retain) IBOutlet UITextView *detailTextView;
-@property (nonatomic, retain) IBOutlet UIButton *addPicButton;
+@property (nonatomic, strong) IBOutlet UITextView *detailTextView;
+@property (nonatomic, strong) IBOutlet UIButton *addPicButton;
 
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIImageView *imageFrameView;
 
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) UIImage *imageFrame;
-@property (readwrite, retain) NSData *imageData;
+@property (readwrite, strong) NSData *imageData;
 
 @property (copy, nonatomic) NSString *lastChosenMediaType;
 

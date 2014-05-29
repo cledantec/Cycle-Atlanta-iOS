@@ -27,11 +27,11 @@
     
 }
 
-@property (nonatomic, retain) UILabel *progressLabel;
-@property (nonatomic, retain) UILabel *errorLabel;
-@property (nonatomic, retain) YLProgressBar *progressBar;
-@property (nonatomic, retain) YLBackgroundView *background;
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UILabel *progressLabel;
+@property (nonatomic, strong) UILabel *errorLabel;
+@property (nonatomic, strong) YLProgressBar *progressBar;
+@property (nonatomic, strong) YLBackgroundView *background;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 + (id)progressViewInView:(UIView *)aSuperview messageString:(NSString *)message progressTypePlain:(BOOL)progressTypePlain;
 - (void)setVisible:(BOOL)isBarVisible messageString:(NSString *)message;

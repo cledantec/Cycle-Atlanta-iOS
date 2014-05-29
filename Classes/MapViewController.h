@@ -50,17 +50,17 @@
 	IBOutlet MKMapView *mapView;
 	Trip *trip;
 	
-	UIBarButtonItem *doneButton;
-	UIBarButtonItem *flipButton;
+    IBOutlet UIBarButtonItem *doneButton;
+    IBOutlet UIBarButtonItem *flipButton;
 	UIView *infoView;
 }
 
-@property (nonatomic, retain) id <TripPurposeDelegate> delegate;
-@property (nonatomic, retain) Trip *trip;
-@property (nonatomic, retain) UIBarButtonItem *doneButton;
-@property (nonatomic, retain) UIBarButtonItem *flipButton;
-@property (nonatomic, retain) UIView *infoView;
-@property (nonatomic, retain) MKPolyline* routeLine;
+@property (nonatomic, strong) id <TripPurposeDelegate> delegate;
+@property (nonatomic, strong) Trip *trip;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *flipButton;
+@property (nonatomic, strong) UIView *infoView;
+@property (nonatomic, strong) MKPolyline* routeLine;
 
 - (id)initWithTrip:(Trip *)trip;
 

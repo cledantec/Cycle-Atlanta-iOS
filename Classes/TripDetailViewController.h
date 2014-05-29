@@ -30,9 +30,9 @@
     NSString *details;
 }
 
-@property (nonatomic, retain) id <TripPurposeDelegate> delegate;
+@property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 
-@property (nonatomic, retain) IBOutlet UITextView *detailTextView;
+@property (nonatomic, strong) IBOutlet UITextView *detailTextView;
 
 
 -(IBAction)skip:(id)sender;

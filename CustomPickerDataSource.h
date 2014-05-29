@@ -78,9 +78,9 @@
     NSInteger pickerCategory;
 }
 
-@property (nonatomic, retain) NSArray *customPickerArray;
-@property (nonatomic, retain) NSArray *pickerTitles;
-@property (nonatomic, retain) NSArray *pickerImages;
-@property (nonatomic, retain) id<UIPickerViewDelegate> parent;
+@property (nonatomic, strong) NSArray *customPickerArray;
+@property (nonatomic, strong) NSArray *pickerTitles;
+@property (nonatomic, strong) NSArray *pickerImages;
+@property (nonatomic, strong) id<UIPickerViewDelegate> parent;
 
 @end

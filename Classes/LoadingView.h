@@ -47,8 +47,8 @@
 
 }
 
-@property (nonatomic, retain) UILabel *loadingLabel;
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, strong) UILabel *loadingLabel;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 + (id)loadingViewInView:(UIView *)aSuperview messageString:(NSString *)message;
 - (void)loadingComplete:(NSString *) completeMessage delayInterval:(NSTimeInterval)delay;

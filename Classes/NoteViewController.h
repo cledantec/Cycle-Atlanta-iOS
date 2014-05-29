@@ -36,11 +36,11 @@
 }
 
 
-@property (nonatomic, retain) id <TripPurposeDelegate> delegate;
-@property (nonatomic, retain) Note *note;
-@property (retain, nonatomic) IBOutlet UIBarButtonItem *flipButton;
-@property (nonatomic, retain) UIView *infoView;
-@property (retain, nonatomic) IBOutlet UINavigationItem *navBar;
+@property (nonatomic, strong) id <TripPurposeDelegate> delegate;
+@property (nonatomic, strong) Note *note;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *flipButton;
+@property (nonatomic, strong) UIView *infoView;
+@property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
 
 -(id)initWithNote:(Note *)note;
 

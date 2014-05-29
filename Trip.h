@@ -13,16 +13,16 @@
 
 @interface Trip : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * distance;
-@property (nonatomic, retain) NSDate * start;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * uploaded;
-@property (nonatomic, retain) NSString * purpose;
-@property (nonatomic, retain) NSNumber * duration;
-@property (nonatomic, retain) NSDate * saved;
-@property (nonatomic, retain) NSSet *coords;
-@property (nonatomic, retain) NSData * thumbnail;
-@property (nonatomic, retain) User *user;
+@property (nonatomic, strong) NSNumber * distance;
+@property (nonatomic, strong) NSDate * start;
+@property (nonatomic, strong) NSString * notes;
+@property (nonatomic, strong) NSDate * uploaded;
+@property (nonatomic, strong) NSString * purpose;
+@property (nonatomic, strong) NSNumber * duration;
+@property (nonatomic, strong) NSDate * saved;
+@property (nonatomic, strong) NSSet *coords;
+@property (nonatomic, strong) NSData * thumbnail;
+@property (nonatomic, strong) User *user;
 @end
 
 @interface Trip (CoreDataGeneratedAccessors)

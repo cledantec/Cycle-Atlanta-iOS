@@ -36,16 +36,16 @@
     User *user;
 }
 
-@property (nonatomic, retain) NSMutableURLRequest *urlRequest;
-@property (nonatomic, retain) User *user;
-@property (nonatomic, retain) id <ActivityIndicatorDelegate> activityDelegate;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSMutableData *receivedData;
-@property (nonatomic, retain) NSString *deviceUniqueIdHash;
-@property (nonatomic, retain) id <UIAlertViewDelegate> alertDelegate;
-@property (nonatomic, retain) UIViewController *parent;
-@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, retain) ProgressView *downloadingProgressView;
+@property (nonatomic, strong) NSMutableURLRequest *urlRequest;
+@property (nonatomic, strong) User *user;
+@property (nonatomic, strong) id <ActivityIndicatorDelegate> activityDelegate;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSMutableData *receivedData;
+@property (nonatomic, strong) NSString *deviceUniqueIdHash;
+@property (nonatomic, strong) id <UIAlertViewDelegate> alertDelegate;
+@property (nonatomic, strong) UIViewController *parent;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) ProgressView *downloadingProgressView;
 
 - (void)fetchUserAndTrip:(UIViewController*)parentView;
 

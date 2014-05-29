@@ -439,24 +439,6 @@
 
 
 
-- (void)dealloc
-{
-    self.delegate = nil;
-    self.customPickerView = nil;
-	self.customPickerDataSource = nil;
-    self.description = nil;
-    self.descriptionText = nil;
-    
-	[customPickerDataSource release];
-	[customPickerView release];
-    [delegate release];
-    [description release];
-    [descriptionText release];
-    
-    [navBarItself release];
-	
-	[super dealloc];
-}
 
 @end
 

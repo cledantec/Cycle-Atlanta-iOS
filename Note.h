@@ -13,19 +13,19 @@
 
 @interface Note : NSManagedObject
 
-@property (nonatomic, retain) NSString * details;
-@property (nonatomic, retain) NSNumber * speed;
-@property (nonatomic, retain) NSNumber * vAccuracy;
-@property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSString * image_url;
-@property (nonatomic, retain) NSNumber * note_type;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSNumber * hAccuracy;
-@property (nonatomic, retain) NSDate * recorded;
-@property (nonatomic, retain) NSNumber * altitude;
-@property (nonatomic, retain) NSData * image_data;
-@property (nonatomic, retain) NSData * thumbnail;
-@property (nonatomic, retain) NSDate * uploaded;
-@property (nonatomic, retain) User *user;
+@property (nonatomic, strong) NSString * details;
+@property (nonatomic, strong) NSNumber * speed;
+@property (nonatomic, strong) NSNumber * vAccuracy;
+@property (nonatomic, strong) NSNumber * longitude;
+@property (nonatomic, strong) NSString * image_url;
+@property (nonatomic, strong) NSNumber * note_type;
+@property (nonatomic, strong) NSNumber * latitude;
+@property (nonatomic, strong) NSNumber * hAccuracy;
+@property (nonatomic, strong) NSDate * recorded;
+@property (nonatomic, strong) NSNumber * altitude;
+@property (nonatomic, strong) NSData * image_data;
+@property (nonatomic, strong) NSData * thumbnail;
+@property (nonatomic, strong) NSDate * uploaded;
+@property (nonatomic, strong) User *user;
 
 @end

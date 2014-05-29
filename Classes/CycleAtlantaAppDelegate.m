@@ -115,8 +115,8 @@
     
     
     // TODO move in viewWillAppear ?
-	TripManager *tripManager = [[[TripManager alloc] initWithManagedObjectContext:context] autorelease];
-    NoteManager *noteManager = [[[NoteManager alloc] initWithManagedObjectContext:context] autorelease];
+	TripManager *tripManager = [[TripManager alloc] initWithManagedObjectContext:context];
+    NoteManager *noteManager = [[NoteManager alloc] initWithManagedObjectContext:context];
     
     
 	RecordTripViewController *recordVC = [[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
@@ -310,7 +310,6 @@
     
     if (mappingModel == nil) {
         NSLog(@"DEBUG no mapping model, no need to migrate.");        
-        [migrationManager release];
         return destinationURL; 
     }
     
@@ -355,7 +354,6 @@
         destinationURL = nil;
     }
         
-    [migrationManager release];    
     
     return destinationURL;
     
@@ -380,22 +378,10 @@
 #pragma mark Memory management
 
 - (void)dealloc {
-    self.window = nil;
-    self.tabBarController = nil;
-    self.uniqueIDHash = nil;
     self.isRecording = nil;
-    self.locationManager = nil;
     
-    [tabBarController release];
-    [uniqueIDHash release];
-    [locationManager release];
-	[window release];
     
-    [managedObjectContext release];
-    [managedObjectModel release];
-    [persistentStoreCoordinator release];
     
-	[super dealloc];
 }
 
 

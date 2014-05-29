@@ -42,6 +42,7 @@
 #import "User.h"
 #import "constants.h"
 #import "ProgressView.h"
+#import "CycleAtlantaAppDelegate.h"
 
 #define kMaxCyclingFreq 3
 
@@ -135,7 +136,7 @@
 - (User *)createUser
 {
 	// Create and configure a new instance of the User entity
-	User *noob = (User *)[[NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext] retain];
+	User *noob = (User *)[NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:managedObjectContext];
 	
 	NSError *error;
 	if (![managedObjectContext save:&error]) {
@@ -143,13 +144,15 @@
 		NSLog(@"createUser error %@, %@", error, [error localizedDescription]);
 	}
 	
-	return [noob autorelease];
+	return noob;
 }
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CycleAtlantaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = appDelegate.managedObjectContext;
     
     // [self setManagedObjectContext: [[[UIApplication sharedApplication] delegate] managedObjectContext]];
     
@@ -197,7 +200,6 @@
 
 }
 - (void)viewWillAppear:(BOOL)animated{
-    
 	NSFetchRequest		*request = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:managedObjectContext];
 	[request setEntity:entity];
@@ -248,8 +250,6 @@
 	else
 		NSLog(@"init FAIL");
     
-	[mutableFetchResults release];
-	[request release];
 
     self.tableView.dataSource = self;
     [self.tableView reloadData];
@@ -285,9 +285,9 @@
         doneToolbar.barStyle = UIBarStyleDefault;
         [doneToolbar sizeToFit];
         
-        NSMutableArray *barItems = [[[NSMutableArray alloc] init] autorelease];
+        NSMutableArray *barItems = [[NSMutableArray alloc] init];
         
-        UIBarButtonItem *flexSpace = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil] autorelease];
+        UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
         [barItems addObject:flexSpace];
         
         UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonPressed:)];
@@ -582,7 +582,7 @@
 			static NSString *CellIdentifier = @"CellInstruction";
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 			}
             
 			// inner switch statement identifies row
@@ -602,7 +602,7 @@
 			static NSString *CellIdentifier = @"CellPersonalInfo";
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 			}
 
 			// inner switch statement identifies row
@@ -639,7 +639,7 @@
 			static NSString *CellIdentifier = @"CellZip";
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 			}
 
 			switch ([indexPath indexAtPosition:1])
@@ -667,7 +667,7 @@
 			static NSString *CellIdentifier = @"CellFrequecy";
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 			}
             
 			// inner switch statement identifies row
@@ -687,7 +687,7 @@
 			static NSString *CellIdentifier = @"CellType";
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 			}
             
 			// inner switch statement identifies row
@@ -708,7 +708,7 @@
 			static NSString *CellIdentifier = @"CellHistory";
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 			}
             
 			// inner switch statement identifies row
@@ -728,7 +728,7 @@
 			static NSString *CellIdentifier = @"CellDownload";
 			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
 			}
             
 			// inner switch statement identifies row
@@ -992,20 +992,6 @@
 }
 
 - (void)dealloc {
-    self.delegate = nil;
-    self.managedObjectContext = nil;
-    self.user = nil;
-    self.age = nil;
-    self.email = nil;
-    self.gender = nil;
-    self.ethnicity = nil;
-    self.income = nil;
-    self.homeZIP = nil;
-    self.workZIP = nil;
-    self.schoolZIP = nil;
-    self.cyclingFreq = nil;
-    self.riderType = nil;
-    self.riderHistory = nil;
     self.ageSelectedRow = nil;
     self.genderSelectedRow = nil;
     self.ethnicitySelectedRow = nil;
@@ -1015,30 +1001,8 @@
     self.riderHistorySelectedRow = nil;
     self.selectedItem = nil;
     
-    [delegate release];
-    [managedObjectContext release];
-    [user release];
-    [age release];
-    [email release];
-    [gender release];
-    [ethnicity release];
-    [income release];
-    [homeZIP release];
-    [workZIP release];
-    [schoolZIP release];
-    [cyclingFreq release];
-    [riderType release];
-    [riderHistory release];
     
-    [doneToolbar release];
-    [actionSheet release];
-    [pickerView release];
-    [currentTextField release];
-    [genderArray release];
-    [ageArray release];
-    [ethnicityArray release];
 
-    [super dealloc];
 }
 
 @end

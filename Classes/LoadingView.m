@@ -123,7 +123,7 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	CGRect frame    = CGRectMake(floor(0.5 * (320 - DEFAULT_LABEL_WIDTH)),
 								 floor(0.5 * ([[UIScreen mainScreen] bounds].size.height - DEFAULT_LABEL_HEIGHT)), 
 								 DEFAULT_LABEL_WIDTH, DEFAULT_LABEL_HEIGHT);
-	LoadingView *loadingView = [[[LoadingView alloc] initWithFrame:frame] autorelease];
+	LoadingView *loadingView = [[LoadingView alloc] initWithFrame:frame];
 	
 	if (!loadingView)
 	{
@@ -141,9 +141,8 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 	 */ //[lblText setFrame:CGRectMake(10, 21, 100, 250)];
 	CGRect labelFrame = CGRectMake(0, 0, DEFAULT_LABEL_WIDTH, 35.);
 	loadingView.loadingLabel =
-		[[[UILabel alloc]
-			initWithFrame:labelFrame]
-		autorelease];
+		[[UILabel alloc]
+			initWithFrame:labelFrame];
 	loadingView.loadingLabel.text = message;
 	loadingView.loadingLabel.textColor = [UIColor whiteColor];
     loadingView.loadingLabel.numberOfLines = 3;
@@ -158,9 +157,8 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 		UIViewAutoresizingFlexibleBottomMargin;
 	
 	[loadingView addSubview:loadingView.loadingLabel];
-	loadingView.activityIndicatorView = [[[UIActivityIndicatorView alloc]
-													   initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite]
-													  autorelease];
+	loadingView.activityIndicatorView = [[UIActivityIndicatorView alloc]
+													   initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	CGRect activityIndicatorRect = loadingView.activityIndicatorView.frame;
     loadingView.activityIndicatorView.hidesWhenStopped = YES;
 	activityIndicatorRect.origin.x = 0.5 * (loadingView.frame.size.width - activityIndicatorRect.size.width);
@@ -279,15 +277,5 @@ CGPathRef NewPathWithRoundRect(CGRect rect, CGFloat cornerRadius)
 //
 // Release instance memory.
 //
-- (void)dealloc
-{
-    self.loadingLabel = nil;
-    self.activityIndicatorView = nil;
-    
-    [loadingLabel release];
-    [activityIndicatorView release];
-    
-    [super dealloc];
-}
 
 @end
