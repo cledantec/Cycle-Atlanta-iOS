@@ -69,11 +69,17 @@
 
 - (id)initWithTrip:(Trip *)_trip
 {
-    //if (self = [super init]) {
 		NSLog(@"MapViewController initWithTrip");
 		self.trip = _trip;
 		mapView.delegate = self;
     return self;
+}
+
+- (void)loadTrip:(Trip *)_trip
+{
+    NSLog(@"MapViewController initWithTrip");
+    self.trip = _trip;
+    mapView.delegate = self;
 }
 
 

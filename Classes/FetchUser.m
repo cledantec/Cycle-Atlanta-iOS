@@ -126,7 +126,7 @@
     else{
         [self.downloadingProgressView setVisible:TRUE messageString:kFetchTitle];
         NSLog(@"Number of trips to download: %lu", (unsigned long)[tripsToLoad count]);
-        FetchTripData *fetchTrip = [[FetchTripData alloc] initWithTripCountAndProgessView:[tripsToLoad count] progressView:self.downloadingProgressView];
+        FetchTripData *fetchTrip = [[FetchTripData alloc] initWithTripCountAndProgessView:(int)[tripsToLoad count] progressView:self.downloadingProgressView];
         [fetchTrip fetchWithTrips:tripsToLoad];
     }
     
@@ -189,8 +189,8 @@
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten
  totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
-	NSLog(@"%ld bytesWritten, %ld totalBytesWritten,%%ldd totalBytesExpectedToWrite",
-		  (long)bytesWritten, (long)totalBytesWritten, totalBytesExpectedToWrite );
+	NSLog(@"%ld bytesWritten, %ld totalBytesWritten, %ld totalBytesExpectedToWrite",
+		  (long)bytesWritten, (long)totalBytesWritten, (long) totalBytesExpectedToWrite );
 }
 
 

@@ -124,7 +124,7 @@
         
         [self presentViewController:tripDetailViewController animated:YES completion:nil];
         
-        [delegate didPickPurpose:row];
+        [delegate didPickPurpose:(unsigned int)row];
     }
     else if (pickerCategory == 1){
         NSLog(@"Issue Save button pressed");
@@ -209,7 +209,7 @@
 {
 	NSLog(@"initWithNibNamed");
 		//NSLog(@"PickerViewController init");		
-		[self createCustomPicker];
+	[self createCustomPicker];
         
 		pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
         if (pickerCategory == 0) {
@@ -252,6 +252,8 @@
     [super viewDidLoad];
     pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     
+    NSLog(@"PickerCategory : %ld", (long)pickerCategory);
+    
     if (pickerCategory == 0) {
         navBarItself.topItem.title = @"Trip Purpose";
         self.descriptionText.text = @"Please select your trip purpose & tap Save";
@@ -278,8 +280,7 @@
     
     description = [[UITextView alloc] initWithFrame:CGRectMake( 18.0, 314.0, 284.0, 120.0 )];
 	description.editable = NO;
-    description.backgroundColor = [UIColor clearColor];
-    description.textColor = [UIColor whiteColor];
+    description.textColor = [UIColor darkGrayColor];
     
 	description.font = [UIFont fontWithName:@"Helvetica" size:16];
 	[self.view addSubview:description];

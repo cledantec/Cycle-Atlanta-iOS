@@ -333,8 +333,8 @@
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten
  totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
-	NSLog(@"%ld bytesWritten, %ld totalBytesWritten, %d totalBytesExpectedToWrite",
-		  (long)bytesWritten, (long)totalBytesWritten, totalBytesExpectedToWrite );
+	NSLog(@"%ld bytesWritten, %ld totalBytesWritten, %ld totalBytesExpectedToWrite",
+		  (long)bytesWritten, (long)totalBytesWritten, (long)totalBytesExpectedToWrite );
 }
 
 

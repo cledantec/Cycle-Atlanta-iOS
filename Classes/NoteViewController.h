@@ -43,5 +43,6 @@
 @property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
 
 -(id)initWithNote:(Note *)note;
+-(void)loadNote:(Note *)note;
 
 @end

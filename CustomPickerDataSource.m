@@ -321,7 +321,7 @@
     
     CGRect labelFrame = CGRectMake(108, 0, pickerView.frame.size.width, 48);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor blackColor];
     label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
     label.text = [NSString stringWithFormat:@" %@", [pickerTitles objectAtIndex: row]];
     

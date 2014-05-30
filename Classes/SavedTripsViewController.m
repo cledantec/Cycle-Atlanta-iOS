@@ -95,9 +95,8 @@
 
 
 @implementation SavedTripsViewController
-
 @synthesize delegate, managedObjectContext;
-@synthesize trips, tripManager, selectedTrip;
+@synthesize trips, tripManager, selectedTrip, tripToDisplay;
 @synthesize tripInProgressTime, timer;
 
 
@@ -136,7 +135,7 @@
     {
         // Get reference to the destination view controller
         MapViewController *nvc = [segue destinationViewController];
-        [nvc initWithTrip:tripToDisplay];
+        [nvc loadTrip:tripToDisplay];
         [loading removeFromSuperview];
     }
 }

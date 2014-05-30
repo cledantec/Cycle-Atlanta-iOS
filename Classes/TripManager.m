@@ -757,7 +757,7 @@
 	NSInteger count = [managedObjectContext countForFetchRequest:request error:&error];
 	NSLog(@"countUnSavedTrips = %ld", (long)count);
 	
-	return count;
+	return (int) count;
 }
 
 // count trips that have been saved but not uploaded
@@ -779,7 +779,7 @@
 	NSInteger count = [managedObjectContext countForFetchRequest:request error:&error];
 	NSLog(@"countUnSyncedTrips = %ld", (long)count);
 	
-	return count;
+	return (int) count;
 }
 
 // count trips that have been saved but have zero distance
@@ -801,7 +801,7 @@
 	NSInteger count = [managedObjectContext countForFetchRequest:request error:&error];
 	NSLog(@"countZeroDistanceTrips = %ld", (long)count);
 	
-	return count;
+	return (int)count;
 }
 
 - (BOOL)loadMostRecetUnSavedTrip
@@ -900,7 +900,7 @@
 		if ( error != nil )
 			NSLog(@"Unresolved error2 %@, %@", error, [error userInfo]);
 	}
-	int count = [mutableFetchResults count];
+	int count = (int) [mutableFetchResults count];
 
 	NSLog(@"found %d trip(s) in need of distance recalcuation", count);
 

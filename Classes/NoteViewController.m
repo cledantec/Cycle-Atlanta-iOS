@@ -47,6 +47,12 @@
     return self;
 }
 
+- (void)loadNote:(Note *)_note
+{
+    NSLog(@"NoteViewController initWithNote");
+    self.note = _note;
+    noteView.delegate = self;
+}
 
 
 - (IBAction)infoAction:(id)sender {
@@ -79,7 +85,7 @@
 {
 	infoView = [[UIView alloc] initWithFrame:CGRectMake(0,74,320,560)];
     NSInteger textLength = [note.details length];
-    int row = 1+(textLength-1)/34;
+    int row = (int) (1+(textLength-1)/34);
 	if ([note.image_data length] != 0 && textLength != 0) {
         infoView.alpha = 1.0;
         infoView.backgroundColor = [UIColor blackColor];

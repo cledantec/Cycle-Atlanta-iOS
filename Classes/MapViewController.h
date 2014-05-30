@@ -63,6 +63,7 @@
 @property (nonatomic, strong) MKPolyline* routeLine;
 
 - (id)initWithTrip:(Trip *)trip;
+- (void)loadTrip:(Trip *)trip;
 
 
 @end

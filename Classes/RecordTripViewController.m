@@ -315,7 +315,7 @@
     Note *note = noteManager.note;
     
     // load map view of note
-    NoteViewController *mvc = [[NoteViewController alloc] initWithNote:note];
+    NoteViewController *mvc = [[NoteViewController alloc] loadNote:note];
     [[self navigationController] pushViewController:mvc animated:YES];
     NSLog(@"displayUploadedNote");
     [mvc release];
@@ -557,9 +557,9 @@
 		NSLog(@"INIT + PUSH");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
                                                              bundle: nil];
-		PickerViewController *pickerViewController = [storyboard instantiateViewControllerWithIdentifier:@"Picker"];
+    PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
         [pickerViewController setDelegate:self];
-		[[self navigationController] pushViewController:pickerViewController animated:YES];
+		[self presentViewController:pickerViewController animated:YES completion:nil];
 	   
 }
 
@@ -574,47 +574,15 @@
         [noteManager addLocation:myLocation];
     }
 	
-	// go directly to TripPurpose, user can cancel from there
-	if ( YES )
-	{
 		// Trip Purpose
 		NSLog(@"INIT + PUSH");
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
                                                              bundle: nil];
-		PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"]
-                                                       initWithNibName:@"Picker" bundle:nil];
+		PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
 		[pickerViewController setDelegate:self];
-		[self.navigationController presentViewController:pickerViewController animated:YES completion:nil];
+		[self presentViewController:pickerViewController animated:YES completion:nil];
         
-        //add location information
-	}
-	
-	// prompt to confirm first
-	else
-	{
-		// pause updating the counter
-		shouldUpdateCounter = NO;
-		
-		// construct purpose confirmation string
-		NSString *purpose = nil;
-		if ( tripManager != nil )
-			purpose = [self getPurposeString:[tripManager getPurposeIndex]];
-		
-		NSString *confirm = [NSString stringWithFormat:@"Stop recording & save this trip?"];
-		
-		// present action sheet
-		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:confirm
-																 delegate:self
-														cancelButtonTitle:@"Cancel"
-												   destructiveButtonTitle:nil
-														otherButtonTitles:@"Save", nil];
-		
-		UIViewController *pvc = self.parentViewController;
-		UITabBarController *tbc = (UITabBarController *)pvc.parentViewController;
-		
-		[actionSheet showFromTabBar:tbc.tabBar];
-	}
 }
 
 
@@ -846,17 +814,9 @@ shouldSelectViewController:(UIViewController *)viewController
 
 - (void)didPickPurpose:(unsigned int)index
 {
-	// update UI
-    appDelegate = [[UIApplication sharedApplication] delegate];
-    appDelegate.isRecording = NO;
-	recording = NO;
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"recording"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-	startButton.enabled = YES;
-	[self resetTimer];
 	
 	[tripManager setPurpose:index];
-    //do something here: may change to be the save as a separate view. Not prompt.
+    [self resetRecordingInProgress];
 }
 
 - (void)didEnterTripDetails:(NSString *)details{
