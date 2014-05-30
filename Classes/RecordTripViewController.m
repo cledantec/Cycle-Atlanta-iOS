@@ -254,7 +254,6 @@
     [self initNoteManager:[[NoteManager alloc] initWithManagedObjectContext:context]];
     
 	// check if any user data has already been saved and pre-select personal info cell accordingly
-    NSLog(@"skippy");
 	if ( [self hasUserInfoBeenSaved] )
 		[self setSaved:YES];
 	
