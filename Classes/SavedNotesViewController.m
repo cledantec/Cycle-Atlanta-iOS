@@ -126,9 +126,9 @@
     {
         // Get reference to the destination view controller
          NoteViewController *nvc = [segue destinationViewController];
+        NSLog(@"Note details : %@", noteToDisplay.details);
         [nvc loadNote:noteToDisplay];
         [loading removeFromSuperview];
-
     }
 }
 

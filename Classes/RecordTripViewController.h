@@ -115,6 +115,7 @@
 -(IBAction)notethis:(id)sender;
 
 - (void)resetCounter;
+- (void)resetRecordingInProgress;
 - (void)setCounterTimeSince:(NSDate *)startDate distance:(CLLocationDistance)distance;
 - (void)updateCounter:(NSTimer *)theTimer;
 

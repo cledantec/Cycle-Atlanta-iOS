@@ -24,8 +24,8 @@
 
 @interface DetailViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>{
     id <TripPurposeDelegate> delegate;
-    UITextView *detailTextView;
-    UIButton *addPicButton;
+    IBOutlet UITextView *detailTextView;
+    IBOutlet UIButton *addPicButton;
     NSInteger pickerCategory;
     NSString *details;
     UIImage *image;

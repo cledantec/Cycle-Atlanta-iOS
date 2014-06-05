@@ -103,7 +103,7 @@
 - (int)countUnSyncedTrips;
 - (int)countZeroDistanceTrips;
 
-- (BOOL)loadMostRecetUnSavedTrip;
+- (BOOL)loadMostRecentUnSavedTrip;
 - (int)recalculateTripDistances;
 - (CLLocationDistance)calculateTripDistance:(Trip*)_trip;
 

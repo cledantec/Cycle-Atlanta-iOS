@@ -209,8 +209,11 @@
     
     //switch to map w/ trip view
     
-    NSInteger recording = [[NSUserDefaults standardUserDefaults] integerForKey:@"recording"];
+    /*NSInteger recording = [[NSUserDefaults standardUserDefaults] integerForKey:@"recording"];
     
+    if (recording == 0) {
+        [parent displayUploadedNote];
+    }*/
     
     NSLog(@"note save and parent");
     
@@ -311,7 +314,11 @@
     
     //switch to map w/ trip view
     
-    NSInteger recording = [[NSUserDefaults standardUserDefaults] integerForKey:@"recording"];
+    /*NSInteger recording = [[NSUserDefaults standardUserDefaults] integerForKey:@"recording"];
+    
+    if (recording == 0) {
+        [parent displayUploadedNote];
+    }*/
     
     NSLog(@"note save and parent");
     

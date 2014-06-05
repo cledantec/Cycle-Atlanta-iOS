@@ -99,7 +99,7 @@ static UIImage *shrinkImage(UIImage *original, CGSize size);
     
     details = @"";
     image = nil;
-    
+    [self performSegueWithIdentifier:@"unwindToRecordTripViewController" sender:self];
     [delegate didEnterNoteDetails:details];
     [delegate didSaveImage:nil];
     [delegate saveNote];
@@ -116,7 +116,9 @@ static UIImage *shrinkImage(UIImage *original, CGSize size);
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     details = detailTextView.text;
+    NSLog(@"Note details : %@", details);
     
+    [self performSegueWithIdentifier:@"unwindToRecordTripViewController" sender:self];
     [delegate didEnterNoteDetails:details];
     [delegate didSaveImage:imageData];
     [delegate saveNote];

@@ -53,15 +53,18 @@
     NSLog(@"Skip");
     [detailTextView resignFirstResponder];
     [delegate didCancelNote];
-    
+
     pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     details = @"";
-    
+    [self performSegueWithIdentifier:@"unwindToRecordTripViewController" sender:self];
+
     [delegate didEnterTripDetails:details];
     [delegate saveTrip];
+    [delegate resetRecordingInProgress];
+
 }
 
 -(IBAction)saveDetail:(id)sender{
@@ -75,8 +78,12 @@
     
     details = detailTextView.text;
     
+    [self performSegueWithIdentifier:@"unwindToRecordTripViewController" sender:self];
+    
     [delegate didEnterTripDetails:details];
     [delegate saveTrip];
+    [delegate resetRecordingInProgress];
+
 }
 
 

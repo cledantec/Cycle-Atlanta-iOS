@@ -119,7 +119,7 @@
 
 - (void)initInfoView
 {
-	infoView					= [[UIView alloc] initWithFrame:CGRectMake(0,0,320,560)];
+	infoView					= [[UIView alloc] initWithFrame:CGRectMake(0,73,320,560)];
 	infoView.alpha				= kInfoViewAlpha;
 	infoView.backgroundColor	= [UIColor blackColor];
 	

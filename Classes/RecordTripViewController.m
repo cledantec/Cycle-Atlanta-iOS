@@ -294,18 +294,17 @@
 }
 
 
-// TODO : bring back ?
-/*
+
 - (void)displayUploadedTripMap
 {
     Trip *trip = tripManager.trip;
-    [self resetRecordingInProgress];
     
     // load map view of saved trip
-    MapViewController *mvc = [[MapViewController alloc] initWithTrip:trip];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Note" bundle: nil];
+    MapViewController *mvc = [storyboard instantiateViewControllerWithIdentifier:@"Map"];
+    [mvc loadTrip:trip];
     [[self navigationController] pushViewController:mvc animated:YES];
     NSLog(@"displayUploadedTripMap");
-    [mvc release];
 }
 
 
@@ -314,11 +313,12 @@
     Note *note = noteManager.note;
     
     // load map view of note
-    NoteViewController *mvc = [[NoteViewController alloc] loadNote:note];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Note" bundle: nil];
+    NoteViewController *mvc = [storyboard instantiateViewControllerWithIdentifier:@"Note"];
+    [mvc loadNote:note];
     [[self navigationController] pushViewController:mvc animated:YES];
     NSLog(@"displayUploadedNote");
-    [mvc release];
-}*/
+}
 
 
 - (void)resetTimer
@@ -422,7 +422,6 @@
        case 0:
        {
            NSLog(@"Discard!!!!");
-           [self resetRecordingInProgressDelete];
            //discard that trip
            break;
        }
@@ -464,7 +463,7 @@
 				case 1:
 				default:
 					// continue => load most recent unsaved trip
-					[tripManager loadMostRecetUnSavedTrip];
+					[tripManager loadMostRecentUnSavedTrip];
 					
 					// update UI to reflect trip once loading has completed
 					[self setCounterTimeSince:tripManager.trip.start
@@ -482,8 +481,9 @@
 			
 			// keep a pointer to our trip to pass to map view below
 			Trip *trip = tripManager.trip;
-			[self resetRecordingInProgress];
 			
+            [self resetRecordingInProgress];
+            
 			// load map view of saved trip
 			MapViewController *mvc = [[MapViewController alloc] initWithTrip:trip];
 			[[self navigationController] pushViewController:mvc animated:YES];
@@ -492,7 +492,6 @@
 	}
 }
 
-//TODO memory leak here... autorelease instead?
 - (NSDictionary *)newTripTimerUserInfo
 {
     return @{@"StartDate": [NSDate date],
@@ -813,9 +812,7 @@ shouldSelectViewController:(UIViewController *)viewController
 
 - (void)didPickPurpose:(unsigned int)index
 {
-	
 	[tripManager setPurpose:index];
-    [self resetRecordingInProgress];
 }
 
 - (void)didEnterTripDetails:(NSString *)details{
@@ -866,8 +863,7 @@ shouldSelectViewController:(UIViewController *)viewController
 #pragma mark RecordingInProgressDelegate method
 
 
-- (Trip *)getRecordingInProgress
-{
+- (Trip *)getRecordingInProgress {
 	if ( recording )
 		return tripManager.trip;
 	else

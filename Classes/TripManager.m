@@ -495,8 +495,6 @@
     // JSON encode the trip data
     NSData *tripJsonData = [NSJSONSerialization dataWithJSONObject:tripDict options:0 error:&writeError];
     NSString *tripJson = [[NSString alloc] initWithData:tripJsonData encoding:NSUTF8StringEncoding];
-    //NSLog(@"trip data %@", tripJson);
-
         
 	// NOTE: device hash added by SaveRequest initWithPostVars
 	NSDictionary *postVars = @{@"coords": tripJson,
@@ -511,6 +509,7 @@
 	
 	// create the connection with the request and start loading the data
 	NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:[saveRequest request] delegate:self];
+    
 	// create loading view to indicate trip is being uploaded
     uploadingView = [LoadingView loadingViewInView:parent.parentViewController.view messageString:kSavingTitle];
 
@@ -804,7 +803,7 @@
 	return (int)count;
 }
 
-- (BOOL)loadMostRecetUnSavedTrip
+- (BOOL)loadMostRecentUnSavedTrip
 {
 	BOOL success = NO;
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];

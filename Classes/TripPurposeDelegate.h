@@ -78,6 +78,7 @@
 - (NSString *)setPurpose:(unsigned int)index;
 
 @optional
+- (void)resetRecordingInProgress;
 - (void)didCancelPurpose;
 - (void)didCancelNote;
 - (void)didCancelNoteDelete;

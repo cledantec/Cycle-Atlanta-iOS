@@ -25,7 +25,7 @@
 @interface TripDetailViewController : UIViewController<UINavigationControllerDelegate, UITextViewDelegate>
 {
     id <TripPurposeDelegate> delegate;
-    UITextView *detailTextView;
+    IBOutlet UITextView *detailTextView;
     NSInteger pickerCategory;
     NSString *details;
 }

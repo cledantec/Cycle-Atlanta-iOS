@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jfM-bS-n1G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="jfM-bS-n1G">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -84,13 +84,11 @@
                                         <barButtonItem key="leftBarButtonItem" title="Skip" id="pnU-MY-bry">
                                             <connections>
                                                 <action selector="skip:" destination="Tpb-Oc-KWS" id="cfu-Dm-0hQ"/>
-                                                <segue destination="Lav-os-NoG" kind="unwind" unwindAction="unwindToRecordTripViewController:" id="zKr-83-SrG"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Save" id="cuB-N8-SJR">
                                             <connections>
                                                 <action selector="saveDetail:" destination="Tpb-Oc-KWS" id="PWb-TB-G19"/>
-                                                <segue destination="Lav-os-NoG" kind="unwind" unwindAction="unwindToRecordTripViewController:" id="uCS-dH-coC"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -107,7 +105,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="detailTextView" destination="CJb-Zy-YOi" id="Jnp-lO-oVU"/>
+                        <outlet property="detailTextView" destination="CJb-Zy-YOi" id="Nrl-RB-NmX"/>
+                        <segue destination="Lav-os-NoG" kind="unwind" identifier="unwindToRecordTripViewController" unwindAction="unwindToRecordTripViewController:" id="4Ts-aX-aaI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D83-ud-CP3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -291,7 +290,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellIdentifier" rowHeight="46" id="iRA-zX-gWp">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="46" id="iRA-zX-gWp">
                                 <rect key="frame" x="0.0" y="83" width="320" height="46"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iRA-zX-gWp" id="amB-6m-tlW">
@@ -388,7 +387,6 @@
                                         <barButtonItem key="rightBarButtonItem" title="Save" id="cXK-Zj-9EK">
                                             <connections>
                                                 <action selector="saveDetail:" destination="oAO-sN-z9D" id="qzE-Lq-r8e"/>
-                                                <segue destination="10j-WX-eF7" kind="unwind" unwindAction="unwindToRecordTripViewController:" id="s8g-8v-DVu"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -430,10 +428,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="addPicButton" destination="IKw-5S-6HO" id="3HS-Uj-91K"/>
-                        <outlet property="detailTextView" destination="X2i-Pl-0Py" id="0CM-ca-nTC"/>
+                        <outlet property="addPicButton" destination="IKw-5S-6HO" id="fz8-vG-SYj"/>
+                        <outlet property="detailTextView" destination="X2i-Pl-0Py" id="LBT-yj-zfE"/>
                         <outlet property="imageFrameView" destination="8F0-34-KAu" id="PYw-Ve-u1G"/>
                         <outlet property="imageView" destination="2dd-Gb-QZn" id="LgW-RO-k2R"/>
+                        <segue destination="10j-WX-eF7" kind="unwind" identifier="unwindToRecordTripViewController" unwindAction="unwindToRecordTripViewController:" id="XSe-3m-6bx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6fY-pl-vrh" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -140,14 +140,14 @@
 
 - (void)initUniqueIDHash
 {
-    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+    //if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
         self.uniqueIDHash = [[UIDevice currentDevice] uniqueGlobalDeviceIdentifier]; // save for later.
-    }
+    //}
     
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        self.uniqueIDHash = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        NSLog(@"iOS 7");
-    }
+    //if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+    //     self.uniqueIDHash = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    //    NSLog(@"iOS 7");
+    //}
     
 	NSLog(@"Hashed uniqueID: %@", uniqueIDHash);	
 }

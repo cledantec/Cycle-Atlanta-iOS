@@ -49,9 +49,10 @@
 
 - (void)loadNote:(Note *)_note
 {
-    NSLog(@"NoteViewController initWithNote");
+    NSLog(@"NoteViewController loadNote");
     self.note = _note;
     noteView.delegate = self;
+    NSLog(@"%@", note.details);
 }
 
 
@@ -83,9 +84,10 @@
 
 - (void)initInfoView
 {
-	infoView = [[UIView alloc] initWithFrame:CGRectMake(0,74,320,560)];
+	infoView = [[UIView alloc] initWithFrame:CGRectMake(0,73,320,560)];
     NSInteger textLength = [note.details length];
     int row = (int) (1+(textLength-1)/34);
+    NSLog(@"%lu, %li",(unsigned long)[note.image_data length], (long)textLength);
 	if ([note.image_data length] != 0 && textLength != 0) {
         infoView.alpha = 1.0;
         infoView.backgroundColor = [UIColor blackColor];
@@ -241,7 +243,6 @@
 		
 		if ( ![note.details isEqual: @""] || ([note.image_data length] != 0))
 		{
-			
 			[self initInfoView];
 		}
         
