@@ -227,6 +227,7 @@
 	// init map region to Atlanta
 	MKCoordinateRegion region = { { 33.749038, -84.388068 }, { 0.0078, 0.0068 } };
     [mapView setRegion:region animated:NO];
+    [mapView setDelegate:self];
     
 
     appDelegate = [[UIApplication sharedApplication] delegate];
@@ -822,6 +823,7 @@ shouldSelectViewController:(UIViewController *)viewController
 
 - (void)saveTrip{
     [tripManager saveTrip];
+    [self resetRecordingInProgress];
     NSLog(@"Save trip");
 }
 

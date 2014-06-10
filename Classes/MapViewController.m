@@ -71,7 +71,6 @@
 {
 		NSLog(@"MapViewController initWithTrip");
 		self.trip = _trip;
-		mapView.delegate = self;
     return self;
 }
 
@@ -79,7 +78,6 @@
 {
     NSLog(@"MapViewController initWithTrip");
     self.trip = _trip;
-    mapView.delegate = self;
 }
 
 
@@ -146,6 +144,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    mapView.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -285,7 +284,7 @@
 			// update last coord pointer so we can cull redundant coords above
 			last = coord;
 		}
-        NSLog(@"routeCoords array is this long: %lu@", (unsigned long)[routeCoords count]);
+        NSLog(@"routeCoords array is this long: %lu", (unsigned long)[routeCoords count]);
         
         NSUInteger numPoints = [routeCoords count];
         CLLocationCoordinate2D *routePath = malloc(numPoints * sizeof(CLLocationCoordinate2D));
@@ -605,7 +604,5 @@ UIImage *shrinkImage(UIImage *original, CGSize size) {
     lineView.lineWidth = 5;
     return lineView;
 }
-
-
 
 @end

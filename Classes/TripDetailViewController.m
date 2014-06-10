@@ -63,7 +63,6 @@
 
     [delegate didEnterTripDetails:details];
     [delegate saveTrip];
-    [delegate resetRecordingInProgress];
 
 }
 
@@ -82,8 +81,6 @@
     
     [delegate didEnterTripDetails:details];
     [delegate saveTrip];
-    [delegate resetRecordingInProgress];
-
 }
 
 
