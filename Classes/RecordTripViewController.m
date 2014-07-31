@@ -53,7 +53,7 @@
 @implementation RecordTripViewController
 @synthesize tripManager, noteManager;
 @synthesize infoButton, saveButton, startButton, noteButton, parentView;
-@synthesize timer, timeCounter, distCounter;
+@synthesize timer, timeCounter, distCounter, noteToDetailAlert;
 @synthesize recording, shouldUpdateCounter, userInfoSaved;
 @synthesize appDelegate;
 @synthesize saveActionSheet;
@@ -138,6 +138,59 @@
 }
 
 
+-(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)heading {
+    NSLog(@"updateHeading");
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"])
+    {
+        if (heading.headingAccuracy < 0)
+            return;
+        
+        CGFloat fieldNorm2 = sqrt (pow(heading.x,2)+
+                                   pow(heading.y,2)+
+                                   pow(heading.z,2));
+        if(fieldNorm) {
+            NSLog(@"%f %f",fieldNorm, fieldNorm2 / fieldNorm);
+            if(fieldNorm2 / fieldNorm > 2.5)
+            {
+                AudioServicesPlaySystemSound (1350);
+                AudioServicesPlaySystemSound (1351);
+                if (myLocation){
+                    NSMutableArray *notesToDetail;
+                    if([[NSUserDefaults standardUserDefaults] objectForKey:@"notesToDetail"])
+                    {
+                        NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"notesToDetail"];
+                        notesToDetail = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+                    }
+                    else
+                    {
+                        notesToDetail = [[NSMutableArray alloc] init];
+                    }
+                    [notesToDetail addObject:myLocation];
+                    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:notesToDetail];
+                    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"notesToDetail"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    noteToDetailAlert.hidden=false;
+                    [noteToDetailAlert setTitle:[NSString stringWithFormat:@"%lu notes to detail", (unsigned long)[notesToDetail count]] forState:UIControlStateNormal];
+                    
+                }
+                else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Activate location services"
+                                                                    message:@"You can't write a note because we're not able to get your location."
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                }
+            }
+        }
+        fieldNorm = fieldNorm2;
+    }
+}
+
+
+
+
+
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
@@ -216,6 +269,7 @@
 }
 
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -229,6 +283,7 @@
     [mapView setRegion:region animated:NO];
     [mapView setDelegate:self];
     
+    
 
     appDelegate = [[UIApplication sharedApplication] delegate];
     appDelegate.isRecording = NO;
@@ -239,6 +294,7 @@
 
 	// Start the location manager.
 	[[self getLocationManager] startUpdatingLocation];
+    
     
     // TODO explain
     [appDelegate initUniqueIDHash];
@@ -262,9 +318,10 @@
 	[self hasRecordingBeenInterrupted];
     
 	NSLog(@"save");
-    
-   
+
+
 }
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -272,6 +329,24 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    //Start magnetometer if needed
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"])
+    {
+        [[self getLocationManager] startUpdatingHeading];
+    }
+    
+    // Shows alert if there is any magnet notes to be detailed
+    NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"notesToDetail"];
+    NSMutableArray *notesToDetail = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"] && [notesToDetail count])
+    {
+        noteToDetailAlert.hidden=false;
+        [noteToDetailAlert setTitle:[NSString stringWithFormat:@"%lu notes to detail", (unsigned long)[notesToDetail count]] forState:UIControlStateNormal];
+    }
+    else {
+        noteToDetailAlert.hidden=true;
+    }
 }
 
 
@@ -423,7 +498,7 @@
        case 0:
        {
            NSLog(@"Discard!!!!");
-           //discard that trip
+           [self resetRecordingInProgressDelete];
            break;
        }
         case 1:{
@@ -523,7 +598,7 @@
                                          resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
         [startButton setBackgroundImage:buttonImage forState:UIControlStateNormal]; // setBackgroundColor doesn't exist...
         [startButton setBackgroundImage:buttonImageHighlight forState:UIControlStateHighlighted];
-        [startButton setTitle:@"Save" forState:UIControlStateNormal];
+        [startButton setTitle:@"Stop" forState:UIControlStateNormal];
 
         // set recording flag so future location updates will be added as coords
         appDelegate = [[UIApplication sharedApplication] delegate];

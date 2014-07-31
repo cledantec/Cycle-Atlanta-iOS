@@ -50,7 +50,7 @@
 
 @synthesize delegate, managedObjectContext, user;
 @synthesize age, email, gender, ethnicity, income, homeZIP, workZIP, schoolZIP;
-@synthesize cyclingFreq, riderType, riderHistory;
+@synthesize cyclingFreq, riderType, riderHistory, magnetometerSwitch;
 @synthesize ageSelectedRow, genderSelectedRow, ethnicitySelectedRow, incomeSelectedRow, cyclingFreqSelectedRow, riderTypeSelectedRow, riderHistorySelectedRow, selectedItem;
 @synthesize fetchUser;
 
@@ -132,6 +132,16 @@
 	return textField;
 }
 
+- (UISwitch*) initiateSwitch
+{
+    UISwitch* switchButton = [[UISwitch alloc] initWithFrame:CGRectMake(225.0, 0.0, 80.0, 45.0)];
+    switchButton.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"];
+    [switchButton addTarget:self action:@selector(saveSwitch:) forControlEvents:UIControlEventValueChanged];
+    return switchButton;
+    
+}
+
+
 
 - (User *)createUser
 {
@@ -189,6 +199,8 @@
     self.cyclingFreq = [self initiateTextFieldBeta];
     self.riderType  =  [self initiateTextFieldBeta];
     self.riderHistory =[self initiateTextFieldBeta];
+    self.magnetometerSwitch = [self initiateSwitch];
+    
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     
@@ -449,6 +461,14 @@
 	[self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)saveSwitch:(id)sender
+{
+    BOOL state = [sender isOn];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:state forKey:@"magnetometerIsOn"];
+    [userDefaults synchronize];
+}
+
 
 
 //- (void)viewWillAppear:(BOOL)animated {
@@ -494,7 +514,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 7;
+    return 8;
 }
 
 
@@ -520,6 +540,9 @@
 			break;
         case 6:
 			return @"Missing trips you saved in an earlier version ? ";
+			break;
+        case 7:
+			return @"Use magnet detection to add notes ? ";
 			break;
 	}
     return nil;
@@ -561,6 +584,9 @@
         case 6:
 			return 1;
 			break;
+        case 7:
+			return 1;
+            break;
 		default:
 			return 0;
 	}
@@ -736,6 +762,26 @@
 			{
 				case 0:
 					cell.textLabel.text = @"Download Previously Saved Trips";
+					break;
+			}
+			
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		}
+			break;
+        case 7:
+		{
+			static NSString *CellIdentifier = @"CellMagnetometer";
+			cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+			if (cell == nil) {
+				cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+			}
+            
+			// inner switch statement identifies row
+			switch ([indexPath indexAtPosition:1])
+			{
+				case 0:
+					cell.textLabel.text = @"Magnetometer";
+                    [cell.contentView addSubview:magnetometerSwitch];
 					break;
 			}
 			

@@ -37,7 +37,7 @@
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
-
+#import <AudioToolbox/AudioServices.h>
 #import <CoreLocation/CoreLocation.h>
 #import "ActivityIndicatorDelegate.h"
 #import <MapKit/MapKit.h>
@@ -76,6 +76,9 @@
 	IBOutlet UILabel *distCounter;
 	IBOutlet UILabel *speedCounter;
     UIActionSheet *saveActionSheet;
+    
+    CGFloat fieldNorm;
+    IBOutlet UIButton *noteToDetailAlert;
 
 	NSTimer *__weak timer;
 	
@@ -101,6 +104,7 @@
 @property (nonatomic, strong) UILabel *timeCounter;
 @property (nonatomic, strong) UILabel *distCounter;
 @property (nonatomic, strong) UIActionSheet *saveActionSheet;
+@property (nonatomic, strong) UIButton *noteToDetailAlert;
 @property (weak) NSTimer *timer;
 @property (nonatomic, strong) UIView   *parentView;
 @property (assign) BOOL recording;

@@ -109,6 +109,7 @@
 		9DD65FBB16FEA3CC00F2EB63 /* ImageResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD65FBA16FEA3CC00F2EB63 /* ImageResize.m */; };
 		D617528219464F8400483231 /* fells_loop.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D617528119464F8400483231 /* fells_loop.gpx */; };
 		D6B6941B1923F2A8006908C3 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */; };
+		D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */; };
 		D6EF02FF192BCFAB00AA67CD /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF02FD192BCFAB00AA67CD /* SaveButton.png */; };
 		D6EF0300192BCFAB00AA67CD /* SaveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF02FE192BCFAB00AA67CD /* SaveButton@2x.png */; };
 		D6EF0303192BED5100AA67CD /* StartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF0301192BED5100AA67CD /* StartButton.png */; };
@@ -261,6 +262,8 @@
 		9DD65FBA16FEA3CC00F2EB63 /* ImageResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResize.m; sourceTree = "<group>"; };
 		D617528119464F8400483231 /* fells_loop.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = fells_loop.gpx; path = ../fells_loop.gpx; sourceTree = "<group>"; };
 		D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
+		D6DBCE03196B2B66007BE9C3 /* NoteToDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteToDetailViewController.h; sourceTree = "<group>"; };
+		D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteToDetailViewController.m; sourceTree = "<group>"; };
 		D6EF02FD192BCFAB00AA67CD /* SaveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SaveButton.png; sourceTree = "<group>"; };
 		D6EF02FE192BCFAB00AA67CD /* SaveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SaveButton@2x.png"; sourceTree = "<group>"; };
 		D6EF0301192BED5100AA67CD /* StartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StartButton.png; sourceTree = "<group>"; };
@@ -293,11 +296,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9D3056ED17440AE80091B214 /* ARCMacro.h */,
-				9D3056F3174412EB0091B214 /* YLBackgroundView.h */,
-				9D3056F4174412EB0091B214 /* YLBackgroundView.m */,
-				9D3056EE17440AE80091B214 /* YLProgressBar.h */,
-				9D3056EF17440AE80091B214 /* YLProgressBar.m */,
+				D6DBCE08196B2CA7007BE9C3 /* Tools */,
+				D6DBCE07196B2C35007BE9C3 /* Tabs */,
+				D6DBCE06196B2BF0007BE9C3 /* MagnetNotes */,
 				64210F5F11350C8500415F1A /* AboutViewController.h */,
 				64210F6011350C8500415F1A /* AboutViewController.m */,
 				6433E5D3106D66EA00C27387 /* ActivityIndicatorDelegate.h */,
@@ -311,8 +312,6 @@
 				9D8A1BB1171B03E900509FBD /* FetchTripData.m */,
 				9DD65FB916FEA3CC00F2EB63 /* ImageResize.h */,
 				9DD65FBA16FEA3CC00F2EB63 /* ImageResize.m */,
-				645E4EDA1200C1C800EFF0E6 /* LoadingView.h */,
-				645E4EDB1200C1C800EFF0E6 /* LoadingView.m */,
 				642F161B1071ED1C0050BCB9 /* MapCoord.h */,
 				642F161C1071ED1C0050BCB9 /* MapCoord.m */,
 				642F15251071DA700050BCB9 /* MapViewController.h */,
@@ -321,24 +320,12 @@
 				8FB7C20C16C55EB9001A8A48 /* NoteManager.m */,
 				8FBCD3C716E0E58100C11EBE /* NoteViewController.h */,
 				8FBCD3C816E0E58100C11EBE /* NoteViewController.m */,
-				8F5E60621602CBE000D8F85D /* NSString+MD5Addition.h */,
-				8F5E60631602CBE000D8F85D /* NSString+MD5Addition.m */,
 				6433E5C5106D62ED00C27387 /* PersonalInfoDelegate.h */,
-				64F824E4106AFFA4001413F8 /* PersonalInfoViewController.h */,
-				64F824E5106AFFA4001413F8 /* PersonalInfoViewController.m */,
 				64119ABD10689ED800C201F0 /* PickerViewController.h */,
 				64119ABE10689ED800C201F0 /* PickerViewController.m */,
-				9D4B4EE41722B8B0005A4CDD /* ProgressView.h */,
-				9D4B4EE51722B8B0005A4CDD /* ProgressView.m */,
 				64581198107AC1080075DABD /* RecordingInProgressDelegate.h */,
-				6411996010683D7500C201F0 /* RecordTripViewController.h */,
-				6411996110683D7500C201F0 /* RecordTripViewController.m */,
 				6426476C1073FEC300E43DEF /* ReminderManager.h */,
 				6426476D1073FEC300E43DEF /* ReminderManager.m */,
-				8F25EC7616E13E7B004263D4 /* SavedNotesViewController.h */,
-				8F25EC7716E13E7B004263D4 /* SavedNotesViewController.m */,
-				641199B0106851AA00C201F0 /* SavedTripsViewController.h */,
-				641199B1106851AA00C201F0 /* SavedTripsViewController.m */,
 				64F823DF106AC151001413F8 /* SaveRequest.h */,
 				64F823E0106AC151001413F8 /* SaveRequest.m */,
 				8F20B0A916F0F08A00031712 /* TripDetailViewController.h */,
@@ -346,12 +333,6 @@
 				64119F021069ACF800C201F0 /* TripManager.h */,
 				64119F031069ACF800C201F0 /* TripManager.m */,
 				6433E54E106D542100C27387 /* TripPurposeDelegate.h */,
-				8F5E60641602CBE000D8F85D /* UIDevice+IdentifierAddition.h */,
-				8F5E60651602CBE000D8F85D /* UIDevice+IdentifierAddition.m */,
-				8FAD930316F189EE00082B6F /* UIImageViewResizable.h */,
-				8FAD930416F189EE00082B6F /* UIImageViewResizable.m */,
-				9D504D9F16B6CF4000B99EBC /* ZipUtil.h */,
-				9D504DA016B6CF4000B99EBC /* ZipUtil.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -539,6 +520,54 @@
 			path = "Ressources/TabBarIcons V2";
 			sourceTree = "<group>";
 		};
+		D6DBCE06196B2BF0007BE9C3 /* MagnetNotes */ = {
+			isa = PBXGroup;
+			children = (
+				D6DBCE03196B2B66007BE9C3 /* NoteToDetailViewController.h */,
+				D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */,
+			);
+			name = MagnetNotes;
+			sourceTree = "<group>";
+		};
+		D6DBCE07196B2C35007BE9C3 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				6411996010683D7500C201F0 /* RecordTripViewController.h */,
+				6411996110683D7500C201F0 /* RecordTripViewController.m */,
+				8F25EC7616E13E7B004263D4 /* SavedNotesViewController.h */,
+				64F824E4106AFFA4001413F8 /* PersonalInfoViewController.h */,
+				64F824E5106AFFA4001413F8 /* PersonalInfoViewController.m */,
+				8F25EC7716E13E7B004263D4 /* SavedNotesViewController.m */,
+				641199B0106851AA00C201F0 /* SavedTripsViewController.h */,
+				641199B1106851AA00C201F0 /* SavedTripsViewController.m */,
+			);
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		D6DBCE08196B2CA7007BE9C3 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				9D4B4EE41722B8B0005A4CDD /* ProgressView.h */,
+				9D4B4EE51722B8B0005A4CDD /* ProgressView.m */,
+				9D504D9F16B6CF4000B99EBC /* ZipUtil.h */,
+				9D504DA016B6CF4000B99EBC /* ZipUtil.m */,
+				8F5E60621602CBE000D8F85D /* NSString+MD5Addition.h */,
+				8F5E60631602CBE000D8F85D /* NSString+MD5Addition.m */,
+				645E4EDA1200C1C800EFF0E6 /* LoadingView.h */,
+				645E4EDB1200C1C800EFF0E6 /* LoadingView.m */,
+				8F5E60641602CBE000D8F85D /* UIDevice+IdentifierAddition.h */,
+				8F5E60651602CBE000D8F85D /* UIDevice+IdentifierAddition.m */,
+				8FAD930316F189EE00082B6F /* UIImageViewResizable.h */,
+				8FAD930416F189EE00082B6F /* UIImageViewResizable.m */,
+				9D3056ED17440AE80091B214 /* ARCMacro.h */,
+				9D3056F3174412EB0091B214 /* YLBackgroundView.h */,
+				9D3056F4174412EB0091B214 /* YLBackgroundView.m */,
+				9D3056EE17440AE80091B214 /* YLProgressBar.h */,
+				9D3056EF17440AE80091B214 /* YLProgressBar.m */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		D6EF0305192BEE1800AA67CD /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,6 +714,7 @@
 				642F15271071DA700050BCB9 /* MapViewController.m in Sources */,
 				642F161D1071ED1C0050BCB9 /* MapCoord.m in Sources */,
 				6426476E1073FEC300E43DEF /* ReminderManager.m in Sources */,
+				D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */,
 				64210F6111350C8500415F1A /* AboutViewController.m in Sources */,
 				645E4EDC1200C1C800EFF0E6 /* LoadingView.m in Sources */,
 				8F5E60661602CBE000D8F85D /* NSString+MD5Addition.m in Sources */,

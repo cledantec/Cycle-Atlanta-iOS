@@ -65,6 +65,7 @@
     UIActionSheet *actionSheet;
     UIPickerView *pickerView;
     UITextField *currentTextField;
+    UISwitch *magnetometerSwitch;
     
     NSArray *genderArray;
     NSArray *ageArray;
@@ -101,6 +102,7 @@
 @property (nonatomic, strong) UITextField   *cyclingFreq;
 @property (nonatomic, strong) UITextField   *riderType;
 @property (nonatomic, strong) UITextField   *riderHistory;
+@property (nonatomic, strong) UISwitch *magnetometerSwitch;
 
 @property (nonatomic) NSInteger ageSelectedRow;
 @property (nonatomic) NSInteger genderSelectedRow;
