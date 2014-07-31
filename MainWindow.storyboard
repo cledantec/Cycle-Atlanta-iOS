@@ -259,7 +259,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="8zZ-fH-V7b" kind="modal" id="QZc-BJ-gdd"/>
+                                    <segue destination="8zZ-fH-V7b" kind="modal" identifier="recordTripToNoteToDetail" id="QZc-BJ-gdd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -545,7 +545,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Yv6-Es-JhF" kind="modal" id="JRh-Y9-I1l"/>
+                                    <action selector="detail:" destination="8zZ-fH-V7b" eventType="touchUpInside" id="OXv-08-DDT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aod-aC-5KL">
@@ -566,6 +566,7 @@
                     </view>
                     <connections>
                         <outlet property="map" destination="Bfr-GS-9ov" id="wdb-kQ-smf"/>
+                        <outlet property="navBar" destination="RB4-02-gAd" id="KLA-9R-vwM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wjj-We-8RV" userLabel="First Responder" sceneMemberID="firstResponder"/>

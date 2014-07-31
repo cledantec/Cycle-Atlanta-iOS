@@ -7,13 +7,17 @@
 //
 
 #import "NoteToDetailViewController.h"
+#import "NoteManager.h"
+#import "PickerViewController.h"
+
+
 
 @interface NoteToDetailViewController ()
 
 @end
 
 @implementation NoteToDetailViewController
-@synthesize map;
+@synthesize map, noteManager, recordTripVC;;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -28,10 +32,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self updateDisplay];
+}
+
+- (void) updateDisplay
+{
     
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"notesToDetail"];
     NSMutableArray *notesToDetail = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
+    // Map
     CLLocation *noteLocation = notesToDetail[0];
     
     MKPointAnnotation *startPoint = [[MKPointAnnotation alloc] init];
@@ -41,6 +51,10 @@
     
     MKCoordinateRegion region = { noteLocation.coordinate, { 0.0078, 0.0068 } };
     [map setRegion:region animated:YES];
+    
+    // NavBar
+    [navBar setTitle:[NSString stringWithFormat:@"%lu Notes to detail", (unsigned long)[notesToDetail count]]];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,16 +63,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 - (IBAction)discard:(id)sender {
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"notesToDetail"];
@@ -69,12 +75,28 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     if([notesToDetail count])
     {
-    
+        [self updateDisplay];
     }
     else
     {
         [self performSegueWithIdentifier:@"unwindToRecordTripViewController" sender:self];
 
     }
+}
+
+- (IBAction)detail:(id)sender {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"notesToDetail"];
+    NSMutableArray *notesToDetail = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    [noteManager addLocation:notesToDetail[0]];
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: @"pickerCategory"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+                                                         bundle: nil];
+    PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
+    [pickerViewController setDelegate:recordTripVC];
+    [self presentViewController:pickerViewController animated:YES completion:nil];
 }
 @end

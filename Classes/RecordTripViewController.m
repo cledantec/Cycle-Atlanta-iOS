@@ -49,6 +49,8 @@
 #import "NoteManager.h"
 #import "Trip.h"
 #import "User.h"
+#import "NoteToDetailViewController.h"
+
 
 @implementation RecordTripViewController
 @synthesize tripManager, noteManager;
@@ -349,6 +351,16 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"recordTripToNoteToDetail"])
+    {
+        NoteToDetailViewController *ntdvc = [segue destinationViewController];
+        [ntdvc setNoteManager:noteManager];
+        [ntdvc setRecordTripVC:self];
+    }
+}
 
 
 
