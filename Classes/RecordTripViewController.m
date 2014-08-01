@@ -55,7 +55,7 @@
 @implementation RecordTripViewController
 @synthesize tripManager, noteManager;
 @synthesize infoButton, saveButton, startButton, noteButton, parentView;
-@synthesize timer, timeCounter, distCounter, noteToDetailAlert;
+@synthesize timer, timeCounter, distCounter, noteToDetailAlert, localNotification;
 @synthesize recording, shouldUpdateCounter, userInfoSaved;
 @synthesize appDelegate;
 @synthesize saveActionSheet;
@@ -137,6 +137,9 @@
 		speedCounter.text = [NSString stringWithFormat:@"%.1f mph", newLocation.speed * 3600 / 1609.344];
 	else
 		speedCounter.text = @"0.0 mph";
+    
+    // Magnetormeter
+    [self locationManager:[self getLocationManager] didUpdateHeading:[self getLocationManager].heading];
 }
 
 
@@ -154,8 +157,16 @@
             NSLog(@"%f %f",fieldNorm, fieldNorm2 / fieldNorm);
             if(fieldNorm2 / fieldNorm > 2.5)
             {
-                AudioServicesPlaySystemSound (1350);
-                AudioServicesPlaySystemSound (1351);
+                if([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+                {
+                    AudioServicesPlaySystemSound (1350);
+                    AudioServicesPlaySystemSound (1351);
+                }
+                else
+                {
+                    [self fireNotif];
+                }
+                
                 if (myLocation){
                     NSMutableArray *notesToDetail;
                     if([[NSUserDefaults standardUserDefaults] objectForKey:@"notesToDetail"])
@@ -175,7 +186,8 @@
                     [noteToDetailAlert setTitle:[NSString stringWithFormat:@"%lu notes to detail", (unsigned long)[notesToDetail count]] forState:UIControlStateNormal];
                     
                 }
-                else {
+                else
+                {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Activate location services"
                                                                     message:@"You can't write a note because we're not able to get your location."
                                                                    delegate:nil
@@ -344,7 +356,15 @@
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"] && [notesToDetail count])
     {
         noteToDetailAlert.hidden=false;
-        [noteToDetailAlert setTitle:[NSString stringWithFormat:@"%lu notes to detail", (unsigned long)[notesToDetail count]] forState:UIControlStateNormal];
+        if([notesToDetail count] > 1)
+        {
+            [noteToDetailAlert setTitle:[NSString stringWithFormat:@"%lu notes to detail", (unsigned long)[notesToDetail count]] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [noteToDetailAlert setTitle:@"1 note to detail" forState:UIControlStateNormal];
+        }
+
     }
     else {
         noteToDetailAlert.hidden=true;
@@ -971,5 +991,52 @@ shouldSelectViewController:(UIViewController *)viewController
     
     
 }
+
+#pragma mark Local notification
+// Used for the magnetNotes feature when app is in background (impossible to vibrate)
+-(void) fireNotif
+{
+    NSLog(@"Fire notif");
+    [[UIApplication sharedApplication]cancelAllLocalNotifications];
+    self.localNotification = [[UILocalNotification alloc] init];
+    if (self.localNotification == nil)
+    {
+        return;
+    }
+    else
+    {
+        self.localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+        self.localNotification.alertAction = nil;
+        self.localNotification.soundName = UILocalNotificationDefaultSoundName;
+        self.localNotification.alertBody = @"Magnet detected !";
+        self.localNotification.alertAction = NSLocalizedString(@"Detail note", nil);
+        //self.localNotification.applicationIconBadgeNumber=1;
+        self.localNotification.repeatInterval=0;
+        [[UIApplication sharedApplication] scheduleLocalNotification:self.localNotification];
+    }
+}
+
+/*
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif
+{
+    [[UIApplication sharedApplication]cancelAllLocalNotifications];
+    app.applicationIconBadgeNumber = notif.applicationIconBadgeNumber -1;
+    
+    notif.soundName = UILocalNotificationDefaultSoundName;
+    
+     [self _showAlert:[NSString stringWithFormat:@"%@",Your msg withTitle:@"Title"];
+
+}
+
+- (void) _showAlert:(NSString*)pushmessage withTitle:(NSString*)title
+    {
+        [self.alertView_local removeFromSuperview];
+        self.alertView_local = [[UIAlertView alloc] initWithTitle:title message:pushmessage delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [self.alertView_local show];
+        
+        if (self.alertView_local)
+        {
+        }
+}*/
 
 @end

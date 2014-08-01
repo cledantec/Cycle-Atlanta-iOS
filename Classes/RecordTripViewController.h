@@ -79,6 +79,7 @@
     
     CGFloat fieldNorm;
     IBOutlet UIButton *noteToDetailAlert;
+    UILocalNotification *localNotification;
 
 	NSTimer *__weak timer;
 	
@@ -105,6 +106,7 @@
 @property (nonatomic, strong) UILabel *distCounter;
 @property (nonatomic, strong) UIActionSheet *saveActionSheet;
 @property (nonatomic, strong) UIButton *noteToDetailAlert;
+@property (nonatomic, strong) UILocalNotification *localNotification;
 @property (weak) NSTimer *timer;
 @property (nonatomic, strong) UIView   *parentView;
 @property (assign) BOOL recording;
@@ -127,5 +129,8 @@
 
 - (void)initTripManager:(TripManager*)manager;
 - (void)initNoteManager:(NoteManager*)manager;
+
+-(void) fireNotif;
+
 
 @end

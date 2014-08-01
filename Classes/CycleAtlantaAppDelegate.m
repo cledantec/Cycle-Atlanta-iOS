@@ -180,6 +180,11 @@
         [appDelegate.locationManager stopUpdatingLocation];
         //[appDelegate.locationManager startMonitoringSignificantLocationChanges];
     }
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"])
+    {
+        NSLog(@"BACKGROUNDED and keep watching magnetic field");
+        [appDelegate.locationManager  startUpdatingHeading];
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *) application

@@ -53,8 +53,14 @@
     [map setRegion:region animated:YES];
     
     // NavBar
-    [navBar setTitle:[NSString stringWithFormat:@"%lu Notes to detail", (unsigned long)[notesToDetail count]]];
-    
+    if([notesToDetail count] > 1)
+    {
+        [navBar setTitle:[NSString stringWithFormat:@"%lu Notes to detail", (unsigned long)[notesToDetail count]]];
+    }
+    else
+    {
+        [navBar setTitle:@"1 Note to detail"];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,5 +104,10 @@
     PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
     [pickerViewController setDelegate:recordTripVC];
     [self presentViewController:pickerViewController animated:YES completion:nil];
+    
+    [notesToDetail removeObjectAtIndex:0];
+    NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:notesToDetail];
+    [[NSUserDefaults standardUserDefaults] setObject:data2 forKey:@"notesToDetail"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 @end

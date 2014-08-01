@@ -394,7 +394,6 @@
                                         <barButtonItem key="leftBarButtonItem" title="Skip" id="zEA-LW-DfE">
                                             <connections>
                                                 <action selector="skip:" destination="oAO-sN-z9D" id="IY8-Db-k0I"/>
-                                                <segue destination="10j-WX-eF7" kind="unwind" unwindAction="unwindToRecordTripViewController:" id="sD3-8d-bQN"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Save" id="cXK-Zj-9EK">
