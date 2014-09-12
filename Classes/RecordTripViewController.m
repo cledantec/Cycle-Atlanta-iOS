@@ -672,6 +672,9 @@
 
 //s Note this calls here
 -(IBAction)notethis:(id)sender{
+    
+    // Instead of picker category, we will set 'Grid Category'
+    // And use it in the grid controller
     [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
