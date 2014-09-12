@@ -670,6 +670,7 @@
 }
 
 
+//s Note this calls here
 -(IBAction)notethis:(id)sender{
     [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
