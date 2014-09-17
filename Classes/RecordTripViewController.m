@@ -37,7 +37,7 @@
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
-
+#define GRIDVIEW 1
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"
@@ -50,7 +50,7 @@
 #import "Trip.h"
 #import "User.h"
 #import "NoteToDetailViewController.h"
-
+#import "GridViewController.h"
 
 @implementation RecordTripViewController
 @synthesize tripManager, noteManager;
@@ -673,8 +673,9 @@
 //s Note this calls here
 -(IBAction)notethis:(id)sender{
     
-    // Instead of picker category, we will set 'Grid Category'
-    // And use it in the grid controller
+    
+#ifndef GRIDVIEW
+    
     [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -692,7 +693,29 @@
 		PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
 		[pickerViewController setDelegate:self];
 		[self presentViewController:pickerViewController animated:YES completion:nil];
-        
+#else
+    
+    // Instead of picker category, we will set 'Grid Category'
+    // And use it in the grid controller
+    [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: @"gridCategory"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"Note This");
+    
+    if (myLocation){
+        [noteManager addLocation:myLocation];
+    }
+    
+    // Trip Purpose
+    NSLog(@"INIT + PUSH");
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+                                                         bundle: nil];
+    GridViewController* grvc= [[storyboard instantiateViewControllerWithIdentifier:@"Grid"] initWithNibName:@"Grid" bundle:nil];
+    [grvc setDelegate:self];
+    [self presentViewController:grvc animated:YES completion:nil];
+    
+#endif
 }
 
 
