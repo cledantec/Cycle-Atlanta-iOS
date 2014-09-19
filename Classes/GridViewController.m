@@ -60,7 +60,11 @@
 	return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
 
+{
+    [self.navigationController setNavigationBarHidden:NO];
+}
 #pragma mark - Local Methods
 
 - (NSArray *)createMenuItems {

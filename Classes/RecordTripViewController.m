@@ -339,7 +339,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-
+  
+    
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -369,6 +370,7 @@
     else {
         noteToDetailAlert.hidden=true;
     }
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -708,17 +710,21 @@
     
     // Trip Purpose
     NSLog(@"INIT + PUSH");
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
                                                          bundle: nil];
-    /*
+    
     GridViewController* grvc= [[storyboard instantiateViewControllerWithIdentifier:@"Grid"] init];
     [grvc setDelegate:self];
-   
     
-    [self.navigationController pushViewController:grvc animated:YES];*/
+     [[self navigationController] pushViewController:grvc animated:YES];
+    
+    // Present it modally
     //[self presentViewController:grvc animated:YES completion:nil];
     
-     [self performSegueWithIdentifier:@"mySegue" sender:sender];
+   //  [self performSegueWithIdentifier:@"mySegue" sender:sender];
+    
+    
    
 #endif
 }

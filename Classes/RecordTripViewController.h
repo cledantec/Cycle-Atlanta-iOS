@@ -95,6 +95,7 @@
     
 	TripManager	*tripManager;
     NoteManager *noteManager;
+   
 }
 
 
@@ -115,6 +116,7 @@
 @property (nonatomic, strong) CycleAtlantaAppDelegate *appDelegate;
 @property (nonatomic, strong) TripManager *tripManager;
 @property (nonatomic, strong) NoteManager *noteManager;
+
 
 - (void)save;
 - (IBAction)start:(UIButton *)sender;
