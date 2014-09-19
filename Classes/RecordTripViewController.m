@@ -37,7 +37,7 @@
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
-#define GRIDVIEW 1
+#define GRIDVIEW 0
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"
@@ -708,13 +708,18 @@
     
     // Trip Purpose
     NSLog(@"INIT + PUSH");
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
                                                          bundle: nil];
-    GridViewController* grvc= [[storyboard instantiateViewControllerWithIdentifier:@"Grid"] initWithNibName:@"Grid" bundle:nil];
+    /*
+    GridViewController* grvc= [[storyboard instantiateViewControllerWithIdentifier:@"Grid"] init];
     [grvc setDelegate:self];
-    [self presentViewController:grvc animated:YES completion:nil];
+   
     
+    [self.navigationController pushViewController:grvc animated:YES];*/
+    //[self presentViewController:grvc animated:YES completion:nil];
+    
+     [self performSegueWithIdentifier:@"mySegue" sender:sender];
+   
 #endif
 }
 

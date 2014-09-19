@@ -45,42 +45,161 @@
 #import "TripManager.h"
 #import "NoteManager.h"
 #import "RecordTripViewController.h"
-#import "NoteSaveViewController.h"
-
-
+#import "SelectViewController.h"
 
 @implementation GridViewController
 
-@synthesize  delegate, description;
-@synthesize descriptionText;
+- (id)init
+{
+	self = [super init];
+	
+	if (self) {
+		[self setMenuItems:[self createMenuItems]];
+	}
+	
+	return self;
+}
 
+
+#pragma mark - Local Methods
+
+- (NSArray *)createMenuItems {
+	NSMutableArray *items = [[NSMutableArray alloc] init];
+	
+	// First Item
+	NAMenuItem *item1 = [[NAMenuItem alloc] initWithTitle:@"First Item"
+                                                    image:[UIImage imageNamed:@"icon.png"]
+                                                  vcClass:[SelectViewController class]];
+	[items addObject:item1];
+	
+	// Second Item
+	NAMenuItem *item2 = [[NAMenuItem alloc] initWithTitle:@"Second Item"
+                                                    image:[UIImage imageNamed:@"icon.png"]
+                                                  vcClass:[SelectViewController class]];
+	[items addObject:item2];
+	
+	// Third Item
+	NAMenuItem *item3 = [[NAMenuItem alloc] initWithTitle:@"Third Item"
+                                                    image:[UIImage imageNamed:@"icon.png"]
+                                                  vcClass:[SelectViewController class]];
+	[items addObject:item3];
+	
+	// Fourth Item
+	NAMenuItem *item4 = [[NAMenuItem alloc] initWithTitle:@"Fourth Item"
+                                                    image:[UIImage imageNamed:@"icon.png"]
+                                                  vcClass:[SelectViewController class]];
+	[items addObject:item4];
+	
+	// Fifth Item
+	NAMenuItem *item5 = [[NAMenuItem alloc] initWithTitle:@"Fifth Item"
+                                                    image:[UIImage imageNamed:@"icon.png"]
+                                                  vcClass:[SelectViewController class]];
+	[items addObject:item5];
+	
+	// Sixth Item
+	NAMenuItem *item6 = [[NAMenuItem alloc] initWithTitle:@"Sixth Item"
+                                                    image:[UIImage imageNamed:@"icon.png"]
+                                                  vcClass:[SelectViewController class]];
+	[items addObject:item6];
+	
+	// Seventh Item
+	NAMenuItem *item7 = [[NAMenuItem alloc] initWithTitle:@"Seventh Item"
+                                                    image:[UIImage imageNamed:@"icon.png"]
+                                                  vcClass:[SelectViewController class]];
+	[items addObject:item7];
+	
+	// Eighth Item
+	NAMenuItem *item8 = [[NAMenuItem alloc] initWithTitle:@"Eighth Item"
+                                                    image:[UIImage imageNamed:@"icon.png"]
+                                                  vcClass:[SelectViewController class]];
+	[items addObject:item8];
+    
+	// Ninth Item
+	NAMenuItem *item9 = [[NAMenuItem alloc] initWithTitle:@"Ninth Item" 
+                                                    image:[UIImage imageNamed:@"icon.png"] 
+                                                  vcClass:[SelectViewController class]];
+	[items addObject:item9];
+	
+	return items;
+}
+
+
+#pragma mark - View Lifecycle
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ 	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	self.navigationItem.title = @"Main Menu";
+	self.view.backgroundColor = [UIColor whiteColor];
+}
+
+
+
+/*
+// return the picker frame based on its size
+- (CGRect)pickerFrameWithSize:(CGSize)size
+{
+	CGRect pickerRect = CGRectMake(	0.0, 78.0, size.width, size.height );
+	return pickerRect;
+}
+
+
+- (void)createCustomPicker
+{
+	customPickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
+	customPickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	
+	// setup the data source and delegate for this picker
+	customPickerDataSource = [[CustomPickerDataSource alloc] init];
+	customPickerDataSource.parent = self;
+	customPickerView.dataSource = customPickerDataSource;
+	customPickerView.delegate = customPickerDataSource;
+	
+	// note we are using CGRectZero for the dimensions of our picker view,
+	// this is because picker views have a built in optimum size,
+	// you just need to set the correct origin in your view.
+	//
+	// position the picker at the bottom
+	CGSize pickerSize = [customPickerView sizeThatFits:CGSizeZero];
+	customPickerView.frame = [self pickerFrameWithSize:pickerSize];
+	
+	customPickerView.showsSelectionIndicator = YES;
+	
+	// add this picker to our view controller, initially hidden
+	//customPickerView.hidden = YES;
+	[self.view addSubview:customPickerView];
+}
 
 
 - (IBAction)cancel:(id)sender
 //add value to be sent in
 {
-    gridCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     
-    if (gridCategory == 3) {
+    if (pickerCategory == 3) {
         [delegate didCancelNoteDelete];
         NSLog(@"Note Cancel Pressed!!!!!!!!!!!!");
     }
     
-    if (gridCategory == 0) {
+    if (pickerCategory == 0) {
         [delegate didCancelNote];
         NSLog(@"Trip Cancel Pressed!!!!!!!!!!!!");
     }
     
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"gridCategory"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-/*
+
 - (IBAction)save:(id)sender
 {
-    gridCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     
-    if (gridCategory == 0) {
+    if (pickerCategory == 0) {
         NSLog(@"Purpose Save button pressed");
         NSInteger row = [customPickerView selectedRowInComponent:0];
         
@@ -94,7 +213,7 @@
         
         [delegate didPickPurpose:(unsigned int)row];
     }
-    else if (gridCategory == 1){
+    else if (pickerCategory == 1){
         NSLog(@"Issue Save button pressed");
         NSLog(@"detail");
         NSLog(@"INIT + PUSH");
@@ -117,7 +236,7 @@
         
         NSLog(@"pickedNotedType is %ld", (long)pickedNotedType);
     }
-    else if (gridCategory == 2){
+    else if (pickerCategory == 2){
         NSLog(@"Asset Save button pressed");
         NSLog(@"detail");
         NSLog(@"INIT + PUSH");
@@ -141,7 +260,7 @@
         NSLog(@"pickedNotedType is %ld", (long)pickedNotedType);
         
     }
-    else if (gridCategory == 3){
+    else if (pickerCategory == 3){
         NSLog(@"Note This Save button pressed");
         NSLog(@"detail");
         NSLog(@"INIT + PUSH");
@@ -171,88 +290,27 @@
         [delegate didPickNoteType:tempType];
     }
 }
-*/
 
--(NSArray*)createGridItems
-{
-    NSMutableArray *items = [[NSMutableArray alloc] init];
-	
-    
-    gridCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
-    
-    if(gridCategory==3)
-    {
-	// First Item
-	NAMenuItem *item1 = [[NAMenuItem alloc] initWithTitle:@"First Item"
-                                                    image:[UIImage imageNamed:@"appIcon.png"]
-                                                  vcClass:[NoteSaveViewController class]];
-	[items addObject:item1];
-	
-	// Second Item
-	NAMenuItem *item2 = [[NAMenuItem alloc] initWithTitle:@"Second Item"
-                                                    image:[UIImage imageNamed:@"appIcon.png"]
-                                                  vcClass:[NoteSaveViewController class]];
-	[items addObject:item2];
-	
-	// Third Item
-	NAMenuItem *item3 = [[NAMenuItem alloc] initWithTitle:@"Third Item"
-                                                    image:[UIImage imageNamed:@"appIcon.png"]
-                                                  vcClass:[NoteSaveViewController class]];
-	[items addObject:item3];
-	
-	// Fourth Item
-	NAMenuItem *item4 = [[NAMenuItem alloc] initWithTitle:@"Fourth Item"
-                                                    image:[UIImage imageNamed:@"appIcon.png"]
-                                                  vcClass:[NoteSaveViewController class]];
-	[items addObject:item4];
-	
-	// Fifth Item
-	NAMenuItem *item5 = [[NAMenuItem alloc] initWithTitle:@"Fifth Item"
-                                                    image:[UIImage imageNamed:@"appIcon.png"]
-                                                  vcClass:[NoteSaveViewController class]];
-	[items addObject:item5];
-	
-	// Sixth Item
-	NAMenuItem *item6 = [[NAMenuItem alloc] initWithTitle:@"Sixth Item"
-                                                    image:[UIImage imageNamed:@"appIcon.png"]
-                                                  vcClass:[NoteSaveViewController class]];
-	[items addObject:item6];
-	
-	// Seventh Item
-	NAMenuItem *item7 = [[NAMenuItem alloc] initWithTitle:@"Seventh Item"
-                                                    image:[UIImage imageNamed:@"appIcon.png"]
-                                                  vcClass:[NoteSaveViewController class]];
-	[items addObject:item7];
-	
-	// Eighth Item
-	NAMenuItem *item8 = [[NAMenuItem alloc] initWithTitle:@"Eighth Item" 
-                                                    image:[UIImage imageNamed:@"appIcon.png"]
-                                                  vcClass:[NoteSaveViewController class]];
-	[items addObject:item8];
-    
-	// Ninth Item
-	NAMenuItem *item9 = [[NAMenuItem alloc] initWithTitle:@"Ninth Item" 
-                                                    image:[UIImage imageNamed:@"appIcon.png"]
-                                                  vcClass:[NoteSaveViewController class]];
-	[items addObject:item9];
-    }
-	
-	return items;
-}
 
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle
 {
 	NSLog(@"initWithNibNamed");
     //NSLog(@"PickerViewController init");
-	
+	[self createCustomPicker];
     
-    gridCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
-    
-   [self setMenuItems: [self createGridItems]];
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+    if (pickerCategory == 0) {
+        // picker defaults to top-most item => update the description
+        [self pickerView:customPickerView didSelectRow:0 inComponent:0];
+    }
+    else if (pickerCategory == 3){
+        // picker defaults to top-most item => update the description
+        [self pickerView:customPickerView didSelectRow:6 inComponent:0];
+    }
 	return self;
 }
 
-/*
+
 - (id)initWithPurpose:(NSInteger)index
 {
 	if (self = [self init])
@@ -262,43 +320,49 @@
 		// update the picker
 		[customPickerView selectRow:index inComponent:0 animated:YES];
 		
-		gridCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
-        if (gridCategory == 0) {
+		pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+        if (pickerCategory == 0) {
             // picker defaults to top-most item => update the description
             [self pickerView:customPickerView didSelectRow:0 inComponent:0];
         }
-        else if (gridCategory == 3){
+        else if (pickerCategory == 3){
             // picker defaults to top-most item => update the description
             [self pickerView:customPickerView didSelectRow:6 inComponent:0];
         }
 	}
 	return self;
 }
-*/
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    gridCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     
-    NSLog(@"GridCategory : %ld", (long)gridCategory);
+    NSLog(@"PickerCategory : %ld", (long)pickerCategory);
     
-    if (gridCategory == 0) {
+    if (pickerCategory == 0) {
         navBarItself.topItem.title = @"Trip Purpose";
         self.descriptionText.text = @"Please select your trip purpose & tap Save";
     }
-    else if (gridCategory == 1){
+    else if (pickerCategory == 1){
         navBarItself.topItem.title = @"Boo this...";
         self.descriptionText.text = @"Please select the issue type & tap Save";
     }
-    else if (gridCategory == 2){
+    else if (pickerCategory == 2){
         navBarItself.topItem.title = @"This is rad!";
         self.descriptionText.text = @"Please select the asset type & tap Save";
     }
-    else if (gridCategory == 3){
+    else if (pickerCategory == 3){
         navBarItself.topItem.title = @"Note This";
         self.descriptionText.text = @"Please select the type & tap Save";
-      
+        [self.customPickerView selectRow:6 inComponent:0 animated:NO];
+        if ([self.customPickerView selectedRowInComponent:0] == 6) {
+            navBarItself.topItem.rightBarButtonItem.enabled = NO;
+        }
+        else{
+            navBarItself.topItem.rightBarButtonItem.enabled = YES;
+        }
     }
     
     description = [[UITextView alloc] initWithFrame:CGRectMake( 18.0, 314.0, 284.0, 120.0 )];
@@ -324,11 +388,9 @@
 #pragma mark UIPickerViewDelegate
 
 
-
-/*
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (gridCategory == 3){
+    if (pickerCategory == 3){
         if ([self.customPickerView selectedRowInComponent:0] == 6) {
             navBarItself.topItem.rightBarButtonItem.enabled = NO;
         }
@@ -338,9 +400,9 @@
     }
 	//NSLog(@"parent didSelectRow: %d inComponent:%d", row, component);
     
-    gridCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
     
-    if (gridCategory == 0) {
+    if (pickerCategory == 0) {
         switch (row) {
             case 0:
                 description.text = kDescCommute;
@@ -369,7 +431,7 @@
         }
     }
     
-    else if (gridCategory == 1){
+    else if (pickerCategory == 1){
         switch (row) {
             case 0:
                 description.text = kIssueDescPavementIssue;
@@ -391,7 +453,7 @@
                 break;
         }
     }
-    else if (gridCategory == 2){
+    else if (pickerCategory == 2){
         switch (row) {
             case 0:
                 description.text = kAssetDescBikeParking;
@@ -413,7 +475,7 @@
                 break;
         }
     }
-    else if (gridCategory == 3){
+    else if (pickerCategory == 3){
         switch (row) {
             case 6:
                 description.text = kDescNoteThis;
@@ -462,9 +524,9 @@
         }
     }
 }
+
+
 */
-
-
 
 @end
 

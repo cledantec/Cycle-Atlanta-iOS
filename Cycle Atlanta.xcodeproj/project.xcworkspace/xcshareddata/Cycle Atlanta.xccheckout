@@ -10,6 +10,8 @@
 	<string>Cycle Atlanta</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>14B6ED5A-5160-41C1-85D2-E4E6F174AD19</key>
+		<string>https://github.com/cammsaul/NAMenu.git</string>
 		<key>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</key>
 		<string>https://github.com/cledantec/Cycle-Atlanta-iOS.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Cycle Atlanta.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>14B6ED5A-5160-41C1-85D2-E4E6F174AD19</key>
+		<string>../../../NAMenu</string>
 		<key>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Cycle-Atlanta-iOS</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>14B6ED5A-5160-41C1-85D2-E4E6F174AD19</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NAMenu</string>
 		</dict>
 	</array>
 </dict>

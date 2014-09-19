@@ -107,12 +107,14 @@
 		9D8A1BAF171B03E000509FBD /* FetchUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A1BAE171B03E000509FBD /* FetchUser.m */; };
 		9D8A1BB2171B03E900509FBD /* FetchTripData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A1BB1171B03E900509FBD /* FetchTripData.m */; };
 		9DD65FBB16FEA3CC00F2EB63 /* ImageResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD65FBA16FEA3CC00F2EB63 /* ImageResize.m */; };
+		BAF7B46619CBB7D000056E5B /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF7B46519CBB7D000056E5B /* GridViewController.m */; };
+		BAF7B46819CBB81900056E5B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BAF7B46719CBB81900056E5B /* icon.png */; };
+		BAF7B46B19CBBAB800056E5B /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF7B46A19CBBAB800056E5B /* SelectViewController.m */; };
 		C200BD6419C9E6B50089ADED /* NAMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C200BD5C19C9E6B50089ADED /* NAMenuItem.m */; };
 		C200BD6519C9E6B50089ADED /* NAMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = C200BD5E19C9E6B50089ADED /* NAMenuItemView.m */; };
 		C200BD6719C9E6B50089ADED /* NAMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C200BD6119C9E6B50089ADED /* NAMenuView.m */; };
 		C200BD6819C9E6B50089ADED /* NAMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C200BD6319C9E6B50089ADED /* NAMenuViewController.m */; };
 		C200BD6A19C9E6EB0089ADED /* NAMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C200BD6919C9E6EB0089ADED /* NAMenuItemView.xib */; };
-		C23C983E19CA170800720A39 /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23C983D19CA170800720A39 /* GridViewController.m */; };
 		D6B6941B1923F2A8006908C3 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */; };
 		D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */; };
 		D6EF02FF192BCFAB00AA67CD /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF02FD192BCFAB00AA67CD /* SaveButton.png */; };
@@ -265,6 +267,11 @@
 		9D8A1BB1171B03E900509FBD /* FetchTripData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchTripData.m; sourceTree = "<group>"; };
 		9DD65FB916FEA3CC00F2EB63 /* ImageResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResize.h; sourceTree = "<group>"; };
 		9DD65FBA16FEA3CC00F2EB63 /* ImageResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResize.m; sourceTree = "<group>"; };
+		BAF7B46419CBB7D000056E5B /* GridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewController.h; sourceTree = "<group>"; };
+		BAF7B46519CBB7D000056E5B /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewController.m; sourceTree = "<group>"; };
+		BAF7B46719CBB81900056E5B /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../NAMenu/icon.png; sourceTree = "<group>"; };
+		BAF7B46919CBBAB800056E5B /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
+		BAF7B46A19CBBAB800056E5B /* SelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectViewController.m; sourceTree = "<group>"; };
 		C200BD5B19C9E6B50089ADED /* NAMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMenuItem.h; sourceTree = "<group>"; };
 		C200BD5C19C9E6B50089ADED /* NAMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAMenuItem.m; sourceTree = "<group>"; };
 		C200BD5D19C9E6B50089ADED /* NAMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMenuItemView.h; sourceTree = "<group>"; };
@@ -274,8 +281,6 @@
 		C200BD6219C9E6B50089ADED /* NAMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMenuViewController.h; sourceTree = "<group>"; };
 		C200BD6319C9E6B50089ADED /* NAMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAMenuViewController.m; sourceTree = "<group>"; };
 		C200BD6919C9E6EB0089ADED /* NAMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NAMenuItemView.xib; sourceTree = "<group>"; };
-		C23C983C19CA170800720A39 /* GridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewController.h; sourceTree = "<group>"; };
-		C23C983D19CA170800720A39 /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewController.m; sourceTree = "<group>"; };
 		D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		D6DBCE03196B2B66007BE9C3 /* NoteToDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteToDetailViewController.h; sourceTree = "<group>"; };
 		D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteToDetailViewController.m; sourceTree = "<group>"; };
@@ -322,6 +327,10 @@
 				1D3623250D0F684500981E51 /* CycleAtlantaAppDelegate.m */,
 				8F1B1D3D164B94C60022B776 /* DetailViewController.h */,
 				8F1B1D3E164B94C60022B776 /* DetailViewController.m */,
+				BAF7B46419CBB7D000056E5B /* GridViewController.h */,
+				BAF7B46519CBB7D000056E5B /* GridViewController.m */,
+				BAF7B46919CBBAB800056E5B /* SelectViewController.h */,
+				BAF7B46A19CBBAB800056E5B /* SelectViewController.m */,
 				9D8A1BAD171B03E000509FBD /* FetchUser.h */,
 				9D8A1BAE171B03E000509FBD /* FetchUser.m */,
 				9D8A1BB0171B03E900509FBD /* FetchTripData.h */,
@@ -339,8 +348,6 @@
 				6433E5C5106D62ED00C27387 /* PersonalInfoDelegate.h */,
 				64119ABD10689ED800C201F0 /* PickerViewController.h */,
 				64119ABE10689ED800C201F0 /* PickerViewController.m */,
-				C23C983C19CA170800720A39 /* GridViewController.h */,
-				C23C983D19CA170800720A39 /* GridViewController.m */,
 				64581198107AC1080075DABD /* RecordingInProgressDelegate.h */,
 				6426476C1073FEC300E43DEF /* ReminderManager.h */,
 				6426476D1073FEC300E43DEF /* ReminderManager.m */,
@@ -454,6 +461,7 @@
 		6411A16A106A05DE00C201F0 /* AppImages */ = {
 			isa = PBXGroup;
 			children = (
+				BAF7B46719CBB81900056E5B /* icon.png */,
 				9D47F909160BA52C00B8B14D /* Default.png */,
 				9D47F90B160BA53000B8B14D /* Default@2x.png */,
 				8FD62A3B16B2253100B54A35 /* Default-568h@2x.png */,
@@ -666,6 +674,7 @@
 			files = (
 				64577E29106DC2FD003ACBFD /* dist.plist in Resources */,
 				C200BD6A19C9E6EB0089ADED /* NAMenuItemView.xib in Resources */,
+				BAF7B46819CBB81900056E5B /* icon.png in Resources */,
 				6458114E107AA4D30075DABD /* bicycle-bell-normalized.aiff in Resources */,
 				D6B6941B1923F2A8006908C3 /* MainWindow.storyboard in Resources */,
 				D6EF02FF192BCFAB00AA67CD /* SaveButton.png in Resources */,
@@ -742,7 +751,7 @@
 				64119AAD1068672100C201F0 /* CustomView.m in Sources */,
 				64119AAE1068672100C201F0 /* CustomPickerDataSource.m in Sources */,
 				64119ABF10689ED800C201F0 /* PickerViewController.m in Sources */,
-				C23C983E19CA170800720A39 /* GridViewController.m in Sources */,
+				BAF7B46619CBB7D000056E5B /* GridViewController.m in Sources */,
 				64119F041069ACF800C201F0 /* TripManager.m in Sources */,
 				64F823E1106AC151001413F8 /* SaveRequest.m in Sources */,
 				64F824E6106AFFA4001413F8 /* PersonalInfoViewController.m in Sources */,
@@ -751,6 +760,7 @@
 				6426476E1073FEC300E43DEF /* ReminderManager.m in Sources */,
 				D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */,
 				64210F6111350C8500415F1A /* AboutViewController.m in Sources */,
+				BAF7B46B19CBBAB800056E5B /* SelectViewController.m in Sources */,
 				C200BD6819C9E6B50089ADED /* NAMenuViewController.m in Sources */,
 				C200BD6519C9E6B50089ADED /* NAMenuItemView.m in Sources */,
 				645E4EDC1200C1C800EFF0E6 /* LoadingView.m in Sources */,
@@ -794,7 +804,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -813,7 +823,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -844,7 +854,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -880,7 +890,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -912,7 +922,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

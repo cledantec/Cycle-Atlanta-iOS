@@ -42,31 +42,30 @@
 #import "TripPurposeDelegate.h"
 #import "Note.h"
 #import "RecordTripViewController.h"
-#import "NAMenuViewController.h"
+#include "NAMenuViewController.h"
 
-@interface GridViewController : NAMenuViewController
+
+@interface GridViewController:NAMenuViewController
 {
+	id <TripPurposeDelegate> delegate;
 
-    id <TripPurposeDelegate> delegate;
-    UITextView				*description;
-    NSInteger gridCategory;
+
     NSInteger pickedNotedType;
     IBOutlet UINavigationBar *navBarItself;
     UILabel *descriptionText;
+    
 }
 
 
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
-//@property (nonatomic, strong) UIPickerView *customPickerView;
-//@property (nonatomic, strong) CustomPickerDataSource *customPickerDataSource;
+@property (nonatomic, strong) UIPickerView *customPickerView;
+@property (nonatomic, strong) CustomPickerDataSource *customPickerDataSource;
 
 @property (nonatomic, strong) UITextView *description;
 
-@property (nonatomic, strong) IBOutlet UILabel *descriptionText;
 
-//- (id)initWithPurpose:(NSInteger)index;
 
-- (IBAction)cancel:(id)sender;
-- (IBAction)save:(id)sender;
+- (id)initWithPurpose:(NSInteger)index;
+
 
 @end
