@@ -390,9 +390,7 @@
     }
     else if (pickerCategory == 3){
         switch (row) {
-            case 6:
-                description.text = kDescNoteThis;
-                break;
+           
                 
             case 0:
                 description.text = kAssetDescNoteThisSpot;
@@ -412,9 +410,9 @@
             case 5:
                 description.text = kAssetDescBikeParking;
                 break;
-        
-            
-            
+            case 6:
+                description.text = kDescNoteThis;
+                break;
             case 7:
                 description.text = kIssueDescPavementIssue;
                 break;

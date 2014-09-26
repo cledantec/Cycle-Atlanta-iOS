@@ -54,7 +54,8 @@
 	self = [super init];
 	
 	if (self) {
-		[self setMenuItems:[self createMenuItems]];
+        NSArray* items=[self createMenuItems];
+		[self setMenuItems:items];
 	}
 	
 	return self;
@@ -68,6 +69,66 @@
 #pragma mark - Local Methods
 
 - (NSArray *)createMenuItems {
+    
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+    
+    NSLog(@"PickerCategory : %ld", (long)pickerCategory);
+    
+    NSMutableDictionary* itemDict=[[NSMutableDictionary alloc]init];
+    int no_items=9;
+    
+    for (int row=0;row<no_items;i++)
+    {
+        
+    
+        if(pickerCategory==0)
+            {
+                switch (row) {
+                        
+                        
+                    case 0:
+                        [itemDict setObject:kAssetDescNoteThisSpot  forKey:[NSNumber numberWithInt:row]];
+                     
+                        break;
+                    case 1:
+                        [itemDict setObject:kAssetDescWaterFountains  forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 2:
+                        [itemDict setObject:kAssetDescSecretPassage  forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 3:
+                        [itemDict setObject:kAssetDescPublicRestrooms  forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 4:
+                        [itemDict setObject:kAssetDescBikeShops  forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 5:
+                        
+                        [itemDict setObject:kAssetDescBikeParking  forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 6:
+                        [itemDict setObject:kDescNoteThis forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 7:
+                        [itemDict setObject:kIssueDescPavementIssue forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 8:
+                        [itemDict setObject:kIssueDescTrafficSignal forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 9:
+                        [itemDict setObject:kIssueDescEnforcement forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 10:
+                        [itemDict setObject:kIssueDescNeedParking forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 11:
+                        [itemDict setObject:kIssueDescBikeLaneIssue forKey:[NSNumber numberWithInt:row]];
+                        break;
+                    case 12:
+                        [itemDict setObject:kIssueDescNoteThisSpot forKey:[NSNumber numberWithInt:row]];
+                        break;
+            }
+    }
 	NSMutableArray *items = [[NSMutableArray alloc] init];
 	
 	// First Item
@@ -134,208 +195,12 @@
  	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (void)viewDidLoad {
+/*- (void)viewDidLoad {
 	[super viewDidLoad];
 	
 	self.navigationItem.title = @"Main Menu";
 	self.view.backgroundColor = [UIColor whiteColor];
-}
-
-
-
-/*
-// return the picker frame based on its size
-- (CGRect)pickerFrameWithSize:(CGSize)size
-{
-	CGRect pickerRect = CGRectMake(	0.0, 78.0, size.width, size.height );
-	return pickerRect;
-}
-
-
-- (void)createCustomPicker
-{
-	customPickerView = [[UIPickerView alloc] initWithFrame:CGRectZero];
-	customPickerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	
-	// setup the data source and delegate for this picker
-	customPickerDataSource = [[CustomPickerDataSource alloc] init];
-	customPickerDataSource.parent = self;
-	customPickerView.dataSource = customPickerDataSource;
-	customPickerView.delegate = customPickerDataSource;
-	
-	// note we are using CGRectZero for the dimensions of our picker view,
-	// this is because picker views have a built in optimum size,
-	// you just need to set the correct origin in your view.
-	//
-	// position the picker at the bottom
-	CGSize pickerSize = [customPickerView sizeThatFits:CGSizeZero];
-	customPickerView.frame = [self pickerFrameWithSize:pickerSize];
-	
-	customPickerView.showsSelectionIndicator = YES;
-	
-	// add this picker to our view controller, initially hidden
-	//customPickerView.hidden = YES;
-	[self.view addSubview:customPickerView];
-}
-
-
-- (IBAction)cancel:(id)sender
-//add value to be sent in
-{
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-    
-    if (pickerCategory == 3) {
-        [delegate didCancelNoteDelete];
-        NSLog(@"Note Cancel Pressed!!!!!!!!!!!!");
-    }
-    
-    if (pickerCategory == 0) {
-        [delegate didCancelNote];
-        NSLog(@"Trip Cancel Pressed!!!!!!!!!!!!");
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-
-- (IBAction)save:(id)sender
-{
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-    
-    if (pickerCategory == 0) {
-        NSLog(@"Purpose Save button pressed");
-        NSInteger row = [customPickerView selectedRowInComponent:0];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
-                                                             bundle: nil];
-        TripDetailViewController *tripDetailViewController = [[storyboard
-                                                               instantiateViewControllerWithIdentifier: @"TripDetail"] initWithNibName:@"TripDetail" bundle:nil];
-        tripDetailViewController.delegate = self.delegate;
-        
-        [self presentViewController:tripDetailViewController animated:YES completion:nil];
-        
-        [delegate didPickPurpose:(unsigned int)row];
-    }
-    else if (pickerCategory == 1){
-        NSLog(@"Issue Save button pressed");
-        NSLog(@"detail");
-        NSLog(@"INIT + PUSH");
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
-                                                             bundle: nil];
-        DetailViewController *detailViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Detail"] initWithNibName:@"Detail" bundle:nil];
-        detailViewController.delegate = self.delegate;
-        
-        [self presentViewController:detailViewController animated:YES completion:nil];
-        //Note: get index of picker
-        NSInteger row = [customPickerView selectedRowInComponent:0];
-        
-        pickedNotedType = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickedNotedType"];
-        
-        [[NSUserDefaults standardUserDefaults] setInteger:row forKey: @"pickedNotedType"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        pickedNotedType = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickedNotedType"];
-        
-        NSLog(@"pickedNotedType is %ld", (long)pickedNotedType);
-    }
-    else if (pickerCategory == 2){
-        NSLog(@"Asset Save button pressed");
-        NSLog(@"detail");
-        NSLog(@"INIT + PUSH");
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
-                                                             bundle: nil];
-        DetailViewController *detailViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Detail"] initWithNibName:@"Detail" bundle:nil];
-        detailViewController.delegate = self.delegate;
-        
-        [self presentViewController:detailViewController animated:YES completion:nil];
-        //do something here: get index for later use.
-        NSInteger row = [customPickerView selectedRowInComponent:0];
-        
-        pickedNotedType = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickedNotedType"];
-        
-        [[NSUserDefaults standardUserDefaults] setInteger:row+6 forKey: @"pickedNotedType"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        pickedNotedType = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickedNotedType"];
-        
-        NSLog(@"pickedNotedType is %ld", (long)pickedNotedType);
-        
-    }
-    else if (pickerCategory == 3){
-        NSLog(@"Note This Save button pressed");
-        NSLog(@"detail");
-        NSLog(@"INIT + PUSH");
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
-                                                             bundle: nil];
-        DetailViewController *detailViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Detail"] initWithNibName:@"Detail" bundle:nil];
-        
-        detailViewController.delegate = self.delegate;
-        
-        [self presentViewController:detailViewController animated:YES completion:nil];
-        
-        //Note: get index of type
-        NSInteger row = [customPickerView selectedRowInComponent:0];
-        
-        NSNumber *tempType = 0;
-        
-        if(row>=7){
-            tempType = @(row-7);
-        }
-        else if (row<=5){
-            tempType = @(11-row);
-        }
-        
-        NSLog(@"tempType: %d", [tempType intValue]);
-        
-        [delegate didPickNoteType:tempType];
-    }
-}
-
-
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)nibBundle
-{
-	NSLog(@"initWithNibNamed");
-    //NSLog(@"PickerViewController init");
-	[self createCustomPicker];
-    
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-    if (pickerCategory == 0) {
-        // picker defaults to top-most item => update the description
-        [self pickerView:customPickerView didSelectRow:0 inComponent:0];
-    }
-    else if (pickerCategory == 3){
-        // picker defaults to top-most item => update the description
-        [self pickerView:customPickerView didSelectRow:6 inComponent:0];
-    }
-	return self;
-}
-
-
-- (id)initWithPurpose:(NSInteger)index
-{
-	if (self = [self init])
-	{
-		//NSLog(@"PickerViewController initWithPurpose: %d", index);
-		
-		// update the picker
-		[customPickerView selectRow:index inComponent:0 animated:YES];
-		
-		pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-        if (pickerCategory == 0) {
-            // picker defaults to top-most item => update the description
-            [self pickerView:customPickerView didSelectRow:0 inComponent:0];
-        }
-        else if (pickerCategory == 3){
-            // picker defaults to top-most item => update the description
-            [self pickerView:customPickerView didSelectRow:6 inComponent:0];
-        }
-	}
-	return self;
-}
+}*/
 
 
 - (void)viewDidLoad
@@ -346,191 +211,21 @@
     NSLog(@"PickerCategory : %ld", (long)pickerCategory);
     
     if (pickerCategory == 0) {
-        navBarItself.topItem.title = @"Trip Purpose";
-        self.descriptionText.text = @"Please select your trip purpose & tap Save";
+        self.navigationItem.title = @"Trip Purpose";
+        
     }
     else if (pickerCategory == 1){
-        navBarItself.topItem.title = @"Boo this...";
-        self.descriptionText.text = @"Please select the issue type & tap Save";
+        self.navigationItem.title = @"Boo this...";
+      
     }
     else if (pickerCategory == 2){
-        navBarItself.topItem.title = @"This is rad!";
-        self.descriptionText.text = @"Please select the asset type & tap Save";
+        self.navigationItem.title= @"This is rad!";
+        
     }
     else if (pickerCategory == 3){
-        navBarItself.topItem.title = @"Note This";
-        self.descriptionText.text = @"Please select the type & tap Save";
-        [self.customPickerView selectRow:6 inComponent:0 animated:NO];
-        if ([self.customPickerView selectedRowInComponent:0] == 6) {
-            navBarItself.topItem.rightBarButtonItem.enabled = NO;
-        }
-        else{
-            navBarItself.topItem.rightBarButtonItem.enabled = YES;
-        }
+        self.navigationItem.title = @"Make a note";
+       
     }
-    
-    description = [[UITextView alloc] initWithFrame:CGRectMake( 18.0, 314.0, 284.0, 120.0 )];
-	description.editable = NO;
-    description.textColor = [UIColor darkGrayColor];
-    
-	description.font = [UIFont fontWithName:@"Helvetica" size:16];
-	[self.view addSubview:description];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-}
-
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-}
-
-#pragma mark UIPickerViewDelegate
-
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    if (pickerCategory == 3){
-        if ([self.customPickerView selectedRowInComponent:0] == 6) {
-            navBarItself.topItem.rightBarButtonItem.enabled = NO;
-        }
-        else{
-            navBarItself.topItem.rightBarButtonItem.enabled = YES;
-        }
-    }
-	//NSLog(@"parent didSelectRow: %d inComponent:%d", row, component);
-    
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
-    
-    if (pickerCategory == 0) {
-        switch (row) {
-            case 0:
-                description.text = kDescCommute;
-                break;
-            case 1:
-                description.text = kDescSchool;
-                break;
-            case 2:
-                description.text = kDescWork;
-                break;
-            case 3:
-                description.text = kDescExercise;
-                break;
-            case 4:
-                description.text = kDescSocial;
-                break;
-            case 5:
-                description.text = kDescShopping;
-                break;
-            case 6:
-                description.text = kDescErrand;
-                break;
-            default:
-                description.text = kDescOther;
-                break;
-        }
-    }
-    
-    else if (pickerCategory == 1){
-        switch (row) {
-            case 0:
-                description.text = kIssueDescPavementIssue;
-                break;
-            case 1:
-                description.text = kIssueDescTrafficSignal;
-                break;
-            case 2:
-                description.text = kIssueDescEnforcement;
-                break;
-            case 3:
-                description.text = kIssueDescNeedParking;
-                break;
-            case 4:
-                description.text = kIssueDescBikeLaneIssue;
-                break;
-            default:
-                description.text = kIssueDescNoteThisSpot;
-                break;
-        }
-    }
-    else if (pickerCategory == 2){
-        switch (row) {
-            case 0:
-                description.text = kAssetDescBikeParking;
-                break;
-            case 1:
-                description.text = kAssetDescBikeShops;
-                break;
-            case 2:
-                description.text = kAssetDescPublicRestrooms;
-                break;
-            case 3:
-                description.text = kAssetDescSecretPassage;
-                break;
-            case 4:
-                description.text = kAssetDescWaterFountains;
-                break;
-            default:
-                description.text = kAssetDescNoteThisSpot;
-                break;
-        }
-    }
-    else if (pickerCategory == 3){
-        switch (row) {
-            case 6:
-                description.text = kDescNoteThis;
-                break;
-                
-            case 0:
-                description.text = kAssetDescNoteThisSpot;
-                break;
-            case 1:
-                description.text = kAssetDescWaterFountains;
-                break;
-            case 2:
-                description.text = kAssetDescSecretPassage;
-                break;
-            case 3:
-                description.text = kAssetDescPublicRestrooms;
-                break;
-            case 4:
-                description.text = kAssetDescBikeShops;
-                break;
-            case 5:
-                description.text = kAssetDescBikeParking;
-                break;
-                
-                
-                
-            case 7:
-                description.text = kIssueDescPavementIssue;
-                break;
-            case 8:
-                description.text = kIssueDescTrafficSignal;
-                break;
-            case 9:
-                description.text = kIssueDescEnforcement;
-                break;
-            case 10:
-                description.text = kIssueDescNeedParking;
-                break;
-            case 11:
-                description.text = kIssueDescBikeLaneIssue;
-                break;
-            case 12:
-                description.text = kIssueDescNoteThisSpot;
-                break;
-                
-        }
-    }
-}
-
-
-*/
-
 @end
-

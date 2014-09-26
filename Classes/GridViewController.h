@@ -49,7 +49,7 @@
 {
 	id <TripPurposeDelegate> delegate;
 
-
+    NSInteger pickerCategory;
     NSInteger pickedNotedType;
     IBOutlet UINavigationBar *navBarItself;
     UILabel *descriptionText;
