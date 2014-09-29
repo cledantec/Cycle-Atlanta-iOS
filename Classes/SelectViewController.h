@@ -10,4 +10,7 @@
 
 @interface SelectViewController : UIViewController
 
+@property (nonatomic,strong) NSString* description;
+
+-(void) setDescription:(NSString *)description;
 @end

@@ -37,7 +37,7 @@
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
-#define GRIDVIEW 0
+#define GRIDVIEW 1s
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"

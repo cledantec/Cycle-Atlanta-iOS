@@ -25,7 +25,7 @@
 
 #import "NAMenuView.h"
 
-@interface NAMenuViewController : UIViewController<NAMenuViewDelegate>
+@interface NAMenuViewController : UIViewController<NAMenuViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSArray *menuItems;
 

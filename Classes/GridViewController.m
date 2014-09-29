@@ -70,25 +70,22 @@
 
 - (NSArray *)createMenuItems {
     
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
     
     NSLog(@"PickerCategory : %ld", (long)pickerCategory);
     
     NSMutableDictionary* itemDict=[[NSMutableDictionary alloc]init];
     int no_items=9;
     
-    for (int row=0;row<no_items;i++)
+    for (int row=0;row<no_items;row++)
     {
         
     
-        if(pickerCategory==0)
+        if(pickerCategory==3)
             {
                 switch (row) {
-                        
-                        
                     case 0:
                         [itemDict setObject:kAssetDescNoteThisSpot  forKey:[NSNumber numberWithInt:row]];
-                     
                         break;
                     case 1:
                         [itemDict setObject:kAssetDescWaterFountains  forKey:[NSNumber numberWithInt:row]];
@@ -128,10 +125,18 @@
                         [itemDict setObject:kIssueDescNoteThisSpot forKey:[NSNumber numberWithInt:row]];
                         break;
             }
+            }
     }
 	NSMutableArray *items = [[NSMutableArray alloc] init];
+    
+    for(id key in itemDict)
+    {
+        
+        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:@"test" image:[UIImage imageNamed:@"icon.png"] vcClass:[UIAlertView class] desc:[itemDict objectForKey:key]];
+        [items addObject:item];
+    }
 	
-	// First Item
+	/*// First Item
 	NAMenuItem *item1 = [[NAMenuItem alloc] initWithTitle:@"First Item"
                                                     image:[UIImage imageNamed:@"icon.png"]
                                                   vcClass:[SelectViewController class]];
@@ -183,13 +188,13 @@
 	NAMenuItem *item9 = [[NAMenuItem alloc] initWithTitle:@"Ninth Item" 
                                                     image:[UIImage imageNamed:@"icon.png"] 
                                                   vcClass:[SelectViewController class]];
-	[items addObject:item9];
+	[items addObject:item9]; */
 	
 	return items;
 }
 
 
-#pragma mark - View Lifecycle
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
  	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);

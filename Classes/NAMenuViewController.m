@@ -44,6 +44,15 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+  
+    if (buttonIndex == 0)
+    {
+        NSLog(@"You have clicked OK");
+    }
+  
+}
 
 #pragma mark - NAMenuViewDelegate Methods
 
@@ -67,9 +76,26 @@
         viewController = [sb instantiateInitialViewController];
     } else {
         Class class = [menuItem targetViewControllerClass];
+        if([NSStringFromClass(class) isEqualToString: @"UIAlertView"])
+        {
+            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OK Dialog"
+                                                             message:[menuItem description ]
+                                                            delegate:self
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles: nil];
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+
+        }
+        
+        else
+        {
+        NSLog(@"Class TYpe is %@",class);
         viewController = [[class alloc] init];
+        [self.navigationController pushViewController:viewController animated:YES];
+        }
     }
-	[self.navigationController pushViewController:viewController animated:YES];
+	
 }
 
 @end

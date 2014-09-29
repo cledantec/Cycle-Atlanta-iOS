@@ -29,10 +29,10 @@
 @synthesize title;
 @synthesize icon;
 @synthesize targetViewControllerClass;
-
+@synthesize description;
 #pragma mark - Memory Management
 
-- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass {
+- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail {
 	self = [super init];
 	
 	if (self) {
@@ -40,12 +40,14 @@
 		icon = image;
 		targetViewControllerClass = targetClass;
         _storyboardName = nil;
+        description=detail;
+        
 	}
 	
 	return self;
 }
 
-- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image storyBoard:(NSString *)storyBoard {
+- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image storyBoard:(NSString *)storyBoard desc:(NSString*)detail {
 	self = [super init];
 	
 	if (self) {
@@ -53,6 +55,7 @@
 		icon = image;
 		_storyboardName = storyBoard;
         targetViewControllerClass = nil;
+        description=detail;
 	}
 	
 	return self;

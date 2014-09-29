@@ -31,8 +31,9 @@
 @property (nonatomic, strong) UIImage *icon;
 @property (nonatomic, weak) Class targetViewControllerClass;
 @property (nonatomic, copy) NSString *storyboardName;
+@property (nonatomic,strong) NSString* description;
 
-- (id)initWithTitle:(NSString *)title image:(UIImage *)image vcClass:(Class)targetClass;
-- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image storyBoard:(NSString *)storyBoard;
+- (id)initWithTitle:(NSString *)title image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail;
+- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image storyBoard:(NSString *)storyBoard desc:(NSString*)detail;
 
 @end

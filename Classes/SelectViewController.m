@@ -12,7 +12,10 @@
 
 @end
 
+
 @implementation SelectViewController
+
+@synthesize description;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
