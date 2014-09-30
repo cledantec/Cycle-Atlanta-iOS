@@ -78,7 +78,7 @@
         Class class = [menuItem targetViewControllerClass];
         if([NSStringFromClass(class) isEqualToString: @"UIAlertView"])
         {
-            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"OK Dialog"
+            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:[menuItem title]
                                                              message:[menuItem description ]
                                                             delegate:self
                                                    cancelButtonTitle:nil

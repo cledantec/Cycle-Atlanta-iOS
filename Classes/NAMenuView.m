@@ -64,6 +64,10 @@
     // set some defaults
     columnCountPortrait = 3;
     columnCountLandscape = 4;
+    
+    //itemSize = CGSizeMake(100, 100);
+    
+    // Sahil's change
     itemSize = CGSizeMake(100, 100);
 }
 
@@ -90,7 +94,9 @@
 	if (totalHeight < self.bounds.size.height) {
 		CGFloat leftoverHeight = self.bounds.size.height - totalHeight;
 		CGFloat extraYPadding = roundf(leftoverHeight / (numRows + 1));
-		yPadding += extraYPadding;
+		//yPadding += extraYPadding;
+        //Sahil;s change
+        yPadding += extraYPadding/2;
 		
 		totalHeight = ((self.itemSize.height + yPadding) * numRows) + yPadding;
 	}
@@ -100,12 +106,13 @@
 		padding = roundf((self.bounds.size.width - (numItems * self.itemSize.width)) / (numItems + 1));
 	}
 	
+    NSUInteger extraXpadding=10;
 	for (int i = 0; i < numItems; i++) {
 		UIView *item = [self.itemViews objectAtIndex:i];
 		NSUInteger column = i % numColumns;
 		NSUInteger row = i / numColumns;
 		
-		CGFloat xOffset = (column * (self.itemSize.width + padding)) + padding;
+		CGFloat xOffset = (column * (self.itemSize.width + padding)) + padding+extraXpadding;
 		CGFloat yOffset = (row * (self.itemSize.height + yPadding)) + yPadding;
 		item.frame = CGRectMake(xOffset, yOffset, self.itemSize.width, self.itemSize.height);
 	}

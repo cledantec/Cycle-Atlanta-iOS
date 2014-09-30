@@ -75,54 +75,79 @@
     NSLog(@"PickerCategory : %ld", (long)pickerCategory);
     
     NSMutableDictionary* itemDict=[[NSMutableDictionary alloc]init];
-    int no_items=9;
+    int no_items=12;
     
     for (int row=0;row<no_items;row++)
     {
         
-    
+        NSMutableDictionary* itemVals=[[NSMutableDictionary alloc]init];
         if(pickerCategory==3)
             {
                 switch (row) {
                     case 0:
-                        [itemDict setObject:kAssetDescNoteThisSpot  forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kAssetDescNoteThisSpot forKey:@"desc"];
+                        [itemVals setObject:@"Note this asset" forKey:@"title"];
+                        [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 1:
-                        [itemDict setObject:kAssetDescWaterFountains  forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kAssetDescWaterFountains forKey:@"desc"];
+                        [itemVals setObject:@"Water fountains" forKey:@"title"];
+                        [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 2:
-                        [itemDict setObject:kAssetDescSecretPassage  forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kAssetDescSecretPassage forKey:@"desc"];
+                        [itemVals setObject:@"Secret passage" forKey:@"title"];
+                        [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 3:
-                        [itemDict setObject:kAssetDescPublicRestrooms  forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kAssetDescPublicRestrooms forKey:@"desc"];
+                        [itemVals setObject:@"Public restrooms" forKey:@"title"];
+                        [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 4:
-                        [itemDict setObject:kAssetDescBikeShops  forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kAssetDescBikeShops forKey:@"desc"];
+                        [itemVals setObject:@"Bike shops" forKey:@"title"];
+                        [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 5:
-                        
-                        [itemDict setObject:kAssetDescBikeParking  forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kAssetDescBikeParking forKey:@"desc"];
+                        [itemVals setObject:@"Bike parking" forKey:@"title"];
+                        [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 6:
-                        [itemDict setObject:kDescNoteThis forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kDescNoteThis forKey:@"desc"];
+                        [itemVals setObject:@"Note This" forKey:@"title"];
+                        [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 7:
-                        [itemDict setObject:kIssueDescPavementIssue forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kIssueDescPavementIssue forKey:@"desc"];
+                        [itemVals setObject:@"Pavement issue" forKey:@"title"];
+                        [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 8:
-                        [itemDict setObject:kIssueDescTrafficSignal forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kIssueDescTrafficSignal forKey:@"desc"];
+                        [itemVals setObject:@"Traffic signal" forKey:@"title"];
+                        [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 9:
-                        [itemDict setObject:kIssueDescEnforcement forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kIssueDescEnforcement forKey:@"desc"];
+                        [itemVals setObject:@"Enforcement" forKey:@"title"];
+                        [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 10:
-                        [itemDict setObject:kIssueDescNeedParking forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kAssetDescSecretPassage forKey:@"desc"];
+                        [itemVals setObject:@"Secret passage" forKey:@"title"];
+                        [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 11:
-                        [itemDict setObject:kIssueDescBikeLaneIssue forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kIssueDescBikeLaneIssue forKey:@"desc"];
+                        [itemVals setObject:@"Bike Lane Issue" forKey:@"title"];
+                        [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 12:
-                        [itemDict setObject:kIssueDescNoteThisSpot forKey:[NSNumber numberWithInt:row]];
+                        [itemVals setObject:kIssueDescNoteThisSpot forKey:@"desc"];
+                        [itemVals setObject:@"Note this issue" forKey:@"title"];
+                        [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
             }
             }
@@ -131,8 +156,9 @@
     
     for(id key in itemDict)
     {
-        
-        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:@"test" image:[UIImage imageNamed:@"icon.png"] vcClass:[UIAlertView class] desc:[itemDict objectForKey:key]];
+        NSString* title=[[itemDict objectForKey:key]objectForKey:@"title"];
+        NSString* description=[[itemDict objectForKey:key]objectForKey:@"desc"];
+        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:[UIImage imageNamed:@"icon.png"] vcClass:[UIAlertView class] desc:description];
         [items addObject:item];
     }
 	

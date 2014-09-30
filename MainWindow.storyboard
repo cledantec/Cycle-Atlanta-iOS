@@ -701,7 +701,7 @@
         <scene sceneID="A1i-66-wsp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uTs-D3-BW2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Record" image="66D224F4-D3D3-41C4-ACA8-3D91C3E7C703" id="7gY-CE-inv"/>
+                    <tabBarItem key="tabBarItem" title="Record" image="3584AE0D-E7AC-4CC9-9466-69099C2CCA31" id="7gY-CE-inv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bqy-oo-ZwF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -718,7 +718,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="66D224F4-D3D3-41C4-ACA8-3D91C3E7C703" width="30" height="17">
+        <image name="3584AE0D-E7AC-4CC9-9466-69099C2CCA31" width="30" height="17">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

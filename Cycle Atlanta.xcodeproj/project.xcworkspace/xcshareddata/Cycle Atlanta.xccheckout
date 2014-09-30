@@ -10,26 +10,30 @@
 	<string>Cycle Atlanta</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>14B6ED5A-5160-41C1-85D2-E4E6F174AD19</key>
-		<string>https://github.com/cammsaul/NAMenu.git</string>
+		<key>6110CC6252755727643E36F2E3E0B2B306648F28</key>
+		<string>https://github.com/cledantec/Cycle-Atlanta-iOS.git</string>
 		<key>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</key>
 		<string>https://github.com/cledantec/Cycle-Atlanta-iOS.git</string>
+		<key>F206CE05803B2508ED50CE9432466FF66F503FD1</key>
+		<string>https://github.com/cammsaul/NAMenu.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Cycle Atlanta.xcodeproj/project.xcworkspace</string>
+	<string>Cycle Atlanta.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>14B6ED5A-5160-41C1-85D2-E4E6F174AD19</key>
-		<string>../../../NAMenu</string>
-		<key>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</key>
+		<key>6110CC6252755727643E36F2E3E0B2B306648F28</key>
 		<string>../..</string>
+		<key>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</key>
+		<string>../../../Cycle-Atlanta-iOS</string>
+		<key>F206CE05803B2508ED50CE9432466FF66F503FD1</key>
+		<string>../../../NAMenu</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/cledantec/Cycle-Atlanta-iOS.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</string>
+	<string>6110CC6252755727643E36F2E3E0B2B306648F28</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -44,7 +48,15 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>14B6ED5A-5160-41C1-85D2-E4E6F174AD19</string>
+			<string>6110CC6252755727643E36F2E3E0B2B306648F28</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Cycle-Atlanta-iOS%202</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F206CE05803B2508ED50CE9432466FF66F503FD1</string>
 			<key>IDESourceControlWCCName</key>
 			<string>NAMenu</string>
 		</dict>
