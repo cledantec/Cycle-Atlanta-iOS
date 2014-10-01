@@ -40,7 +40,7 @@
 		
 		// customize the view a bit
 		self.imageView.layer.borderWidth = 1.0;
-		self.imageView.layer.borderColor = [UIColor colorWithWhite:0.4 alpha:0.4].CGColor;
+		self.imageView.layer.borderColor = [UIColor colorWithWhite:1 alpha:0.4].CGColor;
 		self.imageView.clipsToBounds = YES;
 		self.imageView.layer.cornerRadius = 5.0;
 	}

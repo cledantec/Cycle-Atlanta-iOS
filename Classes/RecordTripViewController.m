@@ -973,7 +973,9 @@ shouldSelectViewController:(UIViewController *)viewController
 }
 
 - (void)didPickNoteType:(NSNumber *)index
-{	
+{
+    
+    // This is where the note is set...
 	[noteManager.note setNote_type:index];
     NSLog(@"Added note type: %d", [noteManager.note.note_type intValue]);
     //do something here: may change to be the save as a separate view. Not prompt.

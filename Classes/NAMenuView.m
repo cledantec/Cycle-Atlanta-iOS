@@ -140,6 +140,13 @@
 		NAMenuItem *menuItem = [self.menuDelegate menuView:self itemForIndex:i];
 								
 		itemView.frame = CGRectMake(0, 0, self.itemSize.width, self.itemSize.height);
+        if([menuItem.boolIssue isEqualToString:@"1"])
+        {
+            [itemView.label setTextColor:[UIColor redColor]];
+        }
+        else{
+            [itemView.label setTextColor:[UIColor blueColor]];
+        }
 		itemView.label.text = menuItem.title;
 		itemView.imageView.image = menuItem.icon;
 		itemView.tag = i;

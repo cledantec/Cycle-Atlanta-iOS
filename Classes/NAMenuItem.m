@@ -30,9 +30,10 @@
 @synthesize icon;
 @synthesize targetViewControllerClass;
 @synthesize description;
+@synthesize boolIssue;
 #pragma mark - Memory Management
 
-- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail {
+- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail issueBool:(NSString*)isIssue {
 	self = [super init];
 	
 	if (self) {
@@ -41,6 +42,7 @@
 		targetViewControllerClass = targetClass;
         _storyboardName = nil;
         description=detail;
+        boolIssue= isIssue;
         
 	}
 	

@@ -87,134 +87,95 @@
                     case 0:
                         [itemVals setObject:kAssetDescNoteThisSpot forKey:@"desc"];
                         [itemVals setObject:@"Note this asset" forKey:@"title"];
+                        [itemVals setObject:@"0" forKey:@"isIssue"];
                         [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 1:
                         [itemVals setObject:kAssetDescWaterFountains forKey:@"desc"];
                         [itemVals setObject:@"Water fountains" forKey:@"title"];
+                        [itemVals setObject:@"0" forKey:@"isIssue"];
                         [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 2:
                         [itemVals setObject:kAssetDescSecretPassage forKey:@"desc"];
                         [itemVals setObject:@"Secret passage" forKey:@"title"];
+                        [itemVals setObject:@"0" forKey:@"isIssue"];
                         [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 3:
                         [itemVals setObject:kAssetDescPublicRestrooms forKey:@"desc"];
                         [itemVals setObject:@"Public restrooms" forKey:@"title"];
+                        [itemVals setObject:@"0" forKey:@"isIssue"];
                         [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 4:
                         [itemVals setObject:kAssetDescBikeShops forKey:@"desc"];
                         [itemVals setObject:@"Bike shops" forKey:@"title"];
+                        [itemVals setObject:@"0" forKey:@"isIssue"];
                         [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 5:
                         [itemVals setObject:kAssetDescBikeParking forKey:@"desc"];
                         [itemVals setObject:@"Bike parking" forKey:@"title"];
+                        [itemVals setObject:@"0" forKey:@"isIssue"];
                         [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 6:
                         [itemVals setObject:kDescNoteThis forKey:@"desc"];
-                        [itemVals setObject:@"Note This" forKey:@"title"];
+                        [itemVals setObject:@"Note This Issue" forKey:@"title"];
+                        [itemVals setObject:@"1" forKey:@"isIssue"];
                         [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 7:
                         [itemVals setObject:kIssueDescPavementIssue forKey:@"desc"];
                         [itemVals setObject:@"Pavement issue" forKey:@"title"];
+                        [itemVals setObject:@"1" forKey:@"isIssue"];
                         [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 8:
                         [itemVals setObject:kIssueDescTrafficSignal forKey:@"desc"];
                         [itemVals setObject:@"Traffic signal" forKey:@"title"];
+                        [itemVals setObject:@"1" forKey:@"isIssue"];
                         [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 9:
                         [itemVals setObject:kIssueDescEnforcement forKey:@"desc"];
                         [itemVals setObject:@"Enforcement" forKey:@"title"];
+                        [itemVals setObject:@"1" forKey:@"isIssue"];
                         [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 10:
                         [itemVals setObject:kAssetDescSecretPassage forKey:@"desc"];
                         [itemVals setObject:@"Secret passage" forKey:@"title"];
+                        [itemVals setObject:@"1" forKey:@"isIssue"];
                         [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 11:
                         [itemVals setObject:kIssueDescBikeLaneIssue forKey:@"desc"];
                         [itemVals setObject:@"Bike Lane Issue" forKey:@"title"];
+                        [itemVals setObject:@"1" forKey:@"isIssue"];
                         [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
                     case 12:
                         [itemVals setObject:kIssueDescNoteThisSpot forKey:@"desc"];
                         [itemVals setObject:@"Note this issue" forKey:@"title"];
+                        [itemVals setObject:@"1" forKey:@"isIssue"];
                         [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
             }
             }
     }
 	NSMutableArray *items = [[NSMutableArray alloc] init];
-    
-    for(id key in itemDict)
+    NSArray* image_name_array=[NSArray arrayWithObjects:@"Note.png",@"Issue.png",nil];
+    for(int key=0;key<no_items;key++)
     {
-        NSString* title=[[itemDict objectForKey:key]objectForKey:@"title"];
-        NSString* description=[[itemDict objectForKey:key]objectForKey:@"desc"];
-        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:[UIImage imageNamed:@"icon.png"] vcClass:[UIAlertView class] desc:description];
+        NSString* title=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"title"];
+        NSString* description=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"desc"];
+        NSString* isIssue=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"isIssue"];
+        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:[UIImage imageNamed:image_name_array[isIssue.intValue]] vcClass:[UIAlertView class] desc:description issueBool:isIssue];
         [items addObject:item];
     }
-	
-	/*// First Item
-	NAMenuItem *item1 = [[NAMenuItem alloc] initWithTitle:@"First Item"
-                                                    image:[UIImage imageNamed:@"icon.png"]
-                                                  vcClass:[SelectViewController class]];
-	[items addObject:item1];
-	
-	// Second Item
-	NAMenuItem *item2 = [[NAMenuItem alloc] initWithTitle:@"Second Item"
-                                                    image:[UIImage imageNamed:@"icon.png"]
-                                                  vcClass:[SelectViewController class]];
-	[items addObject:item2];
-	
-	// Third Item
-	NAMenuItem *item3 = [[NAMenuItem alloc] initWithTitle:@"Third Item"
-                                                    image:[UIImage imageNamed:@"icon.png"]
-                                                  vcClass:[SelectViewController class]];
-	[items addObject:item3];
-	
-	// Fourth Item
-	NAMenuItem *item4 = [[NAMenuItem alloc] initWithTitle:@"Fourth Item"
-                                                    image:[UIImage imageNamed:@"icon.png"]
-                                                  vcClass:[SelectViewController class]];
-	[items addObject:item4];
-	
-	// Fifth Item
-	NAMenuItem *item5 = [[NAMenuItem alloc] initWithTitle:@"Fifth Item"
-                                                    image:[UIImage imageNamed:@"icon.png"]
-                                                  vcClass:[SelectViewController class]];
-	[items addObject:item5];
-	
-	// Sixth Item
-	NAMenuItem *item6 = [[NAMenuItem alloc] initWithTitle:@"Sixth Item"
-                                                    image:[UIImage imageNamed:@"icon.png"]
-                                                  vcClass:[SelectViewController class]];
-	[items addObject:item6];
-	
-	// Seventh Item
-	NAMenuItem *item7 = [[NAMenuItem alloc] initWithTitle:@"Seventh Item"
-                                                    image:[UIImage imageNamed:@"icon.png"]
-                                                  vcClass:[SelectViewController class]];
-	[items addObject:item7];
-	
-	// Eighth Item
-	NAMenuItem *item8 = [[NAMenuItem alloc] initWithTitle:@"Eighth Item"
-                                                    image:[UIImage imageNamed:@"icon.png"]
-                                                  vcClass:[SelectViewController class]];
-	[items addObject:item8];
-    
-	// Ninth Item
-	NAMenuItem *item9 = [[NAMenuItem alloc] initWithTitle:@"Ninth Item" 
-                                                    image:[UIImage imageNamed:@"icon.png"] 
-                                                  vcClass:[SelectViewController class]];
-	[items addObject:item9]; */
+
 	
 	return items;
 }
@@ -225,13 +186,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
  	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
-
-/*- (void)viewDidLoad {
-	[super viewDidLoad];
-	
-	self.navigationItem.title = @"Main Menu";
-	self.view.backgroundColor = [UIColor whiteColor];
-}*/
 
 
 - (void)viewDidLoad

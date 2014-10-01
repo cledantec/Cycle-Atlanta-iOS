@@ -83,7 +83,8 @@
                                                             delegate:self
                                                    cancelButtonTitle:nil
                                                    otherButtonTitles: nil];
-            [alert addButtonWithTitle:@"OK"];
+            [alert addButtonWithTitle:@"Save"];
+            [alert addButtonWithTitle:@"Add details"];
             [alert show];
 
         }

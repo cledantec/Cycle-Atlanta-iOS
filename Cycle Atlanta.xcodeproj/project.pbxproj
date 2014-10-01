@@ -115,6 +115,8 @@
 		C200BD6719C9E6B50089ADED /* NAMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C200BD6119C9E6B50089ADED /* NAMenuView.m */; };
 		C200BD6819C9E6B50089ADED /* NAMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C200BD6319C9E6B50089ADED /* NAMenuViewController.m */; };
 		C200BD6A19C9E6EB0089ADED /* NAMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C200BD6919C9E6EB0089ADED /* NAMenuItemView.xib */; };
+		C21A109D19DC904F00765511 /* Issue.png in Resources */ = {isa = PBXBuildFile; fileRef = C21A109B19DC904F00765511 /* Issue.png */; };
+		C21A109E19DC904F00765511 /* Note.png in Resources */ = {isa = PBXBuildFile; fileRef = C21A109C19DC904F00765511 /* Note.png */; };
 		D6B6941B1923F2A8006908C3 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */; };
 		D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */; };
 		D6EF02FF192BCFAB00AA67CD /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF02FD192BCFAB00AA67CD /* SaveButton.png */; };
@@ -281,6 +283,8 @@
 		C200BD6219C9E6B50089ADED /* NAMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMenuViewController.h; sourceTree = "<group>"; };
 		C200BD6319C9E6B50089ADED /* NAMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAMenuViewController.m; sourceTree = "<group>"; };
 		C200BD6919C9E6EB0089ADED /* NAMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NAMenuItemView.xib; sourceTree = "<group>"; };
+		C21A109B19DC904F00765511 /* Issue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Issue.png; sourceTree = "<group>"; };
+		C21A109C19DC904F00765511 /* Note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Note.png; sourceTree = "<group>"; };
 		D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		D6DBCE03196B2B66007BE9C3 /* NoteToDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteToDetailViewController.h; sourceTree = "<group>"; };
 		D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteToDetailViewController.m; sourceTree = "<group>"; };
@@ -461,6 +465,8 @@
 		6411A16A106A05DE00C201F0 /* AppImages */ = {
 			isa = PBXGroup;
 			children = (
+				C21A109B19DC904F00765511 /* Issue.png */,
+				C21A109C19DC904F00765511 /* Note.png */,
 				BAF7B46719CBB81900056E5B /* icon.png */,
 				9D47F909160BA52C00B8B14D /* Default.png */,
 				9D47F90B160BA53000B8B14D /* Default@2x.png */,
@@ -688,9 +694,11 @@
 				9D4648151604EF2600A4F9CB /* failedUpload@2x.png in Resources */,
 				9D4648161604EF2600A4F9CB /* other.png in Resources */,
 				9D4648171604EF2600A4F9CB /* other@2x.png in Resources */,
+				C21A109D19DC904F00765511 /* Issue.png in Resources */,
 				9D4648181604EF2600A4F9CB /* school.png in Resources */,
 				D6EF0300192BCFAB00AA67CD /* SaveButton@2x.png in Resources */,
 				9D4648191604EF2600A4F9CB /* school@2x.png in Resources */,
+				C21A109E19DC904F00765511 /* Note.png in Resources */,
 				9D46481A1604EF2600A4F9CB /* shopping.png in Resources */,
 				9D46481B1604EF2600A4F9CB /* shopping@2x.png in Resources */,
 				9D46481C1604EF2600A4F9CB /* social.png in Resources */,
