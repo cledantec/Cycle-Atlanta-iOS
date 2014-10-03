@@ -26,7 +26,7 @@
 #import "NAMenuViewController.h"
 
 @implementation NAMenuViewController
-@synthesize menuItems;
+@synthesize menuItems, delegate_NA;
 
 #pragma mark - Memory Management
 
@@ -49,7 +49,62 @@
   
     if (buttonIndex == 0)
     {
-        NSLog(@"You have clicked OK");
+        NSLog(@"Save");
+        /*
+         //Note: get index of type
+         NSInteger row = [customPickerView selectedRowInComponent:0];
+         
+         NSNumber *tempType = 0;
+         
+         if(row>=7){
+         tempType = @(row-7);
+         }
+         else if (row<=5){
+         tempType = @(11-row);
+         }
+         
+         NSLog(@"tempType: %d", [tempType intValue]);
+         
+         [delegate didPickNoteType:tempType];
+         */
+        NSNumber *tempType = 0;
+        [delegate_NA didPickNoteType:tempType];
+        
+    }
+    else
+    {
+        NSLog(@"Add details");
+        NSLog(@"Note This Save button pressed");
+        NSLog(@"detail");
+        NSLog(@"INIT + PUSH");
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+                                                             bundle: nil];
+        DetailViewController *detailViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Detail"] initWithNibName:@"Detail" bundle:nil];
+        
+        detailViewController.delegate = self.delegate_NA;
+        
+        [self presentViewController:detailViewController animated:YES completion:nil];
+        
+        /*
+        //Note: get index of type
+        NSInteger row = [customPickerView selectedRowInComponent:0];
+        
+        NSNumber *tempType = 0;
+        
+        if(row>=7){
+            tempType = @(row-7);
+        }
+        else if (row<=5){
+            tempType = @(11-row);
+        }
+        
+        NSLog(@"tempType: %d", [tempType intValue]);
+        
+        [delegate didPickNoteType:tempType];
+         */
+        NSNumber *tempType = 0;
+        [delegate_NA didPickNoteType:tempType];
     }
   
 }
@@ -81,10 +136,11 @@
             UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:[menuItem title]
                                                              message:[menuItem description ]
                                                             delegate:self
-                                                   cancelButtonTitle:nil
+                                                   cancelButtonTitle:@"Cancel"
                                                    otherButtonTitles: nil];
             [alert addButtonWithTitle:@"Save"];
             [alert addButtonWithTitle:@"Add details"];
+            
             [alert show];
 
         }

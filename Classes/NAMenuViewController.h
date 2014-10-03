@@ -24,9 +24,15 @@
 //
 
 #import "NAMenuView.h"
+#import "TripPurposeDelegate.h"
+#import "DetailViewController.h"
 
 @interface NAMenuViewController : UIViewController<NAMenuViewDelegate, UIAlertViewDelegate>
+{
+    id <TripPurposeDelegate> delegate_NA;
+}
 
 @property (nonatomic, strong) NSArray *menuItems;
+@property (nonatomic, strong) id <TripPurposeDelegate> delegate_NA;
 
 @end
