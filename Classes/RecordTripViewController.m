@@ -37,7 +37,7 @@
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
-#define GRIDVIEW 1
+//#define GRIDVIEW 1
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"
@@ -95,7 +95,73 @@
     return appDelegate.locationManager;
 }
 
+/*********************/
+/// Taken from http://www.devfright.com/didupdatelocations-ios-example/
+/********************/
+/******************************************/
+/******************************************/
+// After iOS 6
+/******************************************/
+/******************************************/
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *newLocation = [locations lastObject];
+    CLLocation *oldLocation;
+    if (locations.count > 1) {
+        oldLocation = [locations objectAtIndex:locations.count-2];
+    } else {
+        oldLocation = nil;
+    }
+    NSLog(@"didUpdateToLocation %@ from %@", newLocation, oldLocation);
+    
+    CLLocationDistance deltaDistance = [newLocation distanceFromLocation:oldLocation];
+    
+    if (!myLocation) {
+        myLocation = newLocation;
+    }
+    else if ([myLocation distanceFromLocation:newLocation]) {
+        myLocation = newLocation;
+    }
+    
+    if ( !didUpdateUserLocation )
+    {
+        NSLog(@"zooming to current user location");
+        MKCoordinateRegion region = { newLocation.coordinate, { 0.0078, 0.0068 } };
+        [mapView setRegion:region animated:YES];
+        
+        didUpdateUserLocation = YES;
+    }
+    
+    // only update map if deltaDistance is at least some epsilon
+    else if ( deltaDistance > 1.0 )
+    {
+        //NSLog(@"center map to current user location");
+        [mapView setCenterCoordinate:newLocation.coordinate animated:YES];
+    }
+    
+    if ( recording )
+    {
+        // add to CoreData store
+        CLLocationDistance distance = [tripManager addCoord:newLocation];
+        self.distCounter.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
+    }
+    
+    // 	double mph = ( [trip.distance doubleValue] / 1609.344 ) / ( [trip.duration doubleValue] / 3600. );
+    if ( newLocation.speed >= 0. )
+        speedCounter.text = [NSString stringWithFormat:@"%.1f mph", newLocation.speed * 3600 / 1609.344];
+    else
+        speedCounter.text = @"0.0 mph";
+    
+    // Magnetormeter
+    [self locationManager:[self getLocationManager] didUpdateHeading:[self getLocationManager].heading];
+}
 
+/******************************************/
+/******************************************/
+// Before iOS 6
+/******************************************/
+/******************************************/
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
@@ -682,6 +748,9 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSLog(@"Note This");
+   
+    
+    //***** THIS IS THE ERROR POINT!!!!!********//
     
     if (myLocation){
         [noteManager addLocation:myLocation];
@@ -976,7 +1045,7 @@ shouldSelectViewController:(UIViewController *)viewController
 {
     
     // This is where the note is set...
-	[noteManager.note setNote_type:index];
+    noteManager.note.note_type=index;
     NSLog(@"Added note type: %d", [noteManager.note.note_type intValue]);
     //do something here: may change to be the save as a separate view. Not prompt.
 }
