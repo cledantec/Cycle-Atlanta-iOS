@@ -51,6 +51,7 @@
 #import "User.h"
 #import "NoteToDetailViewController.h"
 #import "GridViewController.h"
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @implementation RecordTripViewController
 @synthesize tripManager, noteManager;
@@ -59,7 +60,7 @@
 @synthesize recording, shouldUpdateCounter, userInfoSaved;
 @synthesize appDelegate;
 @synthesize saveActionSheet;
-
+@synthesize locationManager;
 
 -(IBAction)unwindToRecordTripViewController:(UIStoryboardSegue *)segue {
     NSLog(@"Back to main tab");
@@ -81,7 +82,21 @@
     manager.parent = self;
 }
 
+
+
+/*
 - (CLLocationManager *)getLocationManager {
+    
+    if(locationManager!=nil)
+    {
+        return locationManager;
+    }
+    locationManager = [[CLLocationManager alloc]init]; // initializing locationManager
+    locationManager.delegate = self; // we set the delegate of locationManager to self.
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest; // setting the accuracy
+    return locationManager;
+    
+ 
 	appDelegate = [[UIApplication sharedApplication] delegate];
     if (appDelegate.locationManager != nil) {
         return appDelegate.locationManager;
@@ -93,6 +108,15 @@
     appDelegate.locationManager.delegate = self;
     
     return appDelegate.locationManager;
+ 
+}
+*/
+
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"There was an error retrieving your location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [errorAlert show];
+    NSLog(@"Error: %@",error.description);
 }
 
 /*********************/
@@ -154,7 +178,10 @@
         speedCounter.text = @"0.0 mph";
     
     // Magnetormeter
-    [self locationManager:[self getLocationManager] didUpdateHeading:[self getLocationManager].heading];
+   // [self locationManager:[self getLocationManager] didUpdateHeading:[self getLocationManager].heading];
+     if ([CLLocationManager locationServicesEnabled]) {
+         [self locationManager:self.locationManager didUpdateHeading:self.locationManager.heading];
+     }
 }
 
 /******************************************/
@@ -205,7 +232,11 @@
 		speedCounter.text = @"0.0 mph";
     
     // Magnetormeter
-    [self locationManager:[self getLocationManager] didUpdateHeading:[self getLocationManager].heading];
+   // [self locationManager:[self getLocationManager] didUpdateHeading:[self getLocationManager].heading];
+     if ([CLLocationManager locationServicesEnabled])
+     {
+    [self locationManager:self.locationManager didUpdateHeading:self.locationManager.heading];
+     }
 }
 
 
@@ -269,14 +300,14 @@
 
 
 
-
+/*
 
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
 	NSLog(@"locationManager didFailWithError: %@", error );
 }
-
+*/
 
 #pragma mark MKMapViewDelegate methods
 
@@ -352,6 +383,10 @@
 
 - (void)viewDidLoad
 {
+    
+    if ([CLLocationManager locationServicesEnabled]) {
+        NSLog(@"Services are enabled");
+    }
     [super viewDidLoad];
     
     NSLog(@"RecordTripViewController viewDidLoad");
@@ -362,9 +397,6 @@
 	MKCoordinateRegion region = { { 33.749038, -84.388068 }, { 0.0078, 0.0068 } };
     [mapView setRegion:region animated:NO];
     [mapView setDelegate:self];
-    
-    
-
     appDelegate = [[UIApplication sharedApplication] delegate];
     appDelegate.isRecording = NO;
 	self.recording = NO;
@@ -372,9 +404,18 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 	self.shouldUpdateCounter = NO;
 
+   
 	// Start the location manager.
-	[[self getLocationManager] startUpdatingLocation];
-    
+	//[[self getLocationManager] startUpdatingLocation];
+    if ([CLLocationManager locationServicesEnabled]) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        if(IS_OS_8_OR_LATER) {
+            [self.locationManager requestAlwaysAuthorization];
+        }
+        [self.locationManager startUpdatingLocation];
+    }
     
     // TODO explain
     [appDelegate initUniqueIDHash];
@@ -414,7 +455,10 @@
     //Start magnetometer if needed
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"])
     {
-        [[self getLocationManager] startUpdatingHeading];
+       // [[self getLocationManager] startUpdatingHeading];
+         if ([CLLocationManager locationServicesEnabled]) {
+         [self.locationManager startUpdatingHeading];
+         }
     }
     
     // Shows alert if there is any magnet notes to be detailed

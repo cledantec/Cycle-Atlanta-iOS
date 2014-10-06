@@ -92,6 +92,7 @@
     NSInteger pickerCategory;
     
     CLLocation *myLocation;
+    CLLocationManager* locationManager;
     
 	TripManager	*tripManager;
     NoteManager *noteManager;
@@ -116,7 +117,7 @@
 @property (nonatomic, strong) CycleAtlantaAppDelegate *appDelegate;
 @property (nonatomic, strong) TripManager *tripManager;
 @property (nonatomic, strong) NoteManager *noteManager;
-
+@property (nonatomic,strong) CLLocationManager* locationManager;
 
 - (void)save;
 - (IBAction)start:(UIButton *)sender;
