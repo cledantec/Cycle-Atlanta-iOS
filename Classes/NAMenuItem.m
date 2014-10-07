@@ -31,9 +31,10 @@
 @synthesize targetViewControllerClass;
 @synthesize description;
 @synthesize boolIssue;
+@synthesize rownum;
 #pragma mark - Memory Management
 
-- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail issueBool:(NSString*)isIssue {
+- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail issueBool:(NSString*)isIssue row_no:(int)row{
 	self = [super init];
 	
 	if (self) {
@@ -43,6 +44,7 @@
         _storyboardName = nil;
         description=detail;
         boolIssue= isIssue;
+        rownum= row;
         
 	}
 	

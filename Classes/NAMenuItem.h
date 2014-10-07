@@ -33,8 +33,9 @@
 @property (nonatomic, copy) NSString *storyboardName;
 @property (nonatomic,strong) NSString* description;
 @property (nonatomic,strong) NSString* boolIssue;
+@property  NSInteger rownum;
 
-- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail issueBool:(NSString*)isIssue;
+- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail issueBool:(NSString*)isIssue row_no:(int)row;
 - (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image storyBoard:(NSString *)storyBoard desc:(NSString*)detail;
 
 @end

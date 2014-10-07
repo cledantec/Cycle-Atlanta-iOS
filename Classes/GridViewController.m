@@ -75,7 +75,7 @@
     NSLog(@"PickerCategory : %ld", (long)pickerCategory);
     
     NSMutableDictionary* itemDict=[[NSMutableDictionary alloc]init];
-    int no_items=12;
+    int no_items=13;
     
     for (int row=0;row<no_items;row++)
     {
@@ -172,7 +172,7 @@
         NSString* title=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"title"];
         NSString* description=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"desc"];
         NSString* isIssue=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"isIssue"];
-        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:[UIImage imageNamed:image_name_array[isIssue.intValue]] vcClass:[UIAlertView class] desc:description issueBool:isIssue];
+        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:[UIImage imageNamed:image_name_array[isIssue.intValue]] vcClass:[UIAlertView class] desc:description issueBool:isIssue row_no:key];
         [items addObject:item];
     }
 

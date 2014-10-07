@@ -27,7 +27,7 @@
 
 @implementation NAMenuViewController
 @synthesize menuItems, delegate_NA;
-
+@synthesize selected_row;
 #pragma mark - Memory Management
 
 
@@ -47,13 +47,13 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
   
-    if (buttonIndex == 0)
+    if (buttonIndex == 1)
     {
         NSLog(@"Save");
-        /*
+        
          //Note: get index of type
-         NSInteger row = [customPickerView selectedRowInComponent:0];
-         
+        NSInteger row = self.selected_row;
+        
          NSNumber *tempType = 0;
          
          if(row>=7){
@@ -64,14 +64,12 @@
          }
          
          NSLog(@"tempType: %d", [tempType intValue]);
+        
          
-         [delegate didPickNoteType:tempType];
-         */
-        NSNumber *tempType = 0;
         [delegate_NA didPickNoteType:tempType];
         
     }
-    else
+    else if(buttonIndex==2)
     {
         NSLog(@"Add details");
         NSLog(@"Note This Save button pressed");
@@ -86,9 +84,9 @@
         
         [self presentViewController:detailViewController animated:YES completion:nil];
         
-        /*
+        
         //Note: get index of type
-        NSInteger row = [customPickerView selectedRowInComponent:0];
+        NSInteger row = self.selected_row;
         
         NSNumber *tempType = 0;
         
@@ -101,10 +99,8 @@
         
         NSLog(@"tempType: %d", [tempType intValue]);
         
-        [delegate didPickNoteType:tempType];
-         */
-        NSNumber *tempType = 0;
         [delegate_NA didPickNoteType:tempType];
+        
     }
   
 }
@@ -133,6 +129,8 @@
         Class class = [menuItem targetViewControllerClass];
         if([NSStringFromClass(class) isEqualToString: @"UIAlertView"])
         {
+            self.selected_row = [menuItem rownum];
+            NSLog(@"Selected row is %d",self.selected_row);
             UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:[menuItem title]
                                                              message:[menuItem description ]
                                                             delegate:self

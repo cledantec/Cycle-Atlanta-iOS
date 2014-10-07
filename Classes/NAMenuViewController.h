@@ -34,5 +34,5 @@
 
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate_NA;
-
+@property NSInteger selected_row;
 @end
