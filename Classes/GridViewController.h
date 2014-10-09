@@ -61,11 +61,10 @@
 @property (nonatomic, strong) UIPickerView *customPickerView;
 @property (nonatomic, strong) CustomPickerDataSource *customPickerDataSource;
 
-@property (nonatomic, strong) UITextView *description;
+//@property (nonatomic, strong) UITextView *description;
 
 
 
-- (id)initWithPurpose:(NSInteger)index;
-
+- (id)initWithDelegate:(id<TripPurposeDelegate>)Del;
 
 @end

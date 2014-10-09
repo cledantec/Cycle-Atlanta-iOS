@@ -47,8 +47,24 @@
 #import "RecordTripViewController.h"
 #import "SelectViewController.h"
 
-@implementation GridViewController
 
+@implementation GridViewController
+@synthesize delegate;
+
+
+- (id)initWithDelegate:(id<TripPurposeDelegate>)Del
+ {
+	self = [super init];
+     self.delegate=Del;
+	if (self) {
+ NSArray* items=[self createMenuItems];
+ [self setMenuItems:items];
+	}
+	
+	return self;
+ }
+
+/*
 - (id)init
 {
 	self = [super init];
@@ -60,7 +76,7 @@
 	
 	return self;
 }
-
+*/
 - (void)viewWillAppear:(BOOL)animated
 
 {
@@ -172,7 +188,7 @@
         NSString* title=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"title"];
         NSString* description=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"desc"];
         NSString* isIssue=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"isIssue"];
-        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:[UIImage imageNamed:image_name_array[isIssue.intValue]] vcClass:[UIAlertView class] desc:description issueBool:isIssue row_no:key];
+        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:[UIImage imageNamed:image_name_array[isIssue.intValue]] vcClass:[UIAlertView class] desc:description issueBool:isIssue row_no:key delegate:self.delegate];
         [items addObject:item];
     }
 
@@ -191,7 +207,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"pickerCategory"];
+    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
     
     NSLog(@"PickerCategory : %ld", (long)pickerCategory);
     

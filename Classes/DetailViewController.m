@@ -87,7 +87,7 @@ static UIImage *shrinkImage(UIImage *original, CGSize size);
 	[super viewDidDisappear:animated];
 }
 
-
+/*
 -(IBAction)skip:(id)sender{
     NSLog(@"Skip");
     [detailTextView resignFirstResponder];
@@ -104,7 +104,7 @@ static UIImage *shrinkImage(UIImage *original, CGSize size);
     [delegate didSaveImage:nil];
     [delegate saveNote];
 }
-
+*/
 
 -(IBAction)saveDetail:(id)sender{
     NSLog(@"Save Detail");

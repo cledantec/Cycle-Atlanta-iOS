@@ -24,7 +24,7 @@
 //
 
 #import "NAMenuItem.h"
-
+#import "TripPurposeDelegate.h"
 @implementation NAMenuItem
 @synthesize title;
 @synthesize icon;
@@ -32,9 +32,10 @@
 @synthesize description;
 @synthesize boolIssue;
 @synthesize rownum;
+@synthesize delegate;
 #pragma mark - Memory Management
 
-- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail issueBool:(NSString*)isIssue row_no:(int)row{
+- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail issueBool:(NSString*)isIssue row_no:(int)row delegate:(id<TripPurposeDelegate>)passed_del{
 	self = [super init];
 	
 	if (self) {
@@ -45,7 +46,7 @@
         description=detail;
         boolIssue= isIssue;
         rownum= row;
-        
+        delegate=passed_del;
 	}
 	
 	return self;

@@ -84,7 +84,7 @@
 
 
 
-/*
+
 - (CLLocationManager *)getLocationManager {
     
     if(locationManager!=nil)
@@ -110,13 +110,34 @@
     return appDelegate.locationManager;
  
 }
-*/
+
 
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"There was an error retrieving your location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [errorAlert show];
-    NSLog(@"Error: %@",error.description);
+    NSString *errorString;
+    [manager stopUpdatingLocation];
+    NSLog(@"Error: %@",[error localizedDescription]);
+    switch([error code]) {
+        case kCLErrorDenied:
+            //Access denied by user
+            errorString = @"Access to Location Services denied by user";
+            //Do something...
+            break;
+        case kCLErrorLocationUnknown:
+            //Probably temporary...
+            errorString = @"Location data unavailable";
+            //Do something else...
+            break;
+        default:
+            errorString = @"An unknown error has occurred";
+            break;
+    }
+
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [alert show];
+
+
 }
 
 /*********************/
@@ -824,11 +845,10 @@
     // Trip Purpose
     NSLog(@"INIT + PUSH");
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
-                                                         bundle: nil];
+
     
-    GridViewController* grvc= [[storyboard instantiateViewControllerWithIdentifier:@"Grid"] init];
-    [grvc setDelegate:self];
+    GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
+    
     
      [[self navigationController] pushViewController:grvc animated:YES];
     

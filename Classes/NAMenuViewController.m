@@ -47,7 +47,7 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
   
-    if (buttonIndex == 1)
+    if (buttonIndex == 0)
     {
         NSLog(@"Save");
         
@@ -67,9 +67,11 @@
         
          
         [delegate_NA didPickNoteType:tempType];
+        [delegate_NA saveNote];
+        [self.navigationController popViewControllerAnimated:YES];
         
     }
-    else if(buttonIndex==2)
+    else if(buttonIndex==1)
     {
         NSLog(@"Add details");
         NSLog(@"Note This Save button pressed");
@@ -100,9 +102,9 @@
         NSLog(@"tempType: %d", [tempType intValue]);
         
         [delegate_NA didPickNoteType:tempType];
+        [self.navigationController popViewControllerAnimated:YES];
         
     }
-  
 }
 
 #pragma mark - NAMenuViewDelegate Methods
@@ -119,9 +121,11 @@
 
 - (void)menuView:(NAMenuView *)menuView didSelectItemAtIndex:(NSUInteger)index {
 	NSAssert([self menuItems], @"You must set menuItems before attempting to load.");
+   
 	
     UIViewController *viewController;
     NAMenuItem *menuItem = [self.menuItems objectAtIndex:index];
+    self.delegate_NA= [menuItem delegate];
     if (menuItem.storyboardName) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:menuItem.storyboardName  bundle:nil];
         viewController = [sb instantiateInitialViewController];
@@ -134,11 +138,10 @@
             UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:[menuItem title]
                                                              message:[menuItem description ]
                                                             delegate:self
-                                                   cancelButtonTitle:@"Cancel"
+                                                   cancelButtonTitle:nil
                                                    otherButtonTitles: nil];
             [alert addButtonWithTitle:@"Save"];
             [alert addButtonWithTitle:@"Add details"];
-            
             [alert show];
 
         }
