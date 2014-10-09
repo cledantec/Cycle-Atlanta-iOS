@@ -305,6 +305,7 @@
 		C21A109C19DC904F00765511 /* Note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Note.png; sourceTree = "<group>"; };
 		C261D63419E70DEA002E1B2D /* UIImageEffects.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UIImageEffects.xcodeproj; path = UIImageEffects/UIImageEffects.xcodeproj; sourceTree = "<group>"; };
 		C261D63C19E70EAB002E1B2D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		C261D63E19E753DD002E1B2D /* GlobalVars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalVars.h; sourceTree = "<group>"; };
 		D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		D6DBCE03196B2B66007BE9C3 /* NoteToDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteToDetailViewController.h; sourceTree = "<group>"; };
 		D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteToDetailViewController.m; sourceTree = "<group>"; };
@@ -383,6 +384,7 @@
 				64119F021069ACF800C201F0 /* TripManager.h */,
 				64119F031069ACF800C201F0 /* TripManager.m */,
 				6433E54E106D542100C27387 /* TripPurposeDelegate.h */,
+				C261D63E19E753DD002E1B2D /* GlobalVars.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

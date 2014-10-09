@@ -101,6 +101,10 @@
 
 @implementation UIImage (ImageEffects)
 
+- (void) test
+{
+    NSLog(@"Image is %@",self);
+}
 
 - (UIImage *)applyLightEffect
 {

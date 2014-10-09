@@ -60,7 +60,7 @@
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 @property (nonatomic, strong) UIPickerView *customPickerView;
 @property (nonatomic, strong) CustomPickerDataSource *customPickerDataSource;
-
+@property (nonatomic,strong) UIImage* backImage;
 //@property (nonatomic, strong) UITextView *description;
 
 

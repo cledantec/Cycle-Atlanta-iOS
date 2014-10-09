@@ -98,7 +98,6 @@
    
 }
 
-
 @property (nonatomic, strong) UIButton *infoButton;
 @property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) UIButton *startButton;
@@ -117,6 +116,7 @@
 @property (nonatomic, strong) TripManager *tripManager;
 @property (nonatomic, strong) NoteManager *noteManager;
 @property (nonatomic,strong) CLLocationManager* locationManager;
+@property (nonatomic) UIImage *imageOfUnderlyingView;
 
 - (void)save;
 - (IBAction)start:(UIButton *)sender;

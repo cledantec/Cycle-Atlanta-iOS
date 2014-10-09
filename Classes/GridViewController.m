@@ -50,7 +50,7 @@
 
 @implementation GridViewController
 @synthesize delegate;
-
+@synthesize backImage;
 
 - (id)initWithDelegate:(id<TripPurposeDelegate>)Del
  {
@@ -80,7 +80,8 @@
 - (void)viewWillAppear:(BOOL)animated
 
 {
-    [self.navigationController setNavigationBarHidden:NO];
+    //[self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 #pragma mark - Local Methods
 
@@ -228,5 +229,14 @@
        
     }
     self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:self.backImage];
+
+    /*
+   //self.view.backgroundColor = [UIColor clearColor];
+    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    backView.image = self.backImage;
+    //UIImageWriteToSavedPhotosAlbum(self.backImage, nil, nil, nil);
+    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
+    [self.view addSubview:backView];*/
 }
 @end

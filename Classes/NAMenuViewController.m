@@ -24,7 +24,7 @@
 //
 
 #import "NAMenuViewController.h"
-
+#import "GlobalVars.h"
 @implementation NAMenuViewController
 @synthesize menuItems, delegate_NA;
 @synthesize selected_row;
@@ -68,7 +68,11 @@
          
         [delegate_NA didPickNoteType:tempType];
         [delegate_NA saveNote];
-        [self.navigationController popViewControllerAnimated:YES];
+#ifdef MODAL
+        [self dismissViewControllerAnimated:NO completion:nil];
+#else
+        //[self.navigationController popViewControllerAnimated:YES];
+#endif
         
     }
     else if(buttonIndex==1)
@@ -102,7 +106,11 @@
         NSLog(@"tempType: %d", [tempType intValue]);
         
         [delegate_NA didPickNoteType:tempType];
-        [self.navigationController popViewControllerAnimated:YES];
+#ifdef MODAL
+        [self dismissViewControllerAnimated:NO completion:nil];
+#else
+        //[self.navigationController popViewControllerAnimated:YES];
+#endif
         
     }
 }

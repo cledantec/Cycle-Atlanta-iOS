@@ -97,6 +97,7 @@
 
 @interface UIImage (ImageEffects)
 
+- (void) test;
 - (UIImage *)applyLightEffect;
 - (UIImage *)applyExtraLightEffect;
 - (UIImage *)applyDarkEffect;

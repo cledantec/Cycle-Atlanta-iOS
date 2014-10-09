@@ -51,6 +51,8 @@
 #import "User.h"
 #import "NoteToDetailViewController.h"
 #import "GridViewController.h"
+#import "UIImage+ImageEffects.m"
+#import "GlobalVars.h"
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @implementation RecordTripViewController
@@ -61,6 +63,7 @@
 @synthesize appDelegate;
 @synthesize saveActionSheet;
 @synthesize locationManager;
+
 
 -(IBAction)unwindToRecordTripViewController:(UIStoryboardSegue *)segue {
     NSLog(@"Back to main tab");
@@ -891,12 +894,22 @@
             NSLog(@"INIT + PUSH");
             
             NSLog(@"view is %@", self.view);
-            UIImage* imageOfUnderlyingView =[self convertViewToImage:self.view
-                                             ];
-            imageOfUnderlyingView = [imageOfUnderlyingView applyBlurWithRadius:20 tintColor:[UIColor colorWithWhite:1.0 alpha:0.2]saturationDeltaFactor:1.3 maskImage:nil];
+            self.imageOfUnderlyingView =[self convertViewToImage:self.view];
+          
+            //UIImageWriteToSavedPhotosAlbum(imageOfUnderlyingView, nil, nil, nil);
+            self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:20
+                                                                     tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
+                                                         saturationDeltaFactor:1.3
+                                                                     maskImage:nil];
+          
             
             GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
-            [[self navigationController] pushViewController:grvc animated:YES];
+            grvc.backImage=self.imageOfUnderlyingView ;
+#ifdef MODAL
+            [self presentViewController:grvc animated:YES completion:nil];
+#else
+           // [[self navigationController] pushViewController:grvc animated:YES];
+#endif
         }
     
    
