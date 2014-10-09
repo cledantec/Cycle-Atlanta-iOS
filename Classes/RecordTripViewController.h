@@ -135,5 +135,9 @@
 
 -(void) fireNotif;
 
+// Alert View Tags
+#define kNoteNotPossible 102
+#define kAccessNotGiven 103
+#define kLocationNotAvailable 104
 
 @end

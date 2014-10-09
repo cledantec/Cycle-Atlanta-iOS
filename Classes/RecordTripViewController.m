@@ -117,24 +117,33 @@
     NSString *errorString;
     [manager stopUpdatingLocation];
     NSLog(@"Error: %@",[error localizedDescription]);
+    UIAlertView *alert=[[UIAlertView alloc]init];
     switch([error code]) {
         case kCLErrorDenied:
             //Access denied by user
-            errorString = @"Access to Location Services denied by user";
+            errorString = @"Access to Location Services is denied for this app. Do you wish to enable it?";
             //Do something...
+            alert=[alert initWithTitle:@"Enable Location Services" message:errorString delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+            [alert addButtonWithTitle:@"Yes"];
+            [alert addButtonWithTitle:@"No"];
+            alert.tag=kAccessNotGiven;
             break;
         case kCLErrorLocationUnknown:
             //Probably temporary...
             errorString = @"Location data unavailable";
-            //Do something else...
+            alert=[alert initWithTitle:@"No location available" message:errorString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            alert.tag=kLocationNotAvailable;
+            
             break;
         default:
             errorString = @"An unknown error has occurred";
+            alert=[alert initWithTitle:@"Error" message:errorString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             break;
     }
 
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+   // UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    
     [alert show];
 
 
@@ -321,14 +330,7 @@
 
 
 
-/*
 
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error
-{
-	NSLog(@"locationManager didFailWithError: %@", error );
-}
-*/
 
 #pragma mark MKMapViewDelegate methods
 
@@ -715,6 +717,33 @@
 					break;
 			}
 		}
+        case kAccessNotGiven:
+        {
+            switch (buttonIndex) {
+                case 0:
+                {
+                    NSLog(@"User wants to give access now");
+                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                }
+                    
+                case 1:
+                {
+                    NSLog(@"User doesn't want to give access!");
+                }
+             
+            }
+            break;
+        }
+        case kLocationNotAvailable:
+        {
+            NSLog(@"Location not available");
+            break;
+        }
+        case kNoteNotPossible:
+        {
+            NSLog(@"saving didDismissWithButtonIndex: %ld", (long)buttonIndex);
+            break;
+        }
 			break;
 		default:
 		{
@@ -805,7 +834,9 @@
 
 //s Note this calls here
 -(IBAction)notethis:(id)sender{
-    
+    if ([CLLocationManager locationServicesEnabled]) {
+        [self.locationManager startUpdatingLocation];
+    }
     
 #ifndef GRIDVIEW
     
@@ -838,25 +869,21 @@
     
     NSLog(@"Note This");
     
-    if (myLocation){
-        [noteManager addLocation:myLocation];
-    }
-    
-    // Trip Purpose
-    NSLog(@"INIT + PUSH");
-    
-
-    
-    GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
-    
-    
-     [[self navigationController] pushViewController:grvc animated:YES];
-    
-    // Present it modally
-    //[self presentViewController:grvc animated:YES completion:nil];
-    
-   //  [self performSegueWithIdentifier:@"mySegue" sender:sender];
-    
+    if(!myLocation)
+        {
+            NSLog(@"Not taking notes, as location is not available");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location not available" message:@"Cannot take notes as location is not avaiable" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            alert.tag=kNoteNotPossible;
+            [alert show];
+        }
+    else
+        {
+            // Add note, push the grid view
+            [noteManager addLocation:myLocation];
+            NSLog(@"INIT + PUSH");
+            GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
+            [[self navigationController] pushViewController:grvc animated:YES];
+        }
     
    
 #endif
