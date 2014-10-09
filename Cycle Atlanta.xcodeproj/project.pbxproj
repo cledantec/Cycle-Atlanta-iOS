@@ -117,6 +117,7 @@
 		C200BD6A19C9E6EB0089ADED /* NAMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C200BD6919C9E6EB0089ADED /* NAMenuItemView.xib */; };
 		C21A109D19DC904F00765511 /* Issue.png in Resources */ = {isa = PBXBuildFile; fileRef = C21A109B19DC904F00765511 /* Issue.png */; };
 		C21A109E19DC904F00765511 /* Note.png in Resources */ = {isa = PBXBuildFile; fileRef = C21A109C19DC904F00765511 /* Note.png */; };
+		C261D63D19E70EAB002E1B2D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C261D63C19E70EAB002E1B2D /* Accelerate.framework */; };
 		D6B6941B1923F2A8006908C3 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */; };
 		D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */; };
 		D6EF02FF192BCFAB00AA67CD /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF02FD192BCFAB00AA67CD /* SaveButton.png */; };
@@ -124,6 +125,23 @@
 		D6EF0303192BED5100AA67CD /* StartButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF0301192BED5100AA67CD /* StartButton.png */; };
 		D6EF0304192BED5100AA67CD /* StartButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF0302192BED5100AA67CD /* StartButton@2x.png */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C261D63819E70DEB002E1B2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C261D63419E70DEA002E1B2D /* UIImageEffects.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 28DD4755175C2F84007B658A;
+			remoteInfo = UIImageEffects;
+		};
+		C261D63A19E70E79002E1B2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C261D63419E70DEA002E1B2D /* UIImageEffects.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 28DD4754175C2F84007B658A;
+			remoteInfo = UIImageEffects;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -285,6 +303,8 @@
 		C200BD6919C9E6EB0089ADED /* NAMenuItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NAMenuItemView.xib; sourceTree = "<group>"; };
 		C21A109B19DC904F00765511 /* Issue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Issue.png; sourceTree = "<group>"; };
 		C21A109C19DC904F00765511 /* Note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Note.png; sourceTree = "<group>"; };
+		C261D63419E70DEA002E1B2D /* UIImageEffects.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UIImageEffects.xcodeproj; path = UIImageEffects/UIImageEffects.xcodeproj; sourceTree = "<group>"; };
+		C261D63C19E70EAB002E1B2D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		D6DBCE03196B2B66007BE9C3 /* NoteToDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteToDetailViewController.h; sourceTree = "<group>"; };
 		D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteToDetailViewController.m; sourceTree = "<group>"; };
@@ -299,6 +319,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C261D63D19E70EAB002E1B2D /* Accelerate.framework in Frameworks */,
 				9D504DA416B6D0AE00B99EBC /* libz.dylib in Frameworks */,
 				8FD696E91655E36600324E6E /* MediaPlayer.framework in Frameworks */,
 				8FD696E61655E35800324E6E /* MobileCoreServices.framework in Frameworks */,
@@ -377,6 +398,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				C261D63419E70DEA002E1B2D /* UIImageEffects.xcodeproj */,
 				D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */,
 				9D504DA316B6D0AE00B99EBC /* libz.dylib */,
 				64119AA81068672100C201F0 /* Trip Purpose data source */,
@@ -418,6 +440,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C261D63C19E70EAB002E1B2D /* Accelerate.framework */,
 				8FD696E81655E36600324E6E /* MediaPlayer.framework */,
 				8FD696E51655E35800324E6E /* MobileCoreServices.framework */,
 				642647FC107435A200E43DEF /* AudioToolbox.framework */,
@@ -567,6 +590,14 @@
 			name = NAMenu;
 			sourceTree = "<group>";
 		};
+		C261D63519E70DEA002E1B2D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C261D63919E70DEB002E1B2D /* UIImageEffects.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D6DBCE06196B2BF0007BE9C3 /* MagnetNotes */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,6 +669,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C261D63B19E70E79002E1B2D /* PBXTargetDependency */,
 			);
 			name = "Cycle Atlanta";
 			productName = CycleTracks;
@@ -666,12 +698,28 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C261D63519E70DEA002E1B2D /* Products */;
+					ProjectRef = C261D63419E70DEA002E1B2D /* UIImageEffects.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* Cycle Atlanta */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C261D63919E70DEB002E1B2D /* UIImageEffects.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = UIImageEffects.app;
+			remoteRef = C261D63819E70DEB002E1B2D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -796,6 +844,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C261D63B19E70E79002E1B2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = UIImageEffects;
+			targetProxy = C261D63A19E70E79002E1B2D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

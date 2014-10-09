@@ -83,7 +83,15 @@
 }
 
 
-
+-(UIImage *)convertViewToImage:(UIView*)view_self
+{
+    UIGraphicsBeginImageContext(view_self.bounds.size);
+    [view_self drawViewHierarchyInRect:view_self.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
 
 - (CLLocationManager *)getLocationManager {
     
@@ -881,6 +889,12 @@
             // Add note, push the grid view
             [noteManager addLocation:myLocation];
             NSLog(@"INIT + PUSH");
+            
+            NSLog(@"view is %@", self.view);
+            UIImage* imageOfUnderlyingView =[self convertViewToImage:self.view
+                                             ];
+            imageOfUnderlyingView = [imageOfUnderlyingView applyBlurWithRadius:20 tintColor:[UIColor colorWithWhite:1.0 alpha:0.2]saturationDeltaFactor:1.3 maskImage:nil];
+            
             GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
             [[self navigationController] pushViewController:grvc animated:YES];
         }

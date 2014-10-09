@@ -46,8 +46,7 @@
 #import "TripPurposeDelegate.h"
 #import "CycleAtlantaAppDelegate.h"
 #import "Note.h"
-
-
+#import "UIImage+ImageEffects.h"
 @class ReminderManager;
 @class TripManager;
 @class NoteManager;
@@ -134,7 +133,7 @@
 - (void)initNoteManager:(NoteManager*)manager;
 
 -(void) fireNotif;
-
+-(UIImage *)convertViewToImage:(UIView*)view_self;
 // Alert View Tags
 #define kNoteNotPossible 102
 #define kAccessNotGiven 103
