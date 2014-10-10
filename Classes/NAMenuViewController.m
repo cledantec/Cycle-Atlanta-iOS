@@ -71,7 +71,7 @@
 #ifdef MODAL
         [self dismissViewControllerAnimated:NO completion:nil];
 #else
-        //[self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
 #endif
         
     }

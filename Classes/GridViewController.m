@@ -80,10 +80,13 @@
 - (void)viewWillAppear:(BOOL)animated
 
 {
-    UIBarButtonItem *boton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(mySelector:)];
+    /*UIBarButtonItem *boton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(mySelector:)];
     self.navigationItem.backBarButtonItem  = boton;
-     //[self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+     //[self.navigationController setNavigationBarHidden:NO];*/
+   // NSLog(@"Title is %@" , self.navigationItem.hidesBackButton);
+   // self.navigationItem.hidesBackButton=true;
+       [self.navigationController setNavigationBarHidden:NO animated:YES];
+    //
     
 }
 #pragma mark - Local Methods
@@ -211,6 +214,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+     //NSLog(@"Title is %@" , self.navigationItem.backBarButtonItem);
+    
     pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
     
     NSLog(@"PickerCategory : %ld", (long)pickerCategory);

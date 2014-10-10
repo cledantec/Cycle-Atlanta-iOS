@@ -514,6 +514,12 @@
     else {
         noteToDetailAlert.hidden=true;
     }
+    
+    UIImageView* imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    imageView1.center = CGPointMake(25, noteButton.frame.size.height / 2);
+    imageView1.image = [UIImage imageNamed:@"tabbar_notes.png"];
+    [noteButton addSubview:imageView1];
+    
     [self.navigationController setNavigationBarHidden:YES];
 }
 
@@ -897,18 +903,20 @@
             self.imageOfUnderlyingView =[self convertViewToImage:self.view];
           
             //UIImageWriteToSavedPhotosAlbum(imageOfUnderlyingView, nil, nil, nil);
-            self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:20
+            self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:10
                                                                      tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
                                                          saturationDeltaFactor:1.3
                                                                      maskImage:nil];
           
             
             GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
+            grvc.hidesBottomBarWhenPushed=YES;
             grvc.backImage=self.imageOfUnderlyingView ;
 #ifdef MODAL
             [self presentViewController:grvc animated:YES completion:nil];
 #else
             [[self navigationController] pushViewController:grvc animated:YES];
+            self.navigationItem.backBarButtonItem.title=@"Cancel";
 #endif
         }
     
