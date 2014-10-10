@@ -10,6 +10,6 @@
 #define Cycle_Atlanta_GlobalVars_h
 
 // This variable controls if the view after 'note this' should be presented modally or pushed into a navigation stach
-#define MODAL 1
+//#define MODAL 0
 
 #endif

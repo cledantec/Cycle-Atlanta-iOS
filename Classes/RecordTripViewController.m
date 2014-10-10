@@ -908,7 +908,7 @@
 #ifdef MODAL
             [self presentViewController:grvc animated:YES completion:nil];
 #else
-           // [[self navigationController] pushViewController:grvc animated:YES];
+            [[self navigationController] pushViewController:grvc animated:YES];
 #endif
         }
     

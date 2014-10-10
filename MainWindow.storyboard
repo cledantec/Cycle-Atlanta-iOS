@@ -169,17 +169,6 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uaw-cW-xrr">
                                 <rect key="frame" x="0.0" y="0.0" width="336" height="479"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXh-t1-1Jm">
-                                <rect key="frame" x="115" y="157" width="100" height="31"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Note this">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="notethis:" destination="fiU-BF-ZiG" eventType="touchUpInside" id="Ucj-pY-vO2"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVU-y4-8zh">
                                 <rect key="frame" x="0.0" y="460" width="320" height="62"/>
                                 <color key="backgroundColor" red="0.35220246952947837" green="0.66733099489795911" blue="0.037073944160997671" alpha="1" colorSpace="calibratedRGB"/>
@@ -241,6 +230,17 @@
                                 <state key="normal" title="3 Notes to detail">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXh-t1-1Jm">
+                                <rect key="frame" x="231" y="167" width="89" height="31"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Note this">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="notethis:" destination="fiU-BF-ZiG" eventType="touchUpInside" id="Ucj-pY-vO2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -619,7 +619,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYG-Ff-sf7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WKA-pf-uTw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2534" y="-1031"/>
+            <point key="canvasLocation" x="2530" y="-967"/>
         </scene>
         <!--Grid View Controller-->
         <scene sceneID="Nq8-8I-ZtP">
@@ -661,8 +661,9 @@
         <!--Record-->
         <scene sceneID="A1i-66-wsp">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vaH-Bb-R4f" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uTs-D3-BW2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Record" image="32212529-3D18-47A8-9733-A9057BD59770" id="7gY-CE-inv"/>
+                    <tabBarItem key="tabBarItem" title="Record" image="3CB55981-9C51-48F5-B331-5F0BCD70B510" id="7gY-CE-inv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bqy-oo-ZwF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -673,13 +674,12 @@
                         <segue destination="fiU-BF-ZiG" kind="relationship" relationship="rootViewController" id="e7Z-4U-Oqa"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vaH-Bb-R4f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1510" y="-403"/>
         </scene>
     </scenes>
     <resources>
-        <image name="32212529-3D18-47A8-9733-A9057BD59770" width="30" height="17">
+        <image name="3CB55981-9C51-48F5-B331-5F0BCD70B510" width="30" height="17">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

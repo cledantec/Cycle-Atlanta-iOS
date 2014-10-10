@@ -119,7 +119,8 @@
     NoteManager *noteManager = [[NoteManager alloc] initWithManagedObjectContext:context];
     
     UINavigationController* uinav=[[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
-    RecordTripViewController *recordVC=[uinav.viewControllers objectAtIndex:0];
+   RecordTripViewController *recordVC=[uinav.viewControllers objectAtIndex:0];
+    
 	//RecordTripViewController *recordVC = [[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
 	[recordVC initTripManager:tripManager];
     [recordVC initNoteManager:noteManager];

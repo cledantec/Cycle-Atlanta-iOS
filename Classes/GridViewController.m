@@ -80,8 +80,11 @@
 - (void)viewWillAppear:(BOOL)animated
 
 {
-    //[self.navigationController setNavigationBarHidden:NO];
+    UIBarButtonItem *boton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(mySelector:)];
+    self.navigationItem.backBarButtonItem  = boton;
+     //[self.navigationController setNavigationBarHidden:NO];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
 }
 #pragma mark - Local Methods
 
