@@ -48,7 +48,7 @@
     
     [super viewWillAppear:animated];
 }
-
+/*
 -(IBAction)skip:(id)sender{
     NSLog(@"Skip");
     [detailTextView resignFirstResponder];
@@ -65,7 +65,7 @@
     [delegate saveTrip];
 
 }
-
+*/
 -(IBAction)saveDetail:(id)sender{
     NSLog(@"Save Detail");
     [detailTextView resignFirstResponder];

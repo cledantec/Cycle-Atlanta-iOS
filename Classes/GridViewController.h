@@ -49,14 +49,14 @@
 {
 	id <TripPurposeDelegate> delegate;
 
-    NSInteger pickerCategory;
+    NSInteger gridCategory;
     NSInteger pickedNotedType;
     IBOutlet UINavigationBar *navBarItself;
     UILabel *descriptionText;
     
 }
 
-
+@property (nonatomic, strong) NSMutableArray *trips;
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 @property (nonatomic, strong) UIPickerView *customPickerView;
 @property (nonatomic, strong) CustomPickerDataSource *customPickerDataSource;

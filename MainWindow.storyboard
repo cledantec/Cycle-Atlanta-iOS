@@ -77,11 +77,6 @@
                                 <rect key="frame" x="0.0" y="16" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Details" id="GcW-E1-OfG">
-                                        <barButtonItem key="leftBarButtonItem" title="Skip" id="pnU-MY-bry">
-                                            <connections>
-                                                <action selector="skip:" destination="Tpb-Oc-KWS" id="cfu-Dm-0hQ"/>
-                                            </connections>
-                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Save" id="cuB-N8-SJR">
                                             <connections>
                                                 <action selector="saveDetail:" destination="Tpb-Oc-KWS" id="PWb-TB-G19"/>
@@ -670,7 +665,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaH-Bb-R4f" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uTs-D3-BW2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Record" image="4A23AB6C-01E0-41A6-A972-DC8F27416C10" id="7gY-CE-inv"/>
+                    <tabBarItem key="tabBarItem" title="Record" image="23DB2A09-9A30-47CD-B7E1-8FE3867982AF" id="7gY-CE-inv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bqy-oo-ZwF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -686,7 +681,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="4A23AB6C-01E0-41A6-A972-DC8F27416C10" width="30" height="17">
+        <image name="23DB2A09-9A30-47CD-B7E1-8FE3867982AF" width="30" height="17">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

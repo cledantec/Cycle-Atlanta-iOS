@@ -28,20 +28,20 @@
 @implementation NAMenuItem
 @synthesize title;
 @synthesize icon;
-@synthesize targetViewControllerClass;
+@synthesize purpose;
 @synthesize description;
 @synthesize boolIssue;
 @synthesize rownum;
 @synthesize delegate;
 #pragma mark - Memory Management
 
-- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail issueBool:(NSString*)isIssue row_no:(int)row delegate:(id<TripPurposeDelegate>)passed_del{
+- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image purposeType:(NSString*)targetPurpose desc:(NSString*)detail issueBool:(NSString*)isIssue row_no:(int)row delegate:(id<TripPurposeDelegate>)passed_del{
 	self = [super init];
 	
 	if (self) {
 		title = [aTitle copy];
 		icon = image;
-		targetViewControllerClass = targetClass;
+		purpose= targetPurpose;
         _storyboardName = nil;
         description=detail;
         boolIssue= isIssue;
@@ -59,7 +59,6 @@
 		title = [aTitle copy];
 		icon = image;
 		_storyboardName = storyBoard;
-        targetViewControllerClass = nil;
         description=detail;
 	}
 	

@@ -417,6 +417,7 @@
 
 - (void)viewDidLoad
 {
+    self.hidesBottomBarWhenPushed=NO;
     
     if ([CLLocationManager locationServicesEnabled]) {
         NSLog(@"Services are enabled");
@@ -837,6 +838,7 @@
 }
 - (void)save
 {
+#ifndef GRIDVIEW
 	[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 		NSLog(@"INIT + PUSH");
@@ -845,13 +847,49 @@
     PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
         [pickerViewController setDelegate:self];
 		[self presentViewController:pickerViewController animated:YES completion:nil];
-	   
+#else
+    if(!myLocation)
+    {
+        NSLog(@"Not saving trips, as location is not available");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location not available" message:@"Cannot save trips as location is not avaiable" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        alert.tag=kNoteNotPossible;
+        [alert show];
+    }
+    else
+    {
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"gridCategory"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"INIT + PUSH");
+    self.imageOfUnderlyingView =[self convertViewToImage:self.view];
+    self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:10
+                                                                       tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
+                                                           saturationDeltaFactor:1.3
+                                                                       maskImage:nil];
+        
+        
+    GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
+    //grvc.hidesBottomBarWhenPushed=YES;
+    grvc.backImage=self.imageOfUnderlyingView ;
+#ifdef MODAL
+    [self presentViewController:grvc animated:YES completion:nil];
+#else
+    [[self navigationController] pushViewController:grvc animated:YES];
+    self.navigationItem.backBarButtonItem.title=@"Cancel";
+#endif
+
+   
+    }
+    
+#endif
 }
 
 
 //s Note this calls here
 -(IBAction)notethis:(id)sender{
     if ([CLLocationManager locationServicesEnabled]) {
+        if(IS_OS_8_OR_LATER) {
+            [self.locationManager requestAlwaysAuthorization];
+        }
         [self.locationManager startUpdatingLocation];
     }
     
@@ -910,7 +948,7 @@
           
             
             GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
-            grvc.hidesBottomBarWhenPushed=YES;
+            //grvc.hidesBottomBarWhenPushed=YES;
             grvc.backImage=self.imageOfUnderlyingView ;
 #ifdef MODAL
             [self presentViewController:grvc animated:YES completion:nil];

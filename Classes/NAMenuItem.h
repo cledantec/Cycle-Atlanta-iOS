@@ -32,14 +32,14 @@
 }
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) UIImage *icon;
-@property (nonatomic, weak) Class targetViewControllerClass;
+@property (nonatomic, strong) NSString* purpose;
 @property (nonatomic, copy) NSString *storyboardName;
 @property (nonatomic,strong) NSString* description;
 @property (nonatomic,strong) NSString* boolIssue;
 @property  NSInteger rownum;
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 
-- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image vcClass:(Class)targetClass desc:(NSString*)detail issueBool:(NSString*)isIssue row_no:(int)row delegate:(id<TripPurposeDelegate>)del;
+- (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image purposeType:(NSString*)purpose desc:(NSString*)detail issueBool:(NSString*)isIssue row_no:(int)row delegate:(id<TripPurposeDelegate>)del;
 - (id)initWithTitle:(NSString *)aTitle image:(UIImage *)image storyBoard:(NSString *)storyBoard desc:(NSString*)detail;
 
 @end

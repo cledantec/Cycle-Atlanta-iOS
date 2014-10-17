@@ -51,6 +51,7 @@
 @implementation GridViewController
 @synthesize delegate;
 @synthesize backImage;
+@synthesize trips;
 
 - (id)initWithDelegate:(id<TripPurposeDelegate>)Del
  {
@@ -93,19 +94,19 @@
 
 - (NSArray *)createMenuItems {
     
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
+    gridCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
     
-    NSLog(@"PickerCategory : %ld", (long)pickerCategory);
+    NSLog(@"PickerCategory : %ld", (long)gridCategory);
     
     NSMutableDictionary* itemDict=[[NSMutableDictionary alloc]init];
-    int no_items=13;
-    
-    for (int row=0;row<no_items;row++)
-    {
-        
-        NSMutableDictionary* itemVals=[[NSMutableDictionary alloc]init];
-        if(pickerCategory==3)
-            {
+    int no_items;
+    if(gridCategory==3)
+        {
+            no_items=13;
+            for (int row=0;row<no_items;row++)
+                {
+                    NSMutableDictionary* itemVals=[[NSMutableDictionary alloc]init];
+
                 switch (row) {
                     case 0:
                         [itemVals setObject:kAssetDescNoteThisSpot forKey:@"desc"];
@@ -185,22 +186,142 @@
                         [itemVals setObject:@"1" forKey:@"isIssue"];
                         [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
                         break;
+                }
             }
+            
+            NSMutableArray *items = [[NSMutableArray alloc] init];
+            for(int key=0;key<no_items;key++)
+            {
+                NSString* title=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"title"];
+                NSString* description=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"desc"];
+                NSString* isIssue=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"isIssue"];
+                UIImage* image;
+                // Set the images
+                if([isIssue isEqualToString:@"1"])
+                    {
+                         image = [UIImage imageNamed:kNoteThisIssue];
+                    }
+                else
+                {
+                    image=[UIImage imageNamed:kNoteThisAsset];
+                }
+                NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:image purposeType:@"Trip" desc:description issueBool:isIssue row_no:key delegate:self.delegate];
+                [items addObject:item];
             }
+            return items;
+
+            
     }
+    else if(gridCategory==0)
+    {
+        no_items=8;
+        for (int row=0;row<no_items;row++)
+        {
+            NSMutableDictionary* itemVals=[[NSMutableDictionary alloc]init];
+
+            switch (row) {
+                case 0:
+                    [itemVals setObject:kDescCommute forKey:@"desc"];
+                    [itemVals setObject:@"Commute" forKey:@"title"];
+                    [itemVals setObject:@"0" forKey:@"isIssue"];
+                    [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
+                    break;
+                case 1:
+                    [itemVals setObject:kDescSchool forKey:@"desc"];
+                    [itemVals setObject:@"School" forKey:@"title"];
+                    [itemVals setObject:@"0" forKey:@"isIssue"];
+                    [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
+                    break;
+                case 2:
+                    [itemVals setObject:kDescWork forKey:@"desc"];
+                    [itemVals setObject:@"Work" forKey:@"title"];
+                    [itemVals setObject:@"0" forKey:@"isIssue"];
+                    [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
+                    break;
+                case 3:
+                    [itemVals setObject:kDescExercise forKey:@"desc"];
+                    [itemVals setObject:@"Exercise" forKey:@"title"];
+                    [itemVals setObject:@"0" forKey:@"isIssue"];
+                    [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
+                    break;
+                case 4:
+                    [itemVals setObject:kDescSocial forKey:@"desc"];
+                    [itemVals setObject:@"Social" forKey:@"title"];
+                    [itemVals setObject:@"0" forKey:@"isIssue"];
+                    [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
+                    break;
+                case 5:
+                    [itemVals setObject:kDescShopping forKey:@"desc"];
+                    [itemVals setObject:@"Shopping" forKey:@"title"];
+                    [itemVals setObject:@"0" forKey:@"isIssue"];
+                    [itemDict setObject:itemVals  forKey:[NSNumber numberWithInt:row]];
+                    break;
+                case 6:
+                    [itemVals setObject:kDescErrand forKey:@"desc"];
+                    [itemVals setObject:@"Errand" forKey:@"title"];
+                    [itemVals setObject:@"0" forKey:@"isIssue"];
+                    [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
+                    break;
+                case 7:
+                    [itemVals setObject:kDescOther forKey:@"desc"];
+                    [itemVals setObject:@"Other" forKey:@"title"];
+                    [itemVals setObject:@"0" forKey:@"isIssue"];
+                    [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
+                    break;
+                case 8:
+            // Work on fetching last trip!
+                    [itemVals setObject:kDescOther forKey:@"desc"];
+                    [itemVals setObject:@"Last Trip" forKey:@"title"];
+                    [itemVals setObject:@"0" forKey:@"isIssue"];
+                    [itemDict setObject:itemVals forKey:[NSNumber numberWithInt:row]];
+                    break;
+                           }
+        }
+    
 	NSMutableArray *items = [[NSMutableArray alloc] init];
-    NSArray* image_name_array=[NSArray arrayWithObjects:@"Note.png",@"Issue.png",nil];
     for(int key=0;key<no_items;key++)
     {
         NSString* title=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"title"];
         NSString* description=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"desc"];
         NSString* isIssue=[[itemDict objectForKey:[NSNumber numberWithInt:key]]objectForKey:@"isIssue"];
-        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:[UIImage imageNamed:image_name_array[isIssue.intValue]] vcClass:[UIAlertView class] desc:description issueBool:isIssue row_no:key delegate:self.delegate];
+          UIImage* image;
+        // Set the images
+        switch ( key ) {
+            case kTripPurposeCommute:
+                image = [UIImage imageNamed:kTripPurposeCommuteIcon];
+                break;
+            case kTripPurposeSchool:
+                image = [UIImage imageNamed:kTripPurposeSchoolIcon];
+                break;
+            case kTripPurposeWork:
+                image = [UIImage imageNamed:kTripPurposeWorkIcon];
+                break;
+            case kTripPurposeExercise:
+                image = [UIImage imageNamed:kTripPurposeExerciseIcon];
+                break;
+            case kTripPurposeSocial:
+                image = [UIImage imageNamed:kTripPurposeSocialIcon];
+                break;
+            case kTripPurposeShopping:
+                image = [UIImage imageNamed:kTripPurposeShoppingIcon];
+                break;
+            case kTripPurposeErrand:
+                image = [UIImage imageNamed:kTripPurposeErrandIcon];
+                break;
+            case kTripPurposeOther:
+                image = [UIImage imageNamed:kTripPurposeOtherIcon];
+                break;
+            default:
+                image = [UIImage imageNamed:@"GreenCheckMark2.png"];
+        }
+        NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:image purposeType:@"Trip" desc:description issueBool:isIssue row_no:key delegate:self.delegate];
         [items addObject:item];
+    }
+        return items;
     }
 
 	
-	return items;
+    return nil;
 }
 
 
@@ -217,35 +338,28 @@
     
      //NSLog(@"Title is %@" , self.navigationItem.backBarButtonItem);
     
-    pickerCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
+    gridCategory = [[NSUserDefaults standardUserDefaults] integerForKey:@"gridCategory"];
     
-    NSLog(@"PickerCategory : %ld", (long)pickerCategory);
+    NSLog(@"PickerCategory : %ld", (long)gridCategory);
     
-    if (pickerCategory == 0) {
+    if (gridCategory == 0) {
         self.navigationItem.title = @"Trip Purpose";
         
     }
-    else if (pickerCategory == 1){
+    else if (gridCategory == 1){
         self.navigationItem.title = @"Boo this...";
       
     }
-    else if (pickerCategory == 2){
+    else if (gridCategory == 2){
         self.navigationItem.title= @"This is rad!";
         
     }
-    else if (pickerCategory == 3){
+    else if (gridCategory == 3){
         self.navigationItem.title = @"Make a note";
        
     }
     self.view.backgroundColor = [UIColor whiteColor];
     self.view.backgroundColor = [UIColor colorWithPatternImage:self.backImage];
 
-    /*
-   //self.view.backgroundColor = [UIColor clearColor];
-    UIImageView* backView = [[UIImageView alloc] initWithFrame:self.view.frame];
-    backView.image = self.backImage;
-    //UIImageWriteToSavedPhotosAlbum(self.backImage, nil, nil, nil);
-    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
-    [self.view addSubview:backView];*/
 }
 @end

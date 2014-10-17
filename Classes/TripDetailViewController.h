@@ -35,7 +35,7 @@
 @property (nonatomic, strong) IBOutlet UITextView *detailTextView;
 
 
--(IBAction)skip:(id)sender;
+//-(IBAction)skip:(id)sender;
 -(IBAction)saveDetail:(id)sender;
 
 @end

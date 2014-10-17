@@ -46,72 +46,136 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-  
-    if (buttonIndex == 0)
-    {
-        NSLog(@"Save");
+    switch (alertView.tag) {
+/*******************************/
+//NOTE
+/*******************************/
+        case 1:
+        {
+      
+            if (buttonIndex == 0)
+            {
+                NSLog(@"Save");
         
          //Note: get index of type
-        NSInteger row = self.selected_row;
+                NSInteger row = self.selected_row;
         
-         NSNumber *tempType = 0;
+                NSNumber *tempType = 0;
          
-         if(row>=7){
-         tempType = @(row-7);
-         }
-         else if (row<=5){
-         tempType = @(11-row);
-         }
+                if(row>=7){
+                    tempType = @(row-7);
+                }
+                else if (row<=5){
+                    tempType = @(11-row);
+                }
          
-         NSLog(@"tempType: %d", [tempType intValue]);
+                NSLog(@"tempType: %d", [tempType intValue]);
         
          
-        [delegate_NA didPickNoteType:tempType];
-        [delegate_NA saveNote];
+                [delegate_NA didPickNoteType:tempType];
+                [delegate_NA saveNote];
 #ifdef MODAL
-        [self dismissViewControllerAnimated:NO completion:nil];
+                [self dismissViewControllerAnimated:NO completion:nil];
 #else
-        [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
 #endif
         
-    }
-    else if(buttonIndex==1)
-    {
-        NSLog(@"Add details");
-        NSLog(@"Note This Save button pressed");
-        NSLog(@"detail");
-        NSLog(@"INIT + PUSH");
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+            }
+            else if(buttonIndex==1)
+            {
+                NSLog(@"Add details");
+                NSLog(@"Note This Save button pressed");
+                NSLog(@"detail");
+                NSLog(@"INIT + PUSH");
+                
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
                                                              bundle: nil];
-        DetailViewController *detailViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Detail"] initWithNibName:@"Detail" bundle:nil];
+                DetailViewController *detailViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Detail"] initWithNibName:@"Detail" bundle:nil];
         
-        detailViewController.delegate = self.delegate_NA;
+                detailViewController.delegate = self.delegate_NA;
         
-        [self presentViewController:detailViewController animated:YES completion:nil];
+                [self presentViewController:detailViewController animated:YES completion:nil];
         
         
         //Note: get index of type
-        NSInteger row = self.selected_row;
+                NSInteger row = self.selected_row;
         
-        NSNumber *tempType = 0;
+                NSNumber *tempType = 0;
         
-        if(row>=7){
-            tempType = @(row-7);
-        }
-        else if (row<=5){
-            tempType = @(11-row);
-        }
+                if(row>=7){
+                    tempType = @(row-7);
+                }
+                else if (row<=5){
+                    tempType = @(11-row);
+                }
         
-        NSLog(@"tempType: %d", [tempType intValue]);
+                NSLog(@"tempType: %d", [tempType intValue]);
         
-        [delegate_NA didPickNoteType:tempType];
+                [delegate_NA didPickNoteType:tempType];
 #ifdef MODAL
-        [self dismissViewControllerAnimated:NO completion:nil];
+                [self dismissViewControllerAnimated:NO completion:nil];
 #else
-        [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
 #endif
         
+        }
+            
+        }
+/*******************************/
+//TRIP
+/*******************************/
+            
+        case 2:
+        {
+            if (buttonIndex == 0)
+            {
+                NSLog(@"Just save");
+                NSInteger row = self.selected_row;
+                
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+                                                                     bundle: nil];
+                TripDetailViewController *tripDetailViewController = [[storyboard
+                                                                       instantiateViewControllerWithIdentifier: @"TripDetail"] initWithNibName:@"TripDetail" bundle:nil];
+                tripDetailViewController.delegate = self.delegate_NA;
+                
+                //[self presentViewController:tripDetailViewController animated:YES completion:nil];
+                
+                [delegate_NA didPickPurpose:(unsigned int)row];
+                [delegate_NA saveTrip];
+#ifdef MODAL
+                [self dismissViewControllerAnimated:NO completion:nil];
+#else
+                [self.navigationController popViewControllerAnimated:YES];
+#endif
+                
+            }
+            else if(buttonIndex==1)
+            {
+                NSLog(@"Add details");
+                NSLog(@"Purpose Save button pressed");
+                NSInteger row = self.selected_row;
+                
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+                                                                     bundle: nil];
+                TripDetailViewController *tripDetailViewController = [[storyboard
+                                                                       instantiateViewControllerWithIdentifier: @"TripDetail"] initWithNibName:@"TripDetail" bundle:nil];
+                tripDetailViewController.delegate = self.delegate_NA;
+                
+                [self presentViewController:tripDetailViewController animated:YES completion:nil];
+                
+                [delegate_NA didPickPurpose:(unsigned int)row];
+#ifdef MODAL
+                [self dismissViewControllerAnimated:NO completion:nil];
+#else
+                [self.navigationController popViewControllerAnimated:YES];
+#endif
+                
+            }
+            
+        }
+
+            
+            
     }
 }
 
@@ -138,8 +202,8 @@
         UIStoryboard *sb = [UIStoryboard storyboardWithName:menuItem.storyboardName  bundle:nil];
         viewController = [sb instantiateInitialViewController];
     } else {
-        Class class = [menuItem targetViewControllerClass];
-        if([NSStringFromClass(class) isEqualToString: @"UIAlertView"])
+        NSString* targetPurpose = [menuItem purpose];
+        if([targetPurpose isEqualToString: @"Note"])
         {
             self.selected_row = [menuItem rownum];
             NSLog(@"Selected row is %d",self.selected_row);
@@ -148,18 +212,29 @@
                                                             delegate:self
                                                    cancelButtonTitle:nil
                                                    otherButtonTitles: nil];
+            alert.tag=kNoteAlert;
             [alert addButtonWithTitle:@"Save"];
             [alert addButtonWithTitle:@"Add details"];
             [alert show];
 
         }
-        
-        else
+        else if([targetPurpose isEqualToString: @"Trip"])
         {
-        NSLog(@"Class TYpe is %@",class);
-        viewController = [[class alloc] init];
-        [self.navigationController pushViewController:viewController animated:YES];
+            self.selected_row = [menuItem rownum];
+            NSLog(@"Selected row is %d",self.selected_row);
+            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:[menuItem title]
+                                                             message:[menuItem description ]
+                                                            delegate:self
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles: nil];
+            alert.tag=kTripAlert;
+            [alert addButtonWithTitle:@"Save"];
+            [alert addButtonWithTitle:@"Add details"];
+            [alert show];
+            
         }
+        
+
     }
 	
 }
