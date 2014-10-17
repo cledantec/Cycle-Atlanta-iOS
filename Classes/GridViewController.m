@@ -86,7 +86,7 @@
      //[self.navigationController setNavigationBarHidden:NO];*/
    // NSLog(@"Title is %@" , self.navigationItem.hidesBackButton);
    // self.navigationItem.hidesBackButton=true;
-       [self.navigationController setNavigationBarHidden:NO animated:YES];
+      // [self.navigationController setNavigationBarHidden:NO animated:YES];
     //
     
 }
@@ -205,7 +205,7 @@
                 {
                     image=[UIImage imageNamed:kNoteThisAsset];
                 }
-                NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:image purposeType:@"Trip" desc:description issueBool:isIssue row_no:key delegate:self.delegate];
+                NAMenuItem* item=[[NAMenuItem alloc]initWithTitle:title image:image purposeType:@"Note" desc:description issueBool:isIssue row_no:key delegate:self.delegate];
                 [items addObject:item];
             }
             return items;

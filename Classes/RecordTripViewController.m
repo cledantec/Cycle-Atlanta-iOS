@@ -37,7 +37,7 @@
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
-#define GRIDVIEW 1
+//#define GRIDVIEW 1
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"
@@ -131,6 +131,9 @@
     UIAlertView *alert=[[UIAlertView alloc]init];
     switch([error code]) {
         case kCLErrorDenied:
+            if(locationAccessAsked==false)
+            {
+            locationAccessAsked=true;
             //Access denied by user
             errorString = @"Access to Location Services is denied for this app. Do you wish to enable it?";
             //Do something...
@@ -138,24 +141,28 @@
             [alert addButtonWithTitle:@"Yes"];
             [alert addButtonWithTitle:@"No"];
             alert.tag=kAccessNotGiven;
+                [alert show];
+            }
             break;
         case kCLErrorLocationUnknown:
             //Probably temporary...
             errorString = @"Location data unavailable";
             alert=[alert initWithTitle:@"No location available" message:errorString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
             alert.tag=kLocationNotAvailable;
+            [alert show];
             
             break;
         default:
             errorString = @"An unknown error has occurred";
             alert=[alert initWithTitle:@"Error" message:errorString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
             break;
     }
 
 
    // UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
     
-    [alert show];
+    
 
 
 }
@@ -220,9 +227,9 @@
     
     // Magnetormeter
    // [self locationManager:[self getLocationManager] didUpdateHeading:[self getLocationManager].heading];
-     if ([CLLocationManager locationServicesEnabled]) {
+    // if ([CLLocationManager locationServicesEnabled]) {
          [self locationManager:self.locationManager didUpdateHeading:self.locationManager.heading];
-     }
+    // }
 }
 
 /******************************************/
@@ -413,11 +420,21 @@
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString: kInfoURL]];
 }
 
-
+-(void)refreshLocation
+{
+    
+        [self.locationManager startUpdatingLocation];
+    
+}
 
 - (void)viewDidLoad
 {
+    locationAccessAsked=false;
     self.hidesBottomBarWhenPushed=NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshLocation)
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
     
     if ([CLLocationManager locationServicesEnabled]) {
         NSLog(@"Services are enabled");
@@ -484,6 +501,9 @@
   
     
     [super viewWillAppear:animated];
+    
+  
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
@@ -886,12 +906,12 @@
 
 //s Note this calls here
 -(IBAction)notethis:(id)sender{
-    if ([CLLocationManager locationServicesEnabled]) {
+    /*if ([CLLocationManager locationServicesEnabled]) {
         if(IS_OS_8_OR_LATER) {
             [self.locationManager requestAlwaysAuthorization];
         }
         [self.locationManager startUpdatingLocation];
-    }
+    }*/
     
 #ifndef GRIDVIEW
     
@@ -951,6 +971,8 @@
             //grvc.hidesBottomBarWhenPushed=YES;
             grvc.backImage=self.imageOfUnderlyingView ;
 #ifdef MODAL
+            grvc.hidesBottomBarWhenPushed=YES;
+            //[self.navigationController presentModalViewController:grvc animated:YES];
             [self presentViewController:grvc animated:YES completion:nil];
 #else
             [[self navigationController] pushViewController:grvc animated:YES];

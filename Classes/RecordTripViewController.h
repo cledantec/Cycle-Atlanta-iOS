@@ -90,6 +90,7 @@
 	BOOL userInfoSaved;
     NSInteger pickerCategory;
     
+    BOOL locationAccessAsked;
     CLLocation *myLocation;
     CLLocationManager* locationManager;
     
