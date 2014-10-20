@@ -37,7 +37,7 @@
 //	For more information on the project, 
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
-//#define GRIDVIEW 1
+#define GRIDVIEW 1
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"
@@ -968,13 +968,20 @@
           
             
             GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
+            PersonalInfoViewController* prvc=[[PersonalInfoViewController alloc]init];
             //grvc.hidesBottomBarWhenPushed=YES;
             grvc.backImage=self.imageOfUnderlyingView ;
 #ifdef MODAL
-            grvc.hidesBottomBarWhenPushed=YES;
-            //[self.navigationController presentModalViewController:grvc animated:YES];
-            [self presentViewController:grvc animated:YES completion:nil];
+            UINavigationController *navigationController = [[UINavigationController alloc]
+                                                            initWithRootViewController:grvc];
+             grvc.hidesBottomBarWhenPushed=YES;
+            grvc.navigationItem.backBarButtonItem.title=@"Cancel";
+            grvc.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal ;
+            
+            [self presentViewController:navigationController animated:YES completion: nil];
+           
 #else
+           
             [[self navigationController] pushViewController:grvc animated:YES];
             self.navigationItem.backBarButtonItem.title=@"Cancel";
 #endif

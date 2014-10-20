@@ -185,7 +185,7 @@
     pickerView.showsSelectionIndicator = YES;
     pickerView.dataSource = self;
     pickerView.delegate = self;
-    
+    pickerView.backgroundColor=[UIColor whiteColor];
     
 	// initialize text fields
 	self.age		= [self initiateTextFieldAlpha];
@@ -201,6 +201,9 @@
     self.riderHistory =[self initiateTextFieldBeta];
     self.magnetometerSwitch = [self initiateSwitch];
     
+    actionView=[[UIView alloc]init];
+    int actionViewSize=260;
+    actionView.frame = CGRectMake(0, [[UIScreen mainScreen]bounds].size.height-actionViewSize, [[UIScreen mainScreen]bounds].size.width, actionViewSize);
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     
@@ -284,14 +287,18 @@
     
 
     currentTextField = myTextField;
+   
     
     if(myTextField == gender || myTextField == age || myTextField == ethnicity || myTextField == income || myTextField == cyclingFreq || myTextField == riderType || myTextField == riderHistory){
         
-        [myTextField resignFirstResponder];
         
-        actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil]; //as we want to display a subview we won't be using the default buttons but rather we're need to create a toolbar to display the buttons on
+         [myTextField setInputView:actionView];
+        //[myTextField resignFirstResponder];
+        
+      //  actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil]; //as we want to display a subview we won't be using the default buttons but rather we're need to create a toolbar to display the buttons on
                 
-        [actionSheet addSubview:pickerView];
+      //  [actionSheet addSubview:pickerView];
+        [actionView addSubview:pickerView];
         
         doneToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
         doneToolbar.barStyle = UIBarStyleDefault;
@@ -310,7 +317,9 @@
         
         [doneToolbar setItems:barItems animated:YES];
         
-        [actionSheet addSubview:doneToolbar];
+       // [actionSheet addSubview:doneToolbar];
+        
+        [actionView addSubview:doneToolbar];
         
         selectedItem = 0;
         if(myTextField == gender){
@@ -333,11 +342,7 @@
         
         [pickerView reloadAllComponents];
         
-        [actionSheet addSubview:pickerView];
-        
-        [actionSheet showInView:self.view];
-        
-        [actionSheet setBounds:CGRectMake(0, 0, 320, 485)];
+        [actionView addSubview:pickerView];
 
     }
 }
@@ -399,6 +404,7 @@
 			NSLog(@"PersonalInfo save textField error %@, %@", error, [error localizedDescription]);
 		}
 	}
+    [textField resignFirstResponder];
 }
 
 - (IBAction)save:(id)sender {
@@ -1030,11 +1036,16 @@
         NSString *riderHistorySelect = riderHistoryArray[selectedRow];
         riderHistory.text = riderHistorySelect;
     }
-    [actionSheet dismissWithClickedButtonIndex:1 animated:YES];
+  
+    
+     // Signal that the editing has been done and dismiss the input view
+    [self.view endEditing:YES];
 }
 
 - (void)cancelButtonPressed:(id)sender{
-    [actionSheet dismissWithClickedButtonIndex:1 animated:YES];
+  
+  // Signal that the editing has been done and dismiss the input view
+    [self.view endEditing:YES];
 }
 
 - (void)dealloc {

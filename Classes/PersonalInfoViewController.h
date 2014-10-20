@@ -62,7 +62,13 @@
     UITextField *riderType;
     UITextField *riderHistory;
     UIToolbar *doneToolbar;
-    UIActionSheet *actionSheet;
+    
+    // Replacing UIActionSheet with a simple view, following this example
+    //https://github.com/GabrielMassana/Picker-iOS8/blob/master/Swift-Picker-iOS8/ViewController.swift
+    
+   // UIActionSheet *actionSheet;
+    
+    UIView* actionView;
     UIPickerView *pickerView;
     UITextField *currentTextField;
     UISwitch *magnetometerSwitch;

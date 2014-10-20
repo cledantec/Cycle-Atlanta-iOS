@@ -117,11 +117,18 @@
     // TODO move in viewWillAppear ?
 	TripManager *tripManager = [[TripManager alloc] initWithManagedObjectContext:context];
     NoteManager *noteManager = [[NoteManager alloc] initWithManagedObjectContext:context];
-    
+   
+    int nav_controller=1;
+    RecordTripViewController *recordVC;
+    if(nav_controller==1)
+    {
     UINavigationController* uinav=[[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
-   RecordTripViewController *recordVC=[uinav.viewControllers objectAtIndex:0];
-    
-	//RecordTripViewController *recordVC = [[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
+   recordVC=[uinav.viewControllers objectAtIndex:0];
+    }
+    else
+    {
+	//recordVC = [[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
+    }
 	[recordVC initTripManager:tripManager];
     [recordVC initNoteManager:noteManager];
     

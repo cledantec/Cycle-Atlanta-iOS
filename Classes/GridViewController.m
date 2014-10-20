@@ -86,7 +86,7 @@
      //[self.navigationController setNavigationBarHidden:NO];*/
    // NSLog(@"Title is %@" , self.navigationItem.hidesBackButton);
    // self.navigationItem.hidesBackButton=true;
-      // [self.navigationController setNavigationBarHidden:NO animated:YES];
+       [self.navigationController setNavigationBarHidden:NO animated:YES];
     //
     
 }
