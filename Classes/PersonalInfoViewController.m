@@ -43,6 +43,7 @@
 #import "constants.h"
 #import "ProgressView.h"
 #import "CycleAtlantaAppDelegate.h"
+#import "ALToastView.h"
 
 #define kMaxCyclingFreq 3
 
@@ -465,6 +466,7 @@
 	[delegate setSaved:YES];
 	_saveButton.enabled = NO;
 	[self.navigationController popViewControllerAnimated:YES];
+    [ALToastView toastInView:self.view withText:@"Saved!"];
 }
 
 - (void)saveSwitch:(id)sender

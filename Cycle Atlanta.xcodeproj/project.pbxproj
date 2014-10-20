@@ -118,6 +118,7 @@
 		C21A109D19DC904F00765511 /* Issue.png in Resources */ = {isa = PBXBuildFile; fileRef = C21A109B19DC904F00765511 /* Issue.png */; };
 		C21A109E19DC904F00765511 /* Note.png in Resources */ = {isa = PBXBuildFile; fileRef = C21A109C19DC904F00765511 /* Note.png */; };
 		C261D63D19E70EAB002E1B2D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C261D63C19E70EAB002E1B2D /* Accelerate.framework */; };
+		C2A1189619F5ADFB003C65E4 /* ALToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A1189519F5ADFB003C65E4 /* ALToastView.m */; };
 		D6B6941B1923F2A8006908C3 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */; };
 		D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */; };
 		D6EF02FF192BCFAB00AA67CD /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF02FD192BCFAB00AA67CD /* SaveButton.png */; };
@@ -306,6 +307,8 @@
 		C261D63419E70DEA002E1B2D /* UIImageEffects.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UIImageEffects.xcodeproj; path = UIImageEffects/UIImageEffects.xcodeproj; sourceTree = "<group>"; };
 		C261D63C19E70EAB002E1B2D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		C261D63E19E753DD002E1B2D /* GlobalVars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalVars.h; sourceTree = "<group>"; };
+		C2A1189419F5ADFB003C65E4 /* ALToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALToastView.h; sourceTree = "<group>"; };
+		C2A1189519F5ADFB003C65E4 /* ALToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALToastView.m; sourceTree = "<group>"; };
 		D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		D6DBCE03196B2B66007BE9C3 /* NoteToDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteToDetailViewController.h; sourceTree = "<group>"; };
 		D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteToDetailViewController.m; sourceTree = "<group>"; };
@@ -342,6 +345,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C2A1189419F5ADFB003C65E4 /* ALToastView.h */,
+				C2A1189519F5ADFB003C65E4 /* ALToastView.m */,
 				C200BD5A19C9E51A0089ADED /* NAMenu */,
 				D6DBCE08196B2CA7007BE9C3 /* Tools */,
 				D6DBCE07196B2C35007BE9C3 /* Tabs */,
@@ -838,6 +843,7 @@
 				8F20B0AC16F0F08A00031712 /* TripDetailViewController.m in Sources */,
 				8FAD930516F189EE00082B6F /* UIImageViewResizable.m in Sources */,
 				9DD65FBB16FEA3CC00F2EB63 /* ImageResize.m in Sources */,
+				C2A1189619F5ADFB003C65E4 /* ALToastView.m in Sources */,
 				8F316F671703161E0087529E /* Model.xcmappingmodel in Sources */,
 				9D8A1BAF171B03E000509FBD /* FetchUser.m in Sources */,
 				9D8A1BB2171B03E900509FBD /* FetchTripData.m in Sources */,
