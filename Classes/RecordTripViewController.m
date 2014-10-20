@@ -847,7 +847,7 @@
     {
         NSLog(@"User Press Save Button");
         saveActionSheet = [[UIActionSheet alloc]
-                           initWithTitle:@""
+                           initWithTitle:@"Needs to be removed"
                            delegate:self
                            cancelButtonTitle:@"Continue"
                            destructiveButtonTitle:@"Discard"
@@ -968,7 +968,6 @@
           
             
             GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
-            PersonalInfoViewController* prvc=[[PersonalInfoViewController alloc]init];
             //grvc.hidesBottomBarWhenPushed=YES;
             grvc.backImage=self.imageOfUnderlyingView ;
 #ifdef MODAL
