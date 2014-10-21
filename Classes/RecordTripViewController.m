@@ -70,8 +70,10 @@
 
 int count = 0;
 
--(void) removeView
+-(void) removeView:(NSString*)viewName
 {
+    if([viewName isEqualToString:@"Note"])
+    {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -80,6 +82,7 @@ int count = 0;
     
     noteView.alpha =0;
     [UIView commitAnimations];
+    }
     
 }
 -(IBAction)demoNote:(id)sender{
@@ -88,7 +91,7 @@ int count = 0;
         [noteManager addLocation:myLocation];
     }
     if (count <1){
-        [self removeView];
+        [self removeView:@"Note"];
         count+=1;
     }
     
@@ -97,7 +100,7 @@ int count = 0;
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
         [UIView setAnimationDelay:0.2];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         
         [noteView setBackgroundColor:[UIColor colorWithRed:(0/255.0) green:(150/255.0) blue:(255/255.0) alpha:1]];
         noteView.alpha =0.8;
@@ -106,7 +109,7 @@ int count = 0;
         
     } else {
         
-        [self removeView];
+        [self removeView:@"Note"];
         
     }
     
@@ -844,7 +847,7 @@ int count = 0;
                 
                 [self.delegate didPickNoteType:tempType];
                 [self.delegate saveNote];
-                [self removeView];
+                [self removeView:@"Note"];
                 
                 
             }
@@ -879,7 +882,7 @@ int count = 0;
                 NSLog(@"tempType: %d", [tempType intValue]);
                 
                 [self.delegate didPickNoteType:tempType];
-                [self removeView];
+                [self removeView:@"Note"];
                 
             }
             break;
@@ -1143,6 +1146,11 @@ int count = 0;
     
    
 #endif
+}
+
+- (IBAction)closeNoteGrid:(id)sender {
+    [self removeView:@"Note"];
+    
 }
 
 

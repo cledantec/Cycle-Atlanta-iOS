@@ -245,7 +245,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8QR-hw-WHe">
-                                <rect key="frame" x="0.0" y="324" width="108" height="35"/>
+                                <rect key="frame" x="0.0" y="170" width="108" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -263,10 +263,10 @@
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGH-hZ-HOM">
-                                <rect key="frame" x="0.0" y="72" width="320" height="228"/>
+                                <rect key="frame" x="0.0" y="26" width="320" height="267"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLv-lk-iMT">
-                                        <rect key="frame" x="26" y="22" width="40" height="27"/>
+                                        <rect key="frame" x="26" y="45" width="40" height="27"/>
                                         <state key="normal" title="NoteAsset" image="noteAssetPicker.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -275,28 +275,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Note this asset" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5B2-ri-Apx">
-                                        <rect key="frame" x="13" y="57" width="81" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvn-Ju-e7p">
-                                        <rect key="frame" x="234" y="22" width="40" height="27"/>
-                                        <state key="normal" title="SecretPassage" image="noteAssetPicker.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="noteThisOption:" destination="fiU-BF-ZiG" eventType="touchUpInside" id="2Kd-5s-ISd"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Secret Passage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmu-qa-ceN">
-                                        <rect key="frame" x="221" y="57" width="81" height="21"/>
+                                        <rect key="frame" x="13" y="80" width="81" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hk-Eh-2ol">
-                                        <rect key="frame" x="133" y="22" width="40" height="27"/>
+                                        <rect key="frame" x="133" y="45" width="40" height="27"/>
                                         <state key="normal" title="WaterFountains" image="noteAssetPicker.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -305,11 +290,35 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Water Fountains" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfM-iK-BDy">
-                                        <rect key="frame" x="120" y="57" width="84" height="21"/>
+                                        <rect key="frame" x="120" y="80" width="84" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bvn-Ju-e7p">
+                                        <rect key="frame" x="234" y="45" width="40" height="27"/>
+                                        <state key="normal" title="SecretPassage" image="noteAssetPicker.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="noteThisOption:" destination="fiU-BF-ZiG" eventType="touchUpInside" id="2Kd-5s-ISd"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Secret Passage" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmu-qa-ceN">
+                                        <rect key="frame" x="221" y="80" width="81" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92D-vM-nNy">
+                                        <rect key="frame" x="277" y="-8" width="42" height="44"/>
+                                        <state key="normal" image="Button_Close_Icon_16.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeNoteGrid:" destination="fiU-BF-ZiG" eventType="touchUpInside" id="dfy-PF-h84"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -752,6 +761,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Button_Close_Icon_16.png" width="16" height="16"/>
         <image name="noteAssetPicker.png" width="46" height="27"/>
         <image name="photoFrame.png" width="110" height="110"/>
         <image name="tabbar_notes.png" width="23" height="23"/>

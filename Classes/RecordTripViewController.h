@@ -135,6 +135,7 @@
 - (void)save;
 - (IBAction)start:(UIButton *)sender;
 -(IBAction)notethis:(id)sender;
+- (IBAction)closeNoteGrid:(id)sender;
 
 - (void)resetCounter;
 - (void)resetRecordingInProgress;
