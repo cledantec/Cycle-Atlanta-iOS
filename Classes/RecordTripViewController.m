@@ -63,6 +63,90 @@
 @synthesize appDelegate;
 @synthesize saveActionSheet;
 @synthesize locationManager;
+@synthesize noteView;
+@synthesize selectedNoteType;
+@synthesize delegate;
+@synthesize button_note;
+
+int count = 0;
+
+-(void) removeView
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    
+    [noteView setBackgroundColor:[UIColor whiteColor]];
+    
+    noteView.alpha =0;
+    [UIView commitAnimations];
+    
+}
+-(IBAction)demoNote:(id)sender{
+   
+    if (myLocation){
+        [noteManager addLocation:myLocation];
+    }
+    if (count <1){
+        [self removeView];
+        count+=1;
+    }
+    
+    
+    if (noteView.alpha ==0){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationDelay:0.2];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        
+        [noteView setBackgroundColor:[UIColor colorWithRed:(0/255.0) green:(150/255.0) blue:(255/255.0) alpha:1]];
+        noteView.alpha =0.8;
+        [UIView commitAnimations];
+        
+        
+    } else {
+        
+        [self removeView];
+        
+    }
+    
+}
+
+- (IBAction)noteThisOption:(id)sender {
+    
+    NSLog(@"Button pressed: %@", [sender currentTitle]);
+    
+    NSString* title; NSString* message;
+    
+    if([[sender currentTitle]isEqualToString:@"NoteAsset"])
+    {
+        title=@"Note This Asset";
+        message=kAssetDescNoteThisSpot;
+         selectedNoteType=0;
+    }
+    if([[sender currentTitle]isEqualToString:@"WaterFountains"])
+    {
+        title=@"Water Fountains";
+        message=kAssetDescWaterFountains; selectedNoteType=1;
+    }
+    if([[sender currentTitle]isEqualToString:@"SecretPassage"])
+    {
+        title=@"Secret Passage";
+        message=kAssetDescSecretPassage; selectedNoteType=2;
+    }
+    
+    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:title
+                                                     message:message
+                                                    delegate:self
+                                           cancelButtonTitle:nil
+                                           otherButtonTitles: nil];
+    alert.tag=kNoteAlert;
+    [alert addButtonWithTitle:@"Save"];
+    [alert addButtonWithTitle:@"Add details"];
+    [alert show];
+   
+    
+}
 
 
 -(IBAction)unwindToRecordTripViewController:(UIStoryboardSegue *)segue {
@@ -431,6 +515,7 @@
 {
     locationAccessAsked=false;
     self.hidesBottomBarWhenPushed=NO;
+    self.delegate=self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshLocation)
@@ -734,6 +819,73 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	switch (alertView.tag) {
+            
+        case kNoteAlert:
+        {
+            
+            if (buttonIndex == 0)
+            {
+                NSLog(@"Save");
+                
+                //Note: get index of type
+                NSInteger row = self.selectedNoteType;
+                
+                NSNumber *tempType = 0;
+                
+                if(row>=7){
+                    tempType = @(row-7);
+                }
+                else if (row<=5){
+                    tempType = @(11-row);
+                }
+                
+                NSLog(@"tempType: %d", [tempType intValue]);
+                
+                
+                [self.delegate didPickNoteType:tempType];
+                [self.delegate saveNote];
+                [self removeView];
+                
+                
+            }
+            else if(buttonIndex==1)
+            {
+                NSLog(@"Add details");
+                NSLog(@"Note This Save button pressed");
+                NSLog(@"detail");
+                NSLog(@"INIT + PUSH");
+                
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+                                                                     bundle: nil];
+                DetailViewController *detailViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Detail"] initWithNibName:@"Detail" bundle:nil];
+                
+                detailViewController.delegate = self.delegate;
+                
+                [self presentViewController:detailViewController animated:YES completion:nil];
+                
+                
+                //Note: get index of type
+                NSInteger row = self.selectedNoteType;
+                
+                NSNumber *tempType = 0;
+                
+                if(row>=7){
+                    tempType = @(row-7);
+                }
+                else if (row<=5){
+                    tempType = @(11-row);
+                }
+                
+                NSLog(@"tempType: %d", [tempType intValue]);
+                
+                [self.delegate didPickNoteType:tempType];
+                [self removeView];
+                
+            }
+            break;
+            
+        }
+
 		case 101:
 		{
 			NSLog(@"recording interrupted didDismissWithButtonIndex: %ld", (long)buttonIndex);
@@ -856,6 +1008,9 @@
     }
 	
 }
+
+
+
 - (void)save
 {
 #ifndef GRIDVIEW

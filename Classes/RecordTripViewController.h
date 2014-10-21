@@ -85,6 +85,7 @@
 	UIView *opacityMask;
 	UIView *parentView;
 	
+    IBOutlet UIView *noteView;
 	BOOL recording;
 	BOOL shouldUpdateCounter;
 	BOOL userInfoSaved;
@@ -96,9 +97,14 @@
     
 	TripManager	*tripManager;
     NoteManager *noteManager;
+    
+    NSInteger selectedNoteType;
+    
+    id <TripPurposeDelegate> delegate;
    
 }
 
+@property (nonatomic,strong) UIView* noteView;
 @property (nonatomic, strong) UIButton *infoButton;
 @property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) UIButton *startButton;
@@ -118,6 +124,13 @@
 @property (nonatomic, strong) NoteManager *noteManager;
 @property (nonatomic,strong) CLLocationManager* locationManager;
 @property (nonatomic) UIImage *imageOfUnderlyingView;
+@property (nonatomic) NSInteger selectedNoteType;
+@property (nonatomic, strong) id <TripPurposeDelegate> delegate;
+
+- (IBAction)demoNote:(id)sender;
+- (IBAction)noteThisOption:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *button_note;
+
 
 - (void)save;
 - (IBAction)start:(UIButton *)sender;

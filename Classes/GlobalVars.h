@@ -9,6 +9,8 @@
 #ifndef Cycle_Atlanta_GlobalVars_h
 #define Cycle_Atlanta_GlobalVars_h
 
+#define kNoteAlert 1
+#define kTripAlert 2
 // This variable controls if the view after 'note this' should be presented modally or pushed into a navigation stach
 //#define MODAL 0
 

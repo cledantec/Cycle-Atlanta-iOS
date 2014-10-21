@@ -24,7 +24,7 @@
 //
 
 #import "NAMenuViewController.h"
-#import "GlobalVars.h"
+
 @implementation NAMenuViewController
 @synthesize menuItems, delegate_NA;
 @synthesize selected_row;

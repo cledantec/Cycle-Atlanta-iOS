@@ -27,8 +27,8 @@
 #import "TripPurposeDelegate.h"
 #import "DetailViewController.h"
 #import "TripDetailViewController.h"
-#define kNoteAlert 1
-#define kTripAlert 2
+#import "GlobalVars.h"
+
 @interface NAMenuViewController : UIViewController<NAMenuViewDelegate, UIAlertViewDelegate>
 {
     id <TripPurposeDelegate> delegate_NA;
