@@ -86,6 +86,7 @@
 	UIView *parentView;
 	
     IBOutlet UIView *noteView;
+    IBOutlet UIView *tripView;
 	BOOL recording;
 	BOOL shouldUpdateCounter;
 	BOOL userInfoSaved;
@@ -99,12 +100,14 @@
     NoteManager *noteManager;
     
     NSInteger selectedNoteType;
+    NSInteger selectedTripType;
     
     id <TripPurposeDelegate> delegate;
    
 }
 
 @property (nonatomic,strong) UIView* noteView;
+@property (nonatomic,strong) UIView* tripView;
 @property (nonatomic, strong) UIButton *infoButton;
 @property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) UIButton *startButton;
@@ -125,17 +128,20 @@
 @property (nonatomic,strong) CLLocationManager* locationManager;
 @property (nonatomic) UIImage *imageOfUnderlyingView;
 @property (nonatomic) NSInteger selectedNoteType;
+@property (nonatomic) NSInteger selectedTripype;
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 
+- (IBAction)saveTripType:(id)sender;
 - (IBAction)demoNote:(id)sender;
 - (IBAction)noteThisOption:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *button_note;
+@property (weak, nonatomic) IBOutlet UIButton *closeTrip;
 
 
 - (void)save;
 - (IBAction)start:(UIButton *)sender;
 -(IBAction)notethis:(id)sender;
-- (IBAction)closeNoteGrid:(id)sender;
+- (IBAction)closeGrid:(id)sender;
 
 - (void)resetCounter;
 - (void)resetRecordingInProgress;

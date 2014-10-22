@@ -63,8 +63,8 @@
 @synthesize appDelegate;
 @synthesize saveActionSheet;
 @synthesize locationManager;
-@synthesize noteView;
-@synthesize selectedNoteType;
+@synthesize noteView,tripView;
+@synthesize selectedNoteType,selectedTripype;
 @synthesize delegate;
 @synthesize button_note;
 
@@ -84,7 +84,57 @@ int count = 0;
     [UIView commitAnimations];
     }
     
+    if([viewName isEqualToString:@"Trip"])
+    {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        
+        [tripView setBackgroundColor:[UIColor whiteColor]];
+        
+        tripView.alpha =0;
+        [UIView commitAnimations];
+    }
+    
 }
+- (IBAction)saveTripType:(id)sender {
+    NSLog(@"Button pressed: %@", [sender currentTitle]);
+    
+    NSString* title; NSString* message;
+    
+    if([[sender currentTitle]isEqualToString:@"commute"])
+    {
+        title=@"Commute";
+        message=kDescCommute;
+        selectedTripType=0;
+    }
+    
+    if([[sender currentTitle]isEqualToString:@"school"])
+    {
+        title=@"School";
+        message=kDescSchool;
+        selectedTripType=1;
+    }
+    
+    if([[sender currentTitle]isEqualToString:@"work"])
+    {
+        title=@"Work";
+        message=kDescWork;
+        selectedTripType=2;
+    }
+   
+    
+    UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:title
+                                                     message:message
+                                                    delegate:self
+                                           cancelButtonTitle:nil
+                                           otherButtonTitles: nil];
+    alert.tag=kTripAlert;
+    [alert addButtonWithTitle:@"Save"];
+    [alert addButtonWithTitle:@"Add details"];
+    [alert show];
+}
+
 -(IBAction)demoNote:(id)sender{
    
     if (myLocation){
@@ -519,7 +569,8 @@ int count = 0;
     locationAccessAsked=false;
     self.hidesBottomBarWhenPushed=NO;
     self.delegate=self;
-    
+    [self.view bringSubviewToFront:tripView];
+    //self.closeTrip.titleLabel.hidden=YES;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(refreshLocation)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -889,6 +940,54 @@ int count = 0;
             
         }
 
+            /*******************************/
+            //TRIP
+            /*******************************/
+            
+        case 2:
+        {
+            if (buttonIndex == 0)
+            {
+                NSLog(@"Just save");
+                NSInteger row = self.selectedTripype;
+                
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+                                                                     bundle: nil];
+                TripDetailViewController *tripDetailViewController = [[storyboard
+                                                                       instantiateViewControllerWithIdentifier: @"TripDetail"] initWithNibName:@"TripDetail" bundle:nil];
+                tripDetailViewController.delegate = self.delegate;
+                
+                //[self presentViewController:tripDetailViewController animated:YES completion:nil];
+                
+                [delegate didPickPurpose:(unsigned int)row];
+                [delegate saveTrip];
+                [self removeView:@"Trip"];
+
+                
+            }
+            else if(buttonIndex==1)
+            {
+                NSLog(@"Add details");
+                NSLog(@"Purpose Save button pressed");
+                NSInteger row = self.selectedTripype;
+                
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+                                                                     bundle: nil];
+                TripDetailViewController *tripDetailViewController = [[storyboard
+                                                                       instantiateViewControllerWithIdentifier: @"TripDetail"] initWithNibName:@"TripDetail" bundle:nil];
+                tripDetailViewController.delegate = self.delegate;
+                
+                [self presentViewController:tripDetailViewController animated:YES completion:nil];
+                
+                [delegate didPickPurpose:(unsigned int)row];
+                [self removeView:@"Trip"];
+
+                
+            }
+            
+        }
+            
+            break;
 		case 101:
 		{
 			NSLog(@"recording interrupted didDismissWithButtonIndex: %ld", (long)buttonIndex);
@@ -1016,6 +1115,32 @@ int count = 0;
 
 - (void)save
 {
+    if (myLocation){
+        [noteManager addLocation:myLocation];
+    }
+    if (count <1){
+        [self removeView:@"Trip"];
+        count+=1;
+    }
+    
+    
+    if (tripView.alpha ==0){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationDelay:0.2];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        
+        [tripView setBackgroundColor:[UIColor colorWithRed:(0/255.0) green:(150/255.0) blue:(255/255.0) alpha:1]];
+        tripView.alpha =1;
+        [UIView commitAnimations];
+        
+        
+    } else {
+        
+        [self removeView:@"Trip"];
+        
+    }
+    /*
 #ifndef GRIDVIEW
 	[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -1059,6 +1184,7 @@ int count = 0;
     }
     
 #endif
+     */
 }
 
 
@@ -1148,8 +1274,11 @@ int count = 0;
 #endif
 }
 
-- (IBAction)closeNoteGrid:(id)sender {
-    [self removeView:@"Note"];
+- (IBAction)closeGrid:(id)sender {
+    if([[sender currentTitle]isEqualToString:@"closeTrip"])
+    [self removeView:@"Trip"];
+    else
+        [self removeView:@"Note"];
     
 }
 
