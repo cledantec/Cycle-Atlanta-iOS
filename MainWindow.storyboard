@@ -326,8 +326,8 @@
                                 <rect key="frame" x="0.0" y="220" width="320" height="259"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGa-ki-2Nf">
-                                        <rect key="frame" x="230" y="2" width="73" height="31"/>
-                                        <state key="normal" title="closeTrip">
+                                        <rect key="frame" x="275" y="2" width="43" height="22"/>
+                                        <state key="normal" title="closeTrip" image="Button_Close_Icon_16.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>

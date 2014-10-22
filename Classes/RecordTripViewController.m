@@ -137,9 +137,7 @@ int count = 0;
 
 -(IBAction)demoNote:(id)sender{
    
-    if (myLocation){
-        [noteManager addLocation:myLocation];
-    }
+   
     if (count <1){
         [self removeView:@"Note"];
         count+=1;
@@ -149,7 +147,7 @@ int count = 0;
     if (noteView.alpha ==0){
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:0.2];
+        [UIView setAnimationDelay:0.0];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         
         [noteView setBackgroundColor:[UIColor colorWithRed:(0/255.0) green:(150/255.0) blue:(255/255.0) alpha:1]];
@@ -166,6 +164,10 @@ int count = 0;
 }
 
 - (IBAction)noteThisOption:(id)sender {
+    
+    if (myLocation){
+        [noteManager addLocation:myLocation];
+    }
     
     NSLog(@"Button pressed: %@", [sender currentTitle]);
     
@@ -984,10 +986,11 @@ int count = 0;
 
                 
             }
+            break;
             
         }
             
-            break;
+            
 		case 101:
 		{
 			NSLog(@"recording interrupted didDismissWithButtonIndex: %ld", (long)buttonIndex);
@@ -1115,9 +1118,7 @@ int count = 0;
 
 - (void)save
 {
-    if (myLocation){
-        [noteManager addLocation:myLocation];
-    }
+   
     if (count <1){
         [self removeView:@"Trip"];
         count+=1;
