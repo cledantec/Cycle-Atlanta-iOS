@@ -128,7 +128,7 @@
 @property (nonatomic,strong) CLLocationManager* locationManager;
 @property (nonatomic) UIImage *imageOfUnderlyingView;
 @property (nonatomic) NSInteger selectedNoteType;
-@property (nonatomic) NSInteger selectedTripype;
+@property (nonatomic) NSInteger selectedTripType;
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 
 - (IBAction)saveTripType:(id)sender;

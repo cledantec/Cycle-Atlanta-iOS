@@ -64,7 +64,7 @@
 @synthesize saveActionSheet;
 @synthesize locationManager;
 @synthesize noteView,tripView;
-@synthesize selectedNoteType,selectedTripype;
+@synthesize selectedNoteType,selectedTripType;
 @synthesize delegate;
 @synthesize button_note;
 
@@ -106,21 +106,21 @@ int count = 0;
     {
         title=@"Commute";
         message=kDescCommute;
-        selectedTripType=0;
+        self.selectedTripType=0;
     }
     
     if([[sender currentTitle]isEqualToString:@"school"])
     {
         title=@"School";
         message=kDescSchool;
-        selectedTripType=1;
+        self.selectedTripType=1;
     }
     
     if([[sender currentTitle]isEqualToString:@"work"])
     {
         title=@"Work";
         message=kDescWork;
-        selectedTripType=2;
+        self.selectedTripType=2;
     }
    
     
@@ -944,12 +944,12 @@ int count = 0;
             //TRIP
             /*******************************/
             
-        case 2:
+        case kTripAlert:
         {
             if (buttonIndex == 0)
             {
                 NSLog(@"Just save");
-                NSInteger row = self.selectedTripype;
+                NSInteger row = self.selectedTripType;
                 
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
                                                                      bundle: nil];
@@ -969,7 +969,7 @@ int count = 0;
             {
                 NSLog(@"Add details");
                 NSLog(@"Purpose Save button pressed");
-                NSInteger row = self.selectedTripype;
+                NSInteger row = self.selectedTripType;
                 
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
                                                                      bundle: nil];
