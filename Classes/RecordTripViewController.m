@@ -38,6 +38,7 @@
 //	e-mail Billy Charlton at the SFCTA <billy.charlton@sfcta.org>
 
 #define GRIDVIEW 1
+#define NEWFORMAT 1
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"
@@ -135,6 +136,7 @@ int count = 0;
     [alert show];
 }
 
+/*
 -(IBAction)demoNote:(id)sender{
    
    
@@ -162,7 +164,7 @@ int count = 0;
     }
     
 }
-
+*/
 - (IBAction)noteThisOption:(id)sender {
     
     if (myLocation){
@@ -1191,12 +1193,42 @@ int count = 0;
 
 //s Note this calls here
 -(IBAction)notethis:(id)sender{
+    
+  
+#ifdef NEWFORMAT
+    
+    
+    if (count <1){
+        [self removeView:@"Note"];
+        count+=1;
+    }
+    
+    
+    if (noteView.alpha ==0){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationDelay:0.0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        
+        [noteView setBackgroundColor:[UIColor colorWithRed:(0/255.0) green:(150/255.0) blue:(255/255.0) alpha:1]];
+        noteView.alpha =0.8;
+        [UIView commitAnimations];
+        
+        
+    } else {
+        
+        [self removeView:@"Note"];
+        
+    }
+#else
+
     /*if ([CLLocationManager locationServicesEnabled]) {
         if(IS_OS_8_OR_LATER) {
             [self.locationManager requestAlwaysAuthorization];
         }
         [self.locationManager startUpdatingLocation];
     }*/
+
     
 #ifndef GRIDVIEW
     
@@ -1273,10 +1305,13 @@ int count = 0;
     
    
 #endif
+    
+#endif
+    
 }
 
 - (IBAction)closeGrid:(id)sender {
-    if([[sender currentTitle]isEqualToString:@"closeTrip"])
+    if([sender tag]==1)
     [self removeView:@"Trip"];
     else
         [self removeView:@"Note"];
