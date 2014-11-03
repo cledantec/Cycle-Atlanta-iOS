@@ -67,12 +67,14 @@
 @synthesize noteView,tripView;
 @synthesize selectedNoteType,selectedTripType;
 @synthesize delegate;
-
+@synthesize blurEffectView,mapView,TopStatsView;
 
 int count = 0;
 
 -(void) removeView:(NSString*)viewName
 {
+    [self.blurEffectView removeFromSuperview];
+    [self enableAll];
     if([viewName isEqualToString:@"Note"])
     {
     [UIView beginAnimations:nil context:nil];
@@ -568,8 +570,19 @@ int count = 0;
     
 }
 
+-(void) dismissGrids
+{
+    [self removeView:@"Note"];
+    [self removeView:@"Trip"];
+}
 - (void)viewDidLoad
 {
+    UITapGestureRecognizer *tapImageRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissGrids)];
+    
+    [self.mapView addGestureRecognizer:tapImageRecognizer];
+    [self.startButton addGestureRecognizer:tapImageRecognizer];
+    [self.TopStatsView addGestureRecognizer:tapImageRecognizer];
+    
     locationAccessAsked=false;
     self.hidesBottomBarWhenPushed=NO;
     self.delegate=self;
@@ -699,6 +712,21 @@ int count = 0;
 }
 
 
+-(void) enableTabBar
+{
+    [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:TRUE];
+    [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:TRUE];
+    [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:TRUE];
+    [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:TRUE];
+}
+
+-(void) disableTabBar
+{
+    [[[[self.tabBarController tabBar]items]objectAtIndex:0]setEnabled:FALSE];
+    [[[[self.tabBarController tabBar]items]objectAtIndex:1]setEnabled:FALSE];
+    [[[[self.tabBarController tabBar]items]objectAtIndex:2]setEnabled:FALSE];
+    [[[[self.tabBarController tabBar]items]objectAtIndex:3]setEnabled:FALSE];
+}
 
 - (UIButton *)createStartButton
 {
@@ -902,6 +930,7 @@ int count = 0;
                 
                 [self.delegate didPickNoteType:tempType];
                 [self.delegate saveNote];
+               
                 [self removeView:@"Note"];
                 
                 
@@ -1117,7 +1146,12 @@ int count = 0;
 }
 
 
-
+-(void) disableAll
+{
+    noteButton.enabled=NO;
+    startButton.enabled=NO;
+    [self disableTabBar];
+}
 
 - (void)save
 {
@@ -1133,7 +1167,7 @@ int count = 0;
      UIImageWriteToSavedPhotosAlbum(_imageOfUnderlyingView, nil, nil, nil);*/
     tripView.backgroundColor=[UIColor whiteColor];
     //noteView.backgroundColor=[UIColor colorWithPatternImage:self.imageOfUnderlyingView];
-    startButton.enabled=NO;
+    [self disableAll];
     //[self.view bringSubviewToFront:tripView];
     [self viewSlideInFromBottomToTop:tripView];
     
@@ -1240,9 +1274,20 @@ int count = 0;
 -(IBAction)notethis:(id)sender{
     
   
+    // USE IF NEED TO BLUR
+    /*
+    //only apply the blur if the user hasn't disabled transparency effects
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    [blurEffectView setFrame:self.view.bounds];
+    //[self.view sendSubviewToBack:blurEffectView];
+    
+    [self.view insertSubview:blurEffectView belowSubview:noteView];*/
+    
+    [self disableAll];
 #ifdef NEWFORMAT
     
-    noteView.alpha=0.9;
+    noteView.alpha=0.8;
     /*self.imageOfUnderlyingView =[self convertViewToImage:self.view];
     
     
@@ -1370,11 +1415,18 @@ int count = 0;
     
 }
 
+-(void) enableAll
+{
+    [self enableTabBar];
+    startButton.enabled=YES;
+    noteButton.enabled=YES;
+}
 - (IBAction)closeGrid:(id)sender {
+    
+    [self enableAll];
     if([sender tag]==1)
     {
     [self removeView:@"Trip"];
-    startButton.enabled=YES;
     }
     else
         [self removeView:@"Note"];

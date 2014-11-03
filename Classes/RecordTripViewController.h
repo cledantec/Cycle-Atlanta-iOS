@@ -106,6 +106,7 @@
    
 }
 
+@property (nonatomic,strong) MKMapView* mapView;
 @property (nonatomic,strong) UIView* noteView;
 @property (nonatomic,strong) UIView* tripView;
 @property (nonatomic, strong) UIButton *infoButton;
@@ -130,6 +131,8 @@
 @property (nonatomic) NSInteger selectedNoteType;
 @property (nonatomic) NSInteger selectedTripType;
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
+@property (nonatomic,strong) UIVisualEffectView* blurEffectView;
+@property (weak, nonatomic) IBOutlet UIView *TopStatsView;
 
 - (IBAction)saveTripType:(id)sender;
 - (IBAction)noteThisOption:(id)sender;

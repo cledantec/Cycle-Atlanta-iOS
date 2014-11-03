@@ -237,7 +237,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGH-hZ-HOM">
-                                <rect key="frame" x="0.0" y="19" width="320" height="267"/>
+                                <rect key="frame" x="0.0" y="117" width="320" height="267"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLv-lk-iMT">
                                         <rect key="frame" x="26" y="45" width="40" height="27"/>
@@ -361,6 +361,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="llp-SY-5GG"/>
                     <connections>
+                        <outlet property="TopStatsView" destination="egv-vc-Vjs" id="7J1-Fo-hNY"/>
                         <outlet property="distCounter" destination="f4N-B0-p0y" id="CF8-49-Pxc"/>
                         <outlet property="mapView" destination="Uaw-cW-xrr" id="DOC-rr-782"/>
                         <outlet property="noteButton" destination="yXh-t1-1Jm" id="T3u-BV-Ahw"/>
