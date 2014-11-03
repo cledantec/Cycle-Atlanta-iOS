@@ -67,7 +67,7 @@
 @synthesize noteView,tripView;
 @synthesize selectedNoteType,selectedTripType;
 @synthesize delegate;
-@synthesize button_note;
+
 
 int count = 0;
 
@@ -1118,9 +1118,26 @@ int count = 0;
 
 
 
+
 - (void)save
 {
-   
+  
+    tripView.alpha=0.9;
+    /*self.imageOfUnderlyingView =[self convertViewToImage:self.view];
+     
+     
+     self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:10
+     tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
+     saturationDeltaFactor:1.3
+     maskImage:nil];
+     UIImageWriteToSavedPhotosAlbum(_imageOfUnderlyingView, nil, nil, nil);*/
+    tripView.backgroundColor=[UIColor whiteColor];
+    //noteView.backgroundColor=[UIColor colorWithPatternImage:self.imageOfUnderlyingView];
+    startButton.enabled=NO;
+    //[self.view bringSubviewToFront:tripView];
+    [self viewSlideInFromBottomToTop:tripView];
+    
+    /*
     if (count <1){
         [self removeView:@"Trip"];
         count+=1;
@@ -1143,6 +1160,7 @@ int count = 0;
         [self removeView:@"Trip"];
         
     }
+     */
     /*
 #ifndef GRIDVIEW
 	[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
@@ -1191,13 +1209,54 @@ int count = 0;
 }
 
 
+-(void)viewSlideInFromTopToBottom:(UIView *)views
+{
+    CATransition *transition = nil;
+    transition = [CATransition animation];
+    transition.duration = 0.5;//kAnimationDuration
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype =kCATransitionFromBottom ;
+    transition.delegate = self;
+    [views.layer addAnimation:transition forKey:nil];
+}
+//http://huntmyideas.weebly.com/blog/animating-a-uiview-to-slide-downslide-upslide-rightslide-left#sthash.JSvmkGAB.dpuf
+
+-(void)viewSlideInFromBottomToTop:(UIView *)views
+{
+    
+    CATransition *transition = nil;
+    transition = [CATransition animation];
+    transition.duration = 0.5;//kAnimationDuration
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype =kCATransitionFromTop ;
+    transition.delegate = self;
+    [views.layer addAnimation:transition forKey:nil];
+}
+
+
 //s Note this calls here
 -(IBAction)notethis:(id)sender{
     
   
 #ifdef NEWFORMAT
     
+    noteView.alpha=0.9;
+    /*self.imageOfUnderlyingView =[self convertViewToImage:self.view];
     
+    
+    self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:10
+                                                                   tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
+                                                       saturationDeltaFactor:1.3
+                                                                   maskImage:nil];
+     UIImageWriteToSavedPhotosAlbum(_imageOfUnderlyingView, nil, nil, nil);*/
+    noteView.backgroundColor=[UIColor whiteColor];
+    //noteView.backgroundColor=[UIColor colorWithPatternImage:self.imageOfUnderlyingView];
+    
+    [self viewSlideInFromTopToBottom:noteView];
+    
+  /*
     if (count <1){
         [self removeView:@"Note"];
         count+=1;
@@ -1220,6 +1279,7 @@ int count = 0;
         [self removeView:@"Note"];
         
     }
+   */
 #else
 
     /*if ([CLLocationManager locationServicesEnabled]) {
@@ -1312,7 +1372,10 @@ int count = 0;
 
 - (IBAction)closeGrid:(id)sender {
     if([sender tag]==1)
+    {
     [self removeView:@"Trip"];
+    startButton.enabled=YES;
+    }
     else
         [self removeView:@"Note"];
     

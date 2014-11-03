@@ -132,10 +132,7 @@
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 
 - (IBAction)saveTripType:(id)sender;
-- (IBAction)demoNote:(id)sender;
 - (IBAction)noteThisOption:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *button_note;
-@property (weak, nonatomic) IBOutlet UIButton *closeTrip;
 
 
 - (void)save;
