@@ -39,6 +39,7 @@
 
 #define GRIDVIEW 1
 #define NEWFORMAT 1
+//#define BLURIT 1
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"
@@ -579,9 +580,14 @@ int count = 0;
 {
     UITapGestureRecognizer *tapImageRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissGrids)];
     
+#ifdef BLURIT
+    [self.blurEffectView addGestureRecognizer:tapImageRecognizer];
+#else
+    
     [self.mapView addGestureRecognizer:tapImageRecognizer];
-    [self.startButton addGestureRecognizer:tapImageRecognizer];
-    [self.TopStatsView addGestureRecognizer:tapImageRecognizer];
+#endif
+    //[self.startButton addGestureRecognizer:tapImageRecognizer];
+    //[self.TopStatsView addGestureRecognizer:tapImageRecognizer];
     
     locationAccessAsked=false;
     self.hidesBottomBarWhenPushed=NO;
@@ -1135,7 +1141,7 @@ int count = 0;
     {
         NSLog(@"User Press Save Button");
         saveActionSheet = [[UIActionSheet alloc]
-                           initWithTitle:@"Needs to be removed"
+                           initWithTitle:@"You can"
                            delegate:self
                            cancelButtonTitle:@"Continue"
                            destructiveButtonTitle:@"Discard"
@@ -1275,15 +1281,14 @@ int count = 0;
     
   
     // USE IF NEED TO BLUR
-    /*
+    
     //only apply the blur if the user hasn't disabled transparency effects
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     [blurEffectView setFrame:self.view.bounds];
-    //[self.view sendSubviewToBack:blurEffectView];
-    
-    [self.view insertSubview:blurEffectView belowSubview:noteView];*/
-    
+#ifdef BLURIT
+    [self.view insertSubview:blurEffectView belowSubview:noteView];
+#endif
     [self disableAll];
 #ifdef NEWFORMAT
     
