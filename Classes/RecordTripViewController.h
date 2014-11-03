@@ -123,6 +123,7 @@
 @property (assign) BOOL recording;
 @property (assign) BOOL shouldUpdateCounter;
 @property (assign) BOOL userInfoSaved;
+@property (assign) BOOL blurOn;
 @property (nonatomic, strong) CycleAtlantaAppDelegate *appDelegate;
 @property (nonatomic, strong) TripManager *tripManager;
 @property (nonatomic, strong) NoteManager *noteManager;
@@ -133,6 +134,7 @@
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 @property (nonatomic,strong) UIVisualEffectView* blurEffectView;
 @property (weak, nonatomic) IBOutlet UIView *TopStatsView;
+@property (weak, nonatomic) IBOutlet UIView *blurImageView;
 
 - (IBAction)saveTripType:(id)sender;
 - (IBAction)noteThisOption:(id)sender;

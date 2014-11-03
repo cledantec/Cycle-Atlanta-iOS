@@ -237,7 +237,7 @@
                                 </connections>
                             </button>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGH-hZ-HOM">
-                                <rect key="frame" x="0.0" y="58" width="320" height="267"/>
+                                <rect key="frame" x="0.0" y="140" width="320" height="267"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLv-lk-iMT">
                                         <rect key="frame" x="26" y="45" width="40" height="27"/>

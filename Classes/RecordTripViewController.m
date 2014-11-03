@@ -39,7 +39,7 @@
 
 #define GRIDVIEW 1
 #define NEWFORMAT 1
-//#define BLURIT 1
+#define BLURIT 1
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"
@@ -61,7 +61,7 @@
 @synthesize tripManager, noteManager;
 @synthesize infoButton, saveButton, startButton, noteButton, parentView;
 @synthesize timer, timeCounter, distCounter, noteToDetailAlert, localNotification;
-@synthesize recording, shouldUpdateCounter, userInfoSaved;
+@synthesize recording, shouldUpdateCounter, userInfoSaved,blurOn;
 @synthesize appDelegate;
 @synthesize saveActionSheet;
 @synthesize locationManager;
@@ -139,35 +139,6 @@ int count = 0;
     [alert show];
 }
 
-/*
--(IBAction)demoNote:(id)sender{
-   
-   
-    if (count <1){
-        [self removeView:@"Note"];
-        count+=1;
-    }
-    
-    
-    if (noteView.alpha ==0){
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:0.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-        
-        [noteView setBackgroundColor:[UIColor colorWithRed:(0/255.0) green:(150/255.0) blue:(255/255.0) alpha:1]];
-        noteView.alpha =0.8;
-        [UIView commitAnimations];
-        
-        
-    } else {
-        
-        [self removeView:@"Note"];
-        
-    }
-    
-}
-*/
 - (IBAction)noteThisOption:(id)sender {
     
     if (myLocation){
@@ -576,11 +547,25 @@ int count = 0;
     [self removeView:@"Note"];
     [self removeView:@"Trip"];
 }
+
+
+
+
 - (void)viewDidLoad
 {
+    
     UITapGestureRecognizer *tapImageRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissGrids)];
     
 #ifdef BLURIT
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
+    CGRect frame = CGRectMake(self.TopStatsView.frame.origin.x,
+                              self.TopStatsView.frame.origin.y+self.TopStatsView.frame.size.height,
+                              self.TopStatsView.frame.size.width,
+                              self.view.frame.size.height-self.TopStatsView.frame.size.height);
+    
+    [blurEffectView setFrame:frame];
     [self.blurEffectView addGestureRecognizer:tapImageRecognizer];
 #else
     
@@ -1141,7 +1126,7 @@ int count = 0;
     {
         NSLog(@"User Press Save Button");
         saveActionSheet = [[UIActionSheet alloc]
-                           initWithTitle:@"You can"
+                           initWithTitle:nil
                            delegate:self
                            cancelButtonTitle:@"Continue"
                            destructiveButtonTitle:@"Discard"
@@ -1173,8 +1158,11 @@ int count = 0;
      UIImageWriteToSavedPhotosAlbum(_imageOfUnderlyingView, nil, nil, nil);*/
     tripView.backgroundColor=[UIColor whiteColor];
     //noteView.backgroundColor=[UIColor colorWithPatternImage:self.imageOfUnderlyingView];
+    
+#ifdef BLURIT
+    [self.view insertSubview:blurEffectView belowSubview:tripView];
+#endif
     [self disableAll];
-    //[self.view bringSubviewToFront:tripView];
     [self viewSlideInFromBottomToTop:tripView];
     
     /*
@@ -1283,9 +1271,7 @@ int count = 0;
     // USE IF NEED TO BLUR
     
     //only apply the blur if the user hasn't disabled transparency effects
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    [blurEffectView setFrame:self.view.bounds];
+    
 #ifdef BLURIT
     [self.view insertSubview:blurEffectView belowSubview:noteView];
 #endif
