@@ -14,7 +14,7 @@
                         <viewControllerLayoutGuide type="bottom" id="uxU-kG-9rX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ans-s4-eXQ" customClass="ProgressView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WjG-P3-YhD">
@@ -64,7 +64,7 @@
                         <viewControllerLayoutGuide type="bottom" id="PAn-vr-aF7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cNv-Rh-VTo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CJb-Zy-YOi">
@@ -102,14 +102,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D83-ud-CP3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Lav-os-NoG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4166" y="-600"/>
+            <point key="canvasLocation" x="4166" y="-599.99999999999989"/>
         </scene>
         <!--My trips-->
         <scene sceneID="Kuk-hk-N4E">
             <objects>
                 <tableViewController id="9T5-FA-hjY" customClass="SavedTripsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hFg-J5-Lmz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="LYz-hB-OWE">
@@ -158,14 +158,14 @@
                         <viewControllerLayoutGuide type="bottom" id="gUx-ix-aDA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lqi-zg-Ipl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uaw-cW-xrr">
                                 <rect key="frame" x="0.0" y="0.0" width="336" height="479"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVU-y4-8zh">
-                                <rect key="frame" x="0.0" y="460" width="320" height="62"/>
+                                <rect key="frame" x="0.0" y="459" width="320" height="62"/>
                                 <color key="backgroundColor" red="0.35220246952947837" green="0.66733099489795911" blue="0.037073944160997671" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="Start">
@@ -393,17 +393,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mgr-55-afw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2036" y="-403"/>
+            <point key="canvasLocation" x="2036" y="-402.99999999999994"/>
         </scene>
         <!--My notes-->
         <scene sceneID="BV7-mI-HoC">
             <objects>
                 <tableViewController id="HAA-uq-xzk" customClass="SavedNotesViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="46" sectionHeaderHeight="22" sectionFooterHeight="22" id="q0Z-Vg-eda">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="CA3-kz-DJj">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pd9-cF-HWg">
@@ -437,7 +438,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhT-y3-cFY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1590" y="304"/>
+            <point key="canvasLocation" x="1590" y="303.99999999999994"/>
         </scene>
         <!--Note View Controller-->
         <scene sceneID="ej4-eH-tDC">
@@ -448,7 +449,7 @@
                         <viewControllerLayoutGuide type="bottom" id="C6c-3t-Abq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5oa-IS-WKH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7zp-i1-NaC">
@@ -483,7 +484,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xNU-cR-piO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wdh-Ov-px7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2184" y="304"/>
+            <point key="canvasLocation" x="2184" y="303.99999999999994"/>
         </scene>
         <!--Select View Controller-->
         <scene sceneID="Yii-tZ-yWa">
@@ -494,7 +495,7 @@
                         <viewControllerLayoutGuide type="bottom" id="1sz-oc-YZg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1c2-xE-8Op">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -512,7 +513,7 @@
                         <viewControllerLayoutGuide type="bottom" id="jSN-d3-Gwx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="b3o-cV-Vpn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M5L-hf-fPR">
@@ -568,14 +569,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6fY-pl-vrh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="10j-WX-eF7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3734" y="-59"/>
+            <point key="canvasLocation" x="3734" y="-58.999999999999993"/>
         </scene>
         <!--Profile-->
         <scene sceneID="PWe-RL-fDg">
             <objects>
                 <tableViewController id="jiv-KU-B2O" customClass="PersonalInfoViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="2Wd-Uh-Crv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="AFf-A8-bD0">
@@ -631,7 +632,7 @@
                         <viewControllerLayoutGuide type="bottom" id="nLU-fr-uQv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YZj-td-qNI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k7W-Fl-mkC">
@@ -684,7 +685,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wjj-We-8RV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="lad-pi-AKp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2163" y="983"/>
+            <point key="canvasLocation" x="2163" y="982.99999999999989"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1bZ-G3-E2t">
@@ -719,7 +720,7 @@
                         <viewControllerLayoutGuide type="bottom" id="hfC-eY-6eA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ure-fc-ZVl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xAL-P3-j6r">
@@ -754,7 +755,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYG-Ff-sf7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WKA-pf-uTw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2530" y="-967"/>
+            <point key="canvasLocation" x="2530" y="-966.99999999999989"/>
         </scene>
         <!--Grid View Controller-->
         <scene sceneID="Nq8-8I-ZtP">
@@ -765,7 +766,7 @@
                         <viewControllerLayoutGuide type="bottom" id="njt-kh-014"/>
                     </layoutGuides>
                     <view key="view" alpha="0.59999999999999964" contentMode="scaleToFill" id="g7S-eh-2jD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -773,7 +774,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XsC-6d-hr9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3188" y="-403"/>
+            <point key="canvasLocation" x="3188" y="-402.99999999999994"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zRG-GF-YXw">
@@ -791,7 +792,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ya-Pk-SZm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2662" y="-403"/>
+            <point key="canvasLocation" x="2662" y="-402.99999999999994"/>
         </scene>
         <!--Record-->
         <scene sceneID="A1i-66-wsp">
@@ -810,7 +811,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vaH-Bb-R4f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1620" y="-403"/>
+            <point key="canvasLocation" x="1620" y="-402.99999999999994"/>
         </scene>
     </scenes>
     <resources>
@@ -828,7 +829,7 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <color key="tintColor" red="0.0" green="0.6917769160583942" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
 </document>

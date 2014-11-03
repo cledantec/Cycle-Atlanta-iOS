@@ -721,6 +721,11 @@ int count = 0;
 
 - (UIButton *)createStartButton
 {
+    
+    
+   // CGRect frame=CGRectMake(self.view.frame.origin.x, + self.view.frame.origin.y+ self.view.frame.size.height-18, self.view.frame.size.width, 18);
+  //  [startButton setFrame:frame];
+    
     UIImage *buttonImage = [[UIImage imageNamed:@"StartButton.png"]
                             resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
     UIImage *buttonImageHighlight = [[UIImage imageNamed:@"StartButton.png"]
