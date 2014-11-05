@@ -68,14 +68,21 @@
 @synthesize noteView,tripView;
 @synthesize selectedNoteType,selectedTripType;
 @synthesize delegate;
-@synthesize blurEffectView,mapView,TopStatsView;
+@synthesize blurEffectView,mapView,TopStatsView,topHidingView;
 
 int count = 0;
 
--(void) removeView:(NSString*)viewName
+
+-(void) deblurCommonActions
 {
     [self.blurEffectView removeFromSuperview];
+    self.topHidingView.alpha=0;
     [self enableAll];
+}
+-(void) removeView:(NSString*)viewName
+{
+    
+    [self deblurCommonActions];
     if([viewName isEqualToString:@"Note"])
     {
     [UIView beginAnimations:nil context:nil];
@@ -85,6 +92,8 @@ int count = 0;
     [noteView setBackgroundColor:[UIColor whiteColor]];
     
     noteView.alpha =0;
+    
+        
     [UIView commitAnimations];
     }
     
@@ -557,6 +566,11 @@ int count = 0;
     UITapGestureRecognizer *tapImageRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissGrids)];
     
 #ifdef BLURIT
+    
+    topHidingView=[[UIView alloc] initWithFrame:TopStatsView.frame];
+    [topHidingView setBackgroundColor:[UIColor whiteColor]];
+    self.topHidingView.alpha=0;
+    [self.view insertSubview:topHidingView aboveSubview:TopStatsView];
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     
@@ -1166,9 +1180,10 @@ int count = 0;
     
 #ifdef BLURIT
     [self.view insertSubview:blurEffectView belowSubview:tripView];
+    [self blurCommonActions];
 #endif
     [self disableAll];
-    [self viewSlideInFromBottomToTop:tripView];
+    [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
     
     /*
     if (count <1){
@@ -1242,11 +1257,11 @@ int count = 0;
 }
 
 
--(void)viewSlideInFromTopToBottom:(UIView *)views
+-(void)viewSlideInFromTopToBottom:(UIView *)views withDuration:(NSInteger)duration
 {
     CATransition *transition = nil;
     transition = [CATransition animation];
-    transition.duration = 0.5;//kAnimationDuration
+    transition.duration = duration;//kAnimationDuration
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionPush;
     transition.subtype =kCATransitionFromBottom ;
@@ -1255,12 +1270,12 @@ int count = 0;
 }
 //http://huntmyideas.weebly.com/blog/animating-a-uiview-to-slide-downslide-upslide-rightslide-left#sthash.JSvmkGAB.dpuf
 
--(void)viewSlideInFromBottomToTop:(UIView *)views
+-(void)viewSlideInFromBottomToTop:(UIView *)views withDuration:(NSInteger)duration
 {
     
     CATransition *transition = nil;
     transition = [CATransition animation];
-    transition.duration = 0.5;//kAnimationDuration
+    transition.duration = duration;//kAnimationDuration
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionPush;
     transition.subtype =kCATransitionFromTop ;
@@ -1269,6 +1284,10 @@ int count = 0;
 }
 
 
+-(void) blurCommonActions
+{
+    topHidingView.alpha=0.8;
+}
 //s Note this calls here
 -(IBAction)notethis:(id)sender{
     
@@ -1279,6 +1298,7 @@ int count = 0;
     
 #ifdef BLURIT
     [self.view insertSubview:blurEffectView belowSubview:noteView];
+    [self blurCommonActions];
 #endif
     [self disableAll];
 #ifdef NEWFORMAT
@@ -1295,7 +1315,7 @@ int count = 0;
     noteView.backgroundColor=[UIColor whiteColor];
     //noteView.backgroundColor=[UIColor colorWithPatternImage:self.imageOfUnderlyingView];
     
-    [self viewSlideInFromTopToBottom:noteView];
+    [self viewSlideInFromTopToBottom:noteView withDuration:kAnimationDuration];
     
   /*
     if (count <1){

@@ -135,6 +135,7 @@
 @property (nonatomic,strong) UIVisualEffectView* blurEffectView;
 @property (weak, nonatomic) IBOutlet UIView *TopStatsView;
 @property (weak, nonatomic) IBOutlet UIView *blurImageView;
+@property (strong,nonatomic) IBOutlet UIView *topHidingView;
 
 - (IBAction)saveTripType:(id)sender;
 - (IBAction)noteThisOption:(id)sender;
@@ -161,5 +162,8 @@
 #define kNoteNotPossible 102
 #define kAccessNotGiven 103
 #define kLocationNotAvailable 104
+
+//Constants
+#define kAnimationDuration 0.3
 
 @end
