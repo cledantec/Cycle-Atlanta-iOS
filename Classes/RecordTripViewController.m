@@ -107,6 +107,10 @@ int count = 0;
         
         tripView.alpha =0;
         [UIView commitAnimations];
+        
+        NSLog(@"Cancel");
+        // re-enable counter updates
+        shouldUpdateCounter = YES;
     }
     
 }
@@ -1128,7 +1132,7 @@ int count = 0;
                                          resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
         [startButton setBackgroundImage:buttonImage forState:UIControlStateNormal]; // setBackgroundColor doesn't exist...
         [startButton setBackgroundImage:buttonImageHighlight forState:UIControlStateHighlighted];
-        [startButton setTitle:@"Stop" forState:UIControlStateNormal];
+        [startButton setTitle:@"Save" forState:UIControlStateNormal];
 
         // set recording flag so future location updates will be added as coords
         appDelegate = [[UIApplication sharedApplication] delegate];
@@ -1144,15 +1148,39 @@ int count = 0;
     else
     {
         NSLog(@"User Press Save Button");
-        saveActionSheet = [[UIActionSheet alloc]
+        tripView.alpha=0.9;
+        tripView.backgroundColor=[UIColor whiteColor];
+        
+#ifdef BLURIT
+        [self.view insertSubview:blurEffectView belowSubview:tripView];
+        [self blurCommonActions];
+#endif
+        [self disableAll];
+        [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
+        
+        
+        
+        /*saveActionSheet = [[UIActionSheet alloc]
                            initWithTitle:nil
                            delegate:self
                            cancelButtonTitle:@"Continue"
                            destructiveButtonTitle:@"Discard"
                            otherButtonTitles:@"Save",nil];
-        [saveActionSheet showInView:[UIApplication sharedApplication].keyWindow];
+        [saveActionSheet showInView:[UIApplication sharedApplication].keyWindow];*/
     }
 	
+}
+
+
+- (IBAction)quickSave:(id)sender
+{
+    NSLog(@"Do Quick Save!");
+}
+- (IBAction)discardTrip:(id)sender
+{
+    NSLog(@"Discard!");
+    [self resetRecordingInProgressDelete];
+    [self removeView:@"Trip"];
 }
 
 
@@ -1448,6 +1476,8 @@ int count = 0;
         [self removeView:@"Note"];
     
 }
+
+
 
 
 - (void)resetCounter

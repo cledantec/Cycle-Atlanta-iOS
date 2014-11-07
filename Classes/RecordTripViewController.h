@@ -145,6 +145,8 @@
 - (IBAction)start:(UIButton *)sender;
 -(IBAction)notethis:(id)sender;
 - (IBAction)closeGrid:(id)sender;
+- (IBAction)quickSave:(id)sender;
+- (IBAction)discardTrip:(id)sender;
 
 - (void)resetCounter;
 - (void)resetRecordingInProgress;

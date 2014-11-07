@@ -310,10 +310,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Djo-hh-ZBJ">
-                                <rect key="frame" x="0.0" y="261" width="320" height="259"/>
+                                <rect key="frame" x="0.0" y="186" width="320" height="331"/>
                                 <subviews>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGa-ki-2Nf">
-                                        <rect key="frame" x="277" y="7" width="43" height="22"/>
+                                        <rect key="frame" x="279" y="3" width="41" height="62"/>
+                                        <color key="backgroundColor" red="0.48564877717391308" green="0.44131459713440219" blue="0.43959205259780915" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="Button_Close_Icon_16.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -322,7 +323,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Dl-Cp-QUG">
-                                        <rect key="frame" x="25" y="49" width="45" height="27"/>
+                                        <rect key="frame" x="25" y="113" width="45" height="27"/>
                                         <state key="normal" title="commute" image="commute.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -331,13 +332,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Commute" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMe-nC-n5W">
-                                        <rect key="frame" x="23" y="84" width="76" height="21"/>
+                                        <rect key="frame" x="23" y="148" width="76" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jf-h5-l39">
-                                        <rect key="frame" x="124" y="49" width="45" height="27"/>
+                                        <rect key="frame" x="124" y="113" width="45" height="27"/>
                                         <state key="normal" title="school" image="school.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -346,13 +347,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="School" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AtN-tv-UAe">
-                                        <rect key="frame" x="134" y="84" width="76" height="21"/>
+                                        <rect key="frame" x="134" y="148" width="76" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYu-CC-hWN">
-                                        <rect key="frame" x="224" y="49" width="45" height="27"/>
+                                        <rect key="frame" x="224" y="113" width="45" height="27"/>
                                         <state key="normal" title="work" image="workRelated.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -361,17 +362,43 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Work" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUP-Uz-Xnc">
-                                        <rect key="frame" x="232" y="84" width="76" height="21"/>
+                                        <rect key="frame" x="232" y="148" width="76" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Trip Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbX-bm-OM3">
-                                        <rect key="frame" x="96" y="10" width="173" height="21"/>
+                                        <rect key="frame" x="96" y="74" width="173" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3V-vL-8QI">
+                                        <rect key="frame" x="0.0" y="268" width="320" height="62"/>
+                                        <color key="backgroundColor" red="0.17038521003957049" green="0.17024231008890797" blue="0.66733099490000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Quick Save">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="quickSave:" destination="fiU-BF-ZiG" eventType="touchUpInside" id="CAb-OD-AvC"/>
+                                            <action selector="start:" destination="fiU-BF-ZiG" eventType="touchUpInside" id="ldv-nY-sMC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZMi-z4-0qo">
+                                        <rect key="frame" x="0.0" y="3" width="280" height="62"/>
+                                        <color key="backgroundColor" red="0.48564877717391308" green="0.17944096055677269" blue="0.13001898887626631" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <state key="normal" title="Discard Trip">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="discardTrip:" destination="fiU-BF-ZiG" eventType="touchUpInside" id="Gbc-6z-pDv"/>
+                                            <action selector="start:" destination="fiU-BF-ZiG" eventType="touchUpInside" id="Mnw-EP-m6h"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -393,7 +420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mgr-55-afw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2036" y="-402.99999999999994"/>
+            <point key="canvasLocation" x="2036" y="-403"/>
         </scene>
         <!--My notes-->
         <scene sceneID="BV7-mI-HoC">
