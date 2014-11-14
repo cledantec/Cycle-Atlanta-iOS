@@ -39,7 +39,8 @@
 
 #define GRIDVIEW 1
 #define NEWFORMAT 1
-#define BLURIT 1
+//#define BLURIT 1
+#define BLACKIT 1
 #import "constants.h"
 #import "MapViewController.h"
 #import "NoteViewController.h"
@@ -68,14 +69,17 @@
 @synthesize noteView,tripView;
 @synthesize selectedNoteType,selectedTripType;
 @synthesize delegate;
-@synthesize blurEffectView,mapView,TopStatsView,topHidingView;
+@synthesize blurEffectView,mapView,TopStatsView,topHidingView,blackView,blurView1,blurView2;
+@synthesize tripViewDiscard,tripViewQSave,tripViewOptionView,tripViewContinue;
 
 int count = 0;
 
 
 -(void) deblurCommonActions
 {
+    [self.blackView removeFromSuperview];
     [self.blurEffectView removeFromSuperview];
+    [self.blurView1 removeFromSuperview];
     self.topHidingView.alpha=0;
     [self enableAll];
 }
@@ -107,10 +111,6 @@ int count = 0;
         
         tripView.alpha =0;
         [UIView commitAnimations];
-        
-        NSLog(@"Cancel");
-        // re-enable counter updates
-        shouldUpdateCounter = YES;
     }
     
 }
@@ -562,12 +562,90 @@ int count = 0;
 }
 
 
+-(void) setTripViewElements
+{
+    // The offsets from the sides
+    NSInteger offset=10, spacing=10;
+    NSInteger buttonHeight=50;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGRect frame;
+    
+    
+    
+    
+   // CGFloat screenHeight = screenRect.size.height;
+    
+    // First the discard button
+    frame=CGRectMake(offset, tripViewDiscard.frame.origin.y, screenWidth-(offset*2), buttonHeight);
+    [tripViewDiscard setFrame:frame];
+     //[blurView1 setFrame:frame];
+    // Now the option view
+    frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height);
+    [self.tripViewOptionView setFrame:frame];
+    
+    // Finally the save button
+    frame=CGRectMake(offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height, screenWidth-(offset*2), buttonHeight);
+    [self.tripViewQSave setFrame:frame];
+    
+    frame=CGRectMake(offset, self.tripViewQSave.frame.origin.y+self.tripViewQSave.frame.size.height+spacing, screenWidth-(offset*2), buttonHeight);
+    [self.tripViewContinue setFrame:frame];
+    
+    
+    // Set the rounded corners
+    self.tripViewDiscard.layer.cornerRadius = 4;
+    self.tripViewQSave.layer.cornerRadius = 4;
+    self.tripViewContinue.layer.cornerRadius=4;
+    
+    self.tripViewDiscard.layer.borderWidth = 1;
+    self.tripViewQSave.layer.borderWidth = 1;
+    self.tripViewContinue.layer.borderWidth=1;
+    
+    [self.tripViewDiscard setBackgroundColor:[UIColor whiteColor]];
+    [self.tripViewQSave setBackgroundColor:[UIColor whiteColor]];
+    [self.tripViewContinue setBackgroundColor:[UIColor whiteColor]];
+    
+    [self.tripViewDiscard setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.tripViewContinue setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.tripViewQSave setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    
+    // Set alphas..
+    [self.tripViewContinue setAlpha:0.8];
+    [self.tripViewDiscard setAlpha:0.8];
+    [self.tripViewQSave setAlpha:0.8];
+    
+    
+
+   
+    //[self.blurEffectView addGestureRecognizer:tapImageRecognizer];
+}
 
 
+-(void) viewDidLayoutSubviews
+{
+    [self setTripViewElements];
+}
 - (void)viewDidLoad
 {
+  
+    // Setting Trip View's elements programatically
+    //[self setTripViewElements];
+    
     
     UITapGestureRecognizer *tapImageRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissGrids)];
+    
+
+#ifdef BLACKIT
+    // The blurring
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    blurView1 = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
+    
+    blackView=[[UIView alloc]initWithFrame:self.view.frame];
+    blackView.backgroundColor=[UIColor blackColor];
+    [self.blackView addGestureRecognizer:tapImageRecognizer];
+#endif
     
 #ifdef BLURIT
     
@@ -587,7 +665,7 @@ int count = 0;
     [self.blurEffectView addGestureRecognizer:tapImageRecognizer];
 #else
     
-    [self.mapView addGestureRecognizer:tapImageRecognizer];
+    //[self.mapView addGestureRecognizer:tapImageRecognizer];
 #endif
     //[self.startButton addGestureRecognizer:tapImageRecognizer];
     //[self.TopStatsView addGestureRecognizer:tapImageRecognizer];
@@ -659,6 +737,7 @@ int count = 0;
 
 
 }
+
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -1149,11 +1228,18 @@ int count = 0;
     {
         NSLog(@"User Press Save Button");
         tripView.alpha=0.9;
-        tripView.backgroundColor=[UIColor whiteColor];
+        tripView.backgroundColor=[UIColor clearColor];
+  
+#ifdef BLACKIT
+        self.blackView.alpha=0.5;
+        [self.view insertSubview:blackView belowSubview:tripView];
         
+        //[self.view insertSubview:blurView1 belowSubview:tripView];
+#endif
 #ifdef BLURIT
         [self.view insertSubview:blurEffectView belowSubview:tripView];
         [self blurCommonActions];
+        
 #endif
         [self disableAll];
         [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
@@ -1180,7 +1266,6 @@ int count = 0;
 {
     NSLog(@"Discard!");
     [self resetRecordingInProgressDelete];
-    [self removeView:@"Trip"];
 }
 
 

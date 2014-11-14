@@ -124,6 +124,9 @@
 @property (assign) BOOL shouldUpdateCounter;
 @property (assign) BOOL userInfoSaved;
 @property (assign) BOOL blurOn;
+@property (assign) BOOL discarded;
+@property (nonatomic, strong) UIActionSheet *aac;
+
 @property (nonatomic, strong) CycleAtlantaAppDelegate *appDelegate;
 @property (nonatomic, strong) TripManager *tripManager;
 @property (nonatomic, strong) NoteManager *noteManager;
@@ -133,12 +136,17 @@
 @property (nonatomic) NSInteger selectedTripType;
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 @property (nonatomic,strong) UIVisualEffectView* blurEffectView;
+@property (nonatomic,strong) UIVisualEffectView* blurView1;
+@property (nonatomic,strong) UIVisualEffectView* blurView2;
 @property (weak, nonatomic) IBOutlet UIView *TopStatsView;
 @property (weak, nonatomic) IBOutlet UIView *blurImageView;
 @property (strong,nonatomic) IBOutlet UIView *topHidingView;
+@property (strong,nonatomic) IBOutlet UIView* blackView;
 
 - (IBAction)saveTripType:(id)sender;
 - (IBAction)noteThisOption:(id)sender;
+
+// TRIP VIEW's OUTLETS
 
 
 - (void)save;
@@ -147,6 +155,10 @@
 - (IBAction)closeGrid:(id)sender;
 - (IBAction)quickSave:(id)sender;
 - (IBAction)discardTrip:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *tripViewOptionView;
+@property (weak, nonatomic) IBOutlet UIButton *tripViewQSave;
+@property (weak, nonatomic) IBOutlet UIButton *tripViewDiscard;
+@property (weak, nonatomic) IBOutlet UIButton *tripViewContinue;
 
 - (void)resetCounter;
 - (void)resetRecordingInProgress;
