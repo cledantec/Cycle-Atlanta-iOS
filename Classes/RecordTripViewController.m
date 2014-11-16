@@ -74,6 +74,7 @@
 
 int count = 0;
 BOOL tripViewVisible=false;
+int last_saved_purpose=-1;
 
 -(void) deblurCommonActions
 {
@@ -1088,20 +1089,7 @@ BOOL tripViewVisible=false;
             if (buttonIndex == 0)
             {
                 NSLog(@"Just save");
-                NSInteger row = self.selectedTripType;
-                
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
-                                                                     bundle: nil];
-                TripDetailViewController *tripDetailViewController = [[storyboard
-                                                                       instantiateViewControllerWithIdentifier: @"TripDetail"] initWithNibName:@"TripDetail" bundle:nil];
-                tripDetailViewController.delegate = self.delegate;
-                
-                //[self presentViewController:tripDetailViewController animated:YES completion:nil];
-                
-                [delegate didPickPurpose:(unsigned int)row];
-                [delegate saveTrip];
-                tripViewVisible=false;
-                [self removeView:@"Trip"];
+                [self saveSingleTrip:self.selectedTripType];
 
                 
             }
@@ -1213,6 +1201,9 @@ BOOL tripViewVisible=false;
         // start the timer if needed
         if ( timer == nil )
         {
+            //Fetch the trips
+            [self fetchTrips];
+            
 			[self resetCounter];
 			timer = [NSTimer scheduledTimerWithTimeInterval:kCounterTimeInterval
 													 target:self selector:@selector(updateCounter:)
@@ -1241,7 +1232,17 @@ BOOL tripViewVisible=false;
     else
     {
         
-        
+        if(last_saved_purpose==-1)
+        {
+            self.tripViewQSave.enabled=false;
+            [tripViewQSave setTitle:@"No previous trips" forState:UIControlStateNormal];
+        }
+        else
+        {
+            self.tripViewQSave.enabled=true;
+             [tripViewQSave setTitle:@"Quick Save" forState:UIControlStateNormal];
+            
+        }
         NSLog(@"User Press Save Button");
         tripView.alpha=0.9;
         tripView.backgroundColor=[UIColor clearColor];
@@ -1273,9 +1274,58 @@ BOOL tripViewVisible=false;
 }
 
 
+-(void) saveSingleTrip:(NSInteger) index
+{
+    NSInteger row = self.selectedTripType;
+    [delegate didPickPurpose:(unsigned int)row];
+    [delegate saveTrip];
+    tripViewVisible=false;
+    [self removeView:@"Trip"];
+}
+
 - (IBAction)quickSave:(id)sender
 {
     NSLog(@"Do Quick Save!");
+    [self saveSingleTrip:last_saved_purpose];
+    
+    
+    
+}
+
+- (void) fetchTrips
+{
+    // Fetch the Trips
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Trip" inManagedObjectContext:tripManager.managedObjectContext];
+    [request setEntity:entity];
+    // configure sort order
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptors];
+    NSError *error;
+    NSInteger count = [tripManager.managedObjectContext countForFetchRequest:request error:&error];
+    NSLog(@"count = %ld", (long)count);
+    
+    NSMutableArray *mutableFetchResults = [[tripManager.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        // Handle the error.
+        NSLog(@"no saved trips");
+        if ( error != nil )
+            NSLog(@"Unresolved error2 %@, %@", error, [error userInfo]);
+    }
+    
+    if([mutableFetchResults count]>0)
+    {
+    Trip* trip=mutableFetchResults[0];
+    
+    int index = [TripPurpose getPurposeIndex:trip.purpose];
+    NSLog(@ "Purpose is %d", index);
+    last_saved_purpose=index;
+    }
+    else
+    {
+        last_saved_purpose=-1;
+    }
 }
 - (IBAction)discardTrip:(id)sender
 {
