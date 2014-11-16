@@ -73,7 +73,7 @@
 @synthesize tripViewDiscard,tripViewQSave,tripViewOptionView,tripViewContinue;
 
 int count = 0;
-
+BOOL tripViewVisible=false;
 
 -(void) deblurCommonActions
 {
@@ -111,6 +111,12 @@ int count = 0;
         
         tripView.alpha =0;
         [UIView commitAnimations];
+        
+        if(tripViewVisible==true)
+        {
+            tripViewVisible=false;
+            shouldUpdateCounter=YES;
+        }
     }
     
 }
@@ -582,13 +588,15 @@ int count = 0;
     [tripViewDiscard setFrame:frame];
      //[blurView1 setFrame:frame];
     // Now the option view
-    frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height);
+    frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height-5, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height);
     [self.tripViewOptionView setFrame:frame];
+    [self.noteView setFrame:frame];
     
     // Finally the save button
-    frame=CGRectMake(offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height, screenWidth-(offset*2), buttonHeight);
+    frame=CGRectMake(offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height-5, screenWidth-(offset*2), buttonHeight);
     [self.tripViewQSave setFrame:frame];
     
+    // The Continue button
     frame=CGRectMake(offset, self.tripViewQSave.frame.origin.y+self.tripViewQSave.frame.size.height+spacing, screenWidth-(offset*2), buttonHeight);
     [self.tripViewContinue setFrame:frame];
     
@@ -598,9 +606,9 @@ int count = 0;
     self.tripViewQSave.layer.cornerRadius = 4;
     self.tripViewContinue.layer.cornerRadius=4;
     
-    self.tripViewDiscard.layer.borderWidth = 1;
+    /*self.tripViewDiscard.layer.borderWidth = 1;
     self.tripViewQSave.layer.borderWidth = 1;
-    self.tripViewContinue.layer.borderWidth=1;
+    self.tripViewContinue.layer.borderWidth=1;*/
     
     [self.tripViewDiscard setBackgroundColor:[UIColor whiteColor]];
     [self.tripViewQSave setBackgroundColor:[UIColor whiteColor]];
@@ -614,6 +622,8 @@ int count = 0;
     [self.tripViewContinue setAlpha:0.8];
     [self.tripViewDiscard setAlpha:0.8];
     [self.tripViewQSave setAlpha:0.8];
+    
+    
     
     
 
@@ -914,11 +924,14 @@ int count = 0;
 	
 	NSMutableArray *mutableFetchResults = [[tripManager.managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
     
+    if([mutableFetchResults count]>0)
+    {
     NSManagedObject *tripToDelete = mutableFetchResults[0];
     
     
     if (tripManager.trip!= nil && tripManager.trip.saved == nil) {
         [noteManager.managedObjectContext deleteObject:tripToDelete];
+    }
     }
     
     
@@ -1087,6 +1100,7 @@ int count = 0;
                 
                 [delegate didPickPurpose:(unsigned int)row];
                 [delegate saveTrip];
+                tripViewVisible=false;
                 [self removeView:@"Trip"];
 
                 
@@ -1226,6 +1240,8 @@ int count = 0;
     // do the saving
     else
     {
+        
+        
         NSLog(@"User Press Save Button");
         tripView.alpha=0.9;
         tripView.backgroundColor=[UIColor clearColor];
@@ -1233,8 +1249,6 @@ int count = 0;
 #ifdef BLACKIT
         self.blackView.alpha=0.5;
         [self.view insertSubview:blackView belowSubview:tripView];
-        
-        //[self.view insertSubview:blurView1 belowSubview:tripView];
 #endif
 #ifdef BLURIT
         [self.view insertSubview:blurEffectView belowSubview:tripView];
@@ -1242,11 +1256,12 @@ int count = 0;
         
 #endif
         [self disableAll];
+        tripViewVisible=true;
         [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
         
         
-        
-        /*saveActionSheet = [[UIActionSheet alloc]
+        /*
+        saveActionSheet = [[UIActionSheet alloc]
                            initWithTitle:nil
                            delegate:self
                            cancelButtonTitle:@"Continue"
@@ -1265,9 +1280,16 @@ int count = 0;
 - (IBAction)discardTrip:(id)sender
 {
     NSLog(@"Discard!");
+    tripViewVisible=false;
     [self resetRecordingInProgressDelete];
+    [self removeView:@"Trip"];
 }
 
+- (IBAction)continue:(id)sender {
+    NSLog(@"Continue!");
+    [self removeView:@"Trip"];
+    
+}
 
 -(void) disableAll
 {
@@ -1413,6 +1435,13 @@ int count = 0;
     [self.view insertSubview:blurEffectView belowSubview:noteView];
     [self blurCommonActions];
 #endif
+    
+#ifdef BLACKIT
+    self.blackView.alpha=0.5;
+    [self.view insertSubview:blackView belowSubview:tripView];
+    
+    //[self.view insertSubview:blurView1 belowSubview:tripView];
+#endif
     [self disableAll];
 #ifdef NEWFORMAT
     
@@ -1428,7 +1457,7 @@ int count = 0;
     noteView.backgroundColor=[UIColor whiteColor];
     //noteView.backgroundColor=[UIColor colorWithPatternImage:self.imageOfUnderlyingView];
     
-    [self viewSlideInFromTopToBottom:noteView withDuration:kAnimationDuration];
+    [self viewSlideInFromBottomToTop:noteView withDuration:kAnimationDuration];
     
   /*
     if (count <1){
