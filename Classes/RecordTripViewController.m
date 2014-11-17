@@ -1374,93 +1374,13 @@ int last_saved_purpose=-1;
 {
   
     tripView.alpha=0.9;
-    /*self.imageOfUnderlyingView =[self convertViewToImage:self.view];
-     
-     
-     self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:10
-     tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
-     saturationDeltaFactor:1.3
-     maskImage:nil];
-     UIImageWriteToSavedPhotosAlbum(_imageOfUnderlyingView, nil, nil, nil);*/
     tripView.backgroundColor=[UIColor whiteColor];
-    //noteView.backgroundColor=[UIColor colorWithPatternImage:self.imageOfUnderlyingView];
-    
 #ifdef BLURIT
     [self.view insertSubview:blurEffectView belowSubview:tripView];
     [self blurCommonActions];
 #endif
     [self disableAll];
     [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
-    
-    /*
-    if (count <1){
-        [self removeView:@"Trip"];
-        count+=1;
-    }
-    
-    
-    if (tripView.alpha ==0){
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:0.2];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-        
-        [tripView setBackgroundColor:[UIColor colorWithRed:(0/255.0) green:(150/255.0) blue:(255/255.0) alpha:1]];
-        tripView.alpha =1;
-        [UIView commitAnimations];
-        
-        
-    } else {
-        
-        [self removeView:@"Trip"];
-        
-    }
-     */
-    /*
-#ifndef GRIDVIEW
-	[[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-		NSLog(@"INIT + PUSH");
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
-                                                             bundle: nil];
-    PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
-        [pickerViewController setDelegate:self];
-		[self presentViewController:pickerViewController animated:YES completion:nil];
-#else
-    if(!myLocation)
-    {
-        NSLog(@"Not saving trips, as location is not available");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location not available" message:@"Cannot save trips as location is not avaiable" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-        alert.tag=kNoteNotPossible;
-        [alert show];
-    }
-    else
-    {
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey: @"gridCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"INIT + PUSH");
-    self.imageOfUnderlyingView =[self convertViewToImage:self.view];
-    self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:10
-                                                                       tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
-                                                           saturationDeltaFactor:1.3
-                                                                       maskImage:nil];
-        
-        
-    GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
-    //grvc.hidesBottomBarWhenPushed=YES;
-    grvc.backImage=self.imageOfUnderlyingView ;
-#ifdef MODAL
-    [self presentViewController:grvc animated:YES completion:nil];
-#else
-    [[self navigationController] pushViewController:grvc animated:YES];
-    self.navigationItem.backBarButtonItem.title=@"Cancel";
-#endif
-
-   
-    }
-    
-#endif
-     */
 }
 
 
@@ -1521,66 +1441,17 @@ int last_saved_purpose=-1;
     noteViewOptionView.backgroundColor=[UIColor whiteColor];
     noteViewOptionView.alpha=1;
     noteView.backgroundColor=[UIColor clearColor];
-    /*self.imageOfUnderlyingView =[self convertViewToImage:self.view];
-    
-    
-    self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:10
-                                                                   tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
-                                                       saturationDeltaFactor:1.3
-                                                                   maskImage:nil];
-     UIImageWriteToSavedPhotosAlbum(_imageOfUnderlyingView, nil, nil, nil);*/
-    //noteView.backgroundColor=[UIColor colorWithPatternImage:self.imageOfUnderlyingView];
     
     [self viewSlideInFromBottomToTop:noteView withDuration:kAnimationDuration];
     
-  /*
-    if (count <1){
-        [self removeView:@"Note"];
-        count+=1;
-    }
-    
-    
-    if (noteView.alpha ==0){
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:0.0];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-        
-        [noteView setBackgroundColor:[UIColor colorWithRed:(0/255.0) green:(150/255.0) blue:(255/255.0) alpha:1]];
-        noteView.alpha =0.8;
-        [UIView commitAnimations];
-        
-        
-    } else {
-        
-        [self removeView:@"Note"];
-        
-    }
-   */
+
 #else
-
-    /*if ([CLLocationManager locationServicesEnabled]) {
-        if(IS_OS_8_OR_LATER) {
-            [self.locationManager requestAlwaysAuthorization];
-        }
-        [self.locationManager startUpdatingLocation];
-    }*/
-
-    
-#ifndef GRIDVIEW
-    
     [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
     NSLog(@"Note This");
-   
-    
-    //***** THIS IS THE ERROR POINT!!!!!********//
-    
     if (myLocation){
         [noteManager addLocation:myLocation];
     }
-	
 		// Trip Purpose
 		NSLog(@"INIT + PUSH");
         
@@ -1588,61 +1459,7 @@ int last_saved_purpose=-1;
                                                              bundle: nil];
 		PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
 		[pickerViewController setDelegate:self];
-		[self presentViewController:pickerViewController animated:YES completion:nil];
-#else
-    
-    // Instead of picker category, we will set 'Grid Category'
-    // And use it in the grid controller
-    [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: @"gridCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSLog(@"Note This");
-    
-    if(!myLocation)
-        {
-            NSLog(@"Not taking notes, as location is not available");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location not available" message:@"Cannot take notes as location is not avaiable" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            alert.tag=kNoteNotPossible;
-            [alert show];
-        }
-    else
-        {
-            // Add note, push the grid view
-            [noteManager addLocation:myLocation];
-            NSLog(@"INIT + PUSH");
-            
-            NSLog(@"view is %@", self.view);
-            self.imageOfUnderlyingView =[self convertViewToImage:self.view];
-          
-            //UIImageWriteToSavedPhotosAlbum(imageOfUnderlyingView, nil, nil, nil);
-            self.imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:10
-                                                                     tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
-                                                         saturationDeltaFactor:1.3
-                                                                     maskImage:nil];
-          
-            
-            GridViewController* grvc= [[GridViewController alloc]initWithDelegate:self];
-            //grvc.hidesBottomBarWhenPushed=YES;
-            grvc.backImage=self.imageOfUnderlyingView ;
-#ifdef MODAL
-            UINavigationController *navigationController = [[UINavigationController alloc]
-                                                            initWithRootViewController:grvc];
-             grvc.hidesBottomBarWhenPushed=YES;
-            grvc.navigationItem.backBarButtonItem.title=@"Cancel";
-            grvc.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal ;
-            
-            [self presentViewController:navigationController animated:YES completion: nil];
-           
-#else
-           
-            [[self navigationController] pushViewController:grvc animated:YES];
-            self.navigationItem.backBarButtonItem.title=@"Cancel";
-#endif
-        }
-    
-   
-#endif
-    
+    [self presentViewController:pickerViewController animated:YES completion:nil];
 #endif
     
 }
