@@ -70,7 +70,7 @@
 @synthesize selectedNoteType,selectedTripType;
 @synthesize delegate;
 @synthesize blurEffectView,mapView,TopStatsView,topHidingView,blackView,blurView1,blurView2;
-@synthesize tripViewDiscard,tripViewQSave,tripViewOptionView,tripViewContinue;
+@synthesize tripViewDiscard,tripViewQSave,tripViewOptionView,tripViewContinue,noteViewOptionView;
 
 int count = 0;
 BOOL tripViewVisible=false;
@@ -568,7 +568,28 @@ int last_saved_purpose=-1;
     [self removeView:@"Trip"];
 }
 
-
+-(void) setNoteViewElements
+{
+    NSInteger offset=5, spacing=10;
+    NSInteger buttonHeight=50;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGRect frame;
+    frame=CGRectMake(0, screenRect.size.height/3, screenWidth, noteViewOptionView.frame.size.height+spacing+buttonHeight);
+    [noteView setFrame:frame];
+    frame=CGRectMake(offset, 0, screenWidth-(offset*2), noteViewOptionView.frame.size.height);
+    [noteViewOptionView setFrame:frame];
+    noteViewOptionView.layer.cornerRadius = 4;
+    noteViewOptionView.layer.masksToBounds = YES;
+    
+    // The Continue button
+    frame=CGRectMake(offset, self.noteViewOptionView.frame.origin.y+self.noteViewOptionView.frame.size.height+spacing, screenWidth-(offset*2), buttonHeight);
+    [self.noteViewContinue setFrame:frame];
+    self.noteViewContinue.layer.cornerRadius=4;
+     [self.noteViewContinue setBackgroundColor:[UIColor whiteColor]];
+    [self.noteViewContinue setAlpha:0.8];
+}
 -(void) setTripViewElements
 {
     // The offsets from the sides
@@ -578,10 +599,6 @@ int last_saved_purpose=-1;
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGRect frame;
-    
-    
-    
-    
    // CGFloat screenHeight = screenRect.size.height;
     
     // First the discard button
@@ -591,7 +608,6 @@ int last_saved_purpose=-1;
     // Now the option view
     frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height-5, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height);
     [self.tripViewOptionView setFrame:frame];
-    [self.noteView setFrame:frame];
     
     // Finally the save button
     frame=CGRectMake(offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height-5, screenWidth-(offset*2), buttonHeight);
@@ -636,6 +652,7 @@ int last_saved_purpose=-1;
 -(void) viewDidLayoutSubviews
 {
     [self setTripViewElements];
+    [self setNoteViewElements];
 }
 - (void)viewDidLoad
 {
@@ -1335,6 +1352,11 @@ int last_saved_purpose=-1;
     [self removeView:@"Trip"];
 }
 
+- (IBAction)cancelNote:(id)sender {
+    NSLog(@"Cancel Note!");
+    [self removeView:@"Note"];
+}
+
 - (IBAction)continue:(id)sender {
     NSLog(@"Continue!");
     [self removeView:@"Trip"];
@@ -1488,14 +1510,17 @@ int last_saved_purpose=-1;
     
 #ifdef BLACKIT
     self.blackView.alpha=0.5;
-    [self.view insertSubview:blackView belowSubview:tripView];
+    [self.view insertSubview:blackView belowSubview:noteView];
     
     //[self.view insertSubview:blurView1 belowSubview:tripView];
 #endif
     [self disableAll];
 #ifdef NEWFORMAT
     
-    noteView.alpha=0.8;
+    noteView.alpha=0.9;
+    noteViewOptionView.backgroundColor=[UIColor whiteColor];
+    noteViewOptionView.alpha=1;
+    noteView.backgroundColor=[UIColor clearColor];
     /*self.imageOfUnderlyingView =[self convertViewToImage:self.view];
     
     
@@ -1504,7 +1529,6 @@ int last_saved_purpose=-1;
                                                        saturationDeltaFactor:1.3
                                                                    maskImage:nil];
      UIImageWriteToSavedPhotosAlbum(_imageOfUnderlyingView, nil, nil, nil);*/
-    noteView.backgroundColor=[UIColor whiteColor];
     //noteView.backgroundColor=[UIColor colorWithPatternImage:self.imageOfUnderlyingView];
     
     [self viewSlideInFromBottomToTop:noteView withDuration:kAnimationDuration];

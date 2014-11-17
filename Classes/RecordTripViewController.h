@@ -85,7 +85,6 @@
 	UIView *opacityMask;
 	UIView *parentView;
 	
-    IBOutlet UIView *noteView;
     IBOutlet UIView *tripView;
 	BOOL recording;
 	BOOL shouldUpdateCounter;
@@ -107,7 +106,6 @@
 }
 
 @property (nonatomic,strong) MKMapView* mapView;
-@property (nonatomic,strong) UIView* noteView;
 @property (nonatomic,strong) UIView* tripView;
 @property (nonatomic, strong) UIButton *infoButton;
 @property (nonatomic, strong) UIButton *saveButton;
@@ -148,6 +146,7 @@
 
 // TRIP VIEW's OUTLETS
 
+@property (weak, nonatomic) IBOutlet UIView *noteView;
 
 - (void)save;
 - (IBAction)start:(UIButton *)sender;
@@ -159,6 +158,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *tripViewQSave;
 @property (weak, nonatomic) IBOutlet UIButton *tripViewDiscard;
 @property (weak, nonatomic) IBOutlet UIButton *tripViewContinue;
+@property (weak, nonatomic) IBOutlet UIView *noteViewOptionView;
+@property (weak, nonatomic) IBOutlet UIButton *noteViewContinue;
 
 - (void)resetCounter;
 - (void)resetRecordingInProgress;
