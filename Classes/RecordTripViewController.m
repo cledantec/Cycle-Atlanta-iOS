@@ -631,9 +631,9 @@ int last_saved_purpose=-1;
     [self.tripViewQSave setBackgroundColor:[UIColor whiteColor]];
     [self.tripViewContinue setBackgroundColor:[UIColor whiteColor]];
     
-    [self.tripViewDiscard setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.tripViewContinue setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.tripViewQSave setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.tripViewDiscard setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.tripViewContinue setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.tripViewQSave setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     // Set alphas..
     [self.tripViewContinue setAlpha:0.8];
