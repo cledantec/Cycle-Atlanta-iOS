@@ -74,13 +74,14 @@
 
 int count = 0;
 BOOL tripViewVisible=false;
-int last_saved_purpose=-1;
+//By default, it is commute
+int last_saved_purpose=0;
 
 -(void) deblurCommonActions
 {
     [self.blackView removeFromSuperview];
-    [self.blurEffectView removeFromSuperview];
-    [self.blurView1 removeFromSuperview];
+    self.blurEffectView.alpha=0;
+    //[self.blurView1 removeFromSuperview];
     self.topHidingView.alpha=0;
     [self enableAll];
 }
@@ -146,6 +147,41 @@ int last_saved_purpose=-1;
         message=kDescWork;
         self.selectedTripType=2;
     }
+    
+    if([[sender currentTitle]isEqualToString:@"Exercise"])
+    {
+        title=@"Exercise";
+        message=kDescExercise;
+        self.selectedTripType=3;
+    }
+    
+    if([[sender currentTitle]isEqualToString:@"Social"])
+    {
+        title=@"Social";
+        message=kDescSocial;
+        self.selectedTripType=4;
+    }
+    
+    if([[sender currentTitle]isEqualToString:@"Shopping"])
+    {
+        title=@"Shopping";
+        message=kDescShopping;
+        self.selectedTripType=5;
+    }
+    
+    if([[sender currentTitle]isEqualToString:@"Errand"])
+    {
+        title=@"Errand";
+        message=kDescErrand;
+        self.selectedTripType=6;
+    }
+    
+    if([[sender currentTitle]isEqualToString:@"Other"])
+    {
+        title=@"Other";
+        message=kDescOther;
+        self.selectedTripType=7;
+    }
    
     
     UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:title
@@ -175,15 +211,36 @@ int last_saved_purpose=-1;
         message=kAssetDescNoteThisSpot;
          selectedNoteType=0;
     }
-    if([[sender currentTitle]isEqualToString:@"WaterFountains"])
+    if([[sender currentTitle]isEqualToString:@"Bike parking"])
     {
-        title=@"Water Fountains";
-        message=kAssetDescWaterFountains; selectedNoteType=1;
+        // FOR ASSETS, Selected note type can be inferred from Saved Notes view controller
+        // Its '11-the number there'
+        title=@"Bike parking";
+        message=kAssetDescBikeParking; selectedNoteType=6;
     }
-    if([[sender currentTitle]isEqualToString:@"SecretPassage"])
+    if([[sender currentTitle]isEqualToString:@"Bike shops"])
     {
-        title=@"Secret Passage";
+        title=@"Bike shops";
+        message=kAssetDescBikeShops; selectedNoteType=4;
+    }
+    
+    if([[sender currentTitle]isEqualToString:@"Short Cut"])
+    {
+        title=@"Short Cut";
         message=kAssetDescSecretPassage; selectedNoteType=2;
+    }
+    
+    if([[sender currentTitle]isEqualToString:@"Wash up"])
+    {
+        title=@"Wash up";
+        message=kAssetDescPublicRestrooms; selectedNoteType=3;
+    }
+    
+////// ISSUES //////
+    if([[sender currentTitle]isEqualToString:@"Fix Signal"])
+    {
+        title=@"Fix Signal";
+        message=kIssueDescTrafficSignal; selectedNoteType=8;
     }
     
     UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:title
@@ -576,7 +633,10 @@ int last_saved_purpose=-1;
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGRect frame;
-    frame=CGRectMake(0, screenRect.size.height/3, screenWidth, noteViewOptionView.frame.size.height+spacing+buttonHeight);
+    
+    // Start bottom up
+    
+    frame=CGRectMake(0, screenRect.size.height/2.35, screenWidth, noteViewOptionView.frame.size.height+spacing+buttonHeight);
     [noteView setFrame:frame];
     frame=CGRectMake(offset, 0, screenWidth-(offset*2), noteViewOptionView.frame.size.height);
     [noteViewOptionView setFrame:frame];
@@ -599,18 +659,24 @@ int last_saved_purpose=-1;
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGRect frame;
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+  
+    CGFloat extra_button_offset=1;
    // CGFloat screenHeight = screenRect.size.height;
     
     // First the discard button
-    frame=CGRectMake(offset, tripViewDiscard.frame.origin.y, screenWidth-(offset*2), buttonHeight);
+    frame=CGRectMake(offset-extra_button_offset, tripViewDiscard.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [tripViewDiscard setFrame:frame];
      //[blurView1 setFrame:frame];
     // Now the option view
-    frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height-5, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height);
+    frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height+1, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height+1);
     [self.tripViewOptionView setFrame:frame];
+    [blurEffectView setFrame:frame];
     
     // Finally the save button
-    frame=CGRectMake(offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height-5, screenWidth-(offset*2), buttonHeight);
+    frame=CGRectMake(offset-extra_button_offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height+1, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [self.tripViewQSave setFrame:frame];
     
     // The Continue button
@@ -639,13 +705,82 @@ int last_saved_purpose=-1;
     [self.tripViewContinue setAlpha:0.8];
     [self.tripViewDiscard setAlpha:0.8];
     [self.tripViewQSave setAlpha:0.8];
+    [self.tripViewOptionView setAlpha:0.8];
     
     
+    /// BLURRING
     
+  
     
-
+    // Fit all labels
+    _workLabel.adjustsFontSizeToFitWidth = YES;
+    _commuteLabel.adjustsFontSizeToFitWidth = YES;
+    _exerciseLabel.adjustsFontSizeToFitWidth = YES;
+    _socialLabel.adjustsFontSizeToFitWidth = YES;
+    _errandLabel.adjustsFontSizeToFitWidth = YES;
+    _otherLabel.adjustsFontSizeToFitWidth = YES;
+    
+    UIColor *label_color=[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1.0f];
+    _workLabel.textColor=label_color;
+    _commuteLabel.textColor=[UIColor greenColor];
+    _exerciseLabel.textColor=[UIColor greenColor];
+    _socialLabel.textColor=[UIColor greenColor];
+    _errandLabel.textColor=[UIColor greenColor];
+    _otherLabel.textColor=[UIColor greenColor];
+    /*
+    int y_offset=25;
+    // Set the option buttons and labels
+    
+    //First column
+    
+    // Work button
+    frame=CGRectMake(self.exerciseButton.frame.origin.x, y_offset, self.exerciseButton.frame.size.width, self.exerciseButton.frame.size.height);
+    [self.exerciseButton setFrame:frame];
+    frame=CGRectMake(self.exerciseLabel.frame.origin.x, self.exerciseButton.frame.size.height+y_offset+1, self.exerciseLabel.frame.size.width, self.exerciseLabel.frame.size.height);
+    [self.exerciseLabel setFrame:frame];
+    //Exercise Button
+    
+    frame=CGRectMake(self.workButton.frame.origin.x, y_offset+self.workLabel.frame.origin.y+self.workLabel.frame.size.height, self.workButton.frame.size.width, self.workButton.frame.size.height);
+    [self.exerciseButton setFrame:frame];
+    frame=CGRectMake(self.workLabel.frame.origin.x-6, self.exerciseButton.frame.size.height+self.exerciseButton.frame.origin.y+1, self.exerciseLabel.frame.size.width, self.exerciseLabel.frame.size.height);
+    [self.exerciseLabel setFrame:frame];
+    // Errand button
+    frame=CGRectMake(self.workButton.frame.origin.x, y_offset+self.exerciseLabel.frame.origin.y+self.exerciseLabel.frame.size.height, self.workButton.frame.size.width, self.workButton.frame.size.height);
+    [self.errandButton setFrame:frame];
+    frame=CGRectMake(self.workLabel.frame.origin.x-2, self.errandButton.frame.size.height+self.errandButton.frame.origin.y+1, self.errandLabel.frame.size.width, self.errandLabel.frame.size.height);
+    [self.errandLabel setFrame:frame];
+    
+   //Second columns
+    //Commute button
+    frame=CGRectMake(self.commuteButton.frame.origin.x, y_offset, self.commuteButton.frame.size.width, self.commuteButton.frame.size.height);
+    [self.commuteButton setFrame:frame];
+    frame=CGRectMake(self.commuteLabel.frame.origin.x, self.commuteButton.frame.size.height+y_offset+1, self.commuteLabel.frame.size.width, self.commuteLabel.frame.size.height);
+    [self.commuteLabel setFrame:frame];
+    //Social button
+    frame=CGRectMake(_commuteButton.frame.origin.x+2, y_offset+self.commuteLabel.frame.origin.y+self.commuteLabel.frame.size.height, self.commuteButton.frame.size.width, self.commuteButton.frame.size.height);
+    [self.socialButton setFrame:frame];
+    frame=CGRectMake(_commuteLabel.frame.origin.x+8, self.socialButton.frame.size.height+self.socialButton.frame.origin.y+1, self.socialLabel.frame.size.width, self.socialLabel.frame.size.height);
+    [self.socialLabel setFrame:frame];
+    //Other button
+    frame=CGRectMake(self.commuteButton.frame.origin.x+2, y_offset+self.socialLabel.frame.origin.y+self.socialLabel.frame.size.height, self.socialButton.frame.size.width, self.socialButton.frame.size.height);
+    [self.otherButton setFrame:frame];
+    frame=CGRectMake(self.commuteLabel.frame.origin.x+9, self.otherButton.frame.size.height+self.otherButton.frame.origin.y+1, self.otherLabel.frame.size.width, self.otherLabel.frame.size.height);
+    [self.otherLabel setFrame:frame];
+    
+    //Third column
+    //School button
+    frame=CGRectMake(self.schoolButton.frame.origin.x, y_offset, self.schoolButton.frame.size.width, self.schoolButton.frame.size.height);
+    [self.schoolButton setFrame:frame];
+    frame=CGRectMake(self.schoolLabel.frame.origin.x, self.schoolButton.frame.size.height+y_offset+1, self.schoolLabel.frame.size.width, self.schoolLabel.frame.size.height);
+    [self.schoolLabel setFrame:frame];
+    // Shopping button
+    frame=CGRectMake(self.schoolButton.frame.origin.x+6, y_offset+self.schoolLabel.frame.origin.y+self.schoolLabel.frame.size.height, self.schoolButton.frame.size.width, self.schoolButton.frame.size.height);
+    [self.shoppingButton setFrame:frame];
+    frame=CGRectMake(self.schoolLabel.frame.origin.x-6, self.shoppingButton.frame.size.height+self.shoppingButton.frame.origin.y+1, self.shoppingLabel.frame.size.width, self.shoppingLabel.frame.size.height);
+    [self.shoppingLabel setFrame:frame];
+     */
+    
    
-    //[self.blurEffectView addGestureRecognizer:tapImageRecognizer];
 }
 
 
@@ -1248,18 +1383,10 @@ int last_saved_purpose=-1;
     // do the saving
     else
     {
-        
-        if(last_saved_purpose==-1)
-        {
-            self.tripViewQSave.enabled=false;
-            [tripViewQSave setTitle:@"No previous trips" forState:UIControlStateNormal];
-        }
-        else
-        {
-            self.tripViewQSave.enabled=true;
-             [tripViewQSave setTitle:@"Quick Save" forState:UIControlStateNormal];
-            
-        }
+        NSString* myString=@"Quick Save:";
+        NSString* purpose=[tripManager getPurposeString:last_saved_purpose];
+        NSString *test = [myString stringByAppendingString:purpose];
+        [tripViewQSave setTitle:test forState:UIControlStateNormal];
         NSLog(@"User Press Save Button");
         tripView.alpha=0.9;
         tripView.backgroundColor=[UIColor clearColor];
@@ -1267,6 +1394,7 @@ int last_saved_purpose=-1;
 #ifdef BLACKIT
         self.blackView.alpha=0.5;
         [self.view insertSubview:blackView belowSubview:tripView];
+        [self.view insertSubview:blurEffectView aboveSubview:blackView];
 #endif
 #ifdef BLURIT
         [self.view insertSubview:blurEffectView belowSubview:tripView];
@@ -1275,8 +1403,14 @@ int last_saved_purpose=-1;
 #endif
         [self disableAll];
         tripViewVisible=true;
+       
         [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
         
+        /********************/
+        // This is for the tab bar item button overlay
+       // UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+      //  [mainWindow addSubview: self.tripView];
+        //[self.tabBarItem.]
         
         /*
         saveActionSheet = [[UIActionSheet alloc]
@@ -1331,18 +1465,15 @@ int last_saved_purpose=-1;
             NSLog(@"Unresolved error2 %@, %@", error, [error userInfo]);
     }
     
+    // Fetch the last index
     if([mutableFetchResults count]>0)
     {
     Trip* trip=mutableFetchResults[0];
-    
     int index = [TripPurpose getPurposeIndex:trip.purpose];
     NSLog(@ "Purpose is %d", index);
     last_saved_purpose=index;
     }
-    else
-    {
-        last_saved_purpose=-1;
-    }
+   
 }
 - (IBAction)discardTrip:(id)sender
 {
@@ -1424,13 +1555,15 @@ int last_saved_purpose=-1;
     //only apply the blur if the user hasn't disabled transparency effects
     
 #ifdef BLURIT
-    [self.view insertSubview:blurEffectView belowSubview:noteView];
+    
     [self blurCommonActions];
 #endif
     
 #ifdef BLACKIT
     self.blackView.alpha=0.5;
+    
     [self.view insertSubview:blackView belowSubview:noteView];
+    [self.view insertSubview:blurEffectView aboveSubview:self.blackView];
     
     //[self.view insertSubview:blurView1 belowSubview:tripView];
 #endif

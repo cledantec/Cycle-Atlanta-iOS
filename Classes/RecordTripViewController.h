@@ -154,12 +154,28 @@
 - (IBAction)closeGrid:(id)sender;
 - (IBAction)quickSave:(id)sender;
 - (IBAction)discardTrip:(id)sender;
+
+
 @property (weak, nonatomic) IBOutlet UIView *tripViewOptionView;
 @property (weak, nonatomic) IBOutlet UIButton *tripViewQSave;
 @property (weak, nonatomic) IBOutlet UIButton *tripViewDiscard;
 @property (weak, nonatomic) IBOutlet UIButton *tripViewContinue;
 @property (weak, nonatomic) IBOutlet UIView *noteViewOptionView;
 @property (weak, nonatomic) IBOutlet UIButton *noteViewContinue;
+@property (weak, nonatomic) IBOutlet UIButton *commuteButton;
+@property (weak, nonatomic) IBOutlet UILabel *commuteLabel;
+@property (weak, nonatomic) IBOutlet UIButton *workButton;
+@property (weak, nonatomic) IBOutlet UILabel *workLabel;
+@property (weak, nonatomic) IBOutlet UIButton *exerciseButton;
+@property (weak, nonatomic) IBOutlet UILabel *exerciseLabel;
+@property (weak, nonatomic) IBOutlet UIButton *socialButton;
+@property (weak, nonatomic) IBOutlet UILabel *socialLabel;
+@property (weak, nonatomic) IBOutlet UIButton *errandButton;
+@property (weak, nonatomic) IBOutlet UILabel *errandLabel;
+@property (weak, nonatomic) IBOutlet UIButton *otherButton;
+@property (weak, nonatomic) IBOutlet UILabel *otherLabel;
+
+
 
 - (void)resetCounter;
 - (void)resetRecordingInProgress;

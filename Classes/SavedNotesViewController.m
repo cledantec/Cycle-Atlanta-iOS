@@ -319,6 +319,7 @@
     NSString *title = [[NSString alloc] init] ;
     switch ([note.note_type intValue]) {
         case 0:
+            // Issues are all<=5
             title = @"Pavement issue";
             break;
         case 1:
@@ -336,6 +337,8 @@
         case 5:
             title = @"Note this issue";
             break;
+            
+            // Assets are all >=6
         case 6:
             title = @"Bike parking";
             break;
@@ -346,7 +349,7 @@
             title = @"Public restrooms";
             break;
         case 9:
-            title = @"Secret passage";
+            title = @"Short cut";
             break;
         case 10:
             title = @"Water fountains";
