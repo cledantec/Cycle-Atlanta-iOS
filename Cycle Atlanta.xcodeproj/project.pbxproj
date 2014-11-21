@@ -108,7 +108,6 @@
 		9D8A1BB2171B03E900509FBD /* FetchTripData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A1BB1171B03E900509FBD /* FetchTripData.m */; };
 		9DD65FBB16FEA3CC00F2EB63 /* ImageResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD65FBA16FEA3CC00F2EB63 /* ImageResize.m */; };
 		BAF7B46619CBB7D000056E5B /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF7B46519CBB7D000056E5B /* GridViewController.m */; };
-		BAF7B46819CBB81900056E5B /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BAF7B46719CBB81900056E5B /* icon.png */; };
 		BAF7B46B19CBBAB800056E5B /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF7B46A19CBBAB800056E5B /* SelectViewController.m */; };
 		C200BD6419C9E6B50089ADED /* NAMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C200BD5C19C9E6B50089ADED /* NAMenuItem.m */; };
 		C200BD6519C9E6B50089ADED /* NAMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = C200BD5E19C9E6B50089ADED /* NAMenuItemView.m */; };
@@ -291,7 +290,6 @@
 		9DD65FBA16FEA3CC00F2EB63 /* ImageResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResize.m; sourceTree = "<group>"; };
 		BAF7B46419CBB7D000056E5B /* GridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewController.h; sourceTree = "<group>"; };
 		BAF7B46519CBB7D000056E5B /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewController.m; sourceTree = "<group>"; };
-		BAF7B46719CBB81900056E5B /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../NAMenu/icon.png; sourceTree = "<group>"; };
 		BAF7B46919CBBAB800056E5B /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
 		BAF7B46A19CBBAB800056E5B /* SelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectViewController.m; sourceTree = "<group>"; };
 		C200BD5B19C9E6B50089ADED /* NAMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMenuItem.h; sourceTree = "<group>"; };
@@ -500,7 +498,6 @@
 				C2A1189719F700DC003C65E4 /* Button_Close_Icon_16.png */,
 				C21A109B19DC904F00765511 /* Issue.png */,
 				C21A109C19DC904F00765511 /* Note.png */,
-				BAF7B46719CBB81900056E5B /* icon.png */,
 				9D47F909160BA52C00B8B14D /* Default.png */,
 				9D47F90B160BA53000B8B14D /* Default@2x.png */,
 				8FD62A3B16B2253100B54A35 /* Default-568h@2x.png */,
@@ -738,7 +735,6 @@
 			files = (
 				64577E29106DC2FD003ACBFD /* dist.plist in Resources */,
 				C200BD6A19C9E6EB0089ADED /* NAMenuItemView.xib in Resources */,
-				BAF7B46819CBB81900056E5B /* icon.png in Resources */,
 				6458114E107AA4D30075DABD /* bicycle-bell-normalized.aiff in Resources */,
 				D6B6941B1923F2A8006908C3 /* MainWindow.storyboard in Resources */,
 				D6EF02FF192BCFAB00AA67CD /* SaveButton.png in Resources */,

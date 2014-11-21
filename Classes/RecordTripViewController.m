@@ -69,7 +69,7 @@
 @synthesize noteView,tripView;
 @synthesize selectedNoteType,selectedTripType;
 @synthesize delegate;
-@synthesize blurEffectView,mapView,TopStatsView,topHidingView,blackView,blurView1,blurView2;
+@synthesize blurEffectView,mapView,TopStatsView,topHidingView,blackView,blurEffectView_qsave,blurEffectView_dis,blurEffectView_option;
 @synthesize tripViewDiscard,tripViewQSave,tripViewOptionView,tripViewContinue,noteViewOptionView;
 
 int count = 0;
@@ -80,7 +80,11 @@ int last_saved_purpose=0;
 -(void) deblurCommonActions
 {
     [self.blackView removeFromSuperview];
-    self.blurEffectView.alpha=0;
+    //self.blurEffectView.alpha=0;
+   
+    [self.blurEffectView_option removeFromSuperview];
+    [self.blurEffectView_dis removeFromSuperview];
+    [self.blurEffectView_qsave removeFromSuperview];
     //[self.blurView1 removeFromSuperview];
     self.topHidingView.alpha=0;
     [self enableAll];
@@ -659,9 +663,6 @@ int last_saved_purpose=0;
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGRect frame;
-    
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
   
     CGFloat extra_button_offset=1;
    // CGFloat screenHeight = screenRect.size.height;
@@ -669,11 +670,10 @@ int last_saved_purpose=0;
     // First the discard button
     frame=CGRectMake(offset-extra_button_offset, tripViewDiscard.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [tripViewDiscard setFrame:frame];
-     //[blurView1 setFrame:frame];
+
     // Now the option view
     frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height+1, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height+1);
     [self.tripViewOptionView setFrame:frame];
-    [blurEffectView setFrame:frame];
     
     // Finally the save button
     frame=CGRectMake(offset-extra_button_offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height+1, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
@@ -689,12 +689,17 @@ int last_saved_purpose=0;
     self.tripViewQSave.layer.cornerRadius = 4;
     self.tripViewContinue.layer.cornerRadius=4;
     
-    /*self.tripViewDiscard.layer.borderWidth = 1;
-    self.tripViewQSave.layer.borderWidth = 1;
-    self.tripViewContinue.layer.borderWidth=1;*/
+// Comment out if blurring
+    /*
+    [self.tripViewDiscard setBackgroundColor:[UIColor clearColor]];
+    [self.tripViewQSave setBackgroundColor:[UIColor clearColor]];
+    [self.tripViewOptionView setBackgroundColor:[UIColor clearColor]];*/
     
     [self.tripViewDiscard setBackgroundColor:[UIColor whiteColor]];
     [self.tripViewQSave setBackgroundColor:[UIColor whiteColor]];
+    [self.tripViewOptionView setBackgroundColor:[UIColor whiteColor]];
+    
+    
     [self.tripViewContinue setBackgroundColor:[UIColor whiteColor]];
     
     [self.tripViewDiscard setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -710,7 +715,21 @@ int last_saved_purpose=0;
     
     /// BLURRING
     
-  
+    // The blurring
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    blurEffectView_dis   = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+   blurEffectView_qsave   = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
+   // frame=CGRectMake(tripView.frame.origin.x+tripViewDiscard.frame.origin.x,tripView.frame.origin.y+ tripViewDiscard.frame.origin.y,tripViewDiscard.frame.size.width,tripViewDiscard.frame.size.height);
+   [blurEffectView_dis setFrame:tripViewDiscard.frame];
+    
+   // frame=CGRectMake(tripView.frame.origin.x+tripViewOptionView.frame.origin.x,tripView.frame.origin.y+ tripViewOptionView.frame.origin.y,tripViewOptionView.frame.size.width,tripViewOptionView.frame.size.height);
+    [blurEffectView_option setFrame:tripViewOptionView.frame];
+    
+    ///frame=CGRectMake(tripView.frame.origin.x+tripViewQSave.frame.origin.x,tripView.frame.origin.y+ tripViewQSave.frame.origin.y,tripViewQSave.frame.size.width,tripViewQSave.frame.size.height);
+    [blurEffectView_qsave setFrame:tripViewQSave.frame];
+ 
     
     // Fit all labels
     _workLabel.adjustsFontSizeToFitWidth = YES;
@@ -800,9 +819,7 @@ int last_saved_purpose=0;
     
 
 #ifdef BLACKIT
-    // The blurring
-    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    blurView1 = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    
     
     
     blackView=[[UIView alloc]initWithFrame:self.view.frame];
@@ -1394,7 +1411,10 @@ int last_saved_purpose=0;
 #ifdef BLACKIT
         self.blackView.alpha=0.5;
         [self.view insertSubview:blackView belowSubview:tripView];
-        [self.view insertSubview:blurEffectView aboveSubview:blackView];
+        /*
+        [tripView addSubview:blurEffectView_dis];
+        [tripView addSubview:blurEffectView_option];
+       [tripView addSubview:blurEffectView_qsave];*/
 #endif
 #ifdef BLURIT
         [self.view insertSubview:blurEffectView belowSubview:tripView];
@@ -1403,13 +1423,23 @@ int last_saved_purpose=0;
 #endif
         [self disableAll];
         tripViewVisible=true;
-       
+        
+        //[self.tripViewDiscard setBackgroundImage:[self imageCreator:tripViewDiscard] forState:UIControlStateNormal];
+       // self.tripViewOptionView.backgroundColor=[UIColor colorWithPatternImage:[self imageCreator:tripViewOptionView]];
+        //[self.tripViewDiscard setBackgroundImage:[self imageCreator:tripViewDiscard] forState:UIControlStateNormal];
         [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
         
+        /*double delayInSeconds=kAnimationDuration;
+        dispatch_time_t popTime=dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds*NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+
+        });*/
+      
         /********************/
         // This is for the tab bar item button overlay
-       // UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
-      //  [mainWindow addSubview: self.tripView];
+        UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+        [mainWindow addSubview: self.tripView];
         //[self.tabBarItem.]
         
         /*
@@ -1425,7 +1455,43 @@ int last_saved_purpose=0;
 }
 
 
--(void) saveSingleTrip:(NSInteger) index
+-(UIImage*) imageCreator:(UIView*)view_in
+{
+    
+    
+    _imageOfUnderlyingView =[self convertViewToImage:self.view];
+    
+    _imageOfUnderlyingView = [_imageOfUnderlyingView applyBlurWithRadius:4
+                                                                   tintColor:[UIColor colorWithWhite:1.0 alpha:0.4]
+                                                       saturationDeltaFactor:1.3
+         
+                                                               maskImage:nil];
+    /*CIContext *context = [CIContext contextWithOptions:nil];
+    CIImage *inputImage = [CIImage imageWithCGImage:_imageOfUnderlyingView.CGImage];
+    
+    // setting up Gaussian Blur (we could use one of many filters offered by Core Image)
+    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+    [filter setValue:inputImage forKey:kCIInputImageKey];
+    [filter setValue:[NSNumber numberWithFloat:15.0f] forKey:@"inputRadius"];
+    CIImage *result_temp = [filter valueForKey:kCIOutputImageKey];
+    
+    // CIGaussianBlur has a tendency to shrink the image a little,
+    // this ensures it matches up exactly to the bounds of our original image
+    CGImageRef cgImage = [context createCGImage:result_temp fromRect:[inputImage extent]];
+    
+    UIImage *returnImage = [UIImage imageWithCGImage:cgImage];//create a UIImage for this function to "return" so that ARC can manage the memory of the blur... ARC can't manage CGImageRefs so we need to release it before this function "returns" and ends.
+    CGImageRelease(cgImage);//release CGImageRef because ARC doesn't manage this on its own.
+    
+    
+    
+    
+    CGRect rect=CGRectMake(view_in.frame.origin.x+tripView.frame.origin.x, view_in.frame.origin.y+tripView.frame.origin.y, view_in.frame.size.width,view_in.frame.size.height);
+    CGImageRef imageRef=CGImageCreateWithImageInRect(returnImage.CGImage, rect);*/
+    UIImage* result=[UIImage imageWithCGImage:_imageOfUnderlyingView.CGImage];
+    UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil);
+    return (result);
+}
+ -(void) saveSingleTrip:(NSInteger) index
 {
     NSInteger row = self.selectedTripType;
     [delegate didPickPurpose:(unsigned int)row];

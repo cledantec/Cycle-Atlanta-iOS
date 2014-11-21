@@ -134,8 +134,9 @@
 @property (nonatomic) NSInteger selectedTripType;
 @property (nonatomic, strong) id <TripPurposeDelegate> delegate;
 @property (nonatomic,strong) UIVisualEffectView* blurEffectView;
-@property (nonatomic,strong) UIVisualEffectView* blurView1;
-@property (nonatomic,strong) UIVisualEffectView* blurView2;
+@property (nonatomic,strong) UIVisualEffectView* blurEffectView_qsave;
+@property (nonatomic,strong) UIVisualEffectView* blurEffectView_dis;
+@property (nonatomic,strong) UIVisualEffectView* blurEffectView_option;
 @property (weak, nonatomic) IBOutlet UIView *TopStatsView;
 @property (weak, nonatomic) IBOutlet UIView *blurImageView;
 @property (strong,nonatomic) IBOutlet UIView *topHidingView;
@@ -157,6 +158,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UIView *tripViewOptionView;
+@property (strong,nonatomic)  IBOutlet UIView* superTripView;
 @property (weak, nonatomic) IBOutlet UIButton *tripViewQSave;
 @property (weak, nonatomic) IBOutlet UIButton *tripViewDiscard;
 @property (weak, nonatomic) IBOutlet UIButton *tripViewContinue;
