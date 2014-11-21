@@ -77,7 +77,7 @@ int count = 0;
 BOOL tripViewVisible=false;
 //By default, it is commute
 int last_saved_purpose=0;
-
+CGFloat radius=6.0;
 
 static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_tl, CGFloat radius_tr, CGFloat radius_bl, CGFloat radius_br ) {
     
@@ -158,7 +158,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     
     noteView.alpha =0;
     
-        
+    [_noteViewContinue setHidden:YES];
     [UIView commitAnimations];
     }
     
@@ -187,7 +187,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     NSLog(@"Button pressed: %@", [sender currentTitle]);
     
     NSString* title; NSString* message;
-    
+    NSLog(@"Title is %@", [sender currentTitle]);
     if([[sender currentTitle]isEqualToString:@"commute"])
     {
         title=@"Commute";
@@ -302,6 +302,21 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     {
         title=@"Fix Signal";
         message=kIssueDescTrafficSignal; selectedNoteType=8;
+    }
+    if([[sender currentTitle]isEqualToString:@"Rough Road"])
+    {
+        title=@"Rough Road";
+        message=kIssueDescPavementIssue; selectedNoteType=7;
+    }
+    if([[sender currentTitle]isEqualToString:@"Needs Enforcement"])
+    {
+        title=@"Needs Enforcement";
+        message=kIssueDescEnforcement; selectedNoteType=9;
+    }
+    if([[sender currentTitle]isEqualToString:@"Need Parking"])
+    {
+        title=@"Need Parking";
+        message=kIssueDescNeedParking; selectedNoteType=10;
     }
     
     UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:title
@@ -688,7 +703,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 
 -(void) setNoteViewElements
 {
-    NSInteger offset=5, spacing=10;
+    NSInteger offset=10, spacing=10;
     NSInteger buttonHeight=50;
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -701,15 +716,17 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [noteView setFrame:frame];
     frame=CGRectMake(offset, 0, screenWidth-(offset*2), noteViewOptionView.frame.size.height);
     [noteViewOptionView setFrame:frame];
-    noteViewOptionView.layer.cornerRadius = 4;
+    noteViewOptionView.layer.cornerRadius = radius;
     noteViewOptionView.layer.masksToBounds = YES;
     
     // The Continue button
     frame=CGRectMake(offset, self.noteViewOptionView.frame.origin.y+self.noteViewOptionView.frame.size.height+spacing, screenWidth-(offset*2), buttonHeight);
-    [self.noteViewContinue setFrame:frame];
-    self.noteViewContinue.layer.cornerRadius=4;
+    [self.noteViewContinue setFrame:tripViewContinue.frame];
+    self.noteViewContinue.layer.cornerRadius=radius;
      [self.noteViewContinue setBackgroundColor:[UIColor whiteColor]];
     [self.noteViewContinue setAlpha:0.8];
+    [self.noteViewOptionView setAlpha:0.8];
+    [self.noteViewContinue  setBackgroundColor:[UIColor grayColor]];
 }
 -(void) setTripViewElements
 {
@@ -771,7 +788,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [self.tripViewOptionView setAlpha:0.8];
     
     
-    CGFloat radius=6.0;
+    
     [self roundTheButton:tripViewDiscard tl_radius:radius tr_radius:radius bl_radius:0.0 br_radius:0.0];
     [self roundTheButton:tripViewQSave tl_radius:0.0 tr_radius:0.0 bl_radius:radius br_radius:radius];
     [self roundTheButton:tripViewContinue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
@@ -1437,8 +1454,8 @@ blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         if ( timer == nil )
         {
             //Fetch the trips
-            [self fetchTrips];
             
+             [self fetchTrips];
 			[self resetCounter];
 			timer = [NSTimer scheduledTimerWithTimeInterval:kCounterTimeInterval
 													 target:self selector:@selector(updateCounter:)
@@ -1466,8 +1483,14 @@ blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     // do the saving
     else
     {
+        
+       
         NSString* myString=@"Quick Save:";
         NSString* purpose=[tripManager getPurposeString:last_saved_purpose];
+        if([purpose isEqualToString:@"Work-Related"])
+        {
+            purpose=@"Work";
+        }
         NSString *test = [myString stringByAppendingString:purpose];
         [tripViewQSave setTitle:test forState:UIControlStateNormal];
         NSLog(@"User Press Save Button");
@@ -1575,9 +1598,6 @@ blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
 {
     NSLog(@"Do Quick Save!");
     [self saveSingleTrip:last_saved_purpose];
-    
-    
-    
 }
 
 - (void) fetchTrips
@@ -1705,32 +1725,15 @@ blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     //[self.view insertSubview:blurView1 belowSubview:tripView];
 #endif
     [self disableAll];
-#ifdef NEWFORMAT
+
     
     noteView.alpha=0.9;
     noteViewOptionView.backgroundColor=[UIColor whiteColor];
     noteViewOptionView.alpha=1;
     noteView.backgroundColor=[UIColor clearColor];
-    
     [self viewSlideInFromBottomToTop:noteView withDuration:kAnimationDuration];
-    
-
-#else
-    [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: @"pickerCategory"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"Note This");
-    if (myLocation){
-        [noteManager addLocation:myLocation];
-    }
-		// Trip Purpose
-		NSLog(@"INIT + PUSH");
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
-                                                             bundle: nil];
-		PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
-		[pickerViewController setDelegate:self];
-    [self presentViewController:pickerViewController animated:YES completion:nil];
-#endif
+    [_noteViewContinue setHidden:NO];
+    [[[UIApplication sharedApplication]keyWindow]addSubview:_noteViewContinue];
     
 }
 
