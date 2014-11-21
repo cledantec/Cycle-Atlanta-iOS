@@ -56,6 +56,7 @@
 #import "GridViewController.h"
 #import "UIImage+ImageEffects.m"
 #import "GlobalVars.h"
+
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @implementation RecordTripViewController
@@ -76,6 +77,60 @@ int count = 0;
 BOOL tripViewVisible=false;
 //By default, it is commute
 int last_saved_purpose=0;
+
+
+static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_tl, CGFloat radius_tr, CGFloat radius_bl, CGFloat radius_br ) {
+    
+    CGContextRef context;
+    CGColorSpaceRef colorSpace;
+    
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    // create a bitmap graphics context the size of the image
+    context = CGBitmapContextCreate( NULL, rect.size.width, rect.size.height, 8, 0, colorSpace, kCGImageAlphaPremultipliedLast );
+    
+    // free the rgb colorspace
+    CGColorSpaceRelease(colorSpace);
+    
+    if ( context == NULL ) {
+        return NULL;
+    }
+    
+    // cerate mask
+    
+    CGFloat minx = CGRectGetMinX( rect ), midx = CGRectGetMidX( rect ), maxx = CGRectGetMaxX( rect );
+    CGFloat miny = CGRectGetMinY( rect ), midy = CGRectGetMidY( rect ), maxy = CGRectGetMaxY( rect );
+    
+    CGContextBeginPath( context );
+    CGContextSetGrayFillColor( context, 1.0, 0.0 );
+    CGContextAddRect( context, rect );
+    CGContextClosePath( context );
+    CGContextDrawPath( context, kCGPathFill );
+    
+    CGContextSetGrayFillColor( context, 1.0, 1.0 );
+    CGContextBeginPath( context );
+    CGContextMoveToPoint( context, minx, midy );
+    CGContextAddArcToPoint( context, minx, miny, midx, miny, radius_bl );
+    CGContextAddArcToPoint( context, maxx, miny, maxx, midy, radius_br );
+    CGContextAddArcToPoint( context, maxx, maxy, midx, maxy, radius_tr );
+    CGContextAddArcToPoint( context, minx, maxy, minx, midy, radius_tl );
+    CGContextClosePath( context );
+    CGContextDrawPath( context, kCGPathFill );
+    
+    // Create CGImageRef of the main view bitmap content, and then
+    // release that bitmap context
+    CGImageRef bitmapContext = CGBitmapContextCreateImage( context );
+    CGContextRelease( context );
+    
+    // convert the finished resized image to a UIImage
+    UIImage *theImage = [UIImage imageWithCGImage:bitmapContext];
+    // image is retained by the property setting above, so we can
+    // release the original
+    CGImageRelease(bitmapContext);
+    
+    // return the image
+    return theImage;
+}
 
 -(void) deblurCommonActions
 {
@@ -123,6 +178,8 @@ int last_saved_purpose=0;
             tripViewVisible=false;
             shouldUpdateCounter=YES;
         }
+        [tripViewContinue setHidden:YES];
+       // tripViewContinue.alpha=0;
     }
     
 }
@@ -664,30 +721,33 @@ int last_saved_purpose=0;
     CGFloat screenWidth = screenRect.size.width;
     CGRect frame;
   
-    CGFloat extra_button_offset=1;
+    CGFloat extra_button_offset=1.5;
    // CGFloat screenHeight = screenRect.size.height;
     
     // First the discard button
     frame=CGRectMake(offset-extra_button_offset, tripViewDiscard.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [tripViewDiscard setFrame:frame];
 
+  
     // Now the option view
-    frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height+1, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height+1);
+    frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height+1, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height);
     [self.tripViewOptionView setFrame:frame];
-    
+      NSLog(@"Y pos is %f", tripViewQSave.frame.origin.y);
     // Finally the save button
     frame=CGRectMake(offset-extra_button_offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height+1, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [self.tripViewQSave setFrame:frame];
     
     // The Continue button
-    frame=CGRectMake(offset, self.tripViewQSave.frame.origin.y+self.tripViewQSave.frame.size.height+spacing, screenWidth-(offset*2), buttonHeight);
+    frame=CGRectMake(offset-extra_button_offset, self.tripViewQSave.frame.origin.y+self.tripViewQSave.frame.size.height+spacing+tripView.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [self.tripViewContinue setFrame:frame];
     
+    //PARA SHADOW...
+    /*
+    self.tripViewContinue.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.tripViewContinue.layer.shadowOpacity = 0.8;
+    self.tripViewContinue.layer.shadowRadius = 12;
+    self.tripViewContinue.layer.shadowOffset = CGSizeMake(12.0f, 12.0f);*/
     
-    // Set the rounded corners
-    self.tripViewDiscard.layer.cornerRadius = 4;
-    self.tripViewQSave.layer.cornerRadius = 4;
-    self.tripViewContinue.layer.cornerRadius=4;
     
 // Comment out if blurring
     /*
@@ -698,9 +758,7 @@ int last_saved_purpose=0;
     [self.tripViewDiscard setBackgroundColor:[UIColor whiteColor]];
     [self.tripViewQSave setBackgroundColor:[UIColor whiteColor]];
     [self.tripViewOptionView setBackgroundColor:[UIColor whiteColor]];
-    
-    
-    [self.tripViewContinue setBackgroundColor:[UIColor whiteColor]];
+    [self.tripViewContinue setBackgroundColor:[UIColor grayColor]];
     
     [self.tripViewDiscard setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.tripViewContinue setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -713,6 +771,10 @@ int last_saved_purpose=0;
     [self.tripViewOptionView setAlpha:0.8];
     
     
+    CGFloat radius=6.0;
+    [self roundTheButton:tripViewDiscard tl_radius:radius tr_radius:radius bl_radius:0.0 br_radius:0.0];
+    [self roundTheButton:tripViewQSave tl_radius:0.0 tr_radius:0.0 bl_radius:radius br_radius:radius];
+    [self roundTheButton:tripViewContinue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
     /// BLURRING
     
     // The blurring
@@ -808,20 +870,29 @@ blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     [self setTripViewElements];
     [self setNoteViewElements];
 }
+
+
+// API To round the buttons with radius of four corners given
+-(void) roundTheButton:(UIButton*)button tl_radius:(CGFloat)tlr tr_radius:(CGFloat)trr bl_radius:(CGFloat)blr br_radius:(CGFloat)brr
+{
+    // Create the mask image you need calling the previous function
+    UIImage *mask = MTDContextCreateRoundedMask( button.bounds, tlr, trr, blr, brr );
+    // Create a new layer that will work as a mask
+    CALayer *layerMask = [CALayer layer];
+    layerMask.frame = self.tripViewDiscard.bounds;
+    // Put the mask image as content of the layer
+    layerMask.contents = (id)mask.CGImage;
+    // set the mask layer as mask of the view layer
+    button.layer.mask = layerMask;
+
+}
 - (void)viewDidLoad
 {
-  
+    
     // Setting Trip View's elements programatically
     //[self setTripViewElements];
-    
-    
     UITapGestureRecognizer *tapImageRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissGrids)];
-    
-
 #ifdef BLACKIT
-    
-    
-    
     blackView=[[UIView alloc]initWithFrame:self.view.frame];
     blackView.backgroundColor=[UIColor blackColor];
     [self.blackView addGestureRecognizer:tapImageRecognizer];
@@ -922,12 +993,7 @@ blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
 
 - (void)viewWillAppear:(BOOL)animated
 {
-  
-    
     [super viewWillAppear:animated];
-    
-  
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
@@ -1423,12 +1489,12 @@ blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
 #endif
         [self disableAll];
         tripViewVisible=true;
-        
-        //[self.tripViewDiscard setBackgroundImage:[self imageCreator:tripViewDiscard] forState:UIControlStateNormal];
-       // self.tripViewOptionView.backgroundColor=[UIColor colorWithPatternImage:[self imageCreator:tripViewOptionView]];
-        //[self.tripViewDiscard setBackgroundImage:[self imageCreator:tripViewDiscard] forState:UIControlStateNormal];
         [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
         
+        
+        //[self.tripViewDiscard setBackgroundImage:[self imageCreator:tripViewDiscard] forState:UIControlStateNormal];
+        // self.tripViewOptionView.backgroundColor=[UIColor colorWithPatternImage:[self imageCreator:tripViewOptionView]];
+        //[self.tripViewDiscard setBackgroundImage:[self imageCreator:tripViewDiscard] forState:UIControlStateNormal];
         /*double delayInSeconds=kAnimationDuration;
         dispatch_time_t popTime=dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds*NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -1438,8 +1504,13 @@ blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
       
         /********************/
         // This is for the tab bar item button overlay
-        UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
-        [mainWindow addSubview: self.tripView];
+        //tripViewContinue.alpha=0.8;
+        [tripViewContinue setHidden:NO];
+        [[[UIApplication sharedApplication]keyWindow]addSubview:tripViewContinue];
+       // [self.tabBarController presentVi]
+        //UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+       
+        //[mainWindow addSubview: tripViewContinue];
         //[self.tabBarItem.]
         
         /*

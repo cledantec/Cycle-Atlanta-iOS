@@ -85,6 +85,7 @@
     [window makeKeyAndVisible];
     [self performSelectorInBackground:@selector(loadPersistentStore) withObject:nil];
      */
+    
 }
 
 -(void)loadPersistentStore
