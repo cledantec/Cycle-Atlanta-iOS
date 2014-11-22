@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="jfM-bS-n1G">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
@@ -984,24 +983,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XsC-6d-hr9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3188" y="-402.99999999999994"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="zRG-GF-YXw">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5qz-KY-k5y" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="E01-VG-pCG">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Sae-0X-eXl" kind="relationship" relationship="rootViewController" id="DHv-Uj-rhY"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5ya-Pk-SZm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2662" y="-402.99999999999994"/>
         </scene>
         <!--Record-->
         <scene sceneID="A1i-66-wsp">

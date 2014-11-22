@@ -70,7 +70,8 @@ static NSMutableArray *toasts;
 		// Init and add label
 		_textLabel = [[UILabel alloc] init];
 		_textLabel.text = text;
-		_textLabel.minimumFontSize = 14;
+        [_textLabel setMinimumScaleFactor:14.0/[UIFont labelFontSize]];
+		//_textLabel.minimumFontSize = 14;
 		_textLabel.font = [UIFont systemFontOfSize:14];
 		_textLabel.textColor = [UIColor whiteColor];
 		_textLabel.adjustsFontSizeToFitWidth = NO;
