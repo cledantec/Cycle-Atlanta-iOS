@@ -137,6 +137,7 @@
 @property (nonatomic,strong) UIVisualEffectView* blurEffectView_qsave;
 @property (nonatomic,strong) UIVisualEffectView* blurEffectView_dis;
 @property (nonatomic,strong) UIVisualEffectView* blurEffectView_option;
+@property (nonatomic,strong) UIVisualEffectView* blurEffectView_note;
 @property (weak, nonatomic) IBOutlet UIView *TopStatsView;
 @property (weak, nonatomic) IBOutlet UIView *blurImageView;
 @property (strong,nonatomic) IBOutlet UIView *topHidingView;

@@ -70,7 +70,7 @@
 @synthesize noteView,tripView;
 @synthesize selectedNoteType,selectedTripType;
 @synthesize delegate;
-@synthesize blurEffectView,mapView,TopStatsView,topHidingView,blackView,blurEffectView_qsave,blurEffectView_dis,blurEffectView_option;
+@synthesize blurEffectView,mapView,TopStatsView,topHidingView,blackView,blurEffectView_qsave,blurEffectView_dis,blurEffectView_option,blurEffectView_note;
 @synthesize tripViewDiscard,tripViewQSave,tripViewOptionView,tripViewContinue,noteViewOptionView;
 
 int count = 0;
@@ -710,17 +710,23 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [noteView setFrame:frame];
     frame=CGRectMake(offset, 0, screenWidth-(offset*2), noteViewOptionView.frame.size.height);
     [noteViewOptionView setFrame:frame];
+    //Round corners
     noteViewOptionView.layer.cornerRadius = radius;
     noteViewOptionView.layer.masksToBounds = YES;
-    
+    blurEffectView_note.layer.cornerRadius = radius;
+    blurEffectView_note.layer.masksToBounds = YES;
     // The Continue button
     frame=CGRectMake(offset, self.noteViewOptionView.frame.origin.y+self.noteViewOptionView.frame.size.height+spacing, screenWidth-(offset*2), buttonHeight);
     [self.noteViewContinue setFrame:tripViewContinue.frame];
     self.noteViewContinue.layer.cornerRadius=radius;
-     [self.noteViewContinue setBackgroundColor:[UIColor whiteColor]];
+    
     [self.noteViewContinue setAlpha:0.8];
     [self.noteViewOptionView setAlpha:0.8];
+    [self.noteView setBackgroundColor:[UIColor clearColor]];
+
     [self.noteViewContinue  setBackgroundColor:[UIColor grayColor]];
+    [blurEffectView_note setFrame:noteViewOptionView.frame];
+    [noteView insertSubview:blurEffectView_note atIndex:0];
 }
 -(void) setTripViewElements
 {
@@ -752,7 +758,6 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     frame=CGRectMake(offset-extra_button_offset, self.tripViewQSave.frame.origin.y+self.tripViewQSave.frame.size.height+spacing+tripView.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [self.tripViewContinue setFrame:frame];
 
-
     [self.tripViewDiscard setBackgroundColor:[UIColor clearColor]];
     [self.tripViewQSave setBackgroundColor:[UIColor clearColor]];
     [self.tripViewOptionView setBackgroundColor:[UIColor whiteColor]];
@@ -768,19 +773,22 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [self.tripViewQSave setAlpha:0.8];
     [self.tripViewOptionView setAlpha:0.8];
     
-    
-    
+    // Rounding
     [self roundTheButton:tripViewDiscard tl_radius:radius tr_radius:radius bl_radius:0.0 br_radius:0.0];
+    [self roundTheButton:blurEffectView_dis tl_radius:radius tr_radius:radius bl_radius:0.0 br_radius:0.0];
+    
     [self roundTheButton:tripViewQSave tl_radius:0.0 tr_radius:0.0 bl_radius:radius br_radius:radius];
+    [self roundTheButton:blurEffectView_qsave tl_radius:0.0 tr_radius:0.0 bl_radius:radius br_radius:radius];
+    
     [self roundTheButton:tripViewContinue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
+    
     /// BLURRING
     [blurEffectView_dis setFrame:tripViewDiscard.frame];
     [blurEffectView_option setFrame:tripViewOptionView.frame];
     [blurEffectView_qsave setFrame:tripViewQSave.frame];
     frame=CGRectMake(0, 0, tripView.frame.size.width, tripView.frame.size.height);
     UIView* blur_superView=[[UIView alloc]initWithFrame:frame];
-    //blurEffectView_dis.layer.cornerRadius=radius;
-    //blurEffectView_qsave.layer.cornerRadius=radius;
+    
     [blur_superView addSubview:blurEffectView_dis];
     [blur_superView addSubview:blurEffectView_option];
     [blur_superView addSubview:blurEffectView_qsave];
@@ -800,9 +808,6 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     _socialLabel.textColor=[UIColor greenColor];
     _errandLabel.textColor=[UIColor greenColor];
     _otherLabel.textColor=[UIColor greenColor];
-  
-    
-   
 }
 
 
@@ -814,13 +819,13 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 
 
 // API To round the buttons with radius of four corners given
--(void) roundTheButton:(UIButton*)button tl_radius:(CGFloat)tlr tr_radius:(CGFloat)trr bl_radius:(CGFloat)blr br_radius:(CGFloat)brr
+-(void) roundTheButton:(UIView*)button tl_radius:(CGFloat)tlr tr_radius:(CGFloat)trr bl_radius:(CGFloat)blr br_radius:(CGFloat)brr
 {
     // Create the mask image you need calling the previous function
     UIImage *mask = MTDContextCreateRoundedMask( button.bounds, tlr, trr, blr, brr );
     // Create a new layer that will work as a mask
     CALayer *layerMask = [CALayer layer];
-    layerMask.frame = self.tripViewDiscard.bounds;
+    layerMask.frame = button.bounds;
     // Put the mask image as content of the layer
     layerMask.contents = (id)mask.CGImage;
     // set the mask layer as mask of the view layer
@@ -845,6 +850,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     blurEffectView_dis   = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     blurEffectView_qsave   = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurEffectView_note =[[UIVisualEffectView alloc]initWithEffect:blurEffect];
 #endif
     
 #ifdef BLURIT
@@ -1595,9 +1601,8 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 #endif
     [self disableAll];
 
-    
     noteView.alpha=0.9;
-    noteViewOptionView.backgroundColor=[UIColor whiteColor];
+    noteViewOptionView.backgroundColor=[UIColor clearColor];
     noteViewOptionView.alpha=1;
     noteView.backgroundColor=[UIColor clearColor];
     [self viewSlideInFromBottomToTop:noteView withDuration:kAnimationDuration];
