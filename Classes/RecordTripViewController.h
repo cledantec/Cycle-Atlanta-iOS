@@ -144,7 +144,8 @@
 @property (weak, nonatomic) IBOutlet UIView *blurImageView;
 @property (strong,nonatomic) IBOutlet UIView *topHidingView;
 @property (strong,nonatomic) IBOutlet UIView* blackView;
-
+@property (nonatomic,strong) IBOutletCollection(UILabel)NSArray* blueNoteLabels;
+@property (nonatomic,strong) IBOutletCollection(UILabel)NSArray* redNoteLabels;
 - (IBAction)saveTripType:(id)sender;
 - (IBAction)noteThisOption:(id)sender;
 
@@ -179,6 +180,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *errandLabel;
 @property (weak, nonatomic) IBOutlet UIButton *otherButton;
 @property (weak, nonatomic) IBOutlet UILabel *otherLabel;
+
 
 
 

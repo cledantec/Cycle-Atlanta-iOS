@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="jfM-bS-n1G">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="jfM-bS-n1G">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Picker View Controller-->
@@ -606,6 +607,15 @@
                         <outlet property="tripViewQSave" destination="h3V-vL-8QI" id="EeM-22-5DJ"/>
                         <outlet property="workButton" destination="39E-fK-9ut" id="nQ9-rG-LFG"/>
                         <outlet property="workLabel" destination="r32-Nk-s9F" id="dKD-CR-hA8"/>
+                        <outletCollection property="blueNoteLabels" destination="WLv-w7-H0b" id="haF-4R-uIZ"/>
+                        <outletCollection property="blueNoteLabels" destination="vfM-iK-BDy" id="JV6-6Y-y4w"/>
+                        <outletCollection property="blueNoteLabels" destination="xmu-qa-ceN" id="BLq-AL-klw"/>
+                        <outletCollection property="blueNoteLabels" destination="dZ0-iQ-u6w" id="Bgm-LO-4Bp"/>
+                        <outletCollection property="blueNoteLabels" destination="5B2-ri-Apx" id="mYb-tM-hPh"/>
+                        <outletCollection property="redNoteLabels" destination="mH4-t2-BV9" id="CH4-M9-Ofb"/>
+                        <outletCollection property="redNoteLabels" destination="qto-9C-Tft" id="ogP-83-fML"/>
+                        <outletCollection property="redNoteLabels" destination="jUq-rJ-M3L" id="GKl-IY-Pdx"/>
+                        <outletCollection property="redNoteLabels" destination="BfF-AQ-mIG" id="tT5-Wn-C3M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mgr-55-afw" userLabel="First Responder" sceneMemberID="firstResponder"/>

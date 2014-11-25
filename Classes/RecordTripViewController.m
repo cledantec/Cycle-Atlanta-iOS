@@ -72,7 +72,7 @@
 @synthesize delegate;
 @synthesize blurEffectView,mapView,TopStatsView,topHidingView,blackView,blurEffectView_qsave,blurEffectView_dis,blurEffectView_option,blurEffectView_continue,blurEffectView_note;
 @synthesize tripViewDiscard,tripViewQSave,tripViewOptionView,tripViewContinue,noteViewOptionView,bottomView;
-
+@synthesize redNoteLabels,blueNoteLabels;
 int count = 0;
 BOOL tripViewVisible=false;
 //By default, it is commute
@@ -270,7 +270,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
         // FOR ASSETS, Selected note type can be inferred from Saved Notes view controller
         // Its '11-the number there'
         title=@"Bike parking";
-        message=kAssetDescBikeParking; selectedNoteType=6;
+        message=kAssetDescBikeParking; selectedNoteType=5;
     }
     if([[sender currentTitle]isEqualToString:@"Bike shops"])
     {
@@ -721,12 +721,25 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     self.noteViewContinue.layer.cornerRadius=radius;
     
     [self.noteViewContinue setAlpha:0.8];
-    [self.noteViewOptionView setAlpha:0.8];
-    [self.noteView setBackgroundColor:[UIColor clearColor]];
+    [self.noteViewOptionView setAlpha:0.5];
+    
+    noteViewOptionView.backgroundColor=[UIColor whiteColor];
 
     [self.noteViewContinue  setBackgroundColor:[UIColor grayColor]];
     [blurEffectView_note setFrame:noteViewOptionView.frame];
     [noteView insertSubview:blurEffectView_note atIndex:0];
+    
+    for(UILabel* label in redNoteLabels)
+    {
+    UIColor *label_color=[UIColor colorWithRed:(189.0f/255.0f) green:(71.0f/255.0f) blue:(33.0f/255.0f)  alpha:1.0f];
+        label.textColor=label_color;
+    }
+    
+    for(UILabel* label in blueNoteLabels)
+    {
+        UIColor *label_color=[UIColor colorWithRed:(66.0f/255.0f) green:(93.0f/255.0f) blue:(179.0f/255.0f)  alpha:1.0f];
+        label.textColor=label_color;
+    }
 }
 -(void) setTripViewElements
 {
@@ -1448,7 +1461,6 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
         [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
         [tripViewContinue setHidden:NO];
         [[[UIApplication sharedApplication]keyWindow]addSubview:tripViewContinue];
-        //[[[UIApplication sharedApplication]keyWindow]addSubview:blurEffectView_continue];
 #ifdef BLACKIT
         [blackView setHidden:NO];
 #endif
@@ -1459,6 +1471,27 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 #endif
     }
 	
+}
+
+//s Note this calls here
+-(IBAction)notethis:(id)sender{
+    
+    
+#ifdef BLURIT
+    [self blurCommonActions];
+#endif
+    
+#ifdef BLACKIT
+    [blackView setHidden:NO];
+#endif
+    [self disableAll];
+    noteView.alpha=1;
+    
+    noteView.backgroundColor=[UIColor clearColor];
+    [self viewSlideInFromBottomToTop:noteView withDuration:kAnimationDuration];
+    [_noteViewContinue setHidden:NO];
+    [[[UIApplication sharedApplication]keyWindow]addSubview:_noteViewContinue];
+    
 }
 
  -(void) saveSingleTrip:(NSInteger) index
@@ -1579,33 +1612,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 {
     topHidingView.alpha=0.8;
 }
-//s Note this calls here
--(IBAction)notethis:(id)sender{
-    
-  
-    // USE IF NEED TO BLUR
-    
-    //only apply the blur if the user hasn't disabled transparency effects
-    
-#ifdef BLURIT
-    
-    [self blurCommonActions];
-#endif
-    
-#ifdef BLACKIT
-    [blackView setHidden:NO];
-#endif
-    [self disableAll];
 
-    noteView.alpha=0.9;
-    noteViewOptionView.backgroundColor=[UIColor clearColor];
-    noteViewOptionView.alpha=1;
-    noteView.backgroundColor=[UIColor clearColor];
-    [self viewSlideInFromBottomToTop:noteView withDuration:kAnimationDuration];
-    [_noteViewContinue setHidden:NO];
-    [[[UIApplication sharedApplication]keyWindow]addSubview:_noteViewContinue];
-    
-}
 
 -(void) enableAll
 {
