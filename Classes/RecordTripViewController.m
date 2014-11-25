@@ -70,8 +70,8 @@
 @synthesize noteView,tripView;
 @synthesize selectedNoteType,selectedTripType;
 @synthesize delegate;
-@synthesize blurEffectView,mapView,TopStatsView,topHidingView,blackView,blurEffectView_qsave,blurEffectView_dis,blurEffectView_option,blurEffectView_note;
-@synthesize tripViewDiscard,tripViewQSave,tripViewOptionView,tripViewContinue,noteViewOptionView;
+@synthesize blurEffectView,mapView,TopStatsView,topHidingView,blackView,blurEffectView_qsave,blurEffectView_dis,blurEffectView_option,blurEffectView_continue,blurEffectView_note;
+@synthesize tripViewDiscard,tripViewQSave,tripViewOptionView,tripViewContinue,noteViewOptionView,bottomView;
 
 int count = 0;
 BOOL tripViewVisible=false;
@@ -758,8 +758,8 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     frame=CGRectMake(offset-extra_button_offset, self.tripViewQSave.frame.origin.y+self.tripViewQSave.frame.size.height+spacing+tripView.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [self.tripViewContinue setFrame:frame];
 
-    [self.tripViewDiscard setBackgroundColor:[UIColor clearColor]];
-    [self.tripViewQSave setBackgroundColor:[UIColor clearColor]];
+    [self.tripViewDiscard setBackgroundColor:[UIColor whiteColor]];
+    [self.tripViewQSave setBackgroundColor:[UIColor whiteColor]];
     [self.tripViewOptionView setBackgroundColor:[UIColor whiteColor]];
     [self.tripViewContinue setBackgroundColor:[UIColor grayColor]];
     
@@ -769,9 +769,9 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     
     // Set alphas..
     [self.tripViewContinue setAlpha:0.8];
-    [self.tripViewDiscard setAlpha:0.8];
-    [self.tripViewQSave setAlpha:0.8];
-    [self.tripViewOptionView setAlpha:0.8];
+    [self.tripViewDiscard setAlpha:0.5];
+    [self.tripViewQSave setAlpha:0.5];
+    [self.tripViewOptionView setAlpha:0.5];
     
     // Rounding
     [self roundTheButton:tripViewDiscard tl_radius:radius tr_radius:radius bl_radius:0.0 br_radius:0.0];
@@ -782,10 +782,15 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     
     [self roundTheButton:tripViewContinue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
     
+    
+    frame=CGRectMake(tripView.frame.origin.x, tripView.frame.origin.y, tripView.frame.size.width, tripViewQSave.frame.origin.y-tripViewDiscard.frame.origin.y+tripViewQSave.frame.size.height);
+    [tripView setFrame:frame];
+    
     /// BLURRING
     [blurEffectView_dis setFrame:tripViewDiscard.frame];
     [blurEffectView_option setFrame:tripViewOptionView.frame];
     [blurEffectView_qsave setFrame:tripViewQSave.frame];
+    [blurEffectView_continue setFrame:tripViewContinue.frame];
     frame=CGRectMake(0, 0, tripView.frame.size.width, tripView.frame.size.height);
     UIView* blur_superView=[[UIView alloc]initWithFrame:frame];
     
@@ -793,6 +798,8 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [blur_superView addSubview:blurEffectView_option];
     [blur_superView addSubview:blurEffectView_qsave];
     [tripView insertSubview:blur_superView atIndex:0];
+    [tripViewContinue addSubview:blurEffectView_continue];
+    //[tripViewContinue insertSubview:blurEffectView_continue atIndex:0];
     // Fit all labels
     _workLabel.adjustsFontSizeToFitWidth = YES;
     _commuteLabel.adjustsFontSizeToFitWidth = YES;
@@ -801,13 +808,13 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     _errandLabel.adjustsFontSizeToFitWidth = YES;
     _otherLabel.adjustsFontSizeToFitWidth = YES;
     
-    UIColor *label_color=[UIColor colorWithRed:0.0f green:1.0f blue:0.0f alpha:1.0f];
+    UIColor *label_color=[UIColor colorWithRed:(28.0f/255.0f) green:(152.0f/255.0f) blue:(28.0f/255.0f)  alpha:1.0f];
     _workLabel.textColor=label_color;
-    _commuteLabel.textColor=[UIColor greenColor];
-    _exerciseLabel.textColor=[UIColor greenColor];
-    _socialLabel.textColor=[UIColor greenColor];
-    _errandLabel.textColor=[UIColor greenColor];
-    _otherLabel.textColor=[UIColor greenColor];
+    _commuteLabel.textColor=label_color;
+    _exerciseLabel.textColor=label_color;
+    _socialLabel.textColor=label_color;
+    _errandLabel.textColor=label_color;
+    _otherLabel.textColor=label_color;
 }
 
 
@@ -850,6 +857,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     blurEffectView_dis   = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     blurEffectView_qsave   = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     blurEffectView_option = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurEffectView_continue= [[UIVisualEffectView alloc] initWithEffect:blurEffect];
     blurEffectView_note =[[UIVisualEffectView alloc]initWithEffect:blurEffect];
 #endif
     
@@ -1423,7 +1431,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     {
         
        
-        NSString* myString=@"Quick Save:";
+        NSString* myString=@"Quick Save: ";
         NSString* purpose=[tripManager getPurposeString:last_saved_purpose];
         if([purpose isEqualToString:@"Work-Related"])
         {
@@ -1440,6 +1448,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
         [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
         [tripViewContinue setHidden:NO];
         [[[UIApplication sharedApplication]keyWindow]addSubview:tripViewContinue];
+        //[[[UIApplication sharedApplication]keyWindow]addSubview:blurEffectView_continue];
 #ifdef BLACKIT
         [blackView setHidden:NO];
 #endif
@@ -1448,16 +1457,6 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
         [self blurCommonActions];
         
 #endif
-        
-        
-        /*
-        saveActionSheet = [[UIActionSheet alloc]
-                           initWithTitle:nil
-                           delegate:self
-                           cancelButtonTitle:@"Continue"
-                           destructiveButtonTitle:@"Discard"
-                           otherButtonTitles:@"Save",nil];
-        [saveActionSheet showInView:[UIApplication sharedApplication].keyWindow];*/
     }
 	
 }
@@ -1594,10 +1593,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 #endif
     
 #ifdef BLACKIT
-    //self.blackView.alpha=0.5;
     [blackView setHidden:NO];
-    //[self.view insertSubview:blackView belowSubview:noteView];
-    //[self.view insertSubview:blurEffectView aboveSubview:self.blackView];
 #endif
     [self disableAll];
 
