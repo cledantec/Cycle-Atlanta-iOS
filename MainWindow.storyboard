@@ -695,7 +695,7 @@
                                 </items>
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="p1i-M8-7dG">
-                                <rect key="frame" x="0.0" y="73" width="320" height="407"/>
+                                <rect key="frame" x="0.0" y="73" width="320" height="495"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
@@ -710,7 +710,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xNU-cR-piO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wdh-Ov-px7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2184" y="303.99999999999994"/>
+            <point key="canvasLocation" x="2184" y="303"/>
         </scene>
         <!--Select View Controller-->
         <scene sceneID="Yii-tZ-yWa">
@@ -962,7 +962,7 @@
                                 </items>
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="TGa-zU-p2X">
-                                <rect key="frame" x="0.0" y="73" width="320" height="407"/>
+                                <rect key="frame" x="0.0" y="73" width="320" height="495"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
@@ -977,7 +977,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vYG-Ff-sf7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="WKA-pf-uTw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2530" y="-966.99999999999989"/>
+            <point key="canvasLocation" x="2530" y="-967"/>
         </scene>
         <!--Grid View Controller-->
         <scene sceneID="Nq8-8I-ZtP">

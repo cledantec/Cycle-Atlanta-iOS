@@ -201,7 +201,7 @@ static UIImage *shrinkImage(UIImage *original, CGSize size) {
        
       
        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self presentViewController:picker animated:NO completion:nil];
+        [self presentViewController:picker animated:YES completion:nil];
         }];
   //     [picker release];
     } else {
