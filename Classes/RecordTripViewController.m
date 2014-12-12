@@ -153,6 +153,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     noteView.alpha =0;
     
     [_noteViewContinue setHidden:YES];
+    [blurEffectView_continue setHidden:YES];
     [UIView commitAnimations];
     }
     
@@ -173,6 +174,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
             shouldUpdateCounter=YES;
         }
         [tripViewContinue setHidden:YES];
+        [blurEffectView_continue setHidden:YES];
     }
     
 }
@@ -720,13 +722,21 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [self.noteViewContinue setFrame:tripViewContinue.frame];
     self.noteViewContinue.layer.cornerRadius=radius;
     
-    [self.noteViewContinue setAlpha:0.8];
-    [self.noteViewOptionView setAlpha:0.5];
+    [self.noteViewContinue setAlpha:0.5];
+    [self.noteViewOptionView setAlpha:1];
     
-    noteViewOptionView.backgroundColor=[UIColor whiteColor];
+    noteViewOptionView.backgroundColor=[UIColor clearColor];
 
     [self.noteViewContinue  setBackgroundColor:[UIColor grayColor]];
     [blurEffectView_note setFrame:noteViewOptionView.frame];
+    
+    // Here is the white view background, we blur this and not the icons view, as we want the icons to not be blurred. Note that the background view for icons (tripViewOptionView is set to 'clear')
+    UIView* optionView_back=[[UIView alloc]initWithFrame:noteViewOptionView.frame];
+    [optionView_back setBackgroundColor:[UIColor whiteColor]];
+    [optionView_back setAlpha:0.2];
+    
+    [noteView insertSubview:optionView_back belowSubview:noteViewOptionView];
+    
     [noteView insertSubview:blurEffectView_note atIndex:0];
     
     for(UILabel* label in redNoteLabels)
@@ -771,9 +781,11 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     frame=CGRectMake(offset-extra_button_offset, self.tripViewQSave.frame.origin.y+self.tripViewQSave.frame.size.height+spacing+tripView.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [self.tripViewContinue setFrame:frame];
 
+
+    
     [self.tripViewDiscard setBackgroundColor:[UIColor whiteColor]];
     [self.tripViewQSave setBackgroundColor:[UIColor whiteColor]];
-    [self.tripViewOptionView setBackgroundColor:[UIColor whiteColor]];
+    [self.tripViewOptionView setBackgroundColor:[UIColor clearColor]];
     [self.tripViewContinue setBackgroundColor:[UIColor grayColor]];
     
     [self.tripViewDiscard setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -781,10 +793,10 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [self.tripViewQSave setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     // Set alphas..
-    [self.tripViewContinue setAlpha:0.8];
+    [self.tripViewContinue setAlpha:0.5];
     [self.tripViewDiscard setAlpha:0.5];
     [self.tripViewQSave setAlpha:0.5];
-    [self.tripViewOptionView setAlpha:0.5];
+    [self.tripViewOptionView setAlpha:1];
     
     // Rounding
     [self roundTheButton:tripViewDiscard tl_radius:radius tr_radius:radius bl_radius:0.0 br_radius:0.0];
@@ -794,10 +806,14 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [self roundTheButton:blurEffectView_qsave tl_radius:0.0 tr_radius:0.0 bl_radius:radius br_radius:radius];
     
     [self roundTheButton:tripViewContinue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
-    
+    [self roundTheButton:blurEffectView_continue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
     
     frame=CGRectMake(tripView.frame.origin.x, tripView.frame.origin.y, tripView.frame.size.width, tripViewQSave.frame.origin.y-tripViewDiscard.frame.origin.y+tripViewQSave.frame.size.height);
     [tripView setFrame:frame];
+    
+     frame=CGRectMake(0,0, tripViewOptionView.frame.size.width, tripViewOptionView.frame.size.height);
+    
+    
     
     /// BLURRING
     [blurEffectView_dis setFrame:tripViewDiscard.frame];
@@ -810,8 +826,18 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [blur_superView addSubview:blurEffectView_dis];
     [blur_superView addSubview:blurEffectView_option];
     [blur_superView addSubview:blurEffectView_qsave];
+    
+    
+   // Here is the white view background, we blur this and not the icons view, as we want the icons to not be blurred. Note that the background view for icons (tripViewOptionView is set to 'clear')
+    UIView* optionView_back=[[UIView alloc]initWithFrame:tripViewOptionView.frame];
+    [optionView_back setBackgroundColor:[UIColor whiteColor]];
+    [optionView_back setAlpha:0.2];
+   
+   [tripView insertSubview:optionView_back belowSubview:tripViewOptionView];
+    
     [tripView insertSubview:blur_superView atIndex:0];
     [tripViewContinue addSubview:blurEffectView_continue];
+    
     //[tripViewContinue insertSubview:blurEffectView_continue atIndex:0];
     // Fit all labels
     _workLabel.adjustsFontSizeToFitWidth = YES;
@@ -855,8 +881,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 - (void)viewDidLoad
 {
     
-    // Setting Trip View's elements programatically
-    //[self setTripViewElements];
+
     UITapGestureRecognizer *tapImageRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissGrids)];
 #ifdef BLACKIT
     blackView=[[UIView alloc]initWithFrame:self.view.frame];
@@ -1460,6 +1485,8 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
         tripViewVisible=true;
         [self viewSlideInFromBottomToTop:tripView withDuration:kAnimationDuration];
         [tripViewContinue setHidden:NO];
+        [blurEffectView_continue setHidden:NO];
+        [[[UIApplication sharedApplication]keyWindow]addSubview:blurEffectView_continue];
         [[[UIApplication sharedApplication]keyWindow]addSubview:tripViewContinue];
 #ifdef BLACKIT
         [blackView setHidden:NO];
@@ -1490,8 +1517,10 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     noteView.backgroundColor=[UIColor clearColor];
     [self viewSlideInFromBottomToTop:noteView withDuration:kAnimationDuration];
     [_noteViewContinue setHidden:NO];
-    [[[UIApplication sharedApplication]keyWindow]addSubview:_noteViewContinue];
-    
+    [blurEffectView_continue setHidden:NO];
+   
+    [[[UIApplication sharedApplication]keyWindow]addSubview:blurEffectView_continue];
+     [[[UIApplication sharedApplication]keyWindow]addSubview:_noteViewContinue];
 }
 
  -(void) saveSingleTrip:(NSInteger) index

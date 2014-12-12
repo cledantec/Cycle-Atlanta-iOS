@@ -126,6 +126,7 @@ static UIImage *shrinkImage(UIImage *original, CGSize size);
 
 - (IBAction)shootPictureOrVideo:(id)sender {
     [self getMediaFromSource:UIImagePickerControllerSourceTypeCamera];
+    // [self getMediaFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
 }
 
 - (IBAction)selectExistingPictureOrVideo:(id)sender {
@@ -189,11 +190,20 @@ static UIImage *shrinkImage(UIImage *original, CGSize size) {
         //NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         //picker.mediaTypes = mediaTypes;
-        //picker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+         picker.sourceType = sourceType;
+       // picker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+       // picker.allowsEditing=YES;
         picker.delegate = self;
-        picker.sourceType = sourceType;
-        [self presentViewController:picker animated:YES completion:nil];
-//        [picker release];
+       
+     //   picker.mediaTypes =
+      //  @[(NSString *) kUTTypeImage,
+       //   (NSString *) kUTTypeMovie];
+       
+      
+       [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self presentViewController:picker animated:NO completion:nil];
+        }];
+  //     [picker release];
     } else {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:@"Error accessing media"
