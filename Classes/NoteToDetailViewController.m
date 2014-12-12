@@ -8,7 +8,6 @@
 
 #import "NoteToDetailViewController.h"
 #import "NoteManager.h"
-#import "PickerViewController.h"
 
 
 
@@ -99,11 +98,11 @@
     [[NSUserDefaults standardUserDefaults] setInteger:3 forKey: @"pickerCategory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
+   /* UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow"
                                                          bundle: nil];
     PickerViewController *pickerViewController = [[storyboard instantiateViewControllerWithIdentifier:@"Picker"] initWithNibName:@"Picker" bundle:nil];
     [pickerViewController setDelegate:recordTripVC];
-    [self presentViewController:pickerViewController animated:YES completion:nil];
+    [self presentViewController:pickerViewController animated:YES completion:nil];*/
     
     [notesToDetail removeObjectAtIndex:0];
     NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:notesToDetail];

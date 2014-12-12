@@ -24,7 +24,6 @@
 #import "TripPurposeDelegate.h"
 #import "LoadingView.h"
 #import "NoteViewController.h"
-#import "PickerViewController.h"
 #import "Note.h"
 #import "NoteManager.h"
 
