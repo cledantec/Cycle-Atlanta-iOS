@@ -45,7 +45,6 @@
 #import "MapViewController.h"
 #import "NoteViewController.h"
 #import "PersonalInfoViewController.h"
-#import "PickerViewController.h"
 #import "RecordTripViewController.h"
 #import "ReminderManager.h"
 #import "TripManager.h"
@@ -53,9 +52,8 @@
 #import "Trip.h"
 #import "User.h"
 #import "NoteToDetailViewController.h"
-#import "GridViewController.h"
-#import "UIImage+ImageEffects.m"
 #import "GlobalVars.h"
+#import "CustomPickerDataSource.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 

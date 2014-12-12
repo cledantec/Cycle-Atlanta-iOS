@@ -47,6 +47,9 @@
 #import "CycleAtlantaAppDelegate.h"
 #import "Note.h"
 #import "UIImage+ImageEffects.h"
+#import "TripDetailViewController.h"
+#import "DetailViewController.h"
+
 @class ReminderManager;
 @class TripManager;
 @class NoteManager;
