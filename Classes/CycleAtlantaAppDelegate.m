@@ -201,6 +201,7 @@
 {
     //always turnon location updating when active.
     CycleAtlantaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.locationManager requestAlwaysAuthorization];
     [appDelegate.locationManager startUpdatingLocation];
 }
 

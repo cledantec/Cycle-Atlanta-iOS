@@ -6,27 +6,15 @@
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>B0C950CA-A398-4435-B5A3-2F8C35DE9C37</string>
-	<key>IDESourceControlProjectName</key>
-	<string>Cycle Atlanta</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>6110CC6252755727643E36F2E3E0B2B306648F28</key>
 		<string>https://github.com/cledantec/Cycle-Atlanta-iOS.git</string>
-		<key>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</key>
-		<string>https://github.com/cledantec/Cycle-Atlanta-iOS.git</string>
-		<key>F206CE05803B2508ED50CE9432466FF66F503FD1</key>
-		<string>https://github.com/cammsaul/NAMenu.git</string>
 	</dict>
-	<key>IDESourceControlProjectPath</key>
-	<string>Cycle Atlanta.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>6110CC6252755727643E36F2E3E0B2B306648F28</key>
-		<string>../..</string>
-		<key>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</key>
-		<string>../../../Cycle-Atlanta-iOS</string>
-		<key>F206CE05803B2508ED50CE9432466FF66F503FD1</key>
-		<string>../../../NAMenu</string>
+		<string>Cycle-Atlanta-iOS/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/cledantec/Cycle-Atlanta-iOS.git</string>
@@ -40,25 +28,9 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>AAF910B1-0360-43C5-AB2F-F2B2CDF947EC</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Cycle-Atlanta-iOS</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>6110CC6252755727643E36F2E3E0B2B306648F28</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Cycle-Atlanta-iOS%202</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F206CE05803B2508ED50CE9432466FF66F503FD1</string>
-			<key>IDESourceControlWCCName</key>
-			<string>NAMenu</string>
+			<string>Cycle-Atlanta-iOS</string>
 		</dict>
 	</array>
 </dict>

@@ -111,7 +111,6 @@
 		C21A109E19DC904F00765511 /* Note.png in Resources */ = {isa = PBXBuildFile; fileRef = C21A109C19DC904F00765511 /* Note.png */; };
 		C261D63D19E70EAB002E1B2D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C261D63C19E70EAB002E1B2D /* Accelerate.framework */; };
 		C2A1189619F5ADFB003C65E4 /* ALToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2A1189519F5ADFB003C65E4 /* ALToastView.m */; };
-		C2A1189819F700DC003C65E4 /* Button_Close_Icon_16.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A1189719F700DC003C65E4 /* Button_Close_Icon_16.png */; };
 		D6B6941B1923F2A8006908C3 /* MainWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */; };
 		D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */; };
 		D6EF02FF192BCFAB00AA67CD /* SaveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF02FD192BCFAB00AA67CD /* SaveButton.png */; };
@@ -270,7 +269,6 @@
 		C261D63E19E753DD002E1B2D /* GlobalVars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalVars.h; sourceTree = "<group>"; };
 		C2A1189419F5ADFB003C65E4 /* ALToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALToastView.h; sourceTree = "<group>"; };
 		C2A1189519F5ADFB003C65E4 /* ALToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALToastView.m; sourceTree = "<group>"; };
-		C2A1189719F700DC003C65E4 /* Button_Close_Icon_16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Button_Close_Icon_16.png; path = ../../../../Downloads/button_close_100849/Button_Close_Icon_16.png; sourceTree = "<group>"; };
 		D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		D6DBCE03196B2B66007BE9C3 /* NoteToDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteToDetailViewController.h; sourceTree = "<group>"; };
 		D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteToDetailViewController.m; sourceTree = "<group>"; };
@@ -451,7 +449,6 @@
 		6411A16A106A05DE00C201F0 /* AppImages */ = {
 			isa = PBXGroup;
 			children = (
-				C2A1189719F700DC003C65E4 /* Button_Close_Icon_16.png */,
 				C21A109B19DC904F00765511 /* Issue.png */,
 				C21A109C19DC904F00765511 /* Note.png */,
 				9D47F909160BA52C00B8B14D /* Default.png */,
@@ -662,7 +659,6 @@
 				9D4648151604EF2600A4F9CB /* failedUpload@2x.png in Resources */,
 				9D4648161604EF2600A4F9CB /* other.png in Resources */,
 				9D4648171604EF2600A4F9CB /* other@2x.png in Resources */,
-				C2A1189819F700DC003C65E4 /* Button_Close_Icon_16.png in Resources */,
 				C21A109D19DC904F00765511 /* Issue.png in Resources */,
 				9D4648181604EF2600A4F9CB /* school.png in Resources */,
 				D6EF0300192BCFAB00AA67CD /* SaveButton@2x.png in Resources */,
