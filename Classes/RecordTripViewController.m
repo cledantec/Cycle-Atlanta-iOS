@@ -76,6 +76,7 @@ BOOL tripViewVisible=false;
 //By default, it is commute
 int last_saved_purpose=0;
 CGFloat radius=6.0;
+BOOL didLayoutSubviews = false;
 
 static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_tl, CGFloat radius_tr, CGFloat radius_bl, CGFloat radius_br ) {
     
@@ -857,8 +858,11 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 
 -(void) viewDidLayoutSubviews
 {
-    [self setTripViewElements];
-    [self setNoteViewElements];
+    if (!didLayoutSubviews) {
+        [self setTripViewElements];
+        [self setNoteViewElements];
+        didLayoutSubviews = true;
+    }
 }
 
 

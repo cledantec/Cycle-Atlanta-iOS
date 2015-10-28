@@ -620,7 +620,7 @@
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = 89JRG4TE28;
+						DevelopmentTeam = XBL4QZCV8Q;
 					};
 				};
 			};
@@ -772,7 +772,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -791,7 +791,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -822,7 +822,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -858,7 +858,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -890,7 +890,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cycle Atlanta_Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
