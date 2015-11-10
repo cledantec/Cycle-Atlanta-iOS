@@ -447,7 +447,8 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     } else {
         oldLocation = nil;
     }
-    NSLog(@"didUpdateToLocation %@ from %@", newLocation, oldLocation);
+    // CDB
+    //NSLog(@"didUpdateToLocation %@ from %@", newLocation, oldLocation);
     
     CLLocationDistance deltaDistance = [newLocation distanceFromLocation:oldLocation];
     
@@ -551,7 +552,8 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)heading {
-    NSLog(@"updateHeading");
+    //CDB
+    //NSLog(@"updateHeading");
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"])
     {
         if (heading.headingAccuracy < 0)
