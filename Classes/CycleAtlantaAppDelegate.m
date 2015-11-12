@@ -142,11 +142,15 @@
     SavedNotesViewController *notesVC = [[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:2];
     [notesVC initNoteManager:noteManager];
     
+    // TODO: storyboard link to here
+    /*
 	UINavigationController	*personalNav	= (UINavigationController*)[tabBarController.viewControllers
                                                                         objectAtIndex:3];
     
 	PersonalInfoViewController *personalVC	= (PersonalInfoViewController *)[personalNav topViewController];
-	personalVC.managedObjectContext			= context;}
+	personalVC.managedObjectContext			= context;
+     */
+}
 
 
 

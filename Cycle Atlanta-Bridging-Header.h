@@ -3,4 +3,7 @@
 //
 
 #import "CycleAtlantaAppDelegate.h"
+#import "ALToastView.h"
+#import "FetchUser.h"
 #import "TripManager.h"
+#import "User.h"

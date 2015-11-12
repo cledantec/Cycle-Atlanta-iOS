@@ -849,14 +849,14 @@
         <scene sceneID="aIm-HD-lB8">
             <objects>
                 <tableViewController id="lGu-9I-fNu" customClass="PersonalInfoViewController" customModule="Cycle_Atlanta" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="m3D-Zd-gEH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="m3D-Zd-gEH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1151"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="POd-Hp-azy" userLabel="Getting Started">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="Wvp-7J-iLw" userLabel="Getting Started with Cycle Atlanta" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Wvp-7J-iLw" userLabel="Getting Started with Cycle Atlanta">
                                         <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wvp-7J-iLw" id="h7a-dL-CjB">
@@ -872,7 +872,7 @@
                                                 </label>
                                             </subviews>
                                             <connections>
-                                                <outletCollection property="gestureRecognizers" destination="hDl-1s-RoP" appends="YES" id="yZN-Db-5Ed"/>
+                                                <outletCollection property="gestureRecognizers" destination="hDl-1s-RoP" appends="YES" id="7SZ-lD-EWn"/>
                                             </connections>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -880,7 +880,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Tell us about yourself" id="Ioj-kh-F7e">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="h4g-Jt-UYw" userLabel="UserAge" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="h4g-Jt-UYw" userLabel="UserAge">
                                         <rect key="frame" x="0.0" y="194" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h4g-Jt-UYw" id="2US-YR-p34">
@@ -904,7 +904,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="djI-J3-lon" userLabel="UserEmail" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="djI-J3-lon" userLabel="UserEmail">
                                         <rect key="frame" x="0.0" y="238" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="djI-J3-lon" id="hxB-Bp-3LQ">
@@ -928,7 +928,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="uhJ-Ds-WTv" userLabel="UserGender" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="uhJ-Ds-WTv" userLabel="UserGender">
                                         <rect key="frame" x="0.0" y="282" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uhJ-Ds-WTv" id="2uJ-L7-mUu">
@@ -952,7 +952,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="03V-7a-bEg" userLabel="UserEthnicity" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="03V-7a-bEg" userLabel="UserEthnicity">
                                         <rect key="frame" x="0.0" y="326" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="03V-7a-bEg" id="bjr-jk-aYT">
@@ -976,7 +976,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="4Fb-v0-yxn" userLabel="UserIncome" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4Fb-v0-yxn" userLabel="UserIncome">
                                         <rect key="frame" x="0.0" y="370" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Fb-v0-yxn" id="pM1-kj-1fS">
@@ -1004,7 +1004,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Your typical commute" id="hjL-xh-xCR" userLabel="Your typical commute">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="VzT-di-IRv" userLabel="HomeZIP" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VzT-di-IRv" userLabel="HomeZIP">
                                         <rect key="frame" x="0.0" y="465" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VzT-di-IRv" id="5U3-uw-CFM">
@@ -1028,7 +1028,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="i3c-Yj-iQn" userLabel="WorkZIP" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="i3c-Yj-iQn" userLabel="WorkZIP">
                                         <rect key="frame" x="0.0" y="509" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i3c-Yj-iQn" id="cMi-ma-Mje">
@@ -1052,7 +1052,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="f6d-Bh-u3f" userLabel="SchoolZIP" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="f6d-Bh-u3f" userLabel="SchoolZIP">
                                         <rect key="frame" x="0.0" y="553" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f6d-Bh-u3f" id="LUa-aK-98I">
@@ -1080,7 +1080,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="How often do you cycle?" id="kD2-s5-1oI" userLabel="Cycling Frequency">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="0ot-nY-v5R" userLabel="CycleFreq" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0ot-nY-v5R" userLabel="CycleFreq">
                                         <rect key="frame" x="0.0" y="648" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0ot-nY-v5R" id="voL-Y7-q5u">
@@ -1108,7 +1108,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="What kind of rider are you?" id="Kxt-ST-riz" userLabel="Rider Profile">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="PnR-vg-bPU" userLabel="RiderType" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PnR-vg-bPU" userLabel="RiderType">
                                         <rect key="frame" x="0.0" y="743" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PnR-vg-bPU" id="Bzq-iS-s7t">
@@ -1136,7 +1136,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="How long have you been a cyclist?" id="ABR-ce-raj" userLabel="Cycling History">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PersonalInfoTextCell" id="ZhQ-hH-otn" userLabel="RiderType" customClass="PersonalInfoTableViewCell_Text" customModule="Cycle_Atlanta" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ZhQ-hH-otn" userLabel="RiderType">
                                         <rect key="frame" x="0.0" y="838" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZhQ-hH-otn" id="ZpS-lf-0mM">
@@ -1162,6 +1162,57 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Missing previously saved data?" id="NNV-oF-XII" userLabel="Missing previously saved trips?">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vTy-Wl-Hbo" userLabel="Missing previously saved data?">
+                                        <rect key="frame" x="0.0" y="933" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vTy-Wl-Hbo" id="x7k-R7-Cp1">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Download Previously Saved Trips" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0v-8F-LnU">
+                                                    <rect key="frame" x="8" y="11" width="260" height="21"/>
+                                                    <gestureRecognizers/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <gestureRecognizers/>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="tEE-Z8-OCA" appends="YES" id="JUM-cj-EDk"/>
+                                            </connections>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Use magnetometer to add notes?" id="qSS-EH-cLY" userLabel="Use Magnetometer?">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dCw-Yk-ZV6" userLabel="Magnetometer">
+                                        <rect key="frame" x="0.0" y="1028" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dCw-Yk-ZV6" id="Ew8-2B-m2E">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use magnet detection?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6F-tC-Wwr" userLabel="Rider Type">
+                                                    <rect key="frame" x="8" y="11" width="278" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1s5-eb-h5n" userLabel="Magnetometer">
+                                                    <rect key="frame" x="263" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="magnetSwitchChanged:" destination="lGu-9I-fNu" eventType="valueChanged" id="3iG-fd-KlO"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="lGu-9I-fNu" id="Lhq-bZ-lbg"/>
@@ -1175,6 +1226,8 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="1200"/>
                     <connections>
                         <outlet property="picker" destination="n02-Qz-uhM" id="RNR-Xb-n5S"/>
                         <outlet property="pickerToolbar" destination="zwO-ka-YOv" id="swa-iY-lzI"/>
@@ -1185,6 +1238,7 @@
                         <outlet property="userEthnicity" destination="7vA-Gz-uF0" id="EuS-vc-yrY"/>
                         <outlet property="userGender" destination="PVo-IN-0m0" id="gZZ-J4-1q6"/>
                         <outlet property="userIncome" destination="2na-6m-zCO" id="nBq-Gc-CXM"/>
+                        <outlet property="userMagnetometer" destination="1s5-eb-h5n" id="oy8-lD-YHo"/>
                         <outlet property="userRiderHistory" destination="YJe-C6-VIa" id="57B-vp-q7p"/>
                         <outlet property="userRiderType" destination="vpe-rP-byc" id="FPn-84-iw2"/>
                         <outlet property="userZipHome" destination="NS6-YT-DxL" id="zJ5-Bx-mAd"/>
@@ -1213,9 +1267,14 @@
                         </barButtonItem>
                     </items>
                 </toolbar>
-                <tapGestureRecognizer id="hDl-1s-RoP">
+                <tapGestureRecognizer id="hDl-1s-RoP" userLabel="Instructions Tap">
                     <connections>
                         <action selector="OpenInstructions:" destination="lGu-9I-fNu" id="ijU-Dq-JE2"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="tEE-Z8-OCA" userLabel="Redownload Tap">
+                    <connections>
+                        <action selector="AttemptRedownload:" destination="lGu-9I-fNu" id="hLk-AR-Vdm"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
