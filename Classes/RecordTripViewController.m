@@ -56,6 +56,7 @@
 #import "CustomPickerDataSource.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+#define IS_WIDESCREEN ( [ [ UIScreen mainScreen ] bounds ].size.height >= 568 )
 
 @implementation RecordTripViewController
 @synthesize tripManager, noteManager;
@@ -721,20 +722,20 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     // The Continue button
     frame=CGRectMake(offset, self.noteViewOptionView.frame.origin.y+self.noteViewOptionView.frame.size.height+spacing, screenWidth-(offset*2), buttonHeight);
     [self.noteViewContinue setFrame:tripViewContinue.frame];
-    self.noteViewContinue.layer.cornerRadius=radius;
+    //self.noteViewContinue.layer.cornerRadius=radius;
     
-    [self.noteViewContinue setAlpha:0.5];
+    [self.noteViewContinue setAlpha:1];
     [self.noteViewOptionView setAlpha:1];
     
     noteViewOptionView.backgroundColor=[UIColor clearColor];
 
-    [self.noteViewContinue  setBackgroundColor:[UIColor grayColor]];
+    //[self.noteViewContinue  setBackgroundColor:[UIColor grayColor]];
     [blurEffectView_note setFrame:noteViewOptionView.frame];
     
     // Here is the white view background, we blur this and not the icons view, as we want the icons to not be blurred. Note that the background view for icons (tripViewOptionView is set to 'clear')
     UIView* optionView_back=[[UIView alloc]initWithFrame:noteViewOptionView.frame];
     [optionView_back setBackgroundColor:[UIColor whiteColor]];
-    [optionView_back setAlpha:0.2];
+    [optionView_back setAlpha:1];
     
     [noteView insertSubview:optionView_back belowSubview:noteViewOptionView];
     
@@ -765,6 +766,15 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     CGFloat extra_button_offset=1.5;
    // CGFloat screenHeight = screenRect.size.height;
     
+    //CDB- Move the start button.
+    /*
+//    frame=CGRectMake(offset-extra_button_offset, parentView.frame.origin.y+parentView.frame.size.height-buttonHeight, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
+//        frame=CGRectMake(25,200,100,100);
+  //      [startButton setFrame:frame];
+    startButton.bounds=CGRectMake(0, CGRectGetMaxY(parentView.frame)-startButton.frame.size.height, 320, CGRectGetMaxY(parentView.frame));
+    NSLog(@"Start button origin is %f",startButton.frame.origin.y);
+     */
+    
     // First the discard button
     frame=CGRectMake(offset-extra_button_offset, tripViewDiscard.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [tripViewDiscard setFrame:frame];
@@ -773,30 +783,38 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     // Now the option view
     frame=CGRectMake(offset, tripViewDiscard.frame.origin.y+tripViewDiscard.frame.size.height+1, screenWidth-(offset*2), self.tripViewOptionView.frame.size.height);
     [self.tripViewOptionView setFrame:frame];
-      NSLog(@"Y pos is %f", tripViewQSave.frame.origin.y);
+    NSLog(@"Y pos is %f", tripViewQSave.frame.origin.y);
+    
     // Finally the save button
     frame=CGRectMake(offset-extra_button_offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height+1, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
     [self.tripViewQSave setFrame:frame];
     
-    // The Continue button
-    frame=CGRectMake(offset-extra_button_offset, self.tripViewQSave.frame.origin.y+self.tripViewQSave.frame.size.height+spacing+tripView.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
-    [self.tripViewContinue setFrame:frame];
-
-
     
-    [self.tripViewDiscard setBackgroundColor:[UIColor whiteColor]];
+    // The Continue button
+    //CDB
+   //frame=CGRectMake(offset-extra_button_offset, self.tripViewQSave.frame.origin.y+self.tripViewQSave.frame.size.height+spacing+tripView.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
+    //frame=CGRectMake(offset-extra_button_offset, self.tripViewOptionView.frame.origin.y+self.tripViewOptionView.frame.size.height+spacing+tripView.frame.origin.y, screenWidth-(offset*2)+extra_button_offset*2, buttonHeight);
+    //frame=startButton.frame;
+    //[self.tripViewContinue setFrame:frame];
+    
+    UIColor *btn_color=[UIColor colorWithRed:(240.0f/255.0f) green:(240.0f/255.0f) blue:(240.0f/255.0f)  alpha:1.0f];
+
+    //[self.tripViewDiscard setBackgroundColor:btn_color];
     [self.tripViewQSave setBackgroundColor:[UIColor whiteColor]];
     [self.tripViewOptionView setBackgroundColor:[UIColor clearColor]];
-    [self.tripViewContinue setBackgroundColor:[UIColor grayColor]];
+    //[self.tripViewContinue setBackgroundColor:btn_color];
     
-    [self.tripViewDiscard setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.tripViewContinue setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.tripViewDiscard setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.tripViewContinue setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.tripViewQSave setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     // Set alphas..
-    [self.tripViewContinue setAlpha:0.5];
-    [self.tripViewDiscard setAlpha:0.5];
-    [self.tripViewQSave setAlpha:0.5];
+    // CDB - these were 0.5
+    [self.tripViewContinue setAlpha:1];
+    [self.tripViewDiscard setAlpha:1];
+    //CDB
+    //[self.tripViewQSave setAlpha:0.5];
+    [self.tripViewQSave setAlpha:0];
     [self.tripViewOptionView setAlpha:1];
     
     // Rounding
@@ -806,8 +824,8 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [self roundTheButton:tripViewQSave tl_radius:0.0 tr_radius:0.0 bl_radius:radius br_radius:radius];
     [self roundTheButton:blurEffectView_qsave tl_radius:0.0 tr_radius:0.0 bl_radius:radius br_radius:radius];
     
-    [self roundTheButton:tripViewContinue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
-    [self roundTheButton:blurEffectView_continue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
+    //[self roundTheButton:tripViewContinue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
+    //[self roundTheButton:blurEffectView_continue tl_radius:radius tr_radius:radius bl_radius:radius br_radius:radius];
     
     frame=CGRectMake(tripView.frame.origin.x, tripView.frame.origin.y, tripView.frame.size.width, tripViewQSave.frame.origin.y-tripViewDiscard.frame.origin.y+tripViewQSave.frame.size.height);
     [tripView setFrame:frame];
@@ -817,10 +835,10 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     
     
     /// BLURRING
-    [blurEffectView_dis setFrame:tripViewDiscard.frame];
+//    [blurEffectView_dis setFrame:tripViewDiscard.frame];
     [blurEffectView_option setFrame:tripViewOptionView.frame];
     [blurEffectView_qsave setFrame:tripViewQSave.frame];
-    [blurEffectView_continue setFrame:tripViewContinue.frame];
+//    [blurEffectView_continue setFrame:tripViewContinue.frame];
     frame=CGRectMake(0, 0, tripView.frame.size.width, tripView.frame.size.height);
     UIView* blur_superView=[[UIView alloc]initWithFrame:frame];
     
@@ -832,12 +850,16 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
    // Here is the white view background, we blur this and not the icons view, as we want the icons to not be blurred. Note that the background view for icons (tripViewOptionView is set to 'clear')
     UIView* optionView_back=[[UIView alloc]initWithFrame:tripViewOptionView.frame];
     [optionView_back setBackgroundColor:[UIColor whiteColor]];
-    [optionView_back setAlpha:0.2];
+    
+    //CDB
+    //[optionView_back setAlpha:0.2];
+    [optionView_back setAlpha:1.0];
+
    
    [tripView insertSubview:optionView_back belowSubview:tripViewOptionView];
     
     [tripView insertSubview:blur_superView atIndex:0];
-    [tripViewContinue addSubview:blurEffectView_continue];
+    //[tripViewContinue addSubview:blurEffectView_continue];
     
     //[tripViewContinue insertSubview:blurEffectView_continue atIndex:0];
     // Fit all labels
@@ -861,6 +883,56 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 -(void) viewDidLayoutSubviews
 {
     if (!didLayoutSubviews) {
+        // CDB - a terrible hack to adjust the automatically-created constraints on the iPhone 4s
+        // only, to ensure the start button is on the screen.
+        if (!IS_WIDESCREEN) {
+            for (int i=0;i<[self.view constraints].count; i++) {
+                // See if this constraint is on the start button.
+                if (([self.view constraints][i].firstItem == startButton) &&
+                    ([self.view constraints][i].firstAttribute == NSLayoutAttributeTop)) {
+                    [self.view constraints][i].constant -= 90;
+                } else if (([self.view constraints][i].secondItem == startButton) &&
+                           ([self.view constraints][i].secondAttribute == NSLayoutAttributeTop)) {
+                    [self.view constraints][i].constant -= 90;
+                }
+                // See if this constraint is on the trip view.
+                if (([self.view constraints][i].firstItem == tripView) &&
+                    ([self.view constraints][i].firstAttribute == NSLayoutAttributeTop)) {
+                    [self.view constraints][i].constant -= 90;
+                } else if (([self.view constraints][i].secondItem == tripView) &&
+                           ([self.view constraints][i].secondAttribute == NSLayoutAttributeTop)) {
+                    [self.view constraints][i].constant -= 90;
+                }
+                // See if this constraint is on the note view.
+                if (([self.view constraints][i].firstItem == noteView) &&
+                    ([self.view constraints][i].firstAttribute == NSLayoutAttributeTop)) {
+                    [self.view constraints][i].constant -= 90;
+                } else if (([self.view constraints][i].secondItem == noteView) &&
+                           ([self.view constraints][i].secondAttribute == NSLayoutAttributeTop)) {
+                    [self.view constraints][i].constant -= 90;
+                }
+                //NSLog(@"Constraint %d: %ld", i, (long)[self.view constraints][i].firstItem);
+            }
+            for (int i=0;i<[self.tripView constraints].count; i++) {
+                if (([self.tripView constraints][i].firstItem == tripViewContinue) &&
+                    ([self.tripView constraints][i].firstAttribute == NSLayoutAttributeTop)) {
+                    [self.tripView constraints][i].constant -= 90;
+                } else if (([self.tripView constraints][i].secondItem == tripViewContinue) &&
+                           ([self.tripView constraints][i].secondAttribute == NSLayoutAttributeTop)) {
+                    [self.tripView constraints][i].constant -= 90;
+                }
+            }
+            for (int i=0;i<[self.noteView constraints].count; i++) {
+                if (([self.noteView constraints][i].firstItem == self.noteViewContinue) &&
+                    ([self.noteView constraints][i].firstAttribute == NSLayoutAttributeTop)) {
+                    [self.noteView constraints][i].constant -= 90;
+                } else if (([self.noteView constraints][i].secondItem == self.noteViewContinue) &&
+                           ([self.noteView constraints][i].secondAttribute == NSLayoutAttributeTop)) {
+                    [self.noteView constraints][i].constant -= 90;
+                }
+            }
+        }
+        [self.tripView setFrame:CGRectMake(tripView.frame.origin.x, tripView.frame.origin.y-90, tripView.frame.size.width, tripView.frame.size.height)];
         [self setTripViewElements];
         [self setNoteViewElements];
         didLayoutSubviews = true;
@@ -1010,6 +1082,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
          [self.locationManager startUpdatingHeading];
          }
     }
+
     
     // Shows alert if there is any magnet notes to be detailed
     NSData *data1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"notesToDetail"];
@@ -1070,9 +1143,8 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 - (UIButton *)createStartButton
 {
     
-    
-   // CGRect frame=CGRectMake(self.view.frame.origin.x, + self.view.frame.origin.y+ self.view.frame.size.height-18, self.view.frame.size.width, 18);
-  //  [startButton setFrame:frame];
+    //CGRect frame=CGRectMake(self.view.frame.origin.x, + self.view.frame.origin.y+ self.view.frame.size.height-18, self.view.frame.size.width, 18);
+    //[startButton setFrame:frame];
     
     UIImage *buttonImage = [[UIImage imageNamed:@"StartButton.png"]
                             resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];

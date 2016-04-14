@@ -98,7 +98,10 @@
 #define kInfoURL			@"http://cycleatlanta.org/CycleAtlantaInfo"
 #define kInstructionsURL	@"http://cycleatlanta.org/instructions-v2/"
 
-#define kSaveURL			@"http://fountaincitycycling.org/post/"
+// #define kSaveURL			@"http://fountaincitycycling.org/post/"
+// #define kFetchURL		@"http://cycleatlanta.org/fetch/"
+
+#define kSaveURL			@"http://cycleatlanta.org/post_dev/"
 #define kFetchURL			@"http://cycleatlanta.org/fetch/"
 
 #define kTripNotesPlaceholder	@"Comments"
@@ -106,4 +109,6 @@
 // CustomView metrics used by UIPickerViewDataSource, UIPickerViewDelegate
 #define MAIN_FONT_SIZE		18
 #define MIN_MAIN_FONT_SIZE	16
+
+
 
