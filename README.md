@@ -1,4 +1,4 @@
-#CycleAtanta
+#CycleAtlanta iOS
 
 ## Introduction
 Cycle Atlanta is a smartphone app for recording your bicycle trips. When you use the app, you are giving transportation planners with the City of Atlanta the data they need to make Atlanta a better place to ride.

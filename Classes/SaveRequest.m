@@ -41,6 +41,7 @@
 #import "CycleAtlantaAppDelegate.h"
 #import "SaveRequest.h"
 #import "ZipUtil.h"
+#import "OBAApplication.h"
 
 @implementation SaveRequest
 
@@ -52,9 +53,10 @@
 {
 	if (self = [super init])
 	{
+        NSString* url = [OBAApplication sharedApplication].modelDao.region.baseUrl;
 		// create request.
         self.request = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:kSaveURL]];
+        [request setURL:[NSURL URLWithString:url]];
         [request setHTTPMethod:@"POST"];
         
         // Nab the unique device id hash from our delegate.
@@ -135,7 +137,7 @@
             NSData *postBodyDataZipped = [ZipUtil gzipDeflate:originalData];
             
             NSLog(@"Initializing HTTP POST request to %@ of size %lu, orig size %lu",
-                  kSaveURL, (unsigned long)[postBodyDataZipped length], (unsigned long)[originalData length]);
+                  url, (unsigned long)[postBodyDataZipped length], (unsigned long)[originalData length]);
             
             [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[postBodyDataZipped length]] forHTTPHeaderField:@"Content-Length"];
             //set the POST body

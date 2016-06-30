@@ -11,8 +11,43 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		26109E061D00837F006EADB9 /* OBALocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26109E051D00837F006EADB9 /* OBALocationManager.m */; };
+		26109E091D0083B9006EADB9 /* OBAListWithRangeAndReferencesV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 26109E081D0083B9006EADB9 /* OBAListWithRangeAndReferencesV2.m */; };
+		26109E0C1D0083E1006EADB9 /* OBAHasReferencesV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 26109E0B1D0083E1006EADB9 /* OBAHasReferencesV2.m */; };
+		26109E111D00843F006EADB9 /* OBAReferencesV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 26109E101D00843F006EADB9 /* OBAReferencesV2.m */; };
+		26109E141D00845C006EADB9 /* OBAAgencyV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 26109E131D00845C006EADB9 /* OBAAgencyV2.m */; };
+		2658517E1D3039A500C1304D /* RegionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2658517D1D3039A500C1304D /* RegionManager.m */; };
+		2684F4CE1CDA4A9F00BEC015 /* NSArray+OBAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4CD1CDA4A9F00BEC015 /* NSArray+OBAAdditions.m */; };
+		2684F4D31CDA4E4900BEC015 /* OBARegionBoundsV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4D01CDA4E4900BEC015 /* OBARegionBoundsV2.m */; };
+		2684F4D41CDA4E4900BEC015 /* OBARegionV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4D21CDA4E4900BEC015 /* OBARegionV2.m */; };
+		2684F4D71CDA508900BEC015 /* OBARegionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4D61CDA508900BEC015 /* OBARegionHelper.m */; };
+		2684F4DA1CDA51C900BEC015 /* OBAApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4D91CDA51C900BEC015 /* OBAApplication.m */; };
+		2684F4E11CDA546800BEC015 /* OBAModelDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4DD1CDA546800BEC015 /* OBAModelDAO.m */; };
+		2684F4E21CDA546800BEC015 /* OBAModelDAOUserPreferencesImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4DF1CDA546800BEC015 /* OBAModelDAOUserPreferencesImpl.m */; };
+		2684F4EA1CDA61E300BEC015 /* OBACommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4E51CDA61E300BEC015 /* OBACommon.m */; };
+		2684F4EB1CDA61E300BEC015 /* OBADateHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4E81CDA61E300BEC015 /* OBADateHelpers.m */; };
+		2684F4EE1CDA61F200BEC015 /* OBALogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4ED1CDA61F200BEC015 /* OBALogger.m */; };
+		2684F4FD1CDA626A00BEC015 /* JsonUrlFetcherImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4F11CDA626A00BEC015 /* JsonUrlFetcherImpl.m */; };
+		2684F4FE1CDA626A00BEC015 /* OBADataSourceConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4F41CDA626A00BEC015 /* OBADataSourceConfig.m */; };
+		2684F4FF1CDA626A00BEC015 /* OBAJsonDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4F61CDA626A00BEC015 /* OBAJsonDataSource.m */; };
+		2684F5001CDA626A00BEC015 /* OBAModelFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4F81CDA626A00BEC015 /* OBAModelFactory.m */; };
+		2684F5011CDA626A00BEC015 /* OBAModelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4FA1CDA626A00BEC015 /* OBAModelService.m */; };
+		2684F5021CDA626A00BEC015 /* OBAModelServiceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2684F4FC1CDA626A00BEC015 /* OBAModelServiceRequest.m */; };
+		26DF6AE91D0090E600804F15 /* OBACallMethodJsonDigesterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6AD81D0090E600804F15 /* OBACallMethodJsonDigesterRule.m */; };
+		26DF6AEA1D0090E600804F15 /* OBACreateObjectJsonDigesterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6ADA1D0090E600804F15 /* OBACreateObjectJsonDigesterRule.m */; };
+		26DF6AEB1D0090E600804F15 /* OBAJsonDigester.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6ADC1D0090E600804F15 /* OBAJsonDigester.m */; };
+		26DF6AEC1D0090E600804F15 /* OBASelectorJsonDigesterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6ADE1D0090E600804F15 /* OBASelectorJsonDigesterRule.m */; };
+		26DF6AED1D0090E600804F15 /* OBASetCoordinatePropertyJsonDigesterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6AE01D0090E600804F15 /* OBASetCoordinatePropertyJsonDigesterRule.m */; };
+		26DF6AEE1D0090E600804F15 /* OBASetDatePropertyJsonDigesterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6AE21D0090E600804F15 /* OBASetDatePropertyJsonDigesterRule.m */; };
+		26DF6AEF1D0090E600804F15 /* OBASetLocationPropertyJsonDigesterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6AE41D0090E600804F15 /* OBASetLocationPropertyJsonDigesterRule.m */; };
+		26DF6AF01D0090E600804F15 /* OBASetNextOBAJsonDigesterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6AE61D0090E600804F15 /* OBASetNextOBAJsonDigesterRule.m */; };
+		26DF6AF11D0090E600804F15 /* OBASetPropertyJsonDigesterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6AE81D0090E600804F15 /* OBASetPropertyJsonDigesterRule.m */; };
+		26DF6AF51D0091F400804F15 /* OBASphericalGeometryLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6AF41D0091F400804F15 /* OBASphericalGeometryLibrary.m */; };
+		26DF6AF81D00921E00804F15 /* OBACoordinateBounds.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6AF71D00921E00804F15 /* OBACoordinateBounds.m */; };
+		26DF6AFB1D00924A00804F15 /* OBAURLHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 26DF6AFA1D00924A00804F15 /* OBAURLHelpers.m */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
+		59D481A3C4C16131F6BA9FAA /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26FB1F198383A8C7975E1BC4 /* Pods.framework */; };
 		6411996210683D7500C201F0 /* RecordTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6411996110683D7500C201F0 /* RecordTripViewController.m */; };
 		6411996D10683DCD00C201F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6411996C10683DCD00C201F0 /* CoreLocation.framework */; };
 		64119AAD1068672100C201F0 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64119AAA1068672100C201F0 /* CustomView.m */; };
@@ -126,10 +161,85 @@
 		1D3623250D0F684500981E51 /* CycleAtlantaAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CycleAtlantaAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* Cycle Atlanta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cycle Atlanta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		26109E041D00837F006EADB9 /* OBALocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBALocationManager.h; sourceTree = "<group>"; };
+		26109E051D00837F006EADB9 /* OBALocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBALocationManager.m; sourceTree = "<group>"; };
+		26109E071D0083B9006EADB9 /* OBAListWithRangeAndReferencesV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAListWithRangeAndReferencesV2.h; sourceTree = "<group>"; };
+		26109E081D0083B9006EADB9 /* OBAListWithRangeAndReferencesV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAListWithRangeAndReferencesV2.m; sourceTree = "<group>"; };
+		26109E0A1D0083E1006EADB9 /* OBAHasReferencesV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAHasReferencesV2.h; sourceTree = "<group>"; };
+		26109E0B1D0083E1006EADB9 /* OBAHasReferencesV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAHasReferencesV2.m; sourceTree = "<group>"; };
+		26109E0E1D008406006EADB9 /* OBAReferencesV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAReferencesV2.h; sourceTree = "<group>"; };
+		26109E101D00843F006EADB9 /* OBAReferencesV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAReferencesV2.m; sourceTree = "<group>"; };
+		26109E121D00845C006EADB9 /* OBAAgencyV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAAgencyV2.h; sourceTree = "<group>"; };
+		26109E131D00845C006EADB9 /* OBAAgencyV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAAgencyV2.m; sourceTree = "<group>"; };
+		2658517C1D3039A500C1304D /* RegionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionManager.h; sourceTree = "<group>"; };
+		2658517D1D3039A500C1304D /* RegionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionManager.m; sourceTree = "<group>"; };
+		2684F4CC1CDA4A9F00BEC015 /* NSArray+OBAAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+OBAAdditions.h"; sourceTree = "<group>"; };
+		2684F4CD1CDA4A9F00BEC015 /* NSArray+OBAAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+OBAAdditions.m"; sourceTree = "<group>"; };
+		2684F4CF1CDA4E4900BEC015 /* OBARegionBoundsV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBARegionBoundsV2.h; sourceTree = "<group>"; };
+		2684F4D01CDA4E4900BEC015 /* OBARegionBoundsV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBARegionBoundsV2.m; sourceTree = "<group>"; };
+		2684F4D11CDA4E4900BEC015 /* OBARegionV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBARegionV2.h; sourceTree = "<group>"; };
+		2684F4D21CDA4E4900BEC015 /* OBARegionV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBARegionV2.m; sourceTree = "<group>"; };
+		2684F4D51CDA508900BEC015 /* OBARegionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBARegionHelper.h; sourceTree = "<group>"; };
+		2684F4D61CDA508900BEC015 /* OBARegionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBARegionHelper.m; sourceTree = "<group>"; };
+		2684F4D81CDA51C900BEC015 /* OBAApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAApplication.h; sourceTree = "<group>"; };
+		2684F4D91CDA51C900BEC015 /* OBAApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAApplication.m; sourceTree = "<group>"; };
+		2684F4DC1CDA546800BEC015 /* OBAModelDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAModelDAO.h; sourceTree = "<group>"; };
+		2684F4DD1CDA546800BEC015 /* OBAModelDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAModelDAO.m; sourceTree = "<group>"; };
+		2684F4DE1CDA546800BEC015 /* OBAModelDAOUserPreferencesImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAModelDAOUserPreferencesImpl.h; sourceTree = "<group>"; };
+		2684F4DF1CDA546800BEC015 /* OBAModelDAOUserPreferencesImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAModelDAOUserPreferencesImpl.m; sourceTree = "<group>"; };
+		2684F4E01CDA546800BEC015 /* OBAModelPersistenceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAModelPersistenceLayer.h; sourceTree = "<group>"; };
+		2684F4E41CDA61E300BEC015 /* OBACommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBACommon.h; sourceTree = "<group>"; };
+		2684F4E51CDA61E300BEC015 /* OBACommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBACommon.m; sourceTree = "<group>"; };
+		2684F4E61CDA61E300BEC015 /* OBACommonV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBACommonV1.h; sourceTree = "<group>"; };
+		2684F4E71CDA61E300BEC015 /* OBADateHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBADateHelpers.h; sourceTree = "<group>"; };
+		2684F4E81CDA61E300BEC015 /* OBADateHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBADateHelpers.m; sourceTree = "<group>"; };
+		2684F4E91CDA61E300BEC015 /* OBAImageHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAImageHelpers.h; sourceTree = "<group>"; };
+		2684F4EC1CDA61F200BEC015 /* OBALogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBALogger.h; sourceTree = "<group>"; };
+		2684F4ED1CDA61F200BEC015 /* OBALogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBALogger.m; sourceTree = "<group>"; };
+		2684F4F01CDA626A00BEC015 /* JsonUrlFetcherImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonUrlFetcherImpl.h; sourceTree = "<group>"; };
+		2684F4F11CDA626A00BEC015 /* JsonUrlFetcherImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonUrlFetcherImpl.m; sourceTree = "<group>"; };
+		2684F4F21CDA626A00BEC015 /* OBADataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBADataSource.h; sourceTree = "<group>"; };
+		2684F4F31CDA626A00BEC015 /* OBADataSourceConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBADataSourceConfig.h; sourceTree = "<group>"; };
+		2684F4F41CDA626A00BEC015 /* OBADataSourceConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBADataSourceConfig.m; sourceTree = "<group>"; };
+		2684F4F51CDA626A00BEC015 /* OBAJsonDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAJsonDataSource.h; sourceTree = "<group>"; };
+		2684F4F61CDA626A00BEC015 /* OBAJsonDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAJsonDataSource.m; sourceTree = "<group>"; };
+		2684F4F71CDA626A00BEC015 /* OBAModelFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAModelFactory.h; sourceTree = "<group>"; };
+		2684F4F81CDA626A00BEC015 /* OBAModelFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAModelFactory.m; sourceTree = "<group>"; };
+		2684F4F91CDA626A00BEC015 /* OBAModelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAModelService.h; sourceTree = "<group>"; };
+		2684F4FA1CDA626A00BEC015 /* OBAModelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAModelService.m; sourceTree = "<group>"; };
+		2684F4FB1CDA626A00BEC015 /* OBAModelServiceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAModelServiceRequest.h; sourceTree = "<group>"; };
+		2684F4FC1CDA626A00BEC015 /* OBAModelServiceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAModelServiceRequest.m; sourceTree = "<group>"; };
+		26DF6AD71D0090E600804F15 /* OBACallMethodJsonDigesterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBACallMethodJsonDigesterRule.h; sourceTree = "<group>"; };
+		26DF6AD81D0090E600804F15 /* OBACallMethodJsonDigesterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBACallMethodJsonDigesterRule.m; sourceTree = "<group>"; };
+		26DF6AD91D0090E600804F15 /* OBACreateObjectJsonDigesterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBACreateObjectJsonDigesterRule.h; sourceTree = "<group>"; };
+		26DF6ADA1D0090E600804F15 /* OBACreateObjectJsonDigesterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBACreateObjectJsonDigesterRule.m; sourceTree = "<group>"; };
+		26DF6ADB1D0090E600804F15 /* OBAJsonDigester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAJsonDigester.h; sourceTree = "<group>"; };
+		26DF6ADC1D0090E600804F15 /* OBAJsonDigester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAJsonDigester.m; sourceTree = "<group>"; };
+		26DF6ADD1D0090E600804F15 /* OBASelectorJsonDigesterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBASelectorJsonDigesterRule.h; sourceTree = "<group>"; };
+		26DF6ADE1D0090E600804F15 /* OBASelectorJsonDigesterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBASelectorJsonDigesterRule.m; sourceTree = "<group>"; };
+		26DF6ADF1D0090E600804F15 /* OBASetCoordinatePropertyJsonDigesterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBASetCoordinatePropertyJsonDigesterRule.h; sourceTree = "<group>"; };
+		26DF6AE01D0090E600804F15 /* OBASetCoordinatePropertyJsonDigesterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBASetCoordinatePropertyJsonDigesterRule.m; sourceTree = "<group>"; };
+		26DF6AE11D0090E600804F15 /* OBASetDatePropertyJsonDigesterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBASetDatePropertyJsonDigesterRule.h; sourceTree = "<group>"; };
+		26DF6AE21D0090E600804F15 /* OBASetDatePropertyJsonDigesterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBASetDatePropertyJsonDigesterRule.m; sourceTree = "<group>"; };
+		26DF6AE31D0090E600804F15 /* OBASetLocationPropertyJsonDigesterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBASetLocationPropertyJsonDigesterRule.h; sourceTree = "<group>"; };
+		26DF6AE41D0090E600804F15 /* OBASetLocationPropertyJsonDigesterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBASetLocationPropertyJsonDigesterRule.m; sourceTree = "<group>"; };
+		26DF6AE51D0090E600804F15 /* OBASetNextOBAJsonDigesterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBASetNextOBAJsonDigesterRule.h; sourceTree = "<group>"; };
+		26DF6AE61D0090E600804F15 /* OBASetNextOBAJsonDigesterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBASetNextOBAJsonDigesterRule.m; sourceTree = "<group>"; };
+		26DF6AE71D0090E600804F15 /* OBASetPropertyJsonDigesterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBASetPropertyJsonDigesterRule.h; sourceTree = "<group>"; };
+		26DF6AE81D0090E600804F15 /* OBASetPropertyJsonDigesterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBASetPropertyJsonDigesterRule.m; sourceTree = "<group>"; };
+		26DF6AF31D0091F400804F15 /* OBASphericalGeometryLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBASphericalGeometryLibrary.h; sourceTree = "<group>"; };
+		26DF6AF41D0091F400804F15 /* OBASphericalGeometryLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBASphericalGeometryLibrary.m; sourceTree = "<group>"; };
+		26DF6AF61D00921E00804F15 /* OBACoordinateBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBACoordinateBounds.h; sourceTree = "<group>"; };
+		26DF6AF71D00921E00804F15 /* OBACoordinateBounds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBACoordinateBounds.m; sourceTree = "<group>"; };
+		26DF6AF91D00924A00804F15 /* OBAURLHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBAURLHelpers.h; sourceTree = "<group>"; };
+		26DF6AFA1D00924A00804F15 /* OBAURLHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBAURLHelpers.m; sourceTree = "<group>"; };
+		26DF6AFC1D00926900804F15 /* OBAMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OBAMacros.h; sourceTree = "<group>"; };
+		26FB1F198383A8C7975E1BC4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28D801B30F44B63D00FB423F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Cycle Atlanta_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Cycle Atlanta_Prefix.pch"; path = "../Cycle Atlanta_Prefix.pch"; sourceTree = "<group>"; };
+		60EAEA52A4414B9B982F60AB /* Pods.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.distribution.xcconfig; path = "Pods/Target Support Files/Pods/Pods.distribution.xcconfig"; sourceTree = "<group>"; };
 		6411996010683D7500C201F0 /* RecordTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RecordTripViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6411996110683D7500C201F0 /* RecordTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RecordTripViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6411996C10683DCD00C201F0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -166,7 +276,9 @@
 		64F823E0106AC151001413F8 /* SaveRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveRequest.m; sourceTree = "<group>"; };
 		64F824E4106AFFA4001413F8 /* PersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoViewController.h; sourceTree = "<group>"; };
 		64F824E5106AFFA4001413F8 /* PersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoViewController.m; sourceTree = "<group>"; };
+		89BFB741B7EBC7CB12909BF1 /* Pods.release beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods.release beta.xcconfig"; path = "Pods/Target Support Files/Pods/Pods.release beta.xcconfig"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Cycle Atlanta-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Cycle Atlanta-Info.plist"; path = "../Cycle Atlanta-Info.plist"; sourceTree = "<group>"; };
+		8E8208B45C32300EBD3D28E2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8F1B1D3D164B94C60022B776 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		8F1B1D3E164B94C60022B776 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DetailViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		8F20B0A916F0F08A00031712 /* TripDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripDetailViewController.h; sourceTree = "<group>"; };
@@ -270,6 +382,7 @@
 		C261D63E19E753DD002E1B2D /* GlobalVars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalVars.h; sourceTree = "<group>"; };
 		C2A1189419F5ADFB003C65E4 /* ALToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALToastView.h; sourceTree = "<group>"; };
 		C2A1189519F5ADFB003C65E4 /* ALToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALToastView.m; sourceTree = "<group>"; };
+		C5101F7522144449BF5C7B34 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainWindow.storyboard; sourceTree = "<group>"; };
 		D6DBCE03196B2B66007BE9C3 /* NoteToDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteToDetailViewController.h; sourceTree = "<group>"; };
 		D6DBCE04196B2B66007BE9C3 /* NoteToDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteToDetailViewController.m; sourceTree = "<group>"; };
@@ -277,6 +390,7 @@
 		D6EF02FE192BCFAB00AA67CD /* SaveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SaveButton@2x.png"; sourceTree = "<group>"; };
 		D6EF0301192BED5100AA67CD /* StartButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StartButton.png; sourceTree = "<group>"; };
 		D6EF0302192BED5100AA67CD /* StartButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StartButton@2x.png"; sourceTree = "<group>"; };
+		F5532E87744C724F7D9543B3 /* Pods.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.beta.xcconfig; path = "Pods/Target Support Files/Pods/Pods.beta.xcconfig"; sourceTree = "<group>"; };
 		FB1ACCE91C10C7A7003C5CAA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Cycle Atlanta/Images.xcassets"; sourceTree = "<group>"; };
 		FBE4EAA61BE17F68007C1AF2 /* Cycle Atlanta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cycle Atlanta-Bridging-Header.h"; sourceTree = "<group>"; };
 		FBE4EAA71BE17F68007C1AF2 /* SavedTripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SavedTripsViewController.swift; path = Classes/SavedTripsViewController.swift; sourceTree = "<group>"; };
@@ -303,6 +417,7 @@
 				642F151C1071D9DD0050BCB9 /* MapKit.framework in Frameworks */,
 				642647FD107435A200E43DEF /* AudioToolbox.framework in Frameworks */,
 				64ED1621112F364200E617E1 /* QuartzCore.framework in Frameworks */,
+				59D481A3C4C16131F6BA9FAA /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +427,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2684F4CA1CDA48FB00BEC015 /* Regions */,
 				C2A1189419F5ADFB003C65E4 /* ALToastView.h */,
 				C2A1189519F5ADFB003C65E4 /* ALToastView.m */,
 				D6DBCE08196B2CA7007BE9C3 /* Tools */,
@@ -364,6 +480,142 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		26109E031D008354006EADB9 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				26109E041D00837F006EADB9 /* OBALocationManager.h */,
+				26109E051D00837F006EADB9 /* OBALocationManager.m */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		2684F4CA1CDA48FB00BEC015 /* Regions */ = {
+			isa = PBXGroup;
+			children = (
+				26DF6AF21D0091EA00804F15 /* Location */,
+				26109E031D008354006EADB9 /* Manager */,
+				2684F4EF1CDA624400BEC015 /* Services */,
+				2684F4E31CDA61D800BEC015 /* Helpers */,
+				2684F4DB1CDA545B00BEC015 /* Dao */,
+				2684F4CB1CDA4A4400BEC015 /* Model */,
+				2684F4D81CDA51C900BEC015 /* OBAApplication.h */,
+				2684F4D91CDA51C900BEC015 /* OBAApplication.m */,
+				2684F4D51CDA508900BEC015 /* OBARegionHelper.h */,
+				2684F4D61CDA508900BEC015 /* OBARegionHelper.m */,
+				2658517C1D3039A500C1304D /* RegionManager.h */,
+				2658517D1D3039A500C1304D /* RegionManager.m */,
+			);
+			name = Regions;
+			sourceTree = "<group>";
+		};
+		2684F4CB1CDA4A4400BEC015 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				26DF6AD61D0090D500804F15 /* Json */,
+				26DF6AF61D00921E00804F15 /* OBACoordinateBounds.h */,
+				26DF6AF71D00921E00804F15 /* OBACoordinateBounds.m */,
+				26109E121D00845C006EADB9 /* OBAAgencyV2.h */,
+				26109E131D00845C006EADB9 /* OBAAgencyV2.m */,
+				26109E101D00843F006EADB9 /* OBAReferencesV2.m */,
+				26109E0E1D008406006EADB9 /* OBAReferencesV2.h */,
+				26109E0A1D0083E1006EADB9 /* OBAHasReferencesV2.h */,
+				26109E0B1D0083E1006EADB9 /* OBAHasReferencesV2.m */,
+				26109E071D0083B9006EADB9 /* OBAListWithRangeAndReferencesV2.h */,
+				26109E081D0083B9006EADB9 /* OBAListWithRangeAndReferencesV2.m */,
+				2684F4CF1CDA4E4900BEC015 /* OBARegionBoundsV2.h */,
+				2684F4D01CDA4E4900BEC015 /* OBARegionBoundsV2.m */,
+				2684F4D11CDA4E4900BEC015 /* OBARegionV2.h */,
+				2684F4D21CDA4E4900BEC015 /* OBARegionV2.m */,
+				2684F4CC1CDA4A9F00BEC015 /* NSArray+OBAAdditions.h */,
+				2684F4CD1CDA4A9F00BEC015 /* NSArray+OBAAdditions.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		2684F4DB1CDA545B00BEC015 /* Dao */ = {
+			isa = PBXGroup;
+			children = (
+				2684F4DC1CDA546800BEC015 /* OBAModelDAO.h */,
+				2684F4DD1CDA546800BEC015 /* OBAModelDAO.m */,
+				2684F4DE1CDA546800BEC015 /* OBAModelDAOUserPreferencesImpl.h */,
+				2684F4DF1CDA546800BEC015 /* OBAModelDAOUserPreferencesImpl.m */,
+				2684F4E01CDA546800BEC015 /* OBAModelPersistenceLayer.h */,
+			);
+			name = Dao;
+			sourceTree = "<group>";
+		};
+		2684F4E31CDA61D800BEC015 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				26DF6AF91D00924A00804F15 /* OBAURLHelpers.h */,
+				26DF6AFA1D00924A00804F15 /* OBAURLHelpers.m */,
+				2684F4EC1CDA61F200BEC015 /* OBALogger.h */,
+				2684F4ED1CDA61F200BEC015 /* OBALogger.m */,
+				2684F4E41CDA61E300BEC015 /* OBACommon.h */,
+				2684F4E51CDA61E300BEC015 /* OBACommon.m */,
+				2684F4E61CDA61E300BEC015 /* OBACommonV1.h */,
+				26DF6AFC1D00926900804F15 /* OBAMacros.h */,
+				2684F4E71CDA61E300BEC015 /* OBADateHelpers.h */,
+				2684F4E81CDA61E300BEC015 /* OBADateHelpers.m */,
+				2684F4E91CDA61E300BEC015 /* OBAImageHelpers.h */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		2684F4EF1CDA624400BEC015 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				2684F4F01CDA626A00BEC015 /* JsonUrlFetcherImpl.h */,
+				2684F4F11CDA626A00BEC015 /* JsonUrlFetcherImpl.m */,
+				2684F4F21CDA626A00BEC015 /* OBADataSource.h */,
+				2684F4F31CDA626A00BEC015 /* OBADataSourceConfig.h */,
+				2684F4F41CDA626A00BEC015 /* OBADataSourceConfig.m */,
+				2684F4F51CDA626A00BEC015 /* OBAJsonDataSource.h */,
+				2684F4F61CDA626A00BEC015 /* OBAJsonDataSource.m */,
+				2684F4F71CDA626A00BEC015 /* OBAModelFactory.h */,
+				2684F4F81CDA626A00BEC015 /* OBAModelFactory.m */,
+				2684F4F91CDA626A00BEC015 /* OBAModelService.h */,
+				2684F4FA1CDA626A00BEC015 /* OBAModelService.m */,
+				2684F4FB1CDA626A00BEC015 /* OBAModelServiceRequest.h */,
+				2684F4FC1CDA626A00BEC015 /* OBAModelServiceRequest.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		26DF6AD61D0090D500804F15 /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				26DF6AD71D0090E600804F15 /* OBACallMethodJsonDigesterRule.h */,
+				26DF6AD81D0090E600804F15 /* OBACallMethodJsonDigesterRule.m */,
+				26DF6AD91D0090E600804F15 /* OBACreateObjectJsonDigesterRule.h */,
+				26DF6ADA1D0090E600804F15 /* OBACreateObjectJsonDigesterRule.m */,
+				26DF6ADB1D0090E600804F15 /* OBAJsonDigester.h */,
+				26DF6ADC1D0090E600804F15 /* OBAJsonDigester.m */,
+				26DF6ADD1D0090E600804F15 /* OBASelectorJsonDigesterRule.h */,
+				26DF6ADE1D0090E600804F15 /* OBASelectorJsonDigesterRule.m */,
+				26DF6ADF1D0090E600804F15 /* OBASetCoordinatePropertyJsonDigesterRule.h */,
+				26DF6AE01D0090E600804F15 /* OBASetCoordinatePropertyJsonDigesterRule.m */,
+				26DF6AE11D0090E600804F15 /* OBASetDatePropertyJsonDigesterRule.h */,
+				26DF6AE21D0090E600804F15 /* OBASetDatePropertyJsonDigesterRule.m */,
+				26DF6AE31D0090E600804F15 /* OBASetLocationPropertyJsonDigesterRule.h */,
+				26DF6AE41D0090E600804F15 /* OBASetLocationPropertyJsonDigesterRule.m */,
+				26DF6AE51D0090E600804F15 /* OBASetNextOBAJsonDigesterRule.h */,
+				26DF6AE61D0090E600804F15 /* OBASetNextOBAJsonDigesterRule.m */,
+				26DF6AE71D0090E600804F15 /* OBASetPropertyJsonDigesterRule.h */,
+				26DF6AE81D0090E600804F15 /* OBASetPropertyJsonDigesterRule.m */,
+			);
+			name = Json;
+			sourceTree = "<group>";
+		};
+		26DF6AF21D0091EA00804F15 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				26DF6AF31D0091F400804F15 /* OBASphericalGeometryLibrary.h */,
+				26DF6AF41D0091F400804F15 /* OBASphericalGeometryLibrary.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +630,7 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				FBE4EAA61BE17F68007C1AF2 /* Cycle Atlanta-Bridging-Header.h */,
+				C1728DCBE071EF85D03D5C44 /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -423,6 +676,7 @@
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				28D801B30F44B63D00FB423F /* CoreData.framework */,
 				64ED1620112F364200E617E1 /* QuartzCore.framework */,
+				26FB1F198383A8C7975E1BC4 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -544,6 +798,18 @@
 			path = "Ressources/TabBarIcons V2";
 			sourceTree = "<group>";
 		};
+		C1728DCBE071EF85D03D5C44 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C5101F7522144449BF5C7B34 /* Pods.debug.xcconfig */,
+				F5532E87744C724F7D9543B3 /* Pods.beta.xcconfig */,
+				8E8208B45C32300EBD3D28E2 /* Pods.release.xcconfig */,
+				89BFB741B7EBC7CB12909BF1 /* Pods.release beta.xcconfig */,
+				60EAEA52A4414B9B982F60AB /* Pods.distribution.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D6DBCE06196B2BF0007BE9C3 /* MagnetNotes */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,9 +885,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Cycle Atlanta" */;
 			buildPhases = (
+				505FB18E17FD5B821818F620 /* Check Pods Manifest.lock */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				F0ABE17A47275EDF9A6CBA06 /* Embed Pods Frameworks */,
+				8CB0E6A1F7F08CAFB7DDF5E4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -639,7 +908,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0730;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
 						DevelopmentTeam = LECSLW6UDQ;
@@ -732,6 +1001,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		505FB18E17FD5B821818F620 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8CB0E6A1F7F08CAFB7DDF5E4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0ABE17A47275EDF9A6CBA06 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -739,42 +1056,76 @@
 			files = (
 				FBE4EAAC1BE4082C007C1AF2 /* SavedTripsViewController.m in Sources */,
 				9D3056F5174412F40091B214 /* YLBackgroundView.m in Sources */,
+				26DF6AF01D0090E600804F15 /* OBASetNextOBAJsonDigesterRule.m in Sources */,
 				9D3056F017440BC00091B214 /* YLProgressBar.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				26DF6AEC1D0090E600804F15 /* OBASelectorJsonDigesterRule.m in Sources */,
+				2684F4DA1CDA51C900BEC015 /* OBAApplication.m in Sources */,
+				26109E141D00845C006EADB9 /* OBAAgencyV2.m in Sources */,
 				1D3623260D0F684500981E51 /* CycleAtlantaAppDelegate.m in Sources */,
+				26DF6AF81D00921E00804F15 /* OBACoordinateBounds.m in Sources */,
 				6411996210683D7500C201F0 /* RecordTripViewController.m in Sources */,
 				64119AAD1068672100C201F0 /* CustomView.m in Sources */,
+				26109E091D0083B9006EADB9 /* OBAListWithRangeAndReferencesV2.m in Sources */,
+				26109E061D00837F006EADB9 /* OBALocationManager.m in Sources */,
+				2684F4EE1CDA61F200BEC015 /* OBALogger.m in Sources */,
 				64119AAE1068672100C201F0 /* CustomPickerDataSource.m in Sources */,
+				2684F4FD1CDA626A00BEC015 /* JsonUrlFetcherImpl.m in Sources */,
 				64119F041069ACF800C201F0 /* TripManager.m in Sources */,
+				26109E0C1D0083E1006EADB9 /* OBAHasReferencesV2.m in Sources */,
 				64F823E1106AC151001413F8 /* SaveRequest.m in Sources */,
 				642F15271071DA700050BCB9 /* MapViewController.m in Sources */,
 				642F161D1071ED1C0050BCB9 /* MapCoord.m in Sources */,
 				6426476E1073FEC300E43DEF /* ReminderManager.m in Sources */,
 				D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */,
+				26DF6AEE1D0090E600804F15 /* OBASetDatePropertyJsonDigesterRule.m in Sources */,
+				2684F5011CDA626A00BEC015 /* OBAModelService.m in Sources */,
+				26DF6AE91D0090E600804F15 /* OBACallMethodJsonDigesterRule.m in Sources */,
 				64210F6111350C8500415F1A /* AboutViewController.m in Sources */,
+				26DF6AED1D0090E600804F15 /* OBASetCoordinatePropertyJsonDigesterRule.m in Sources */,
+				2684F4E21CDA546800BEC015 /* OBAModelDAOUserPreferencesImpl.m in Sources */,
+				2684F4EA1CDA61E300BEC015 /* OBACommon.m in Sources */,
 				BAF7B46B19CBBAB800056E5B /* SelectViewController.m in Sources */,
 				645E4EDC1200C1C800EFF0E6 /* LoadingView.m in Sources */,
 				8F5E60661602CBE000D8F85D /* NSString+MD5Addition.m in Sources */,
+				26DF6AEB1D0090E600804F15 /* OBAJsonDigester.m in Sources */,
 				8F5E60671602CBE000D8F85D /* UIDevice+IdentifierAddition.m in Sources */,
 				8F1B1D3F164B94C60022B776 /* DetailViewController.m in Sources */,
 				9D504DA116B6CF4000B99EBC /* ZipUtil.m in Sources */,
+				2684F4EB1CDA61E300BEC015 /* OBADateHelpers.m in Sources */,
+				2684F4CE1CDA4A9F00BEC015 /* NSArray+OBAAdditions.m in Sources */,
+				26DF6AEF1D0090E600804F15 /* OBASetLocationPropertyJsonDigesterRule.m in Sources */,
+				2684F4E11CDA546800BEC015 /* OBAModelDAO.m in Sources */,
 				8FA0AD9416BB4ED800E0E7C4 /* CycleAtlanta.xcdatamodeld in Sources */,
 				8FB7C20D16C55EB9001A8A48 /* NoteManager.m in Sources */,
 				8F9C086416DC9479003EA308 /* Note.m in Sources */,
 				8F9C086716DC9479003EA308 /* Trip.m in Sources */,
 				8F9C086A16DC947A003EA308 /* User.m in Sources */,
+				26DF6AFB1D00924A00804F15 /* OBAURLHelpers.m in Sources */,
 				8F9C086D16DC947A003EA308 /* Coord.m in Sources */,
+				2658517E1D3039A500C1304D /* RegionManager.m in Sources */,
+				2684F4FE1CDA626A00BEC015 /* OBADataSourceConfig.m in Sources */,
 				8FBCD3CA16E0E58100C11EBE /* NoteViewController.m in Sources */,
 				8F25EC7916E13E7C004263D4 /* SavedNotesViewController.m in Sources */,
 				8F20B0AC16F0F08A00031712 /* TripDetailViewController.m in Sources */,
 				8FAD930516F189EE00082B6F /* UIImageViewResizable.m in Sources */,
 				9DD65FBB16FEA3CC00F2EB63 /* ImageResize.m in Sources */,
+				2684F4D41CDA4E4900BEC015 /* OBARegionV2.m in Sources */,
 				C2A1189619F5ADFB003C65E4 /* ALToastView.m in Sources */,
 				FBE4EAB01BE40CEA007C1AF2 /* PersonalInfoViewController.swift in Sources */,
 				8F316F671703161E0087529E /* Model.xcmappingmodel in Sources */,
 				9D8A1BAF171B03E000509FBD /* FetchUser.m in Sources */,
+				26DF6AF11D0090E600804F15 /* OBASetPropertyJsonDigesterRule.m in Sources */,
+				2684F4D71CDA508900BEC015 /* OBARegionHelper.m in Sources */,
 				9D8A1BB2171B03E900509FBD /* FetchTripData.m in Sources */,
 				9D4B4EE61722B8B0005A4CDD /* ProgressView.m in Sources */,
+				2684F4FF1CDA626A00BEC015 /* OBAJsonDataSource.m in Sources */,
+				26DF6AF51D0091F400804F15 /* OBASphericalGeometryLibrary.m in Sources */,
+				26109E111D00843F006EADB9 /* OBAReferencesV2.m in Sources */,
+				26DF6AEA1D0090E600804F15 /* OBACreateObjectJsonDigesterRule.m in Sources */,
+				2684F4D31CDA4E4900BEC015 /* OBARegionBoundsV2.m in Sources */,
+				2684F5021CDA626A00BEC015 /* OBAModelServiceRequest.m in Sources */,
+				2684F5001CDA626A00BEC015 /* OBAModelFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,6 +1134,7 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5101F7522144449BF5C7B34 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -802,6 +1154,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.gatech.ppl.cycleatlanta;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -812,6 +1165,7 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E8208B45C32300EBD3D28E2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -829,6 +1183,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.gatech.ppl.cycleatlanta;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -845,11 +1200,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7682DFBF-AE70-4C0B-AED0-DC1BBCD2D87F";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Distribution;
 		};
 		64577E11106DB5D8003ACBFD /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60EAEA52A4414B9B982F60AB /* Pods.distribution.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -867,6 +1224,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.gatech.ppl.cycleatlanta;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -885,11 +1243,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7682DFBF-AE70-4C0B-AED0-DC1BBCD2D87F";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Beta;
 		};
 		64577E13106DB5E6003ACBFD /* Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5532E87744C724F7D9543B3 /* Pods.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -910,6 +1270,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.gatech.ppl.cycleatlanta;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -928,11 +1289,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7682DFBF-AE70-4C0B-AED0-DC1BBCD2D87F";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = "Release Beta";
 		};
 		64D31CDA108E80E400D52130 /* Release Beta */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89BFB741B7EBC7CB12909BF1 /* Pods.release beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -951,6 +1314,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Cycle Atlanta-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = edu.gatech.ppl.cycleatlanta;
 				PRODUCT_NAME = "Cycle Atlanta";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -962,12 +1326,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Georgia Tech Research Corporation (LECSLW6UDQ)";
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7682DFBF-AE70-4C0B-AED0-DC1BBCD2D87F";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -980,6 +1346,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7682DFBF-AE70-4C0B-AED0-DC1BBCD2D87F";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

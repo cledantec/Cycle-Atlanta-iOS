@@ -39,6 +39,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "ProgressView.h"
+#import "OBARegionHelper.h"
 
 @class TripManager;
 @class NoteManager;
@@ -68,10 +69,22 @@
 @property (nonatomic, assign) BOOL isRecording;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) ProgressView *storeLoadingView;
+@property (nonatomic, strong) OBARegionHelper *regionHelper;
+@property (nonatomic, strong) id regionObserver;
+
+- (void) regionSelected;
+- (void) showRegionListViewController;
+
+/**
+ * Abstracts OBAModelDAO setters / getters and calls the appropriate analytics methods.
+ */
+- (void)writeSetRegionAutomatically:(BOOL) setRegionAutomatically;
+- (BOOL)readSetRegionAutomatically;
 
 
 - (NSString *)applicationDocumentsDirectory;
 - (void)initUniqueIDHash;
+- (void) showRegionSelectMessage;
 
 @end
 

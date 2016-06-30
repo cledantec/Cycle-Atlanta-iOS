@@ -1,4 +1,4 @@
-//
+    //
 //  PersonalInfoViewController.swift
 //  Cycle Atlanta
 //
@@ -11,6 +11,8 @@ import CoreData
 
 class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
 
+    var areViewsHidden = false;
+    
     var managedObjectContext : NSManagedObjectContext?
     var fetchUser : FetchUser?
     var user : User?
@@ -23,6 +25,7 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     var cycleFreqChoice: [String] = ["", "Less than once a month", "Several times per month", "Several times per week", "Daily"]
     var riderTypeChoice: [String] = ["", "Strong & fearless", "Enthused & confident", "Comfortable, but cautious", "Interested, but concerned"]
     var riderHistoryChoice: [String] = ["", "Since childhood", "Several years", "One year or less", "Just trying it out / just started"]
+    var regionsChoice: [String] = [""];
     
     // List of lists for brevity and readability elsewhere.
     var pickerLists: [UITextField] = []
@@ -36,6 +39,8 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     var pickerDataSource: [String] = []
     var pickerTarget: UITextField? = nil
     
+    
+    @IBOutlet weak var regions: UITextField!
     @IBOutlet weak var userAge: UITextField!
     @IBOutlet weak var userEmail: UITextField!
     @IBOutlet weak var userGender: UITextField!
@@ -48,7 +53,8 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     @IBOutlet weak var userRiderType: UITextField!
     @IBOutlet weak var userRiderHistory: UITextField!
     @IBOutlet weak var userMagnetometer: UISwitch!
-
+    @IBOutlet weak var regionSave: UIView!
+    @IBOutlet weak var saveRegionButton: UIButton!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -60,7 +66,9 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     }
 
     @IBAction func OpenInstructions(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string: "http://cycleatlanta.org/instructions-v2")!)
+        let region = OBAApplication.sharedApplication().modelDao.region;
+        let tutorialUrl = region?.tutorialUrl;
+        UIApplication.sharedApplication().openURL(NSURL(string: tutorialUrl ?? "http://cycleatlanta.org/instructions-v2")!)
     }
     
     @IBAction func AttemptRedownload(sender: AnyObject) {
@@ -82,10 +90,14 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideViews();
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! CycleAtlantaAppDelegate
         managedObjectContext = appDelegate.managedObjectContext
+        
+        loadRegions();
 
-        pickerLists = [userAge, userGender, userEthnicity, userIncome, userCycleFreq, userRiderType, userRiderHistory]
+        pickerLists = [userAge, userGender, userEthnicity, userIncome, userCycleFreq, userRiderType, userRiderHistory, regions]
         textFields = [userEmail, userZipHome, userZipWork, userZipSchool]
         
         for pickerList in pickerLists {
@@ -93,10 +105,36 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
             pickerList.inputAccessoryView = pickerToolbar
         }
 
-        pickerDataSource = genderChoice
-        pickerTarget = userGender
+        pickerDataSource = regionsChoice
+        pickerTarget = regions
         
         fetchUser = FetchUser()
+    }
+    
+    func setHideViews() -> Void {
+        areViewsHidden = true;
+    }
+    
+    func hideViews() -> Void {
+        if !areViewsHidden {
+            regionSave.hidden = true;
+        }
+    }
+    
+    @IBAction func onButtonClick(sender: AnyObject) {
+        saveUser();
+        self.dismissViewControllerAnimated(true, completion: {});
+    }
+    
+    func loadRegions() -> Void {
+        let regionsArr = RegionManager.sharedInstance().allRegions;
+        
+        for reg in regionsArr as! [OBARegionV2] {
+            regionsChoice.append(reg.regionName);
+        }
+        
+        let  obaApp = OBAApplication.sharedApplication();
+        regions.text = obaApp.modelDao.region?.regionName;
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -167,6 +205,7 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
             case userCycleFreq: pickerDataSource = cycleFreqChoice
             case userRiderType: pickerDataSource = riderTypeChoice
             case userRiderHistory: pickerDataSource = riderHistoryChoice
+            case regions: pickerDataSource = regionsChoice
             default: pickerDataSource = ageChoice
             }
             
@@ -222,6 +261,7 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     func loadUser() {
         // Loads user from data model to view controller.
         if let u = user {
+            
             userAge.text = loadListField(ageChoice, field: u.age)
             userEmail.text = u.email
             userGender.text = loadListField(genderChoice, field: u.gender)
@@ -254,6 +294,20 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
             u.cyclingFreq = cycleFreqChoice.indexOf(userCycleFreq.text!)
             u.rider_type = riderTypeChoice.indexOf(userRiderType.text!)
             u.rider_history = riderHistoryChoice.indexOf(userRiderHistory.text!)
+            
+            let regionManager = RegionManager.sharedInstance();
+            regionManager.saveRegionName(regions.text);
+            regionManager.saveSetRegionAuto(false);
+            let obaApp = OBAApplication.sharedApplication();
+            let regionArr = regionManager.allRegions;
+            
+            for reg in regionArr as! [OBARegionV2] {
+                if reg.regionName ==  regions.text{
+                    obaApp.modelDao.region = reg;
+                }
+            }
+            
+            
             
             do {
                 try managedObjectContext?.save()

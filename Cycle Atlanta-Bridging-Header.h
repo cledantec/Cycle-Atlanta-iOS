@@ -7,3 +7,5 @@
 #import "FetchUser.h"
 #import "TripManager.h"
 #import "User.h"
+#import "OBAApplication.h"
+#import "RegionManager.h"

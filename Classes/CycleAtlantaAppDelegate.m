@@ -54,6 +54,8 @@
 #import "NoteManager.h"
 #import <CoreData/NSMappingModel.h>
 #import "ProgressView.h"
+#import "OBAApplication.h"
+
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -62,6 +64,8 @@
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
 @implementation CycleAtlantaAppDelegate
+
+
 
 @synthesize window;
 @synthesize tabBarController;
@@ -86,7 +90,36 @@
     [window makeKeyAndVisible];
     [self performSelectorInBackground:@selector(loadPersistentStore) withObject:nil];
      */
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [[OBAApplication sharedApplication] start];
+        self.regionHelper = [[OBARegionHelper alloc] init];
+        [self.regionHelper updateNearestRegion];
+    }
+    return self;
+}
+
+- (void) showRegionSelectMessage {
+    UIAlertController* alert = [UIAlertController
+                                alertControllerWithTitle:@"Alert"
+                                message:@"Region couldn't be found. Please select a region from settings."
+                                preferredStyle:UIAlertControllerStyleAlert];
     
+    UIAlertAction* defaultAction = [UIAlertAction
+                                    actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainWindow" bundle:nil];
+                                        PersonalInfoViewController *myVC = (PersonalInfoViewController *)[storyboard instantiateViewControllerWithIdentifier:@"personalInfo"];
+                                        [myVC setHideViews];
+                                        [self.window.rootViewController presentViewController:myVC animated:YES completion:nil];
+
+                                    }];
+    
+    [alert addAction:defaultAction];
+    [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 -(void)loadPersistentStore
@@ -395,14 +428,41 @@
 	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
+- (void)writeSetRegionAutomatically:(BOOL)setRegionAutomatically {
+    [[OBAApplication sharedApplication].modelDao writeSetRegionAutomatically:setRegionAutomatically];
+    
+}
+
+- (BOOL)readSetRegionAutomatically {
+    BOOL readSetRegionAuto = [OBAApplication sharedApplication].modelDao.readSetRegionAutomatically;
+    
+    return readSetRegionAuto;
+}
+
+- (void)regionSelected {
+//    [_regionNavigationController removeFromParentViewController];
+//    _regionNavigationController = nil;
+//    _regionListViewController = nil;
+//    
+//    [[OBAApplication sharedApplication] refreshSettings];
+//    
+//    self.window.rootViewController = self.tabBarController;
+//    [_window makeKeyAndVisible];
+}
+
+- (void)showRegionListViewController {
+//    _regionListViewController = [[OBARegionListViewController alloc] init];
+//    _regionNavigationController = [[UINavigationController alloc] initWithRootViewController:_regionListViewController];
+//    
+//    self.window.rootViewController = _regionNavigationController;
+}
+
 
 #pragma mark -
 #pragma mark Memory management
 
 - (void)dealloc {
     self.isRecording = nil;
-    
-    
     
 }
 
