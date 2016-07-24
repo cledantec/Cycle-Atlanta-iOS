@@ -56,6 +56,8 @@
     CLLocationManager *locationManager;
     UIView *backgroundView;
     UIImageView *backgroundImage;
+    
+    UIBackgroundTaskIdentifier *bgTask;
 }
 
 @property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
@@ -68,6 +70,8 @@
 @property (nonatomic, assign) BOOL isRecording;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) ProgressView *storeLoadingView;
+
+@property (nonatomic) UIBackgroundTaskIdentifier *bgTask;
 
 
 - (NSString *)applicationDocumentsDirectory;

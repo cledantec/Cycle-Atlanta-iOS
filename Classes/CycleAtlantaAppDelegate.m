@@ -70,6 +70,7 @@
 @synthesize locationManager;
 @synthesize storeLoadingView;
 @synthesize managedObjectContext;
+@synthesize bgTask;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -185,8 +186,36 @@
     }
 }
 
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    CycleAtlantaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.locationManager stopUpdatingLocation];
+    
+    if(appDelegate.isRecording){
+        NSLog(@"BACKGROUNDED and recording"); //set location service to startUpdatingLocation
+        [appDelegate.locationManager requestAlwaysAuthorization];
+        [appDelegate.locationManager setPausesLocationUpdatesAutomatically:false];
+        [appDelegate.locationManager setActivityType:CLActivityTypeAutomotiveNavigation];
+        [appDelegate.locationManager setAllowsBackgroundLocationUpdates:YES];
+        [appDelegate.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+        [appDelegate.locationManager setDistanceFilter:kCLDistanceFilterNone];
+        [appDelegate.locationManager startUpdatingLocation];
+    } else {
+        NSLog(@"BACKGROUNDED and sitting idle"); //set location service to startMonitoringSignificantLocationChanges
+        //[appDelegate.locationManager stopUpdatingLocation];
+        //[appDelegate.locationManager startMonitoringSignificantLocationChanges];
+    }
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"])
+    {
+        NSLog(@"BACKGROUNDED and keep watching magnetic field");
+        [appDelegate.locationManager  startUpdatingHeading];
+    }
+}
+
+
 - (void)applicationDidEnterBackground:(UIApplication *) application
 {
+    /*
     CycleAtlantaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     if(appDelegate.isRecording){
         NSLog(@"BACKGROUNDED and recording"); //set location service to startUpdatingLocation
@@ -201,13 +230,21 @@
         NSLog(@"BACKGROUNDED and keep watching magnetic field");
         [appDelegate.locationManager  startUpdatingHeading];
     }
+     */
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *) application
 {
     //always turnon location updating when active.
     CycleAtlantaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.locationManager stopUpdatingLocation];
+    
     [appDelegate.locationManager requestAlwaysAuthorization];
+    [appDelegate.locationManager setPausesLocationUpdatesAutomatically:false];
+    [appDelegate.locationManager setActivityType:CLActivityTypeAutomotiveNavigation];
+    [appDelegate.locationManager setAllowsBackgroundLocationUpdates:YES];
+    [appDelegate.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    [appDelegate.locationManager setDistanceFilter:kCLDistanceFilterNone];
     [appDelegate.locationManager startUpdatingLocation];
 }
 

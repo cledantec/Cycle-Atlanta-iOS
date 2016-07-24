@@ -106,6 +106,7 @@
     
     id <TripPurposeDelegate> delegate;
    
+    UIBackgroundTaskIdentifier bgTask;
 }
 
 @property (nonatomic,strong) MKMapView* mapView;
@@ -149,6 +150,9 @@
 @property (strong,nonatomic) IBOutlet UIView* blackView;
 @property (nonatomic,strong) IBOutletCollection(UILabel)NSArray* blueNoteLabels;
 @property (nonatomic,strong) IBOutletCollection(UILabel)NSArray* redNoteLabels;
+
+@property (nonatomic) UIBackgroundTaskIdentifier bgTask;
+
 - (IBAction)saveTripType:(id)sender;
 - (IBAction)noteThisOption:(id)sender;
 

@@ -78,6 +78,7 @@ BOOL tripViewVisible=false;
 int last_saved_purpose=0;
 CGFloat radius=6.0;
 BOOL didLayoutSubviews = false;
+@synthesize bgTask;
 
 static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_tl, CGFloat radius_tr, CGFloat radius_bl, CGFloat radius_br ) {
     
@@ -367,7 +368,17 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     }
     locationManager = [[CLLocationManager alloc]init]; // initializing locationManager
     locationManager.delegate = self; // we set the delegate of locationManager to self.
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest; // setting the accuracy
+    
+    [locationManager stopUpdatingLocation];
+    
+    [locationManager requestAlwaysAuthorization];
+    [locationManager setPausesLocationUpdatesAutomatically:false];
+    [locationManager setActivityType:CLActivityTypeOtherNavigation];
+    [locationManager setAllowsBackgroundLocationUpdates:YES];
+    [locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
+    [locationManager setDistanceFilter:kCLDistanceFilterNone];
+    [locationManager startUpdatingLocation];
+    
     return locationManager;
     
  
@@ -377,8 +388,17 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     }
 	
     appDelegate.locationManager = [[CLLocationManager alloc] init];
-    appDelegate.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    //locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    
+    [appDelegate.locationManager stopUpdatingLocation];
+    
+    [appDelegate.locationManager requestAlwaysAuthorization];
+    [appDelegate.locationManager setPausesLocationUpdatesAutomatically:false];
+    [appDelegate.locationManager setActivityType:CLActivityTypeOtherNavigation];
+    [appDelegate.locationManager setAllowsBackgroundLocationUpdates:YES];
+    [appDelegate.locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
+    [appDelegate.locationManager setDistanceFilter:kCLDistanceFilterNone];
+    [appDelegate.locationManager startUpdatingLocation];
+    
     appDelegate.locationManager.delegate = self;
     
     return appDelegate.locationManager;
@@ -481,6 +501,22 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
         // add to CoreData store
         CLLocationDistance distance = [tripManager addCoord:newLocation];
         self.distCounter.text = [NSString stringWithFormat:@"%.1f mi", distance / 1609.344];
+        
+        if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
+            
+        } else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                [self beginBackgroundUpdateTask];
+                
+                /*[NSTimer scheduledTimerWithTimeInterval:120.0
+                                                                   target:self
+                                                                 selector:@selector(endBackgroundUpdateTask:)
+                                                                 userInfo:nil
+                                                                  repeats:NO];
+                 */
+            });
+        }
     }
     
     // 	double mph = ( [trip.distance doubleValue] / 1609.344 ) / ( [trip.duration doubleValue] / 3600. );
@@ -495,6 +531,20 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
          [self locationManager:self.locationManager didUpdateHeading:self.locationManager.heading];
     // }
 }
+
+- (void) beginBackgroundUpdateTask
+{
+    self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [self endBackgroundUpdateTask];
+    }];
+}
+
+- (void) endBackgroundUpdateTask
+{
+    [[UIApplication sharedApplication] endBackgroundTask: self.bgTask];
+    self.bgTask = UIBackgroundTaskInvalid;
+}
+
 
 /******************************************/
 /******************************************/
