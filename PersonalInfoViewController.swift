@@ -56,25 +56,25 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     
     init (context: NSManagedObjectContext) {
         self.managedObjectContext = context
-        super.init(style: UITableViewStyle.Grouped)
+        super.init(style: UITableViewStyle.grouped)
     }
 
-    @IBAction func OpenInstructions(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string: "http://cycleatlanta.org/instructions-v2")!)
+    @IBAction func OpenInstructions(_ sender: AnyObject) {
+        UIApplication.shared.openURL(URL(string: "http://cycleatlanta.org/instructions-v2")!)
     }
     
-    @IBAction func AttemptRedownload(sender: AnyObject) {
-        fetchUser?.fetchUserAndTrip(parentViewController)
+    @IBAction func AttemptRedownload(_ sender: AnyObject) {
+        fetchUser?.fetchUserAndTrip(parent)
     }
     
-    @IBAction func doneButton(sender: AnyObject) {
+    @IBAction func doneButton(_ sender: AnyObject) {
         pickerTarget!.resignFirstResponder()
     }
     
-    @IBAction func magnetSwitchChanged(sender: AnyObject) {
+    @IBAction func magnetSwitchChanged(_ sender: AnyObject) {
         if let switchState = sender as? UISwitch {
-            let userDefaults = NSUserDefaults.standardUserDefaults()
-            userDefaults.setBool(switchState.on, forKey: "magnetometerIsOn")
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(switchState.isOn, forKey: "magnetometerIsOn")
             userDefaults.synchronize()
         }
     }
@@ -82,7 +82,7 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! CycleAtlantaAppDelegate
+        let appDelegate = UIApplication.shared.delegate as! CycleAtlantaAppDelegate
         managedObjectContext = appDelegate.managedObjectContext
 
         pickerLists = [userAge, userGender, userEthnicity, userIncome, userCycleFreq, userRiderType, userRiderHistory]
@@ -99,41 +99,44 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
         fetchUser = FetchUser()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        let request = NSFetchRequest()
+    override func viewWillAppear(_ animated: Bool) {
+        let request = NSFetchRequest<NSFetchRequestResult>()
         if let moc = managedObjectContext {
-            let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: moc)
+            let entity = NSEntityDescription.entity(forEntityName: "User", in: moc)
             request.entity = entity
-            
-            let error: NSErrorPointer = nil
-            let count = moc.countForFetchRequest(request, error: error)
-            
-            NSLog("saved user count  = %d", count)
-            
-            if count == 0 {
-                // Create new User.
-                user = createUser()
-            } else {
-                // Try to fetch user.
-                do {
-                    if let mutableFetchResults = try moc.executeFetchRequest(request) as? [User] {
-                        user = mutableFetchResults[0]
-                    } else {
-                        NSLog("no saved user")
-                    }
-                } catch let error as NSError {
-                    NSLog("PersonalIfo viewDidLoad fetch error %@, %@", error, error.localizedDescription)
-                }
-            
-                if user != nil {
-                    loadUser()
+
+            do {
+                let count = try moc.count(for: request)
+                
+                NSLog("saved user count  = %d", count)
+                
+                if count == 0 {
+                    // Create new User.
+                    user = createUser()
                 } else {
-                    NSLog("init FAIL")
+                    // Try to fetch user.
+                    do {
+                        if let mutableFetchResults = try moc.fetch(request) as? [User] {
+                            user = mutableFetchResults[0]
+                        } else {
+                            NSLog("no saved user")
+                        }
+                    } catch let error as NSError {
+                        NSLog("PersonalIfo viewDidLoad fetch error %@, %@", error, error.localizedDescription)
+                    }
+                    
+                    if user != nil {
+                        loadUser()
+                    } else {
+                        NSLog("init FAIL")
+                    }
                 }
+            } catch {
+                NSLog("Error fetching ManagedObjectContext in PersonalInfoViewController.viewWillAppear.")
             }
             
             // Load magnetometer switch preference.
-            userMagnetometer.on = NSUserDefaults.standardUserDefaults().boolForKey("magnetometerIsOn")
+            userMagnetometer.isOn = UserDefaults.standard.bool(forKey: "magnetometerIsOn")
             
         } else {
             NSLog("nil managedObjectContext")
@@ -150,12 +153,12 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
 
     
     // Text field delegate functions.
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if pickerLists.contains(textField) {
             pickerTarget = textField
 
@@ -171,36 +174,36 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
             }
             
             picker.reloadAllComponents()
-            picker.selectRow(pickerDataSource.indexOf(textField.text!)!, inComponent: 0, animated: true)
+            picker.selectRow(pickerDataSource.index(of: textField.text!)!, inComponent: 0, animated: true)
         }
         return true
     }
 
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         saveUser()
     }
     
     // Picker data source implementation.
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerDataSource.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerDataSource[row]
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerTarget!.text = pickerDataSource[row]
     }
     
 
     // Data model interaction.
     func createUser() -> User {
-        let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: managedObjectContext!) as! User
+        let user = NSEntityDescription.insertNewObject(forEntityName: "User", into: managedObjectContext!) as! User
         
         do {
             try managedObjectContext?.save()
@@ -211,8 +214,8 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
         return user
     }
     
-    func loadListField (list: [String], field: NSNumber?) -> String {
-        if let f = field?.integerValue {
+    func loadListField (_ list: [String], field: NSNumber?) -> String {
+        if let f = field?.intValue {
             return list[f]
         } else {
             return ""
@@ -243,17 +246,17 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     func saveUser() {
         // Saves user from view controller to data model.
         if let u = user {
-            u.age = ageChoice.indexOf(userAge.text!)
+            u.age = ageChoice.index(of: userAge.text!)! as NSNumber!
             u.email = userEmail.text
-            u.gender = genderChoice.indexOf(userGender.text!)
-            u.ethnicity = ethnicityChoice.indexOf(userEthnicity.text!)
-            u.income = incomeChoice.indexOf(userIncome.text!)
+            u.gender = genderChoice.index(of: userGender.text!)! as NSNumber!
+            u.ethnicity = ethnicityChoice.index(of: userEthnicity.text!)! as NSNumber!
+            u.income = incomeChoice.index(of: userIncome.text!)! as NSNumber!
             u.homeZIP = userZipHome.text
             u.workZIP = userZipWork.text
             u.schoolZIP = userZipSchool.text
-            u.cyclingFreq = cycleFreqChoice.indexOf(userCycleFreq.text!)
-            u.rider_type = riderTypeChoice.indexOf(userRiderType.text!)
-            u.rider_history = riderHistoryChoice.indexOf(userRiderHistory.text!)
+            u.cyclingFreq = cycleFreqChoice.index(of: userCycleFreq.text!)! as NSNumber!
+            u.rider_type = riderTypeChoice.index(of: userRiderType.text!)! as NSNumber!
+            u.rider_history = riderHistoryChoice.index(of: userRiderHistory.text!)! as NSNumber!
             
             do {
                 try managedObjectContext?.save()
@@ -265,7 +268,7 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
         }
     }
     
-    @IBAction func clickSave(sender: AnyObject) {
+    @IBAction func clickSave(_ sender: AnyObject) {
         NSLog("Saving User Data")
         if let u = user {
             for field in pickerLists {
@@ -280,7 +283,7 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
             NSLog("ERROR can't save personal info for nil user")
         }
         
-        ALToastView.toastInView(view, withText: "Saved!")
+        ALToastView.toast(in: view, withText: "Saved!")
     }
     
 }
