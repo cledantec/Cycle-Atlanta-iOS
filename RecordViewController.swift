@@ -14,19 +14,45 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     // Reference to the actual MKMapView object from storyboard.
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var discardTripButton: UIButton!
+    
+    // Core Data managed object context.
+    var appDelegate = UIApplication.shared.delegate as! CycleAtlantaAppDelegate
+    var context : NSManagedObjectContext?
+
+    // Reference to the tripView view (presents UI for trip types).
+    @IBOutlet weak var tripView: UIView!
     
     // Strong reference to the location manager service and a history of the current trip coordinates.
     var locationManager = CLLocationManager()
-    var userLocationTrace = Trip()
+    var userLocationTrace = TripPath()
     
-    let jsonStore = "tripData"
+    // Trip manager (legacy).
+    var tripManager = TripManager()
     
+    // Trip in progress flag.
+    var tripInProgress = false
+    
+    // Key name to local JSON store for coordinate path.
+    let jsonStore = "tripPathData"
+    
+    // Reference to iOS user defaults store.
     let defaults = UserDefaults()
     
+    // Debug variable for storing coordinates and testing.
     var tmpI = 0
+    
+    // Holds selected trip type during save dialog.
+    var selectedTripType = 7    // other
     
     // Initiate location services with high precision.
     override func viewDidLoad() {
+        context = appDelegate.managedObjectContext
+        tripManager = TripManager.init(managedObjectContext: context)
+        
         super.viewDidLoad()
         
         mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
@@ -43,6 +69,10 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.allowDeferredLocationUpdates(untilTraveled: 100, timeout: 60)  // meters, seconds
         locationManager.startUpdatingLocation()
+        
+        // Get a fresh TripManager.
+        tripManager.dirty = true
+        tripManager.parent = self
         
         // See if there is a stored trip to reload.
         //loadTrip()
@@ -61,8 +91,11 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Called when new location data is available (possibly with many updates at once).
         // Append the information to our internal coordinate trace.
+        if !tripInProgress { return }
+        
         for loc in locations {
             userLocationTrace.coords.append(loc)
+            tripManager.addCoord(loc)
         }
         
         // Remove the user trace overlay, modify it, and add it back in.
@@ -131,17 +164,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             self.tmpI += 1
             let intvl = Date()
             print ("Storing session " + String(self.tmpI))
-            /*
-             let dict = self.userLocationTrace.toJSON()
-             print ("Trying to store dict \(dict)")
-             if let jsonString = self.dictToNSString(dict) {
-             print ("Converted \(jsonString)")
-             self.defaults.setObject(jsonString, forKey: self.jsonStore)
-             print ("Stored data: \(jsonString)")
-             } else {
-             print ("Failed dictToString for JSON \(dict)")
-             }
-             */
+
             self.userLocationTrace.storeCoords()
             let diff = intvl.timeIntervalSinceNow
             
@@ -161,9 +184,21 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         }
     }
     
-    @IBAction func tapClearButton(_ sender: AnyObject) {
+    @IBAction func tapStartButton(_ sender: AnyObject) {
+        // Hide the start button and show the stop button.
+        startButton.isHidden = true
+        stopButton.isHidden = false
+        continueButton.isHidden = true
+        discardTripButton.isHidden = true
+        
+        tripView.isHidden = true
+        
+        // Clear any cached data from a previous trip.
         userLocationTrace.clear()
         storeTrip()
+        
+        tripInProgress = true
+        
         // Remove the user trace overlay, modify it, and add it back in.
         if mapView.overlays.count > 0 {
             // Currently assumes a single overlay.  This may need to change someday.
@@ -175,6 +210,116 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         // Draw overlay polyline from CLLocationCoordinate2D array.
         mapView.add(MKPolyline(coordinates: &coords, count: self.userLocationTrace.coords.count))
+    }
+    
+    @IBAction func tapSaveButton(_ sender: AnyObject) {
+        // Ask about saving the trip.
+        
+        // For now, just redisplay the start button.
+        startButton.isHidden = true
+        stopButton.isHidden = true
+        continueButton.isHidden = false
+        discardTripButton.isHidden = false
+        
+        tripView.isHidden = false
+    }
+    
+    @IBAction func tapContinueButton(_ sender: Any) {
+        // Keep recording after all.
+        startButton.isHidden = true
+        stopButton.isHidden = false
+        continueButton.isHidden = true
+        discardTripButton.isHidden = true
+        
+        tripView.isHidden = true
+    }
+
+    @IBAction func tapDiscardTripButton(_ sender: Any) {
+        // Toss the trip and stop recording.
+        startButton.isHidden = false
+        stopButton.isHidden = true
+        continueButton.isHidden = true
+        discardTripButton.isHidden = true
+        
+        tripView.isHidden = true
+        
+        tripInProgress = false
+    }
+    
+    @IBAction func saveTrip(_ sender: UIButton) {
+        var title = ""
+        var message = ""
+        var tripType = 0
+        
+        switch (sender.tag) {
+        case 1:
+            title = "Exercise"
+            message = LocalizedMessages.TRIP_EXERCISE
+            tripType = 3
+        case 2:
+            title = "Other"
+            message = LocalizedMessages.TRIP_OTHER
+            tripType = 7
+        case 3:
+            title = "Social"
+            message = LocalizedMessages.TRIP_SOCIAL
+            tripType = 4
+        case 4:
+            title = "Commute"
+            message = LocalizedMessages.TRIP_COMMUTE
+            tripType = 0
+        case 5:
+            title = "Work"
+            message = LocalizedMessages.TRIP_WORK
+            tripType = 2
+        case 6:
+            title = "Errand"
+            message = LocalizedMessages.TRIP_ERRAND
+            tripType = 6
+        default:
+            title = "Other"
+            message = LocalizedMessages.TRIP_OTHER
+            tripType = 7
+            
+        }
+        
+        self.selectedTripType = tripType
+        
+        print (title, message, tripType)
+        
+        // Display the alert request for saving immediately or adding a note.
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default) { action in
+            self.uploadTrip()
+            self.startButton.isHidden = false
+        }
+        let noteAction = UIAlertAction(title: "Add Details", style: .default) { action in
+            print(action)
+        }
+
+        alert.addAction(saveAction)
+        alert.addAction(noteAction)
+        
+        present(alert, animated: true, completion: nil)
+
+        // And hide the other buttons.
+        startButton.isHidden = true
+        stopButton.isHidden = true
+        continueButton.isHidden = true
+        discardTripButton.isHidden = true
+        
+        tripView.isHidden = true
+        
+        // And definitely end the trip now that they have chosen to save a trip category.
+        tripInProgress = false
+        
+    }
+    
+    func uploadTrip () {
+        let purpose = self.selectedTripType
+        tripManager.setPurpose(UInt32(purpose))
+        tripManager.saveTrip()
     }
     
 }

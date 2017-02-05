@@ -10,7 +10,7 @@
 import UIKit
 import CoreLocation
 
-class Trip: NSObject, Glossy {
+class TripPath: NSObject, Glossy {
     
     var coords : [CLLocation]
     
