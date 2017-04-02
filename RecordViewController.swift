@@ -10,7 +10,7 @@
 import UIKit
 import MapKit
 
-class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, TripDetailsDelegate {
     
     // Reference to the actual MKMapView object from storyboard.
     @IBOutlet weak var mapView: MKMapView!
@@ -342,7 +342,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             self.startButton.isHidden = false
         }
         let noteAction = UIAlertAction(title: "Add Details", style: .default) { action in
-            print(action)
+            print ("Adding details to trip of type \(self.selectedTripType)")
+            
+            self.performSegue(withIdentifier: "TripDetailSegue", sender: nil)
         }
 
         alert.addAction(saveAction)
@@ -350,7 +352,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         present(alert, animated: true, completion: nil)
 
-        // And hide the other buttons.
+        // And reset to no trip in progress.
         startButton.isHidden = true
         stopButton.isHidden = true
         continueButton.isHidden = true
@@ -363,6 +365,21 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         resetCounters()
         
+    }
+    
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "TripDetailSegue" {
+            if let destination = segue.destination as? TripDetailsViewController {
+                destination.delegate = self
+            }
+        }
+    }
+    
+    func sendDetails(value: String) {
+        // Add the detail note for the trip, then save it.
+        tripManager.saveNotes(value)
+        uploadTrip()
+        self.startButton.isHidden = false
     }
     
     func uploadTrip () {

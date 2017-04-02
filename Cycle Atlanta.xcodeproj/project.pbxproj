@@ -126,6 +126,7 @@
 		FB8EC2911E454D4600576BDC /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC28A1E454D4600576BDC /* Operators.swift */; };
 		FB8EC2931E454F4900576BDC /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2921E454F4900576BDC /* RecordViewController.swift */; };
 		FB8EC2BD1E46A66300576BDC /* LocalizedMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2BC1E46A66300576BDC /* LocalizedMessages.swift */; };
+		FBDBB9241E918861008ED7E9 /* TripDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBB9231E918861008ED7E9 /* TripDetailsViewController.swift */; };
 		FBE4EAAC1BE4082C007C1AF2 /* SavedTripsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 641199B1106851AA00C201F0 /* SavedTripsViewController.m */; };
 		FBE4EAB01BE40CEA007C1AF2 /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE4EAAF1BE40CEA007C1AF2 /* PersonalInfoViewController.swift */; };
 /* End PBXBuildFile section */
@@ -299,6 +300,7 @@
 		FB8EC28A1E454D4600576BDC /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		FB8EC2921E454F4900576BDC /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		FB8EC2BC1E46A66300576BDC /* LocalizedMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedMessages.swift; sourceTree = "<group>"; };
+		FBDBB9231E918861008ED7E9 /* TripDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailsViewController.swift; sourceTree = "<group>"; };
 		FBE4EAA61BE17F68007C1AF2 /* Cycle Atlanta-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cycle Atlanta-Bridging-Header.h"; sourceTree = "<group>"; };
 		FBE4EAA71BE17F68007C1AF2 /* SavedTripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SavedTripsViewController.swift; path = Classes/SavedTripsViewController.swift; sourceTree = "<group>"; };
 		FBE4EAA91BE2B709007C1AF2 /* SavedTripsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SavedTripsTableViewCell.swift; path = Classes/SavedTripsTableViewCell.swift; sourceTree = "<group>"; };
@@ -645,6 +647,7 @@
 				FBE4EAAF1BE40CEA007C1AF2 /* PersonalInfoViewController.swift */,
 				FBE4EAA91BE2B709007C1AF2 /* SavedTripsTableViewCell.swift */,
 				FBE4EAA71BE17F68007C1AF2 /* SavedTripsViewController.swift */,
+				FBDBB9231E918861008ED7E9 /* TripDetailsViewController.swift */,
 				FB8EC2801E454C7C00576BDC /* TripPath.swift */,
 				FB8EC2921E454F4900576BDC /* RecordViewController.swift */,
 				FB8EC2BC1E46A66300576BDC /* LocalizedMessages.swift */,
@@ -794,6 +797,7 @@
 				64F823E1106AC151001413F8 /* SaveRequest.m in Sources */,
 				642F15271071DA700050BCB9 /* MapViewController.m in Sources */,
 				642F161D1071ED1C0050BCB9 /* MapCoord.m in Sources */,
+				FBDBB9241E918861008ED7E9 /* TripDetailsViewController.swift in Sources */,
 				6426476E1073FEC300E43DEF /* ReminderManager.m in Sources */,
 				D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */,
 				64210F6111350C8500415F1A /* AboutViewController.m in Sources */,
