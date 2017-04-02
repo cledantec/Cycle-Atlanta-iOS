@@ -28,6 +28,8 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     // Top stats display.
     @IBOutlet weak var speedCounter: UILabel!
+    @IBOutlet weak var distanceCounter: UILabel!
+    @IBOutlet weak var timeCounter: UILabel!
     
     // Strong reference to the location manager service and a history of the current trip coordinates.
     var locationManager = CLLocationManager()
@@ -38,6 +40,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     // Trip in progress flag.
     var tripInProgress = false
+    
+    // Holds the start time of the trip for calculating elapsed time.
+    var tripStartTime = NSDate.timeIntervalSinceReferenceDate
     
     // Key name to local JSON store for coordinate path.
     let jsonStore = "tripPathData"
@@ -115,8 +120,20 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         for loc in locations {
             userLocationTrace.coords.append(loc)
-            tripManager.addCoord(loc)
+            let distance = tripManager.addCoord(loc)
+            
+            // Update distance display.
+            self.distanceCounter.text = String.localizedStringWithFormat("%.1f mi", distance / 1609.344)
         }
+        
+        // Update time display.
+        let elapsedTime = NSDate.timeIntervalSinceReferenceDate - tripStartTime
+        let doubleTime = Double(elapsedTime)
+        let hours = Int(doubleTime) / 3600
+        let minutes = (Int(doubleTime) - (hours*3600)) / 60
+        let seconds = (Int(doubleTime) - (hours*3600) - (minutes*60))
+        
+        self.timeCounter.text = String.localizedStringWithFormat("%02d:%02d:%02d", hours, minutes, seconds)
         
         // Remove the user trace overlay, modify it, and add it back in.
         if mapView.overlays.count > 0 {
@@ -149,6 +166,11 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         }
         
         return MKOverlayRenderer()
+    }
+    
+    func resetCounters() {
+        self.distanceCounter.text = "0.0 mi"
+        self.timeCounter.text = "00:00:00"
     }
     
     /*
@@ -219,6 +241,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         tripInProgress = true
         
+        // Set the start time to calculate elapsed time.
+        self.tripStartTime = NSDate.timeIntervalSinceReferenceDate
+        
         // Remove the user trace overlay, modify it, and add it back in.
         if mapView.overlays.count > 0 {
             // Currently assumes a single overlay.  This may need to change someday.
@@ -264,6 +289,8 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         tripView.isHidden = true
         
         tripInProgress = false
+        
+        resetCounters()
     }
     
     @IBAction func saveTrip(_ sender: UIButton) {
@@ -333,6 +360,8 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         // And definitely end the trip now that they have chosen to save a trip category.
         tripInProgress = false
+        
+        resetCounters()
         
     }
     
