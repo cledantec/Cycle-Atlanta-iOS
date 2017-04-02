@@ -26,6 +26,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     // Reference to the tripView view (presents UI for trip types).
     @IBOutlet weak var tripView: UIView!
     
+    // Top stats display.
+    @IBOutlet weak var speedCounter: UILabel!
+    
     // Strong reference to the location manager service and a history of the current trip coordinates.
     var locationManager = CLLocationManager()
     var userLocationTrace = TripPath()
@@ -88,9 +91,26 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Called when new location data is available (possibly with many updates at once).
         // Append the information to our internal coordinate trace.
+        
+        // Update speed display whether recording or not.
+        if let currentSpeed = locations.last?.speed {
+            speedCounter.text = String.localizedStringWithFormat("%.1f mph", currentSpeed * 3600 / 1609.344)
+        } else {
+            speedCounter.text = "0.0 mph"
+        }
+        
+        // Remaining logic runs only during a recording.
         if !tripInProgress { return }
         
         for loc in locations {
