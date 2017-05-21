@@ -6,5 +6,6 @@
 #import "ALToastView.h"
 #import "FetchUser.h"
 #import "TripManager.h"
+#import "Trip.h"
 #import "User.h"
 #import "constants.h"

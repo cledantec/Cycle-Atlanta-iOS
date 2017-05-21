@@ -58,7 +58,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     // Initiate location services with high precision.
     override func viewDidLoad() {
-        context = appDelegate.managedObjectContext
+        NSLog("Loading context from app delegate %@", appDelegate)
+        context = appDelegate.getManagedObjectContext(appDelegate.getPersistentStoreCoordinator())
+        NSLog("Loaded context %@", context!)
         tripManager = TripManager.init(managedObjectContext: context)
         
         super.viewDidLoad()

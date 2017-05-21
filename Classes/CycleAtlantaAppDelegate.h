@@ -77,5 +77,11 @@
 - (NSString *)applicationDocumentsDirectory;
 - (void)initUniqueIDHash;
 
+- (NSManagedObjectContext *) getManagedObjectContext: (NSPersistentStoreCoordinator *) coordinator;
+- (NSManagedObjectModel *) getManagedObjectModel;
+- (NSPersistentStoreCoordinator *) getPersistentStoreCoordinator;
+
+
+
 @end
 

@@ -422,6 +422,97 @@
         [self.storeLoadingView setVisible:TRUE messageString:kInitMessage ];
 }
 
+#pragma mark Core Data stack visibility for Swift
+
+/**
+ Returns the managed object context for the application.
+ If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+ */
+- (NSManagedObjectContext *) getManagedObjectContext: (NSPersistentStoreCoordinator *) coordinator {
+    
+    if (managedObjectContext != nil) {
+        return managedObjectContext;
+    }
+    
+    //NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [managedObjectContext setPersistentStoreCoordinator: coordinator];
+    }
+    return managedObjectContext;
+}
+
+
+- (NSManagedObjectModel *) getManagedObjectModel {
+    
+    if (managedObjectModel != nil) {
+        return managedObjectModel;
+    }
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"CycleAtlanta" ofType:@"momd"];
+    NSURL *momURL = [NSURL fileURLWithPath:path];
+    managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
+    
+    return managedObjectModel;
+}
+
+
+/**
+ Returns the persistent store coordinator for the application.
+ If the coordinator doesn't already exist, it is created and the application's store added to it.
+ If it does exist, it tests for and then migrates the store as needed.
+ */
+- (NSPersistentStoreCoordinator *) getPersistentStoreCoordinator {
+    NSError * error;
+    
+    if (persistentStoreCoordinator != nil) {
+        return persistentStoreCoordinator;
+    }
+    
+    NSURL *storeURL;// = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"CycleTracks.sqlite"]];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if ([fileManager fileExistsAtPath:
+         [[NSURL fileURLWithPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"CycleTracks.sqlite"]] path]] &&
+        [fileManager fileExistsAtPath:
+         [[NSURL fileURLWithPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"CycleAtlanta.sqlite"]] path]])
+    {
+        //both existprevious migration failed, start over.
+        if(![fileManager removeItemAtPath:[[NSURL fileURLWithPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"CycleAtlanta.sqlite"]] path]
+                                    error:&error])
+        {
+            NSLog(@"Remove file error %@", error );
+        }
+        storeURL = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"CycleTracks.sqlite"]];
+    }
+    else if ([fileManager fileExistsAtPath:
+              [[NSURL fileURLWithPath:[[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"CycleTracks.sqlite"]] path]])
+    {
+        //old version store exists, need to migrate
+        storeURL = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"CycleTracks.sqlite"]];
+    }
+    else
+    {
+        //use current name.
+        storeURL = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"CycleAtlanta.sqlite"]];
+    }
+    
+    // migrate the store if needed, returns the migrated storeURL
+    storeURL = [self migratePersistentStore: storeURL];
+    
+    // create the coordinator
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        //not the most sophisticated error handling
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return persistentStoreCoordinator;
+}
+
 #pragma mark -
 #pragma mark Application's Documents directory
 
