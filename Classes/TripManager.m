@@ -564,6 +564,7 @@
 			case 500:
 			default:
 				title = @"Internal Server Error";
+                // CDB altered: 2017-05-21
 				//message = [NSString stringWithFormat:@"%d", [httpResponse statusCode]];
 				message = kServerError;
 		}
@@ -596,7 +597,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{	
+{
 	[receivedData appendData:data];
 }
 

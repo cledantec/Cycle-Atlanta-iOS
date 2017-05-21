@@ -63,6 +63,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         NSLog("Loaded context %@", context!)
         tripManager = TripManager.init(managedObjectContext: context)
         
+        // Store device ID for uploading to server.  (Refuses to accept data [500 error] without device ID.)
+        appDelegate.initUniqueIDHash()
+        
         super.viewDidLoad()
         
         mapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
