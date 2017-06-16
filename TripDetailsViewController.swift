@@ -40,6 +40,8 @@ class TripDetailsViewController: UIViewController {
     @IBAction func saveButton(_ sender: Any) {
         if let delegate = self.delegate {
             delegate.sendDetails(value: detailText.text)
+        } else {
+            print ("No delegate for saveButton()!")
         }
         dismiss(animated: true, completion: nil)
     }

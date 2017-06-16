@@ -72,6 +72,8 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         mapView.showsUserLocation = true
         mapView.mapType = MKMapType.standard
         
+        mapView.delegate = self
+        
         locationManager.delegate = self
         
         locationManager.requestAlwaysAuthorization()
@@ -140,17 +142,24 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         self.timeCounter.text = String.localizedStringWithFormat("%02d:%02d:%02d", hours, minutes, seconds)
         
-        // Remove the user trace overlay, modify it, and add it back in.
-        if mapView.overlays.count > 0 {
-            // Currently assumes a single overlay.  This may need to change someday.
-            mapView.remove(mapView.overlays[0])
-        }
+        removeUserTraceOverlay()
         
         // Extract CLLocationCoordinate2D array from CLLocation array.
-        var coords = userLocationTrace.coords.map { $0.coordinate }
+        let coords = userLocationTrace.coords.map { $0.coordinate }
+        
+        print ("Creating polyline from coords in didUpdateLocations")
         
         // Draw overlay polyline from CLLocationCoordinate2D array.
-        mapView.add(MKPolyline(coordinates: &coords, count: self.userLocationTrace.coords.count))
+        //mapView.add(MKPolyline(coordinates: &coords, count: self.userLocationTrace.coords.count))
+        createAndAddOverlay(mapView: mapView, coords: coords)
+    }
+    
+    func createAndAddOverlay(mapView : MKMapView, coords : [CLLocationCoordinate2D]) {
+        print ("createAndAddOverlay")
+        
+        mapView.add(MKPolyline(coordinates: coords, count: coords.count), level: .aboveRoads)
+        print ("added overlay of coords")
+        print (coords)
     }
     
     func locationManager(_ manager: CLLocationManager, didFinishDeferredUpdatesWithError error: Error?) {
@@ -159,7 +168,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // Called when an overlay needs to be drawn.  If it is our polyline user trace, set its render options.
-        if overlay is MKPolyline {
+        print ("mapView:rendererFor called")
+        //if overlay is MKPolyline {
+            print ("rendering our polyline for the path")
             let polylineRenderer = MKPolylineRenderer(overlay: overlay)
             
             polylineRenderer.strokeColor = UIColor.blue.withAlphaComponent(0.5)
@@ -168,9 +179,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             polylineRenderer.lineCap = CGLineCap.round
             
             return polylineRenderer
-        }
+        //}
         
-        return MKOverlayRenderer()
+        //return MKOverlayRenderer()
     }
     
     func resetCounters() {
@@ -240,26 +251,20 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         tripView.isHidden = true
         
-        // Clear any cached data from a previous trip.
-        userLocationTrace.clear()
-        storeTrip()
+        resetTrip()
         
         tripInProgress = true
         
         // Set the start time to calculate elapsed time.
         self.tripStartTime = NSDate.timeIntervalSinceReferenceDate
         
-        // Remove the user trace overlay, modify it, and add it back in.
-        if mapView.overlays.count > 0 {
-            // Currently assumes a single overlay.  This may need to change someday.
-            mapView.remove(mapView.overlays[0])
-        }
-        
         // Extract CLLocationCoordinate2D array from CLLocation array.
-        var coords = userLocationTrace.coords.map { $0.coordinate }
+        let coords = userLocationTrace.coords.map { $0.coordinate }
         
+        print ("Creating polyline from coords in tapStartButton")
         // Draw overlay polyline from CLLocationCoordinate2D array.
-        mapView.add(MKPolyline(coordinates: &coords, count: self.userLocationTrace.coords.count))
+        //mapView.add(MKPolyline(coordinates: &coords, count: self.userLocationTrace.coords.count))
+        createAndAddOverlay(mapView: mapView, coords: coords)
     }
     
     @IBAction func tapSaveButton(_ sender: AnyObject) {
@@ -293,9 +298,24 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         tripView.isHidden = true
         
-        tripInProgress = false
-        
+        resetTrip()
+    }
+    
+    func removeUserTraceOverlay() {
+        // Remove the user trace overlay, modify it, and add it back in.
+        if mapView.overlays.count > 0 {
+            // Currently assumes a single overlay.  This may need to change someday.
+            mapView.remove(mapView.overlays[0])
+        }
+    }
+    
+    func resetTrip() {
+        // Clear any cached data from a previous trip.
         resetCounters()
+        userLocationTrace.clear()
+        storeTrip()
+        removeUserTraceOverlay()
+        tripInProgress = false
     }
     
     @IBAction func saveTrip(_ sender: UIButton) {
@@ -345,10 +365,12 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         let saveAction = UIAlertAction(title: "Save", style: .default) { action in
             self.uploadTrip()
             self.startButton.isHidden = false
+            self.resetTrip()
         }
         let noteAction = UIAlertAction(title: "Add Details", style: .default) { action in
             print ("Adding details to trip of type \(self.selectedTripType)")
             
+            print ("Triggering segue TripDetailSegue")
             self.performSegue(withIdentifier: "TripDetailSegue", sender: nil)
         }
 
@@ -367,24 +389,29 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         // And definitely end the trip now that they have chosen to save a trip category.
         tripInProgress = false
-        
-        resetCounters()
-        
     }
     
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    //func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print ("Called prepareForSegue()")
         if segue.identifier == "TripDetailSegue" {
+            print ("Segue is TripDetailSegue")
             if let destination = segue.destination as? TripDetailsViewController {
+                print ("Set self as delegate on destination \(destination)")
                 destination.delegate = self
+            } else {
+                print ("Can't set self as delegate on destination \(segue.destination)")
             }
         }
     }
     
     func sendDetails(value: String) {
         // Add the detail note for the trip, then save it.
+        print ("sendDetails() called in RecordViewController.")
         tripManager.saveNotes(value)
         uploadTrip()
         self.startButton.isHidden = false
+        resetTrip()
     }
     
     func uploadTrip () {
