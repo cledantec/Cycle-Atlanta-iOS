@@ -23,6 +23,7 @@
 #import "SavedNotesViewController.h"
 #import "TripPurposeDelegate.h"
 #import "LoadingView.h"
+#import "CycleAtlantaAppDelegate.h"
 #import "NoteViewController.h"
 #import "Note.h"
 #import "NoteManager.h"
@@ -133,6 +134,10 @@
 
 - (void)refreshTableView
 {
+    CycleAtlantaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    self.noteManager = [[NoteManager alloc] initWithManagedObjectContext:self.managedObjectContext];
+
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Note" inManagedObjectContext:noteManager.managedObjectContext];
 	[request setEntity:entity];

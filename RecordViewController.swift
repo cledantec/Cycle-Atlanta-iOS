@@ -37,6 +37,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     // Trip manager (legacy).
     var tripManager = TripManager()
+    var noteManager = NoteManager()
     
     // Trip in progress flag.
     var tripInProgress = false
@@ -62,6 +63,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         context = appDelegate.getManagedObjectContext(appDelegate.getPersistentStoreCoordinator())
         NSLog("Loaded context %@", context!)
         tripManager = TripManager.init(managedObjectContext: context)
+        noteManager = NoteManager.init(managedObjectContext: context)
         
         // Store device ID for uploading to server.  (Refuses to accept data [500 error] without device ID.)
         appDelegate.initUniqueIDHash()

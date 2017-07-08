@@ -139,9 +139,13 @@
 	tripsVC.delegate					= recordVC;
 	[tripsVC initTripManager:tripManager];
     
+    NSLog(@"tripVC is: %@", tripsVC);
+    
     
     SavedNotesViewController *notesVC = [[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:2];
     [notesVC initNoteManager:noteManager];
+    
+    NSLog(@"notesVC is: %@", notesVC);
     
     // TODO: storyboard link to here
     /*

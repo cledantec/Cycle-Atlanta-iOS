@@ -43,6 +43,7 @@
 #import "LoadingView.h"
 #import "MapViewController.h"
 #import "SavedTripsViewController.h"
+#import "CycleAtlantaAppDelegate.h"
 #import "Trip.h"
 #import "TripManager.h"
 #import "TripPurposeDelegate.h"
@@ -141,8 +142,20 @@
 
 - (void)refreshTableView
 {
+    //NSLog(@"Loading context from app delegate %@", delegate);
+    //self.managedObjectContext = [delegate.getManagedObjectContext:[delegate persistentStoreCoordinator]];
+    //NSLog(@"Loaded context %@", context);
+    //tripManager = TripManager.init(managedObjectContext: context)
+    //noteManager = NoteManager.init(managedObjectContext: context)
     
+    CycleAtlantaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    self.tripManager = [[TripManager alloc] initWithManagedObjectContext:self.managedObjectContext];
+
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSLog(@"managedObjectContext is %@", self.managedObjectContext);
+    NSLog(@"TripManager is: %@", tripManager);
+    NSLog(@"Calling entityForName:@\"Trip\" on managedObjectContext:%@", tripManager.managedObjectContext);
 	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Trip" inManagedObjectContext:tripManager.managedObjectContext];
 	[request setEntity:entity];
 	
