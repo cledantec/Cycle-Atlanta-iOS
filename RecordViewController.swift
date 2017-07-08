@@ -26,6 +26,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     // Reference to the tripView view (presents UI for trip types).
     @IBOutlet weak var tripView: UIView!
     
+    // Reference to the noteView view (presents UI for note types).
+    @IBOutlet weak var noteView: UIView!
+    
     // Top stats display.
     @IBOutlet weak var speedCounter: UILabel!
     @IBOutlet weak var distanceCounter: UILabel!
@@ -271,8 +274,6 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     @IBAction func tapSaveButton(_ sender: AnyObject) {
         // Ask about saving the trip.
-        
-        // For now, just redisplay the start button.
         startButton.isHidden = true
         stopButton.isHidden = true
         continueButton.isHidden = false
@@ -420,6 +421,10 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         let purpose = self.selectedTripType
         tripManager.setPurpose(UInt32(purpose))
         tripManager.saveTrip()
+    }
+    
+    @IBAction func createNote(_ sender: Any) {
+        noteView.isHidden = false
     }
     
 }
