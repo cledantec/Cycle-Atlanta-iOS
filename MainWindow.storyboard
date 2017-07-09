@@ -1068,7 +1068,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bft-6r-Ccv" userLabel="Note View">
-                                <rect key="frame" x="37" y="216" width="300" height="185"/>
+                                <rect key="frame" x="37" y="169.5" width="300" height="278"/>
                                 <subviews>
                                     <button opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b72-Fc-Kai" userLabel="Screen Blocker">
                                         <rect key="frame" x="-38" y="-217" width="376" height="618"/>
@@ -1076,11 +1076,11 @@
                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GA2-MB-PCd" userLabel="Note View Mask">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="185"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="278"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8E7-0g-xfO">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="185"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="278"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="exW-bH-sTy">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="92.5"/>
@@ -1093,7 +1093,7 @@
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="saveTrip:" destination="hJE-1m-eLx" eventType="touchUpInside" id="ZhE-sD-W3J"/>
+                                                            <action selector="saveNote:" destination="hJE-1m-eLx" eventType="touchUpInside" id="WSa-I0-t1V"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5A-1V-eh9" userLabel="Bike Parking">
@@ -1102,7 +1102,7 @@
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="saveTrip:" destination="hJE-1m-eLx" eventType="touchUpInside" id="laj-Uc-ELh"/>
+                                                            <action selector="saveNote:" destination="hJE-1m-eLx" eventType="touchUpInside" id="17V-Xd-jdu"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXb-1i-6dU" userLabel="Bike Shop">
@@ -1111,39 +1111,71 @@
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="saveTrip:" destination="hJE-1m-eLx" eventType="touchUpInside" id="CVa-iv-hx9"/>
+                                                            <action selector="saveNote:" destination="hJE-1m-eLx" eventType="touchUpInside" id="B9E-6R-yKT"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8va-Tk-x1n">
-                                                <rect key="frame" x="0.0" y="92.5" width="300" height="92.5"/>
+                                                <rect key="frame" x="0.0" y="92.5" width="300" height="93"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYa-F2-86n" userLabel="Wash Up">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="92.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="93"/>
                                                         <state key="normal" image="noteAssetPicker.png">
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="saveTrip:" destination="hJE-1m-eLx" eventType="touchUpInside" id="Urr-n5-u7C"/>
+                                                            <action selector="saveNote:" destination="hJE-1m-eLx" eventType="touchUpInside" id="zij-kp-TJo"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZF-BD-gTQ" userLabel="Other Asset">
-                                                        <rect key="frame" x="100" y="0.0" width="100" height="92.5"/>
+                                                        <rect key="frame" x="100" y="0.0" width="100" height="93"/>
                                                         <state key="normal" image="noteAssetPicker.png">
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="saveTrip:" destination="hJE-1m-eLx" eventType="touchUpInside" id="uqc-R4-8yg"/>
+                                                            <action selector="saveNote:" destination="hJE-1m-eLx" eventType="touchUpInside" id="Jnw-lZ-Ws6"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5N-Bx-ItC" userLabel="Fix Signal">
+                                                        <rect key="frame" x="200" y="0.0" width="100" height="93"/>
+                                                        <state key="normal" image="noteIssuePicker.png">
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="saveNote:" destination="hJE-1m-eLx" eventType="touchUpInside" id="Q60-jD-MA9"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Pz6-4E-6O0">
+                                                <rect key="frame" x="0.0" y="185.5" width="300" height="92.5"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogo-YF-fx6" userLabel="Rough Road">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="92.5"/>
+                                                        <state key="normal" image="noteIssuePicker.png">
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="saveNote:" destination="hJE-1m-eLx" eventType="touchUpInside" id="Mrv-XX-Gor"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rE-gI-tlt" userLabel="Needs Enforcement">
+                                                        <rect key="frame" x="100" y="0.0" width="100" height="92.5"/>
+                                                        <state key="normal" image="noteIssuePicker.png">
+                                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="saveNote:" destination="hJE-1m-eLx" eventType="touchUpInside" id="7yp-Ul-2wU"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i4O-ZK-0AB" userLabel="Need Parking">
                                                         <rect key="frame" x="200" y="0.0" width="100" height="92.5"/>
                                                         <state key="normal" image="noteIssuePicker.png">
                                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="saveTrip:" destination="hJE-1m-eLx" eventType="touchUpInside" id="cjm-Cp-6XE"/>
+                                                            <action selector="saveNote:" destination="hJE-1m-eLx" eventType="touchUpInside" id="s9X-4M-iXC"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -1169,19 +1201,37 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wash Up" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKs-0W-6Hc" userLabel="Wash Up">
-                                        <rect key="frame" x="25" y="160.5" width="51" height="14.5"/>
+                                        <rect key="frame" x="25" y="161" width="51" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other Asset" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ke7-GW-Rrq">
-                                        <rect key="frame" x="116.5" y="160.5" width="67.5" height="14.5"/>
+                                        <rect key="frame" x="116.5" y="161" width="67.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fix Signal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kp-y4-SPx" userLabel="Fix Signal">
-                                        <rect key="frame" x="223" y="160.5" width="54.5" height="14.5"/>
+                                        <rect key="frame" x="223" y="161" width="54.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rough Road" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C88-Od-2bc" userLabel="Rough Road">
+                                        <rect key="frame" x="16" y="253.5" width="68.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Needs Enforcement" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqd-2I-1bv" userLabel="Needs Enforcement">
+                                        <rect key="frame" x="114" y="249" width="72" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Need Parking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjX-Si-epu" userLabel="Need Parking">
+                                        <rect key="frame" x="212.5" y="253.5" width="76" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1199,13 +1249,19 @@
                                     <constraint firstItem="Ke7-GW-Rrq" firstAttribute="centerX" secondItem="jZF-BD-gTQ" secondAttribute="centerX" id="Eni-2r-HuF"/>
                                     <constraint firstItem="8E7-0g-xfO" firstAttribute="centerY" secondItem="bft-6r-Ccv" secondAttribute="centerY" id="LEu-53-42e"/>
                                     <constraint firstItem="GA2-MB-PCd" firstAttribute="width" secondItem="bft-6r-Ccv" secondAttribute="width" id="Myh-vN-9g6"/>
+                                    <constraint firstItem="C88-Od-2bc" firstAttribute="centerX" secondItem="ogo-YF-fx6" secondAttribute="centerX" id="UKX-IF-Y2z"/>
+                                    <constraint firstItem="hjX-Si-epu" firstAttribute="centerX" secondItem="i4O-ZK-0AB" secondAttribute="centerX" id="WS8-q3-kos"/>
                                     <constraint firstItem="8E7-0g-xfO" firstAttribute="width" secondItem="bft-6r-Ccv" secondAttribute="width" id="Xl0-Ua-pkb"/>
                                     <constraint firstItem="Ke7-GW-Rrq" firstAttribute="bottom" secondItem="jZF-BD-gTQ" secondAttribute="bottom" constant="-10" id="baV-DK-fhv"/>
                                     <constraint firstItem="GA2-MB-PCd" firstAttribute="height" secondItem="bft-6r-Ccv" secondAttribute="height" id="d3o-F9-5jv"/>
                                     <constraint firstItem="4kp-y4-SPx" firstAttribute="bottom" secondItem="C5N-Bx-ItC" secondAttribute="bottom" constant="-10" id="f2R-i5-mkR"/>
+                                    <constraint firstItem="sqd-2I-1bv" firstAttribute="bottom" secondItem="0rE-gI-tlt" secondAttribute="bottom" id="gUj-oL-UtP"/>
                                     <constraint firstItem="MpS-Wu-Ese" firstAttribute="centerX" secondItem="jXb-1i-6dU" secondAttribute="centerX" id="j0d-gc-H21"/>
                                     <constraint firstItem="GA2-MB-PCd" firstAttribute="centerX" secondItem="bft-6r-Ccv" secondAttribute="centerX" id="kE4-UV-NEf"/>
+                                    <constraint firstItem="C88-Od-2bc" firstAttribute="bottom" secondItem="ogo-YF-fx6" secondAttribute="bottom" constant="-10" id="nUc-BO-TMf"/>
+                                    <constraint firstItem="sqd-2I-1bv" firstAttribute="centerX" secondItem="0rE-gI-tlt" secondAttribute="centerX" id="sOB-z4-g5b"/>
                                     <constraint firstItem="5od-0s-v98" firstAttribute="centerX" secondItem="h5A-1V-eh9" secondAttribute="centerX" id="sZr-8G-CoZ"/>
+                                    <constraint firstItem="hjX-Si-epu" firstAttribute="bottom" secondItem="i4O-ZK-0AB" secondAttribute="bottom" constant="-10" id="trg-RA-p5c"/>
                                     <constraint firstItem="5od-0s-v98" firstAttribute="bottom" secondItem="h5A-1V-eh9" secondAttribute="bottom" constant="-10" id="x8l-vZ-RHX"/>
                                     <constraint firstItem="4kp-y4-SPx" firstAttribute="centerX" secondItem="C5N-Bx-ItC" secondAttribute="centerX" id="zXr-WJ-COS"/>
                                     <constraint firstItem="8E7-0g-xfO" firstAttribute="centerX" secondItem="bft-6r-Ccv" secondAttribute="centerX" id="zZU-Uj-lXj"/>
@@ -1288,7 +1344,7 @@
                             <constraint firstItem="3Vb-o4-2mX" firstAttribute="height" secondItem="d7Z-Mg-LB5" secondAttribute="height" id="63R-9K-UXf"/>
                             <constraint firstItem="bft-6r-Ccv" firstAttribute="centerX" secondItem="mqX-ZK-dE6" secondAttribute="centerX" id="79T-Rh-zB0"/>
                             <constraint firstItem="d7Z-Mg-LB5" firstAttribute="centerX" secondItem="mqX-ZK-dE6" secondAttribute="centerX" id="9Zk-NX-d9L"/>
-                            <constraint firstItem="bft-6r-Ccv" firstAttribute="height" secondItem="mqX-ZK-dE6" secondAttribute="height" multiplier="0.3" id="AL9-bE-tgp"/>
+                            <constraint firstItem="bft-6r-Ccv" firstAttribute="height" secondItem="mqX-ZK-dE6" secondAttribute="height" multiplier="0.45" id="AL9-bE-tgp"/>
                             <constraint firstItem="N7b-H3-Syz" firstAttribute="height" secondItem="mqX-ZK-dE6" secondAttribute="height" constant="-18" id="Ddw-cZ-ZeX"/>
                             <constraint firstItem="N7b-H3-Syz" firstAttribute="width" secondItem="mqX-ZK-dE6" secondAttribute="width" constant="225" id="EzD-Z1-hDH"/>
                             <constraint firstItem="3Vb-o4-2mX" firstAttribute="centerX" secondItem="d7Z-Mg-LB5" secondAttribute="centerX" id="JxP-Z4-4Fm"/>
