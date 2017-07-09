@@ -10,7 +10,7 @@
 import UIKit
 import MapKit
 
-class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, TripDetailsDelegate {
+class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, TripDetailsDelegate, NoteDetailsDelegate {
     
     // Reference to the actual MKMapView object from storyboard.
     @IBOutlet weak var mapView: MKMapView!
@@ -24,6 +24,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     var context : NSManagedObjectContext?
 
     // Reference to the tripView view (presents UI for trip types).
+    @IBOutlet weak var noteButton: UIButton!
     @IBOutlet weak var tripView: UIView!
     
     // Reference to the noteView view (presents UI for note types).
@@ -59,6 +60,9 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     // Holds selected trip type during save dialog.
     var selectedTripType = 7    // other
+    
+    // Holds selected note type during save dialog.
+    var selectedNoteType = 0    // other
     
     // Initiate location services with high precision.
     override func viewDidLoad() {
@@ -253,6 +257,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         stopButton.isHidden = false
         continueButton.isHidden = true
         discardTripButton.isHidden = true
+        noteButton.isHidden = false
         
         tripView.isHidden = true
         
@@ -278,6 +283,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         stopButton.isHidden = true
         continueButton.isHidden = false
         discardTripButton.isHidden = false
+        noteButton.isHidden = true
         
         tripView.isHidden = false
     }
@@ -288,6 +294,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         stopButton.isHidden = false
         continueButton.isHidden = true
         discardTripButton.isHidden = true
+        noteButton.isHidden = false
         
         tripView.isHidden = true
     }
@@ -298,6 +305,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         stopButton.isHidden = true
         continueButton.isHidden = true
         discardTripButton.isHidden = true
+        noteButton.isHidden = true
         
         tripView.isHidden = true
         
@@ -368,6 +376,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         let saveAction = UIAlertAction(title: "Save", style: .default) { action in
             self.uploadTrip()
             self.startButton.isHidden = false
+            self.noteButton.isHidden = true
             self.resetTrip()
         }
         let noteAction = UIAlertAction(title: "Add Details", style: .default) { action in
@@ -387,11 +396,100 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         stopButton.isHidden = true
         continueButton.isHidden = true
         discardTripButton.isHidden = true
+        noteButton.isHidden = true
         
         tripView.isHidden = true
         
         // And definitely end the trip now that they have chosen to save a trip category.
         tripInProgress = false
+    }
+    
+    @IBAction func saveNote(_ sender: UIButton) {
+        var title = ""
+        var message = ""
+        var noteType = 0
+        
+        switch (sender.tag) {
+        case 1:
+            title = "Short Cut"
+            message = LocalizedMessages.NOTE_ASSET_SHORT_CUT
+            noteType = 2
+        case 2:
+            title = "Bike Parking"
+            message = LocalizedMessages.NOTE_ASSET_PARKING
+            noteType = 5
+        case 3:
+            title = "Bike Shop"
+            message = LocalizedMessages.NOTE_ASSET_BIKE_SHOPS
+            noteType = 4
+        case 4:
+            title = "Wash Up"
+            message = LocalizedMessages.NOTE_ASSET_WASH_UP
+            noteType = 3
+        case 5:
+            title = "Note This Asset"
+            message = LocalizedMessages.NOTE_ASSET_OTHER
+            noteType = 0
+        case 6:
+            title = "Fix Signal"
+            message = LocalizedMessages.NOTE_ISSUE_SIGNAL
+            noteType = 8
+        case 7:
+            title = "Rough Road"
+            message = LocalizedMessages.NOTE_ISSUE_REPAIR
+            noteType = 7
+        case 8:
+            title = "Needs Enforcement"
+            message = LocalizedMessages.NOTE_ISSUE_ENFORCEMENT
+            noteType = 9
+        case 9:
+            title = "Need Parking"
+            message = LocalizedMessages.NOTE_ISSUE_PARKING
+            noteType = 10
+        default:
+            title = "Note This Asset"
+            message = LocalizedMessages.NOTE_ASSET_OTHER
+            noteType = 0
+            
+        }
+  
+        
+        noteManager.createNote()
+        
+        if userLocationTrace.coords.count > 0 {
+            noteManager.add(userLocationTrace.coords.last)
+        }
+        
+        self.selectedNoteType = noteType
+        
+        // The real note type IDs in the original database are a bit silly.
+        if self.selectedNoteType >= 7 {
+            self.noteManager.note.note_type = (self.selectedNoteType - 7) as NSNumber
+        } else if self.selectedNoteType <= 5 {
+            self.noteManager.note.note_type = (11 - self.selectedNoteType) as NSNumber
+        }
+        
+        print (title, message, noteType)
+        
+        // Display the alert request for saving immediately or adding user-provided details.
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default) { action in
+            self.noteManager.saveNote()
+        }
+        let detailsAction = UIAlertAction(title: "Add Details", style: .default) { action in
+            print ("Adding details to note of type \(self.selectedNoteType)")
+            
+            print ("Triggering segue NoteDetailSegue")
+            self.performSegue(withIdentifier: "NoteDetailSegue", sender: nil)
+        }
+
+        alert.addAction(saveAction)
+        alert.addAction(detailsAction)
+        
+        present(alert, animated: true, completion: nil)
+
+        noteView.isHidden = true
     }
     
     //func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -405,7 +503,16 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             } else {
                 print ("Can't set self as delegate on destination \(segue.destination)")
             }
+        } else if segue.identifier == "NoteDetailSegue" {
+            print ("Segue is NoteDetailSegue")
+            if let destination = segue.destination as? NoteDetailsViewController {
+                print ("Set self as delegate on destination \(destination)")
+                destination.delegate = self
+            } else {
+                print ("Can't set self as delegate on destination \(segue.destination)")
+            }
         }
+
     }
     
     func sendDetails(value: String) {
@@ -414,9 +521,17 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         tripManager.saveNotes(value)
         uploadTrip()
         self.startButton.isHidden = false
+        noteButton.isHidden = true
         resetTrip()
     }
-    
+
+    func sendNoteDetails(value: String) {
+        // Add the details for the note, then save it.
+        print ("sendNoteDetails() called in RecordViewController.")
+        noteManager.note.details = value
+        noteManager.saveNote()
+    }
+
     func uploadTrip () {
         let purpose = self.selectedTripType
         tripManager.setPurpose(UInt32(purpose))

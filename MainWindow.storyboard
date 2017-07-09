@@ -1315,7 +1315,7 @@
                                     <action selector="tapDiscardTripButton:" destination="hJE-1m-eLx" eventType="touchUpInside" id="tpM-fp-jsb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-eT-GSd" userLabel="Note Button">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNY-eT-GSd" userLabel="Note Button">
                                 <rect key="frame" x="323" y="186" width="60" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1383,6 +1383,7 @@
                         <outlet property="discardTripButton" destination="veM-mE-Zee" id="C3N-Yv-WRc"/>
                         <outlet property="distanceCounter" destination="Amp-eT-KbD" id="Pcb-QV-1AW"/>
                         <outlet property="mapView" destination="N7b-H3-Syz" id="xjR-uv-qsz"/>
+                        <outlet property="noteButton" destination="dNY-eT-GSd" id="wy0-HD-wok"/>
                         <outlet property="noteView" destination="bft-6r-Ccv" id="9y0-8p-95U"/>
                         <outlet property="speedCounter" destination="hqQ-33-u06" id="yC2-Fv-0Zr"/>
                         <outlet property="startButton" destination="d7Z-Mg-LB5" id="G7H-VQ-yJj"/>
@@ -1390,6 +1391,7 @@
                         <outlet property="timeCounter" destination="coP-M4-bv9" id="jOC-F2-jzf"/>
                         <outlet property="tripView" destination="jcf-hZ-MlS" id="nMn-qT-P9D"/>
                         <segue destination="PLe-Ag-Cvg" kind="modal" identifier="TripDetailSegue" id="cOm-T4-ytl"/>
+                        <segue destination="Jmx-61-ist" kind="modal" identifier="NoteDetailSegue" id="jDn-wj-RYj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QQZ-rE-6Ib" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2502,6 +2504,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGp-OT-sXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="563.5" y="931.5"/>
+        </scene>
+        <!--Note Detail View Controller-->
+        <scene sceneID="6jJ-bD-yzt">
+            <objects>
+                <viewController id="Jmx-61-ist" userLabel="Note Detail View Controller" customClass="NoteDetailsViewController" customModule="Cycle_Atlanta" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Mu-Of-Wxy"/>
+                        <viewControllerLayoutGuide type="bottom" id="AsS-UB-9Sq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nW7-lP-Z7d">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S46-Uv-WSR">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Trip Details" id="wIM-kF-pro">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="zgY-yM-CRS">
+                                            <connections>
+                                                <action selector="saveButton:" destination="Jmx-61-ist" id="OCz-hl-voV"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Additional details :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDf-87-p7d">
+                                <rect key="frame" x="117" y="74" width="141" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Un9-mX-697">
+                                <rect key="frame" x="19" y="104" width="337" height="164"/>
+                                <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="164" id="tNO-WT-Dpu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="S46-Uv-WSR" firstAttribute="top" secondItem="5Mu-Of-Wxy" secondAttribute="bottom" id="2WT-6T-Lsa"/>
+                            <constraint firstItem="S46-Uv-WSR" firstAttribute="centerX" secondItem="nW7-lP-Z7d" secondAttribute="centerX" id="7Md-XP-eRm"/>
+                            <constraint firstItem="S46-Uv-WSR" firstAttribute="width" secondItem="nW7-lP-Z7d" secondAttribute="width" id="AB2-RY-Qjb"/>
+                            <constraint firstItem="Un9-mX-697" firstAttribute="top" secondItem="IDf-87-p7d" secondAttribute="bottom" constant="10" id="CMj-uQ-ycn"/>
+                            <constraint firstItem="Un9-mX-697" firstAttribute="centerX" secondItem="nW7-lP-Z7d" secondAttribute="centerX" id="Kjp-yJ-eY3"/>
+                            <constraint firstItem="Un9-mX-697" firstAttribute="width" secondItem="nW7-lP-Z7d" secondAttribute="width" multiplier="0.9" id="Ney-86-NZZ"/>
+                            <constraint firstItem="IDf-87-p7d" firstAttribute="top" secondItem="S46-Uv-WSR" secondAttribute="bottom" constant="10" id="TFj-AL-6EF"/>
+                            <constraint firstItem="IDf-87-p7d" firstAttribute="centerX" secondItem="nW7-lP-Z7d" secondAttribute="centerX" id="kiw-Ud-fCz"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="detailText" destination="Un9-mX-697" id="iCh-MX-vIZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b93-8W-Hhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1582" y="1749"/>
         </scene>
     </scenes>
     <resources>
