@@ -81,6 +81,7 @@
 - (NSManagedObjectModel *) getManagedObjectModel;
 - (NSPersistentStoreCoordinator *) getPersistentStoreCoordinator;
 
+- (void)applicationWillTerminate:(UIApplication *)application;
 
 
 @end

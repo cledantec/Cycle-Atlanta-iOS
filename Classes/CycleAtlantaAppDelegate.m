@@ -178,6 +178,21 @@
  */
 - (void)applicationWillTerminate:(UIApplication *)application {
 	
+    NSLog(@"applicationWillTerminate: attempt to upload, or at least store, any trip in progress");
+    
+    RecordViewController *recordVC;
+
+    UINavigationController* uinav=[[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
+    recordVC=[uinav.viewControllers objectAtIndex:0];
+
+    if (recordVC.tripInProgress) {
+        [recordVC storeTrip];
+        recordVC.selectedTripType = 7;
+        [recordVC.tripManager saveNotes:@"App terminated with trip in progress"];
+        [recordVC uploadTrip];
+        recordVC.tripInProgress = false;
+    }
+    
     NSError *error = nil;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {

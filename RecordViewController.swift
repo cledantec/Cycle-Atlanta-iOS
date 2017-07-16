@@ -101,7 +101,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         // See if there is a stored trip to reload.
         //loadTrip()
         
-        // Save trip every sixty seconds.
+        // Save trip every few seconds.
         Timer.scheduledTimer(
             timeInterval: 5.0, target: self, selector: #selector(RecordViewController.storeTrip),
             userInfo: nil, repeats: true)
