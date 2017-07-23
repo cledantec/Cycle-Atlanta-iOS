@@ -88,13 +88,19 @@
     NSInteger textLength = [note.details length];
     int row = (int) (1+(textLength-1)/34);
     NSLog(@"%lu, %li",(unsigned long)[note.image_data length], (long)textLength);
+    
+    int img_left = -40;
+    int img_top = 0;
+    int img_width = 480;
+    int img_height = 480;
+    
 	if ([note.image_data length] != 0 && textLength != 0) {
         infoView.alpha = 1.0;
         infoView.backgroundColor = [UIColor blackColor];
         
-        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 427)];
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(img_left, img_top, img_width, img_height)];
         
-        UIImageViewResizable *noteImageResize = [[UIImageViewResizable alloc] initWithFrame:CGRectMake(0, 0, 320, 427)];
+        UIImageViewResizable *noteImageResize = [[UIImageViewResizable alloc] initWithFrame:CGRectMake(img_left, img_top, img_width, img_height)];
         
         noteImageResize.image= [UIImage imageWithData:note.image_data];
         noteImageResize.contentMode = UIViewContentModeScaleAspectFit;
@@ -109,7 +115,7 @@
         
         [infoView addSubview:scrollView];
         
-        UIImageView *bgImageHeader      = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 110)];
+        UIImageView *bgImageHeader      = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, img_width, 110)];
         bgImageHeader.backgroundColor = [UIColor blackColor];
         bgImageHeader.alpha = 0.8;
         [infoView addSubview:bgImageHeader];
@@ -122,12 +128,12 @@
         notesHeader.textColor		= [UIColor whiteColor];
         [infoView addSubview:notesHeader];
         
-        UIImageView *bgImageText      = [[UIImageView alloc] initWithFrame:CGRectMake(0, 110, 320, 25*row+25)];
+        UIImageView *bgImageText      = [[UIImageView alloc] initWithFrame:CGRectMake(0, 110, img_width, 25*row+25)];
         bgImageText.backgroundColor = [UIColor blackColor];
         bgImageText.alpha = 0.8;
         [infoView addSubview:bgImageText];
         
-        UITextView *notesText		= [[UITextView alloc] initWithFrame:CGRectMake(0,110,320,25*row+15)];
+        UITextView *notesText		= [[UITextView alloc] initWithFrame:CGRectMake(0,110,img_width,25*row+15)];
         notesText.backgroundColor	= [UIColor clearColor];
         notesText.editable			= NO;
         notesText.font				= [UIFont systemFontOfSize:16.0];
@@ -139,8 +145,8 @@
         infoView.alpha = 1.0;
         infoView.backgroundColor = [UIColor blackColor];
         
-        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 427)];
-        UIImageView *noteImage   = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 427)];
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, img_width, img_height)];
+        UIImageView *noteImage   = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, img_width, img_height)];
         noteImage.image= [UIImage imageWithData:note.image_data];
         noteImage.contentMode = UIViewContentModeScaleAspectFill;
         

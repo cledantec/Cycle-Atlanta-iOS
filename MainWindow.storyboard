@@ -1695,7 +1695,7 @@
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Trip Details" id="wIM-kF-pro">
+                                    <navigationItem title="Note Details" id="wIM-kF-pro">
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="zgY-yM-CRS">
                                             <connections>
                                                 <action selector="saveButton:" destination="Jmx-61-ist" id="OCz-hl-voV"/>
@@ -1710,7 +1710,7 @@
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Un9-mX-697">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tap here to enter notes." translatesAutoresizingMaskIntoConstraints="NO" id="Un9-mX-697">
                                 <rect key="frame" x="19" y="104" width="337" height="164"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1718,27 +1718,67 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Jmx-61-ist" id="HTH-tq-XNj"/>
+                                </connections>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HTy-Ju-coc" userLabel="Photo">
+                                <rect key="frame" x="27.5" y="276" width="320" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="NHp-aM-o4l"/>
+                                    <constraint firstAttribute="width" constant="320" id="gBz-Fy-vgi"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cec-jX-hvV">
+                                <rect key="frame" x="27.5" y="276" width="320" height="320"/>
+                                <state key="normal" title="Take Photo">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePhoto:" destination="Jmx-61-ist" eventType="touchUpInside" id="Gxx-Om-Jj9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="S46-Uv-WSR" firstAttribute="top" secondItem="5Mu-Of-Wxy" secondAttribute="bottom" id="2WT-6T-Lsa"/>
                             <constraint firstItem="S46-Uv-WSR" firstAttribute="centerX" secondItem="nW7-lP-Z7d" secondAttribute="centerX" id="7Md-XP-eRm"/>
                             <constraint firstItem="S46-Uv-WSR" firstAttribute="width" secondItem="nW7-lP-Z7d" secondAttribute="width" id="AB2-RY-Qjb"/>
                             <constraint firstItem="Un9-mX-697" firstAttribute="top" secondItem="IDf-87-p7d" secondAttribute="bottom" constant="10" id="CMj-uQ-ycn"/>
+                            <constraint firstItem="HTy-Ju-coc" firstAttribute="top" secondItem="Un9-mX-697" secondAttribute="bottom" constant="8" id="GGX-0w-OAT"/>
                             <constraint firstItem="Un9-mX-697" firstAttribute="centerX" secondItem="nW7-lP-Z7d" secondAttribute="centerX" id="Kjp-yJ-eY3"/>
                             <constraint firstItem="Un9-mX-697" firstAttribute="width" secondItem="nW7-lP-Z7d" secondAttribute="width" multiplier="0.9" id="Ney-86-NZZ"/>
                             <constraint firstItem="IDf-87-p7d" firstAttribute="top" secondItem="S46-Uv-WSR" secondAttribute="bottom" constant="10" id="TFj-AL-6EF"/>
+                            <constraint firstItem="cec-jX-hvV" firstAttribute="centerX" secondItem="HTy-Ju-coc" secondAttribute="centerX" id="VRR-ZO-1py"/>
+                            <constraint firstItem="cec-jX-hvV" firstAttribute="height" secondItem="HTy-Ju-coc" secondAttribute="height" id="jkV-VY-l8j"/>
                             <constraint firstItem="IDf-87-p7d" firstAttribute="centerX" secondItem="nW7-lP-Z7d" secondAttribute="centerX" id="kiw-Ud-fCz"/>
+                            <constraint firstItem="cec-jX-hvV" firstAttribute="centerY" secondItem="HTy-Ju-coc" secondAttribute="centerY" id="lmf-sP-cKe"/>
+                            <constraint firstItem="HTy-Ju-coc" firstAttribute="centerX" secondItem="Un9-mX-697" secondAttribute="centerX" id="nJx-eL-yvM"/>
+                            <constraint firstItem="cec-jX-hvV" firstAttribute="width" secondItem="HTy-Ju-coc" secondAttribute="width" id="o2r-zx-GNo"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="yLb-wf-gLc" appends="YES" id="A7P-dg-8pk"/>
+                        </connections>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="detailText" destination="Un9-mX-697" id="iCh-MX-vIZ"/>
+                        <outlet property="photo" destination="HTy-Ju-coc" id="aPg-Hq-apj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b93-8W-Hhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="yLb-wf-gLc">
+                    <connections>
+                        <action selector="tapBackground:" destination="Jmx-61-ist" id="310-7w-bxE"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1582" y="1749"/>
         </scene>

@@ -446,7 +446,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         }
   
         
-        noteManager.createNote()
+        //noteManager.createNote()
         
         if userLocationTrace.coords.count > 0 {
             noteManager.add(userLocationTrace.coords.last)
@@ -467,6 +467,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let saveAction = UIAlertAction(title: "Save", style: .default) { action in
+            print ("Saved note immediately.  No details.")
             self.noteManager.saveNote()
         }
         let detailsAction = UIAlertAction(title: "Add Details", style: .default) { action in
@@ -522,6 +523,11 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         print ("sendNoteDetails() called in RecordViewController.")
         noteManager.note.details = value
         noteManager.saveNote()
+    }
+    
+    func sendNoteImage(image: UIImage) {
+        print ("sendNoteImage() called in RecordViewController.")
+        noteManager.note.image_data = UIImageJPEGRepresentation(image, 1)
     }
 
     func uploadTrip () {

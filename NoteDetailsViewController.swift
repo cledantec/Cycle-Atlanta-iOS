@@ -10,13 +10,35 @@ import UIKit
 
 protocol NoteDetailsDelegate {
     func sendNoteDetails(value : String)
+    func sendNoteImage(image : UIImage)
 }
 
-class NoteDetailsViewController: UIViewController {
+class NoteDetailsViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet weak var detailText: UITextView!
     
     var delegate : NoteDetailsDelegate? = nil
+    
+    var imagePicker : UIImagePickerController!
+    
+    var firstTap = true
+    
+    @IBOutlet weak var photo: UIImageView!
+    
+    @IBAction func takePhoto(_ sender: Any) {
+        imagePicker =  UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .camera
+        
+        present(imagePicker, animated: true, completion: nil)
+
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        imagePicker.dismiss(animated: true, completion: nil)
+        photo.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +51,7 @@ class NoteDetailsViewController: UIViewController {
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         
-        detailText.becomeFirstResponder()
+        //detailText.becomeFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,6 +61,9 @@ class NoteDetailsViewController: UIViewController {
     
     @IBAction func saveButton(_ sender: Any) {
         if let delegate = self.delegate {
+            if let pic = photo.image {
+                delegate.sendNoteImage(image: pic)
+            }
             delegate.sendNoteDetails(value: detailText.text)
         } else {
             print ("No delegate for saveButton()!")
@@ -46,6 +71,16 @@ class NoteDetailsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func tapBackground(_ sender: Any) {
+        detailText.resignFirstResponder()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if firstTap {
+            detailText.text = ""
+            firstTap = false
+        }
+    }
     /*
      // MARK: - Navigation
      

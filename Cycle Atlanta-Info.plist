@@ -35,6 +35,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Permission is needed for you to take and attach photos to your notes.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Permission is needed to continue recording your trip while you use other apps.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
