@@ -117,13 +117,6 @@
 		D6EF0304192BED5100AA67CD /* StartButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D6EF0302192BED5100AA67CD /* StartButton@2x.png */; };
 		FB1ACCEA1C10C7A7003C5CAA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1ACCE91C10C7A7003C5CAA /* Images.xcassets */; };
 		FB8EC2811E454C7C00576BDC /* TripPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2801E454C7C00576BDC /* TripPath.swift */; };
-		FB8EC28B1E454D4600576BDC /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2831E454D4600576BDC /* Decoder.swift */; };
-		FB8EC28C1E454D4600576BDC /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2841E454D4600576BDC /* Encoder.swift */; };
-		FB8EC28D1E454D4600576BDC /* ExtensionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2851E454D4600576BDC /* ExtensionArray.swift */; };
-		FB8EC28E1E454D4600576BDC /* ExtensionDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2861E454D4600576BDC /* ExtensionDictionary.swift */; };
-		FB8EC28F1E454D4600576BDC /* Gloss.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2881E454D4600576BDC /* Gloss.swift */; };
-		FB8EC2901E454D4600576BDC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB8EC2891E454D4600576BDC /* Info.plist */; };
-		FB8EC2911E454D4600576BDC /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC28A1E454D4600576BDC /* Operators.swift */; };
 		FB8EC2931E454F4900576BDC /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2921E454F4900576BDC /* RecordViewController.swift */; };
 		FB8EC2BD1E46A66300576BDC /* LocalizedMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8EC2BC1E46A66300576BDC /* LocalizedMessages.swift */; };
 		FBDBB9241E918861008ED7E9 /* TripDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBDBB9231E918861008ED7E9 /* TripDetailsViewController.swift */; };
@@ -291,14 +284,6 @@
 		D6EF0302192BED5100AA67CD /* StartButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StartButton@2x.png"; sourceTree = "<group>"; };
 		FB1ACCE91C10C7A7003C5CAA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Cycle Atlanta/Images.xcassets"; sourceTree = "<group>"; };
 		FB8EC2801E454C7C00576BDC /* TripPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TripPath.swift; path = Classes/TripPath.swift; sourceTree = "<group>"; };
-		FB8EC2831E454D4600576BDC /* Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
-		FB8EC2841E454D4600576BDC /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
-		FB8EC2851E454D4600576BDC /* ExtensionArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionArray.swift; sourceTree = "<group>"; };
-		FB8EC2861E454D4600576BDC /* ExtensionDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDictionary.swift; sourceTree = "<group>"; };
-		FB8EC2871E454D4600576BDC /* Gloss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gloss.h; sourceTree = "<group>"; };
-		FB8EC2881E454D4600576BDC /* Gloss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gloss.swift; sourceTree = "<group>"; };
-		FB8EC2891E454D4600576BDC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB8EC28A1E454D4600576BDC /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		FB8EC2921E454F4900576BDC /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		FB8EC2BC1E46A66300576BDC /* LocalizedMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizedMessages.swift; sourceTree = "<group>"; };
 		FBDBB9231E918861008ED7E9 /* TripDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripDetailsViewController.swift; sourceTree = "<group>"; };
@@ -393,7 +378,6 @@
 			isa = PBXGroup;
 			children = (
 				D6B6941A1923F2A8006908C3 /* MainWindow.storyboard */,
-				FB8EC2821E454D4600576BDC /* Gloss */,
 				FBE4EAAB1BE407DE007C1AF2 /* SwiftClasses */,
 				9D504DA316B6D0AE00B99EBC /* libz.dylib */,
 				64119AA81068672100C201F0 /* Trip Purpose data source */,
@@ -627,21 +611,6 @@
 			path = Ressources/Sounds;
 			sourceTree = "<group>";
 		};
-		FB8EC2821E454D4600576BDC /* Gloss */ = {
-			isa = PBXGroup;
-			children = (
-				FB8EC2831E454D4600576BDC /* Decoder.swift */,
-				FB8EC2841E454D4600576BDC /* Encoder.swift */,
-				FB8EC2851E454D4600576BDC /* ExtensionArray.swift */,
-				FB8EC2861E454D4600576BDC /* ExtensionDictionary.swift */,
-				FB8EC2871E454D4600576BDC /* Gloss.h */,
-				FB8EC2881E454D4600576BDC /* Gloss.swift */,
-				FB8EC2891E454D4600576BDC /* Info.plist */,
-				FB8EC28A1E454D4600576BDC /* Operators.swift */,
-			);
-			path = Gloss;
-			sourceTree = "<group>";
-		};
 		FBE4EAAB1BE407DE007C1AF2 /* SwiftClasses */ = {
 			isa = PBXGroup;
 			children = (
@@ -764,7 +733,6 @@
 				9D6D31A816D7C017007A2497 /* noteAssetPicker@2x.png in Resources */,
 				9D6D31A916D7C017007A2497 /* noteIssuePicker.png in Resources */,
 				9D6D31AA16D7C017007A2497 /* noteIssuePicker@2x.png in Resources */,
-				FB8EC2901E454D4600576BDC /* Info.plist in Resources */,
 				9D6D31AD16D7C189007A2497 /* noteBlankPicker.png in Resources */,
 				9D6D31AE16D7C189007A2497 /* noteBlankPicker@2x.png in Resources */,
 				D6EF0304192BED5100AA67CD /* StartButton@2x.png in Resources */,
@@ -786,12 +754,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB8EC28C1E454D4600576BDC /* Encoder.swift in Sources */,
 				FBE4EAAC1BE4082C007C1AF2 /* SavedTripsViewController.m in Sources */,
 				9D3056F5174412F40091B214 /* YLBackgroundView.m in Sources */,
 				9D3056F017440BC00091B214 /* YLProgressBar.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				FB8EC28D1E454D4600576BDC /* ExtensionArray.swift in Sources */,
 				1D3623260D0F684500981E51 /* CycleAtlantaAppDelegate.m in Sources */,
 				6411996210683D7500C201F0 /* RecordTripViewController.m in Sources */,
 				64119AAD1068672100C201F0 /* CustomView.m in Sources */,
@@ -805,15 +771,12 @@
 				D6DBCE05196B2B66007BE9C3 /* NoteToDetailViewController.m in Sources */,
 				64210F6111350C8500415F1A /* AboutViewController.m in Sources */,
 				BAF7B46B19CBBAB800056E5B /* SelectViewController.m in Sources */,
-				FB8EC28F1E454D4600576BDC /* Gloss.swift in Sources */,
 				645E4EDC1200C1C800EFF0E6 /* LoadingView.m in Sources */,
 				8F5E60661602CBE000D8F85D /* NSString+MD5Addition.m in Sources */,
 				8F5E60671602CBE000D8F85D /* UIDevice+IdentifierAddition.m in Sources */,
 				8F1B1D3F164B94C60022B776 /* DetailViewController.m in Sources */,
-				FB8EC28E1E454D4600576BDC /* ExtensionDictionary.swift in Sources */,
 				9D504DA116B6CF4000B99EBC /* ZipUtil.m in Sources */,
 				8FA0AD9416BB4ED800E0E7C4 /* CycleAtlanta.xcdatamodeld in Sources */,
-				FB8EC2911E454D4600576BDC /* Operators.swift in Sources */,
 				8FB7C20D16C55EB9001A8A48 /* NoteManager.m in Sources */,
 				8F9C086416DC9479003EA308 /* Note.m in Sources */,
 				8F9C086716DC9479003EA308 /* Trip.m in Sources */,
@@ -832,7 +795,6 @@
 				8F316F671703161E0087529E /* Model.xcmappingmodel in Sources */,
 				9D8A1BAF171B03E000509FBD /* FetchUser.m in Sources */,
 				9D8A1BB2171B03E900509FBD /* FetchTripData.m in Sources */,
-				FB8EC28B1E454D4600576BDC /* Decoder.swift in Sources */,
 				FBE7E4B31F12D8CA009C970D /* NoteDetailsViewController.swift in Sources */,
 				9D4B4EE61722B8B0005A4CDD /* ProgressView.m in Sources */,
 			);

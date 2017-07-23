@@ -10,7 +10,7 @@
 import UIKit
 import CoreLocation
 
-class TripPath: NSObject, Glossy {
+class TripPath: NSObject {
     
     var coords : [CLLocation]
     
@@ -37,22 +37,5 @@ class TripPath: NSObject, Glossy {
         
         //print ("Stored coords: \(coords)")
     }
-    
-    required init?(json: JSON) {
-        if let coords : [CLLocation] = "coords" <~~ json {
-            self.coords = coords
-        } else {
-            print ("JSON trip load failed.  Initializing.")
-            self.coords = [CLLocation]()
-        }
-    }
-    
-    // Going to have to break out each coordinate separately to store it in json...
-    func toJSON() -> JSON? {
-        return jsonify([
-            "coords" ~~> coords
-            ])
-    }
-    
     
 }
