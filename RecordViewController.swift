@@ -243,18 +243,6 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         }
     }
     
-    func dictToNSString (_ dict : JSON?) -> NSString? {
-        do {
-            let rawData = try JSONSerialization.data(withJSONObject: dict!, options: .prettyPrinted)
-            let data = NSString(data: rawData, encoding: String.Encoding.utf8.rawValue)!
-            //print ("Wrote JSON: \(data)")
-            return data
-        } catch {
-            print("JSON serialization failed:  \(error)")
-            return nil
-        }
-    }
-    
     @IBAction func tapStartButton(_ sender: AnyObject) {
         // Hide the start button and show the stop button.
         startButton.isHidden = true
