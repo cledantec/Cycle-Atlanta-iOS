@@ -48,7 +48,6 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
     @IBOutlet weak var userRiderType: UITextField!
     @IBOutlet weak var userRiderHistory: UITextField!
     @IBOutlet weak var userMagnetometer: UISwitch!
-
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -283,6 +282,8 @@ class PersonalInfoViewController: UITableViewController, UIPickerViewDataSource,
             NSLog("ERROR can't save personal info for nil user")
         }
         
+        tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+
         ALToastView.toast(in: view, withText: "Saved!")
     }
     

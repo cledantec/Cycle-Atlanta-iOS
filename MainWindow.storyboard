@@ -1553,7 +1553,7 @@
                             <tableViewSection headerTitle="Tell us about yourself" id="Ioj-kh-F7e">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="h4g-Jt-UYw" userLabel="UserAge">
-                                        <rect key="frame" x="0.0" y="135" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="136" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h4g-Jt-UYw" id="2US-YR-p34">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1579,7 +1579,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="djI-J3-lon" userLabel="UserEmail">
-                                        <rect key="frame" x="0.0" y="179" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="180" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="djI-J3-lon" id="hxB-Bp-3LQ">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1605,7 +1605,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="uhJ-Ds-WTv" userLabel="UserGender">
-                                        <rect key="frame" x="0.0" y="223" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="224" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uhJ-Ds-WTv" id="2uJ-L7-mUu">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1631,7 +1631,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="03V-7a-bEg" userLabel="UserEthnicity">
-                                        <rect key="frame" x="0.0" y="267" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="268" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="03V-7a-bEg" id="bjr-jk-aYT">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1657,7 +1657,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4Fb-v0-yxn" userLabel="UserIncome">
-                                        <rect key="frame" x="0.0" y="311" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="312" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Fb-v0-yxn" id="pM1-kj-1fS">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1687,7 +1687,7 @@
                             <tableViewSection headerTitle="Your typical commute" id="hjL-xh-xCR" userLabel="Your typical commute">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VzT-di-IRv" userLabel="HomeZIP">
-                                        <rect key="frame" x="0.0" y="411" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="413" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VzT-di-IRv" id="5U3-uw-CFM">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1713,7 +1713,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="i3c-Yj-iQn" userLabel="WorkZIP">
-                                        <rect key="frame" x="0.0" y="455" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="457" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i3c-Yj-iQn" id="cMi-ma-Mje">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1739,7 +1739,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="f6d-Bh-u3f" userLabel="SchoolZIP">
-                                        <rect key="frame" x="0.0" y="499" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="501" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f6d-Bh-u3f" id="LUa-aK-98I">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1769,7 +1769,7 @@
                             <tableViewSection headerTitle="How often do you cycle?" id="kD2-s5-1oI" userLabel="Cycling Frequency">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0ot-nY-v5R" userLabel="CycleFreq">
-                                        <rect key="frame" x="0.0" y="599" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="602" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0ot-nY-v5R" id="voL-Y7-q5u">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1799,7 +1799,7 @@
                             <tableViewSection headerTitle="What kind of rider are you?" id="Kxt-ST-riz" userLabel="Rider Profile">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PnR-vg-bPU" userLabel="RiderType">
-                                        <rect key="frame" x="0.0" y="699" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="703" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PnR-vg-bPU" id="Bzq-iS-s7t">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1829,7 +1829,7 @@
                             <tableViewSection headerTitle="How long have you been a cyclist?" id="ABR-ce-raj" userLabel="Cycling History">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ZhQ-hH-otn" userLabel="RiderType">
-                                        <rect key="frame" x="0.0" y="799" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="804" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZhQ-hH-otn" id="ZpS-lf-0mM">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1859,7 +1859,7 @@
                             <tableViewSection headerTitle="Missing previously saved data?" id="NNV-oF-XII" userLabel="Missing previously saved trips?">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="vTy-Wl-Hbo" userLabel="Missing previously saved data?">
-                                        <rect key="frame" x="0.0" y="899" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="905" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vTy-Wl-Hbo" id="x7k-R7-Cp1">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1885,7 +1885,7 @@
                             <tableViewSection headerTitle="Use magnetometer to add notes?" id="qSS-EH-cLY" userLabel="Use Magnetometer?">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dCw-Yk-ZV6" userLabel="Magnetometer">
-                                        <rect key="frame" x="0.0" y="999" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="1006" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dCw-Yk-ZV6" id="Ew8-2B-m2E">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1929,6 +1929,7 @@
                         <outlet property="picker" destination="n02-Qz-uhM" id="RNR-Xb-n5S"/>
                         <outlet property="pickerToolbar" destination="zwO-ka-YOv" id="swa-iY-lzI"/>
                         <outlet property="saveButton" destination="ugz-Bl-Dqp" id="6Yf-OP-NXE"/>
+                        <outlet property="tableView" destination="m3D-Zd-gEH" id="Vup-uO-jFm"/>
                         <outlet property="userAge" destination="FUE-qK-Q8m" id="LuX-gZ-Rdg"/>
                         <outlet property="userCycleFreq" destination="cq4-I0-SMe" id="BnY-lL-hsE"/>
                         <outlet property="userEmail" destination="SUj-ux-Eyw" id="Jbv-qK-Pba"/>
