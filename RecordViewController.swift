@@ -126,7 +126,11 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         // Update speed display whether recording or not.
         if let currentSpeed = locations.last?.speed {
-            speedCounter.text = String.localizedStringWithFormat("%.1f mph", currentSpeed * 3600 / 1609.344)
+            if currentSpeed < 0 {
+                speedCounter.text = "0.0 mph"
+            } else {
+                speedCounter.text = String.localizedStringWithFormat("%.1f mph", currentSpeed * 3600 / 1609.344)
+            }
         } else {
             speedCounter.text = "0.0 mph"
         }
