@@ -366,6 +366,14 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     {
         return locationManager;
     }
+    else
+    {
+        appDelegate = [[UIApplication sharedApplication] delegate];
+        return [appDelegate getLocationManager];
+
+    }
+    
+    /*
     locationManager = [[CLLocationManager alloc]init]; // initializing locationManager
     locationManager.delegate = self; // we set the delegate of locationManager to self.
     
@@ -402,10 +410,11 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     appDelegate.locationManager.delegate = self;
     
     return appDelegate.locationManager;
+     */
  
 }
 
-
+/*
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     NSString *errorString;
@@ -449,6 +458,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 
 
 }
+ */
 
 /*********************/
 /// Taken from http://www.devfright.com/didupdatelocations-ios-example/
@@ -458,6 +468,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 // After iOS 6
 /******************************************/
 /******************************************/
+/*
 - (void)locationManager:(CLLocationManager *)manager
      didUpdateLocations:(NSArray *)locations
 {
@@ -509,12 +520,11 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
                 
                 [self beginBackgroundUpdateTask];
                 
-                /*[NSTimer scheduledTimerWithTimeInterval:120.0
-                                                                   target:self
-                                                                 selector:@selector(endBackgroundUpdateTask:)
-                                                                 userInfo:nil
-                                                                  repeats:NO];
-                 */
+                //[NSTimer scheduledTimerWithTimeInterval:120.0
+                //                                                   target:self
+                //                                                selector:@selector(endBackgroundUpdateTask:)
+                //                                                 userInfo:nil
+                //                                                  repeats:NO];
             });
         }
     }
@@ -544,6 +554,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     [[UIApplication sharedApplication] endBackgroundTask: self.bgTask];
     self.bgTask = UIBackgroundTaskInvalid;
 }
+*/
 
 
 /******************************************/
@@ -551,6 +562,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
 // Before iOS 6
 /******************************************/
 /******************************************/
+/*
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
@@ -661,7 +673,7 @@ static inline UIImage* MTDContextCreateRoundedMask( CGRect rect, CGFloat radius_
     }
 }
 
-
+*/
 
 
 
@@ -2082,7 +2094,6 @@ shouldSelectViewController:(UIViewController *)viewController
 
 - (void)dealloc {
     
-    appDelegate.locationManager = nil;
     self.timer = nil;
     self.recording = nil;
     self.shouldUpdateCounter = nil;

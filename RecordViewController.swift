@@ -35,6 +35,8 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     @IBOutlet weak var distanceCounter: UILabel!
     @IBOutlet weak var timeCounter: UILabel!
     
+    var finishedLoading = false
+    
     // Strong reference to the location manager service and a history of the current trip coordinates.
     var locationManager = CLLocationManager()
     var userLocationTrace = TripPath()
@@ -87,16 +89,12 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         locationManager.requestAlwaysAuthorization()
         
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.allowDeferredLocationUpdates(untilTraveled: 100, timeout: 60)  // meters, seconds
-        locationManager.startUpdatingLocation()
-        
         // Get a fresh TripManager.
         tripManager.dirty = true
         tripManager.parent = self
+        
+        // Also starts lo-res location updates.
+        resetTrip()
         
         // See if there is a stored trip to reload.
         //loadTrip()
@@ -105,6 +103,13 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         Timer.scheduledTimer(
             timeInterval: 5.0, target: self, selector: #selector(RecordViewController.storeTrip),
             userInfo: nil, repeats: true)
+        
+        // Update time every second.
+        Timer.scheduledTimer(
+            timeInterval: 1.0, target: self, selector: #selector(RecordViewController.updateTimeDisplay),
+            userInfo: nil, repeats: true)
+        
+        finishedLoading = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -118,6 +123,61 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    func stopUpdates() {
+        
+        print ("Stopping location updates")
+        locationManager.stopUpdatingLocation()
+        
+    }
+    
+    func startLoResUpdates() {
+    
+        print ("Stopping location updates")
+        locationManager.stopUpdatingLocation()
+        
+        print ("Starting lo-res location updates")
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.distanceFilter = 10 // meters
+    
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.allowDeferredLocationUpdates(untilTraveled: 100, timeout: 60)  // meters, seconds
+        locationManager.startUpdatingLocation()
+        
+    }
+    
+    func startHiResUpdates () {
+        
+        print ("Stopping location updates")
+        locationManager.stopUpdatingLocation()
+        
+        print ("Starting hi-res location updates")
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 5  // meters
+        
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.allowDeferredLocationUpdates(untilTraveled: 100, timeout: 60)  // meters, seconds
+        locationManager.startUpdatingLocation()
+        
+    }
+    
+    func updateTimeDisplay() {
+        
+        // Update time only during a recording.
+        if !tripInProgress { return }
+        
+        // Update time display.
+        let elapsedTime = NSDate.timeIntervalSinceReferenceDate - tripStartTime
+        let doubleTime = Double(elapsedTime)
+        let hours = Int(doubleTime) / 3600
+        let minutes = (Int(doubleTime) - (hours*3600)) / 60
+        let seconds = (Int(doubleTime) - (hours*3600) - (minutes*60))
+        
+        self.timeCounter.text = String.localizedStringWithFormat("%02d:%02d:%02d", hours, minutes, seconds)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -146,14 +206,7 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
             self.distanceCounter.text = String.localizedStringWithFormat("%.1f mi", distance / 1609.344)
         }
         
-        // Update time display.
-        let elapsedTime = NSDate.timeIntervalSinceReferenceDate - tripStartTime
-        let doubleTime = Double(elapsedTime)
-        let hours = Int(doubleTime) / 3600
-        let minutes = (Int(doubleTime) - (hours*3600)) / 60
-        let seconds = (Int(doubleTime) - (hours*3600) - (minutes*60))
-        
-        self.timeCounter.text = String.localizedStringWithFormat("%02d:%02d:%02d", hours, minutes, seconds)
+        updateTimeDisplay()
         
         removeUserTraceOverlay()
         
@@ -255,6 +308,8 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         
         resetTrip()
         
+        startHiResUpdates()
+        
         tripInProgress = true
         
         // Set the start time to calculate elapsed time.
@@ -319,6 +374,8 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         storeTrip()
         removeUserTraceOverlay()
         tripInProgress = false
+        
+        startLoResUpdates()
     }
     
     @IBAction func saveTrip(_ sender: UIButton) {

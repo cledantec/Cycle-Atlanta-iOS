@@ -67,7 +67,7 @@
 @synthesize tabBarController;
 @synthesize uniqueIDHash;
 @synthesize isRecording;
-@synthesize locationManager;
+//@synthesize locationManager;
 @synthesize storeLoadingView;
 @synthesize managedObjectContext;
 @synthesize bgTask;
@@ -207,28 +207,25 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    CycleAtlantaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.locationManager stopUpdatingLocation];
+    RecordViewController *recordVC;
     
-    if(appDelegate.isRecording){
-        NSLog(@"BACKGROUNDED and recording"); //set location service to startUpdatingLocation
-        [appDelegate.locationManager requestAlwaysAuthorization];
-        [appDelegate.locationManager setPausesLocationUpdatesAutomatically:false];
-        [appDelegate.locationManager setActivityType:CLActivityTypeAutomotiveNavigation];
-        [appDelegate.locationManager setAllowsBackgroundLocationUpdates:YES];
-        [appDelegate.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-        [appDelegate.locationManager setDistanceFilter:kCLDistanceFilterNone];
-        [appDelegate.locationManager startUpdatingLocation];
+    UINavigationController* uinav=[[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
+    recordVC=[uinav.viewControllers objectAtIndex:0];
+    
+    if (recordVC.tripInProgress) {
+        NSLog(@"BACKGROUNDED and recording"); // Continue updates at normal resolution while recording.
     } else {
-        NSLog(@"BACKGROUNDED and sitting idle"); //set location service to startMonitoringSignificantLocationChanges
-        //[appDelegate.locationManager stopUpdatingLocation];
-        //[appDelegate.locationManager startMonitoringSignificantLocationChanges];
+        NSLog(@"BACKGROUNDED and sitting idle"); // No need for any updates at all.
+        [recordVC stopUpdates];
     }
+    
+    /*
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"magnetometerIsOn"])
     {
         NSLog(@"BACKGROUNDED and keep watching magnetic field");
         [appDelegate.locationManager  startUpdatingHeading];
     }
+     */
 }
 
 
@@ -254,17 +251,31 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *) application
 {
-    //always turnon location updating when active.
-    CycleAtlantaAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.locationManager stopUpdatingLocation];
     
-    [appDelegate.locationManager requestAlwaysAuthorization];
-    [appDelegate.locationManager setPausesLocationUpdatesAutomatically:false];
-    [appDelegate.locationManager setActivityType:CLActivityTypeAutomotiveNavigation];
-    [appDelegate.locationManager setAllowsBackgroundLocationUpdates:YES];
-    [appDelegate.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    [appDelegate.locationManager setDistanceFilter:kCLDistanceFilterNone];
-    [appDelegate.locationManager startUpdatingLocation];
+    RecordViewController *recordVC;
+    
+    UINavigationController* uinav=[[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
+    recordVC=[uinav.viewControllers objectAtIndex:0];
+    
+    if (recordVC.tripInProgress) {
+        NSLog(@"FOREGROUNDED and recording"); // Continue updates at normal resolution while recording.
+    } else {
+        NSLog(@"FOREGROUNDED and sitting idle"); // Lo res updates to show location on map.
+        if (recordVC.finishedLoading) {
+            // This avoids trying to start updates before the locationManager has initialized on first startup.
+            [recordVC startLoResUpdates];
+        }
+    }
+
+}
+
+-(CLLocationManager *) getLocationManager {
+    RecordViewController *recordVC;
+    
+    UINavigationController* uinav=[[((UITabBarController *) self.window.rootViewController) viewControllers] objectAtIndex:0];
+    recordVC=[uinav.viewControllers objectAtIndex:0];
+    
+    return recordVC.locationManager;
 }
 
 

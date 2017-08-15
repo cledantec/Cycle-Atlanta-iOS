@@ -54,9 +54,10 @@
 @class TripManager;
 @class NoteManager;
 
+//CLLocationManagerDelegate,
+
 @interface RecordTripViewController : UIViewController 
-	<CLLocationManagerDelegate,
-	MKMapViewDelegate,
+	<MKMapViewDelegate,
 	UINavigationControllerDelegate, 
 	UITabBarControllerDelegate, 
 	PersonalInfoDelegate,
@@ -96,7 +97,7 @@
     
     BOOL locationAccessAsked;
     CLLocation *myLocation;
-    CLLocationManager* locationManager;
+    //CLLocationManager* locationManager;
     
 	TripManager	*tripManager;
     NoteManager *noteManager;

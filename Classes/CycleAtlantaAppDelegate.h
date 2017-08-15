@@ -53,7 +53,7 @@
     UITabBarController *tabBarController;
 	NSString *uniqueIDHash;
     BOOL isRecording;
-    CLLocationManager *locationManager;
+    //CLLocationManager *locationManager;
     UIView *backgroundView;
     UIImageView *backgroundImage;
     
@@ -68,7 +68,7 @@
 @property (nonatomic, strong) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, strong) NSString *uniqueIDHash;
 @property (nonatomic, assign) BOOL isRecording;
-@property (nonatomic, strong) CLLocationManager *locationManager;
+//@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) ProgressView *storeLoadingView;
 
 @property (nonatomic) UIBackgroundTaskIdentifier *bgTask;
@@ -80,6 +80,7 @@
 - (NSManagedObjectContext *) getManagedObjectContext: (NSPersistentStoreCoordinator *) coordinator;
 - (NSManagedObjectModel *) getManagedObjectModel;
 - (NSPersistentStoreCoordinator *) getPersistentStoreCoordinator;
+- (CLLocationManager *) getLocationManager;
 
 - (void)applicationWillTerminate:(UIApplication *)application;
 
