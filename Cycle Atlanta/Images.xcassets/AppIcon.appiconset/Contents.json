@@ -11,9 +11,8 @@
       "scale" : "3x"
     },
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "cycleatl_icon_58.png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
@@ -22,9 +21,8 @@
       "scale" : "3x"
     },
     {
-      "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "cycleatl_icon_80.png",
+      "size" : "40x40",
       "scale" : "2x"
     },
     {
@@ -35,7 +33,7 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "cycleatl_icon_120.png",
+      "filename" : "appIcon120.png",
       "scale" : "2x"
     },
     {
