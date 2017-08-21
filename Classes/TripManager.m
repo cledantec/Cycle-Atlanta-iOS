@@ -512,8 +512,7 @@
     
 	// create loading view to indicate trip is being uploaded
     uploadingView = [LoadingView loadingViewInView:parent.parentViewController.view messageString:kSavingTitle];
-
-
+    
     if ( theConnection )
      {
          receivedData=[NSMutableData data];

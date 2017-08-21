@@ -375,6 +375,13 @@ class RecordViewController: UIViewController, MKMapViewDelegate, CLLocationManag
         removeUserTraceOverlay()
         tripInProgress = false
         
+        // Get a fresh TripManager.
+        context = appDelegate.getManagedObjectContext(appDelegate.getPersistentStoreCoordinator())
+        tripManager = TripManager.init(managedObjectContext: context)
+
+        tripManager.dirty = true
+        tripManager.parent = self
+        
         startLoResUpdates()
     }
     
